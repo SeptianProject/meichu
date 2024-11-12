@@ -1,8 +1,12 @@
-
+import Navbar from "./components/layouts/Navbar"
+import AppRouter from "./routes/AppRouter"
 
 const App = () => {
   return (
-    <div className="flex justify-center items-center">App</div>
+    <section className="bg-dark">
+      <Navbar />
+      <AppRouter />
+    </section>
   )
 }
 
