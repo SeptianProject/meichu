@@ -3,7 +3,7 @@ import AppRouter from "./routes/AppRouter"
 
 const App = () => {
   return (
-    <section className="bg-dark">
+    <section className="bg-dark relative">
       <Navbar />
       <AppRouter />
     </section>

@@ -5,7 +5,7 @@ type StarProps = {
 
 const Star = ({ className }: StarProps) => {
      return (
-          <img className={`absolute ${className} size-12`} src={assetsImage.star} alt="star" />
+          <img className={`absolute ${className} size-12`} src={assetsImage.Star} alt="star" />
      )
 }
 
