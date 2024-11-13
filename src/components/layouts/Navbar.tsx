@@ -1,19 +1,23 @@
 import { assetsImage } from "../../assets/assets"
 import NavButton from "../elements/NavButton"
 import NavIcon from "../elements/NavIcon"
-import NavItems from "../fragments/NavItems"
+import HamburgerMenu from "../fragments/nav/HamburgerMenu"
+import NavItems from "../fragments/nav/NavItems"
 
 const Navbar = () => {
      return (
-          <nav className="absolute inset-x-0 -top-3 flex items-center justify-between px-28">
+          <nav className="absolute inset-x-0 -top-3 flex items-center justify-between 
+          px-5 lg:px-28">
                {/* NavItems */}
                <NavItems />
                {/* NavButton */}
                <div className="flex items-center gap-x-7">
-                    <NavButton />
+                    <NavButton className="hidden lg:block" />
                     <NavIcon icon={assetsImage.Moon} onClick={() => { }}
-                         className="size-6" />
-                    <NavIcon icon={assetsImage.Profile} onClick={() => { }} />
+                         className="size-[1.4rem] lg:size-6" />
+                    <HamburgerMenu />
+                    <NavIcon icon={assetsImage.Profile} onClick={() => { }}
+                         className="hidden size-8 lg:block" />
                </div>
           </nav>
      )

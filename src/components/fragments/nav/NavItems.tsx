@@ -1,4 +1,4 @@
-import { assetsImage, navItems } from '../../assets/assets'
+import { assetsImage, navItems } from '../../../assets/assets'
 import { Link } from 'react-router-dom'
 
 const NavItems = () => {
@@ -6,9 +6,9 @@ const NavItems = () => {
           <div className='flex items-center gap-x-6'>
                <div className='w-fit'>
                     <img src={assetsImage.MeichuLogo} alt="meichuLogo"
-                         className='size-32' />
+                         className='size-24 lg:size-32' />
                </div>
-               <div className='flex items-center gap-x-8'>
+               <div className='hidden md:flex items-center gap-x-8'>
                     {navItems.map((item, index) => (
                          <Link key={index} to={item.link}
                               className='font-poppins text-light text-base font-light 

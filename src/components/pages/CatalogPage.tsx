@@ -1,8 +1,10 @@
-import React from 'react'
+
 
 const CatalogPage = () => {
      return (
-          <div>CatalogPage</div>
+          <div className='min-h-screen'>
+               CatalogPage
+          </div>
      )
 }
 

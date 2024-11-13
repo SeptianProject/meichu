@@ -2,6 +2,7 @@ import Star from './images/star.svg';
 import Sun from './images/sun.svg';
 import Moon from './images/moon.svg';
 import Profile from './images/profile.svg';
+import BundleProduct from './images/bundleProduct.jpg';
 import MeichuLogo from './images/meichu.png';
 import HeadImg1 from './images/headImg1.jpg';
 import HeadImg2 from './images/headImg2.jpg';
@@ -10,11 +11,15 @@ import HeadImg4 from './images/headImg4.jpg';
 import HeadImg5 from './images/headImg5.jpg';
 
 export const assetsImage = {
-     Star, MeichuLogo, Sun, Moon, Profile
+     Star, MeichuLogo, Sun, Moon, Profile, BundleProduct
 }
 
 export const headImgSwiper = [
      HeadImg1, HeadImg2, HeadImg3, HeadImg4, HeadImg5
+]
+
+export const bundleProducts = [
+     BundleProduct, BundleProduct, BundleProduct
 ]
 
 export const navItems = [

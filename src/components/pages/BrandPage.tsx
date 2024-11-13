@@ -1,8 +1,7 @@
-import React from 'react'
 
 const BrandPage = () => {
      return (
-          <div>BrandPage</div>
+          <div className='min-h-screen'>BrandPage</div>
      )
 }
 

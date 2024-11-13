@@ -1,8 +1,8 @@
-import React from 'react'
+
 
 const CustomProductPage = () => {
      return (
-          <div>CustomProductPage</div>
+          <div className='min-h-screen'>CustomProductPage</div>
      )
 }
 

@@ -5,12 +5,11 @@ import 'swiper/swiper-bundle.css';
 
 const HeadCarousel = () => {
      return (
-          <div className='max-w-screen-lg overflow-hidden'>
+          <div className='max-w-[520px] h-[30vh] flex lg:max-w-screen-lg lg:h-full'>
                <Swiper
                     effect={'cards'}
                     grabCursor={true}
                     navigation={false}
-                    onNavigationNext={(swiper) => console.log('next', swiper)}
                     centeredSlides={true}
                     slidesPerView={4}
                     initialSlide={2}
@@ -24,7 +23,9 @@ const HeadCarousel = () => {
                >
                     {headImgSwiper.map((img, index) => (
                          <SwiperSlide key={index}>
-                              <img className='rounded-2xl w-60 h-80 object-cover object-center ' src={img} alt={`headImg${index + 1}`} />
+                              <img className='rounded-2xl size-full lg:w-60 lg:h-80 
+                              object-cover object-center'
+                                   src={img} alt={`headImg${index + 1}`} />
                          </SwiperSlide>
                     ))}
                </Swiper>
