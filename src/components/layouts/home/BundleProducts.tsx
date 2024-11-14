@@ -7,7 +7,7 @@ import { assetsImage, bundleProducts } from "../../../assets/assets"
 const BundleProducts = () => {
      return (
           <div className="min-h-screen pt-20">
-               <TextTagline className="max-w-60" text="Bundle Products" />
+               <TextTagline text="Bundle Products" className="font-semibold" />
                <div className="mt-8 relative">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:gap-x-10">
                          <img className="rounded-tl-[12rem] h-[40vh] w-[60vw]

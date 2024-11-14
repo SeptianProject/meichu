@@ -8,7 +8,7 @@ import CustomProducts from "../layouts/home/CustomProducts"
 
 const HomePage = () => {
      return (
-          <div className="space-y-10">
+          <section className="space-y-10 px-7 lg:px-20 overflow-hidden relative">
                {/* Main */}
                <div className='min-h-screen flex items-center justify-center lg:pt-32'>
                     <div className="flex flex-col items-center gap-y-10">
@@ -24,7 +24,7 @@ const HomePage = () => {
                <Catalog />
                {/* Custom Product */}
                <CustomProducts />
-          </div>
+          </section>
      )
 }
 

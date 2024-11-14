@@ -20,7 +20,8 @@ export default {
       colors: {
         dark: '#191820',
         light: '#ffffff',
-        primary: '#FFD700',
+        bluePrimary: '#3848E9',
+        blueDark: '#1F1F2C',
       }
     },
   },

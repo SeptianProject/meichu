@@ -6,8 +6,8 @@ import NavItems from "../fragments/nav/NavItems"
 
 const Navbar = () => {
      return (
-          <nav className="absolute inset-x-0 -top-3 flex items-center justify-between 
-          px-5 lg:px-28">
+          <nav className="absolute inset-x-0 flex items-center justify-between 
+          px-5 lg:px-20 h-28 z-10">
                {/* NavItems */}
                <NavItems />
                {/* NavButton */}

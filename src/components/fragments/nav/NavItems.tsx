@@ -8,10 +8,10 @@ const NavItems = () => {
                     <img src={assetsImage.MeichuLogo} alt="meichuLogo"
                          className='size-24 lg:size-32' />
                </div>
-               <div className='hidden md:flex items-center gap-x-8'>
+               <div className='hidden md:flex items-center gap-x-8 '>
                     {navItems.map((item, index) => (
                          <Link key={index} to={item.link}
-                              className='font-poppins text-light text-base font-light 
+                              className='font-poppins text-light cursor-pointer text-base font-light 
                               tracking-wider'>
                               {item.name}
                          </Link>
