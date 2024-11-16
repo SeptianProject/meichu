@@ -7,7 +7,16 @@ import NavItems from "../fragments/nav/NavItems"
 
 const Navbar = () => {
      const [hamburgerActive, setHamburgerActive] = useState(false)
-     const [isDarkMode, setIsDarkMode] = useState(false)
+     const [isDarkMode, setIsDarkMode] = useState(() => {
+          const savedTheme = localStorage.getItem('theme')
+          if (savedTheme) {
+               return savedTheme === 'dark'
+          }
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+               return true
+          }
+          return true
+     })
 
      const handleToggleHamburger = () => {
           setHamburgerActive(!hamburgerActive)
@@ -20,8 +29,14 @@ const Navbar = () => {
      }
 
      const handleToggleDarkMode = () => {
-          setIsDarkMode(!isDarkMode)
-          document.body.classList.toggle('dark')
+          const newDarkMode = !isDarkMode
+          setIsDarkMode(newDarkMode)
+          localStorage.setItem('theme', newDarkMode ? 'dark' : 'light')
+          if (newDarkMode) {
+               document.documentElement.classList.add('dark')
+          } else {
+               document.documentElement.classList.remove('dark')
+          }
      }
 
      useEffect(() => {
@@ -29,12 +44,36 @@ const Navbar = () => {
           return () => window.removeEventListener('scroll', handleHideHamburger)
      }, [])
 
+     useEffect(() => {
+          if (isDarkMode) {
+               document.documentElement.classList.add('dark')
+          } else {
+               document.documentElement.classList.remove('dark')
+          }
+     }, [isDarkMode])
+
+     useEffect(() => {
+          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+          const handleChange = (e: MediaQueryListEvent) => {
+               const newDarkMode = e.matches
+               setIsDarkMode(newDarkMode)
+               localStorage.setItem('theme', newDarkMode ? 'dark' : 'light')
+               if (newDarkMode) {
+                    document.documentElement.classList.add('dark')
+               } else {
+                    document.documentElement.classList.remove('dark')
+               }
+          }
+
+          mediaQuery.addEventListener('change', handleChange)
+          return () => mediaQuery.removeEventListener('change', handleChange)
+     }, [])
+
+
      return (
           <nav className="absolute inset-x-0 flex items-center justify-between 
           px-5 lg:px-20 h-28">
-               {/* NavItems */}
                <NavItems isActive={hamburgerActive} />
-               {/* NavButton */}
                <div className="flex items-center gap-x-7 z-10 relative">
                     {/* Nav Contact */}
                     <NavButton className="hidden lg:block" />

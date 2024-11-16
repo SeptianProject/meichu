@@ -40,7 +40,7 @@ const FloatingButton = () => {
     <div className={`fixed right-10 transition-all  ease-in-out duration-300
     ${onScroll ? 'bottom-10' : '-bottom-20'}`}>
       <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="bg-dark text-light dark:text-txtDark dark:bg-light rounded-full p-2 transition-all duration-500">
+        className="bg-dark text-light dark:text-dark dark:bg-light rounded-full p-2 transition-all duration-500">
         <IoIosArrowUp className="size-7" />
       </button>
     </div>

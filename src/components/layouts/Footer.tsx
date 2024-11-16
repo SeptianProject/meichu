@@ -26,7 +26,7 @@ const Footer = () => {
                          <div className="flex flex-col gap-y-2">
                               {marketPlaceItems.map((item, index) => (
                                    <Link key={index} to={item.link}
-                                        className="text-txtDark dark:text-light text-sm font-poppins text-opacity-70">
+                                        className="text-dark dark:text-light text-sm font-poppins text-opacity-70">
                                         {item.name}
                                    </Link>
                               ))}
@@ -38,7 +38,7 @@ const Footer = () => {
                          <div className="flex flex-col gap-y-2">
                               {meichuFooterItems.map((item, index) => (
                                    <Link key={index} to={item.link}
-                                        className="text-txtDark dark:text-light text-sm font-poppins text-opacity-70">
+                                        className="text-dark dark:text-light text-sm font-poppins text-opacity-70">
                                         {item.name}
                                    </Link>
                               ))}

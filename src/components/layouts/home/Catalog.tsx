@@ -1,6 +1,6 @@
 import TextTagline from '../../fragments/home/TextTagline'
-import CatalogCards from '../catalogs/CatalogCards'
-import CatalogCategories from '../catalogs/CatalogCategories'
+import CatalogCards from '../catalog/CatalogCards'
+import CatalogCategories from '../catalog/CatalogCategories'
 
 const Catalog = () => {
 

@@ -1,5 +1,5 @@
-import CatalogCategories from "../layouts/catalogs/CatalogCategories"
-import CatalogCards from "../layouts/catalogs/CatalogCards"
+import CatalogCategories from "../layouts/catalog/CatalogCategories"
+import CatalogCards from "../layouts/catalog/CatalogCards"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../layouts/RouteHistory"
 

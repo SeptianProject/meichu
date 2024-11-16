@@ -11,7 +11,7 @@ const BrandPage = () => {
                     currentText="Brand Ambassador Meichu" />
                <div className="space-y-5">
                     <TextTagline text="Brand Ambassador" className="font-semibold" />
-                    <p className="font-light tracking-wide">
+                    <p className="font-light text-dark dark:text-light tracking-wide">
                          Whether you have a question about talents, pricing, portfolio, or anything else, our team is ready.
                     </p>
                </div>
@@ -25,8 +25,12 @@ const BrandPage = () => {
                                    style={{ backgroundImage: `url(${item})` }}>
                                    {/* Typograph & badge */}
                                    <div className="absolute bottom-7 z-10 left-5 flex flex-col gap-y-2">
-                                        <h1 className="font-semibold text-xl">Jenny Rubyjane</h1>
-                                        <p className="text-sm font-extralight">Whether you have a question about talents, pricing, portfolio, or anything else, our team...</p>
+                                        <h1 className="font-semibold text-xl text-light">
+                                             Jenny Rubyjane
+                                        </h1>
+                                        <p className="text-sm font-extralight text-light">
+                                             Whether you have a question about talents, pricing, portfolio, or anything else, our team...
+                                        </p>
                                         {/* Badge sosmed */}
                                         <div className="flex items-center gap-x-2">
                                              <button className="border-2 border-light 

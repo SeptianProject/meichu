@@ -1,4 +1,5 @@
-import Star from '../../elements/Star'
+import Star from "../../elements/Star"
+
 
 const Heading = () => {
      return (

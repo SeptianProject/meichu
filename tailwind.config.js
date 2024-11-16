@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'selector',
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -18,11 +18,14 @@ export default {
         poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
-        dark: '#191820',
         light: '#ffffff',
-        txtDark: '#1e1e1e',
+        dark: '#1e1e1e',
         bluePrimary: '#3848E9',
         blueDark: '#1F1F2C',
+      },
+      backgroundColor: {
+        dark: '#191820',
+        light: '#ffffff',
       }
     },
   },

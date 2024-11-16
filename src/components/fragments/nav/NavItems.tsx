@@ -23,7 +23,7 @@ const NavItems = ({ isActive }: NavItemsProps) => {
                `}>
                     {navItems.map((item, index) => (
                          <Link key={index} to={item.link}
-                              className={`font-poppins text-light lg:text-txtDark lg:dark:text-light cursor-pointer
+                              className={`font-poppins text-light lg:text-dark lg:dark:text-light cursor-pointer
                               lg:tracking-wider transition-all duration-300
                               ${location.pathname === item.link
                                         ? 'text-lg font-semibold text-opacity-100'
