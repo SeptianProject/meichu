@@ -5,28 +5,28 @@ import BadgeSosmed from "../elements/BadgeSosmed"
 
 const Footer = () => {
      return (
-          <div className='min-h-[65vh] mt-20 bg-[#1F1F27] lg:bg-transparent px-10 lg:px-20
+          <div className='min-h-[65vh] mt-20 bg-transparent dark:bg-[#1F1F27] lg:bg-transparent px-10 lg:px-20
           flex flex-col lg:flex-row lg:items-center gap-y-10 lg:gap-x-40'>
                {/* Logo & more */}
                <div className="flex flex-col items-start relative gap-y-10 lg:gap-y-4">
                     <img className="size-48 absolute -top-5 -left-5"
                          src={assetsImage.MeichuLogo} alt="Meichu" />
-                    <h3 className="hidden lg:block mt-36">Follow Us</h3>
+                    <h3 className="dark:text-light hidden lg:block mt-36">Follow Us</h3>
                     <div className="flex items-center gap-x-2 mt-36 lg:mt-0">
                          <BadgeSosmed />
                     </div>
-                    <h6 className="text-opacity-50 text-sm font-light">
+                    <h6 className="dark:text-light text-opacity-50 text-sm font-light">
                          2024Meichu | All rights reserved
                     </h6>
                </div>
                <div className="flex items-start gap-x-20">
                     {/* Marketplace */}
                     <div className="flex flex-col gap-y-5">
-                         <h3 className="text-base font-bold">MarketPlace</h3>
+                         <h3 className="dark:text-light text-base font-bold">MarketPlace</h3>
                          <div className="flex flex-col gap-y-2">
                               {marketPlaceItems.map((item, index) => (
                                    <Link key={index} to={item.link}
-                                        className="text-light text-sm font-poppins text-opacity-70">
+                                        className="text-txtDark dark:text-light text-sm font-poppins text-opacity-70">
                                         {item.name}
                                    </Link>
                               ))}
@@ -34,11 +34,11 @@ const Footer = () => {
                     </div>
                     {/* Meichu */}
                     <div className="flex flex-col gap-y-5">
-                         <h3 className="text-base font-bold">Meichu</h3>
+                         <h3 className="dark:text-light text-base font-bold">Meichu</h3>
                          <div className="flex flex-col gap-y-2">
                               {meichuFooterItems.map((item, index) => (
                                    <Link key={index} to={item.link}
-                                        className="text-light text-sm font-poppins text-opacity-70">
+                                        className="text-txtDark dark:text-light text-sm font-poppins text-opacity-70">
                                         {item.name}
                                    </Link>
                               ))}

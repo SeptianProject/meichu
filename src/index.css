@@ -8,7 +8,7 @@ h1,
 h2,
 h3 {
   @apply font-inter;
-  @apply text-light;
+  @apply text-txtDark;
 }
 
 h4,
@@ -16,7 +16,7 @@ h5,
 h6,
 p {
   @apply font-poppins;
-  @apply text-light;
+  @apply text-txtDark;
 }
 
 .swiper-button-prev,

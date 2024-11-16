@@ -4,9 +4,9 @@ type NavButtonProps = {
 
 const NavButton = ({ className }: NavButtonProps) => {
      return (
-          <button className={`w-36 py-[6px] text-light font-medium
-          flex items-center justify-center font-poppins
-          rounded-full bg-[#353535] bg-opacity-50 ${className}`}>
+          <button className={`w-36 py-[6px] bg-transparent border border-[#353535] 
+               dark:text-light text-[#353535] font-medium flex items-center justify-center font-poppins
+          rounded-full dark:bg-[#353535] bg-opacity-50 ${className}`}>
                Contact
           </button>
      )

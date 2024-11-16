@@ -5,7 +5,7 @@ import 'swiper/swiper-bundle.css';
 
 const HeadCarousel = () => {
      return (
-          <div className='max-w-[520px] h-[30vh] flex lg:max-w-screen-lg lg:h-full'>
+          <div className='max-w-[520px] h-[20vh] flex lg:max-w-screen-lg lg:h-full'>
                <Swiper
                     effect={'cards'}
                     grabCursor={true}

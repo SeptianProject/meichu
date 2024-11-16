@@ -20,6 +20,7 @@ export default {
       colors: {
         dark: '#191820',
         light: '#ffffff',
+        txtDark: '#1e1e1e',
         bluePrimary: '#3848E9',
         blueDark: '#1F1F2C',
       }

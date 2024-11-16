@@ -8,11 +8,11 @@ const CustomProducts = () => {
           <div className="min-h-[50vh] lg:min-h-screen max-w-full
           flex items-center justify-between gap-x-10 overflow-hidden">
                <div className="max-w-full lg:max-w-[40vw] h-full flex flex-col gap-y-5">
-                    <h1 className="text-3xl lg:text-4xl font-bold">
+                    <h1 className="dark:text-light text-3xl lg:text-4xl font-bold">
                          Make it the style of your
                          <span className="text-bluePrimary"> dreams!</span>
                     </h1>
-                    <p className="font-light text-base lg:tracking-wide leading-relaxed">
+                    <p className="dark:text-light font-light text-base lg:tracking-wide leading-relaxed">
                          Hey there! We know you've got a great style, and we're here to help you make it even more attractive! Meichu products from Imvu using imvu+ make your style look HD and high-quality
                     </p>
                     <div className="flex items-center gap-x-5">
@@ -21,8 +21,8 @@ const CustomProducts = () => {
                          lg:text-base lg:w-40">
                               Custom Product
                          </button>
-                         <button className="bg-transparent text-sm font-semibold text-light 
-                         border border-light rounded-full w-32 py-3
+                         <button className="bg-transparent text-sm font-semibold text-[#5E5A5A] dark:text-light 
+                         border border-[#5E5A5A] dark:border-light rounded-full w-32 py-3
                          lg:text-base lg:w-40">
                               More Products
                          </button>

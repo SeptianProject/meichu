@@ -12,7 +12,8 @@ const CatalogCategories = () => {
                {categories.map((category, index) => {
                     const active = onSelect === category
                          ? 'bg-bluePrimary text-white border-transparent'
-                         : 'bg-blueDark text-[#5E5A5A] border-[#5E5A5A]'
+                         : 'bg-transparent dark:bg-blueDark text-[#5E5A5A] border-[#5E5A5A]'
+
                     return (
                          <button onClick={() => handleSelect(category)} key={index}
                               className={`${active} border w-fit py-1 px-5

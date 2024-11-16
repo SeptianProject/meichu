@@ -5,7 +5,7 @@ import CatalogCategories from '../catalogs/CatalogCategories'
 const Catalog = () => {
 
      return (
-          <div className="min-h-screen lg:pt-20">
+          <div className="min-h-screen">
                <TextTagline text="Catalog" className='font-semibold' />
                <CatalogCategories />
                <CatalogCards />

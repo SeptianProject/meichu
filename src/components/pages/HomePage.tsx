@@ -8,9 +8,10 @@ import CustomProducts from "../layouts/home/CustomProducts"
 
 const HomePage = () => {
      return (
-          <section className="space-y-10 px-7 lg:px-20 overflow-hidden relative">
+          <section className="px-7 lg:px-20 overflow-hidden flex flex-col gap-y-20">
                {/* Main */}
-               <div className='min-h-screen flex items-center justify-center lg:pt-32'>
+               <div className='min-h-[50vh] pt-40 flex items-center 
+               justify-center lg:min-h-screen lg:pt-32'>
                     <div className="flex flex-col items-center gap-y-10">
                          <HeadCarousel />
                          <Heading />

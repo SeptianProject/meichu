@@ -18,7 +18,7 @@ const BestSeller = () => {
      })
 
      return (
-          <div className="min-h-[50vh] pt-20">
+          <div className="min-h-[50vh]">
                <TextTagline text="Best Seller" className='font-semibold' />
                <div className='mt-6 grid grid-rows-1 grid-cols-1 lg:grid-cols-3 gap-4'>
                     {/* Card best seller */}
