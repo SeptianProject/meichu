@@ -1,4 +1,7 @@
 import Star from './images/star.svg';
+import Google from './images/google.svg';
+import FacebookAuth from './images/facebook-auth.svg';
+import Apple from './images/apple.svg';
 import SingleEmoji from './images/singleEmoji.svg';
 import DuoEmoji from './images/duoEmoji.svg';
 import BaPerson from './images/baPerson.png';
@@ -39,6 +42,19 @@ export const badgeSosmedItems = [
      }, {
           link: 'https://mail.google.com/',
           icon: Gmail
+     }
+]
+
+export const badgeAuthItems = [
+     {
+          link: 'https://www.google.com/',
+          icon: Google
+     }, {
+          link: 'https://www.apple.com/',
+          icon: Apple
+     }, {
+          link: 'https://www.facebook.com/',
+          icon: FacebookAuth
      }
 ]
 

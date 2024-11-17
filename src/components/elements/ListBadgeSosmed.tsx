@@ -1,11 +1,17 @@
-import { badgeSosmedItems } from '../../assets/assets'
+type BadgeSosmedItem = {
+     className: string;
+     badgeItems: {
+          icon: string;
+          link: string;
+     }[]
+}
 
-const BadgeSosmed = () => {
-
+const ListBadgeSosmed = ({ className, badgeItems }: BadgeSosmedItem) => {
      return (
           <>
-               {badgeSosmedItems.map((item, index) => (
-                    <div key={index} className='bg-[#D9D9D9] flex justify-center items-center rounded-xl size-11'>
+               {badgeItems.map((item, index) => (
+                    <div key={index} className={`flex justify-center 
+                    items-center size-11 ${className}`}>
                          <a href={item.link} target='_blank'>
                               <img className='size-6' src={item.icon} alt="" />
                          </a>
@@ -15,4 +21,4 @@ const BadgeSosmed = () => {
      )
 }
 
-export default BadgeSosmed
+export default ListBadgeSosmed

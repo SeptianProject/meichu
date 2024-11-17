@@ -15,7 +15,7 @@ const HeadCarousel = () => {
                     initialSlide={2}
                     cardsEffect={{
                          rotate: false,
-                         perSlideOffset: 65,
+                         perSlideOffset: 70,
                          slideShadows: false,
                     }}
                     modules={[EffectCards, Navigation]}
@@ -23,7 +23,7 @@ const HeadCarousel = () => {
                >
                     {headImgSwiper.map((img, index) => (
                          <SwiperSlide key={index}>
-                              <img className='rounded-2xl size-full lg:w-60 lg:h-80 
+                              <img className='rounded-2xl size-full lg:w-56 lg:h-72
                               object-cover object-center'
                                    src={img} alt={`headImg${index + 1}`} />
                          </SwiperSlide>

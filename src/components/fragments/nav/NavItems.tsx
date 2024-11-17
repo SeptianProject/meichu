@@ -3,9 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 
 type NavItemsProps = {
      isActive: boolean
+     modalOnClick: () => void
 }
 
-const NavItems = ({ isActive }: NavItemsProps) => {
+const NavItems = ({ isActive, modalOnClick }: NavItemsProps) => {
      const location = useLocation()
 
      return (
@@ -32,8 +33,9 @@ const NavItems = ({ isActive }: NavItemsProps) => {
                               {item.name}
                          </Link>
                     ))}
-                    <button className='font-medium text-light rounded-md bg-[#6A45BE] 
-                    w-32 py-3 lg:hidden'>
+                    <button onClick={modalOnClick}
+                         className='font-medium text-light rounded-md bg-[#6A45BE] 
+                         w-32 py-3 lg:hidden'>
                          Login
                     </button>
                </div>

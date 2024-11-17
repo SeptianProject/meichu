@@ -7,6 +7,7 @@ import EventPage from "../components/pages/EventPage"
 import DetailPage from "../components/pages/DetailPage"
 
 const AppRouter = () => {
+
      return (
           <Routes>
                <Route path='*' element={<HomePage />} />

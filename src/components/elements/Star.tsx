@@ -7,7 +7,7 @@ type StarProps = {
 
 const Star = ({ className }: StarProps) => {
      return (
-          <Icon path={mdiStarFourPoints} size={1}
+          <Icon path={mdiStarFourPoints}
                className={`absolute ${className} text-dark 
                dark:text-light size-5 lg:size-12`} />
      )

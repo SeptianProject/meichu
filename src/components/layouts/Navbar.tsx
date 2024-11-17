@@ -4,9 +4,16 @@ import NavButton from "../elements/NavButton"
 import NavIcon from "../elements/NavIcon"
 import HamburgerMenu from "../fragments/nav/HamburgerMenu"
 import NavItems from "../fragments/nav/NavItems"
+import { MdOutlineEmail } from "react-icons/md"
+import { BsWhatsapp } from "react-icons/bs"
 
-const Navbar = () => {
+type NavbarProps = {
+     modalOnClick: (modalType: 'login' | 'register') => void;
+}
+
+const Navbar = ({ modalOnClick }: NavbarProps) => {
      const [hamburgerActive, setHamburgerActive] = useState(false)
+     const [contactActive, setContactActive] = useState(false)
      const [isDarkMode, setIsDarkMode] = useState(() => {
           const savedTheme = localStorage.getItem('theme')
           if (savedTheme) {
@@ -22,10 +29,8 @@ const Navbar = () => {
           setHamburgerActive(!hamburgerActive)
      }
 
-     const handleHideHamburger = () => {
-          if (window.scrollY >= 0) {
-               setHamburgerActive(false)
-          }
+     const handleContactActive = () => {
+          setContactActive(!contactActive)
      }
 
      const handleToggleDarkMode = () => {
@@ -40,6 +45,12 @@ const Navbar = () => {
      }
 
      useEffect(() => {
+          const handleHideHamburger = () => {
+               if (window.scrollY > 0) {
+                    setHamburgerActive(false)
+               }
+          }
+
           window.addEventListener('scroll', handleHideHamburger)
           return () => window.removeEventListener('scroll', handleHideHamburger)
      }, [])
@@ -73,18 +84,26 @@ const Navbar = () => {
      return (
           <nav className="absolute inset-x-0 flex items-center justify-between 
           px-5 lg:px-20 h-28">
-               <NavItems isActive={hamburgerActive} />
+               <NavItems modalOnClick={() => modalOnClick('login')} isActive={hamburgerActive} />
                <div className="flex items-center gap-x-7 z-10 relative">
-                    {/* Nav Contact */}
-                    <NavButton className="hidden lg:block" />
-                    {/* Nav Mode */}
+                    {/* Contact */}
+                    <div className="hidden lg:block">
+                         <NavButton text="Contact" onClick={handleContactActive} />
+                         <div className={`pt-1 absolute flex flex-col items-center 
+                         justify-center gap-y-1 transition-all duration-300 ease-in-out
+                         ${contactActive ? 'z-0 opacity-100 top-10' : '-z-10 opacity-0 top-0'}`}>
+                              <NavButton icon={MdOutlineEmail} text="Email" />
+                              <NavButton icon={BsWhatsapp} text="Whatsapp" />
+                         </div>
+                    </div>
+                    {/* Mode */}
                     <NavIcon icon={isDarkMode ? assetsImage.Moon : assetsImage.Sun}
                          onClick={handleToggleDarkMode}
                          className="size-[1.4rem] lg:size-6" />
-                    {/* Nav Mobile */}
+                    {/* Mobile */}
                     <HamburgerMenu handleActive={handleToggleHamburger} isActive={hamburgerActive} />
-                    {/* Nav Profile */}
-                    <NavIcon icon={assetsImage.Profile} onClick={() => { }}
+                    {/* Profile */}
+                    <NavIcon icon={assetsImage.Profile} onClick={() => modalOnClick('login')}
                          className="hidden size-8 lg:block" />
                </div>
           </nav>

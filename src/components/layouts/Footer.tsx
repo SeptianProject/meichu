@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { assetsImage, marketPlaceItems, meichuFooterItems } from "../../assets/assets"
+import { assetsImage, badgeSosmedItems, marketPlaceItems, meichuFooterItems } from "../../assets/assets"
 import ListBadgeSosmed from "../elements/ListBadgeSosmed"
 
 const Footer = () => {
@@ -12,7 +12,8 @@ const Footer = () => {
                          src={assetsImage.MeichuLogo} alt="Meichu" />
                     <h3 className="dark:text-light hidden lg:block mt-36">Follow Us</h3>
                     <div className="flex items-center gap-x-2 mt-36 lg:mt-0">
-                         <ListBadgeSosmed />
+                         <ListBadgeSosmed badgeItems={badgeSosmedItems}
+                              className="rounded-xl bg-[#D9D9D9]" />
                     </div>
                     <h6 className="dark:text-light text-opacity-50 text-sm font-light">
                          2024Meichu | All rights reserved
