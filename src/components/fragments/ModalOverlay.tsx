@@ -1,11 +1,11 @@
 import React from "react";
 
-interface AuthOverlayProps {
+interface ModalOverlayProps {
      isModalClose: () => void;
      isModalOpen: boolean;
 }
 
-const AuthOverlay: React.FC<AuthOverlayProps> = ({ isModalClose, isModalOpen }) => {
+const ModalOverlay: React.FC<ModalOverlayProps> = ({ isModalClose, isModalOpen }) => {
      return (
           <div onClick={isModalClose}
                className={`fixed inset-0 bg-black/50 backdrop-blur-sm
@@ -13,4 +13,4 @@ const AuthOverlay: React.FC<AuthOverlayProps> = ({ isModalClose, isModalOpen }) 
      );
 }
 
-export default AuthOverlay;
+export default ModalOverlay;

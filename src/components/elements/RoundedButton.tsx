@@ -8,7 +8,7 @@ interface RoundedButtonProps {
 
 const RoundedButton: FC<RoundedButtonProps> = ({ onClick, title, className }) => {
      return (
-          <button onClick={onClick}
+          <button onClick={onClick} type="button"
                className={`${className} border rounded-full w-36 py-3 lg:w-44`}>
                {title}
           </button>

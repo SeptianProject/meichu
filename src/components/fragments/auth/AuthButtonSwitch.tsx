@@ -8,12 +8,10 @@ interface AuthButtonSwitchProps {
 
 const AuthButtonSwitch: React.FC<AuthButtonSwitchProps> = ({ text, textBtn, onSwitchModal }) => {
      return (
-          <div className="flex items-center gap-x-3 justify-center">
-               <h4 className="dark:text-light/40 text-sm">
-                    {text}
-               </h4>
+          <div className="flex items-center gap-x-2 justify-center">
+               <h4 className="dark:text-light/40 text-xs">{text}</h4>
                <button onClick={onSwitchModal}
-                    className="underline text-[#A78CE4]">
+                    className="underline text-[#A78CE4] text-sm font-medium">
                     {textBtn}
                </button>
           </div>

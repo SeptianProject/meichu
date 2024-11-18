@@ -7,12 +7,19 @@ interface AuthModalContainerProps {
      onClose: () => void
 }
 
-const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
-     isOpen,
-     onClose
-}) => {
+const AuthModalContainer: React.FC<AuthModalContainerProps> = ({ isOpen, onClose }) => {
      const [activeModal, setActiveModal] = React.useState<'login' | 'register'>('login')
      const [isAnimating, setIsAnimating] = React.useState(false)
+     const [showPassword, setShowPassword] = React.useState(false)
+     const [showConfirmPass, setShowConfirmPass] = React.useState(false)
+
+     const handleTogglePassword = () => {
+          setShowPassword(!showPassword)
+     }
+
+     const handleToggleConfirmPass = () => {
+          setShowConfirmPass(!showConfirmPass)
+     }
 
      React.useEffect(() => {
           if (isOpen) {
@@ -44,6 +51,8 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
                          isModalClose={onClose}
                          onSwitchModal={() => handleSwitchModal('register')}
                          isAnimating={isAnimating}
+                         showPassword={showPassword}
+                         handleTogglePassword={handleTogglePassword}
                     />
                ) : (
                     <RegisterLayout
@@ -51,6 +60,10 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
                          isModalClose={onClose}
                          onSwitchModal={() => handleSwitchModal('login')}
                          isAnimating={isAnimating}
+                         showPassword={showPassword}
+                         handleTogglePassword={handleTogglePassword}
+                         showConfirmPass={showConfirmPass}
+                         handleToggleConfirmPass={handleToggleConfirmPass}
                     />
                )}
           </>

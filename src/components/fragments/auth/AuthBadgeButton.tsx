@@ -4,7 +4,7 @@ import ListBadgeSosmed from "../../elements/ListBadgeSosmed";
 const AuthBadgeButton = () => {
      return (
           <>
-               <p className="dark:text-light/40 text-xs lg:text-base text-center">
+               <p className="dark:text-light/40 text-xs text-center">
                     - OR Continue with -
                </p>
                <div className="flex items-center justify-center gap-x-3">
