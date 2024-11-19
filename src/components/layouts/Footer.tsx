@@ -5,7 +5,7 @@ import ListBadgeSosmed from "../elements/ListBadgeSosmed"
 const Footer = () => {
      return (
           <div className='min-h-[65vh] mt-20 bg-transparent dark:bg-[#1F1F27] lg:bg-transparent px-10 lg:px-20
-          flex flex-col lg:flex-row lg:items-center gap-y-10 lg:gap-x-40'>
+          flex flex-col lg:flex-row lg:items-center gap-y-10 lg:gap-x-40 lg:dark:bg-transparent'>
                {/* Logo & more */}
                <div className="flex flex-col items-start relative gap-y-10 lg:gap-y-4">
                     <img className="size-48 absolute -top-5 -left-5"
