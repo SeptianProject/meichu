@@ -14,15 +14,15 @@ interface CardGradientBAProps {
 const CardGradientBA: FC<CardGradientBAProps> = ({ key, image, title, desc }) => {
      return (
           <div key={key}
-               className="h-[30rem] bg-center bg-cover rounded-2xl 
-                                   relative overflow-hidden"
+               className="h-[30rem] bg-center bg-cover rounded-2xl relative overflow-hidden
+               lg:h-[25rem] xl:h-[35rem]"
                style={{ backgroundImage: `url(${image})` }}>
                {/* Typograph & badge */}
                <div className="absolute bottom-7 z-10 left-5 flex flex-col gap-y-2">
-                    <h1 className="font-semibold text-xl text-light">
+                    <h1 className="font-semibold lg:text-lg xl:text-2xl text-light">
                          {title}
                     </h1>
-                    <p className="text-sm font-extralight text-light">
+                    <p className="lg:text-xs xl:text-base font-extralight text-light">
                          {desc}
                     </p>
                     {/* Badge sosmed */}

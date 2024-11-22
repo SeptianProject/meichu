@@ -137,7 +137,7 @@ export const navItems = [
 ]
 
 export const brandAmbassadorItems = [
-     BaPerson, BaPerson, BaPerson,
+     BaPerson, BaPerson, BaPerson, BaPerson, BaPerson, BaPerson
 ]
 
 export const categories = [
