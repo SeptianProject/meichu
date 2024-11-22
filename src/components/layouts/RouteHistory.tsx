@@ -19,7 +19,7 @@ const RouteHistory = ({ currentRoute, currentText, prevRoute, prevText }: RouteH
                {prevRoute && (
                     <>
                          <MdKeyboardArrowRight className="text-dark dark:text-light size-6 text-opacity-80" />
-                         <Link to={prevRoute.toString()} className='font-medium text-light font-poppins text-opacity-80'>{prevText}</Link>
+                         <Link to={prevRoute.toString()} className='font-medium text-dark dark:text-light font-poppins text-opacity-80'>{prevText}</Link>
                     </>
                )}
                <MdKeyboardArrowRight

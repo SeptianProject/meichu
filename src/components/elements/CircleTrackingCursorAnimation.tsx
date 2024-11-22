@@ -49,11 +49,11 @@ const CircleTrackingCursorAnimation = () => {
      }, [])
 
      return (
-          <motion.div className="bg-[#8474DB]/20 size-60 lg:size-[25rem] fixed inset-0 rounded-full 
-          blur-[80px] pointer-events-none"
+          <motion.div className="bg-[#8474DB]/50 size-20 fixed inset-0 rounded-full 
+          blur-[40px] pointer-events-none"
                animate={{
-                    x: mousePosition.x - 180,
-                    y: mousePosition.y - 180,
+                    x: mousePosition.x - 40,
+                    y: mousePosition.y - 40,
                }}
                transition={{ type: "spring", duration: 0.3 }}
           />

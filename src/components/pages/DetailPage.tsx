@@ -25,7 +25,7 @@ const DetailPage = () => {
                     <div className="space-y-10 lg:space-y-5 w-full">
                          {/* title */}
                          <div className="space-y-4 lg:max-w-80">
-                              <h1 className="uppercase text-4xl font-bold">
+                              <h1 className="dark:text-light uppercase text-4xl font-bold">
                                    autumn couple series
                               </h1>
                               <TextTagline text="Korean Style"
@@ -33,18 +33,18 @@ const DetailPage = () => {
                          </div>
                          {/* description */}
                          <div className="space-y-2 lg:max-w-[23rem]">
-                              <h3 className="text-2xl font-semibold">Description</h3>
-                              <p className="text-sm font-light text-opacity-80">Whether you have a question about talents, pricing, portfolio, or anything else, our team.
+                              <h3 className="dark:text-light text-2xl font-semibold">Description</h3>
+                              <p className="dark:text-light/70 text-sm font-light">Whether you have a question about talents, pricing, portfolio, or anything else, our team.
                                    Whether you have a question about talents, pricing, portfolio, or anything else, our team.
                                    Whether you have a question about talents, pricing, portfolio, or anything else, our team.</p>
                          </div>
                          {/* price */}
                          <div className="space-y-2">
-                              <h3 className="text-2xl font-semibold">Price</h3>
-                              <p className="text-lg font-light text-opacity-80">$70000</p>
+                              <h3 className="dark:text-light text-2xl font-semibold">Price</h3>
+                              <p className="dark:text-light/70 text-lg font-light">$70000</p>
                          </div>
                          {/* buy button */}
-                         <div className="flex items-center gap-x-5 pb-20">
+                         <div className="flex items-center gap-x-5 pb-10">
                               <button className="text-light bg-bluePrimary font-semibold 
                               border border-transparent w-36 py-3 rounded-full lg:w-52">
                                    Buy Now!
@@ -57,8 +57,8 @@ const DetailPage = () => {
                     </div>
                </div>
                {/* list product */}
-               <div className="border-t-2 border-light/20 space-y-4 pb-40 lg:pb-0">
-                    <h1 className="text-2xl font-semibold pt-5">
+               <div className="border-t-2 border-dark/30 dark:border-light/20 space-y-4 pb-40 lg:pb-0">
+                    <h1 className="text-2xl font-semibold pt-5 dark:text-light">
                          Explore Others Products
                     </h1>
                     <div className="flex flex-col items-center gap-y-16">

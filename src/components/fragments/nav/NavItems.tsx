@@ -15,7 +15,7 @@ const NavItems = ({ isActive, modalOnClick }: NavItemsProps) => {
                     <img src={assetsImage.MeichuLogo} alt="meichuLogo"
                          className='size-24 lg:size-32' />
                </div>
-               <div className={`fixed flex flex-col bg-[#1E1E1E]/15 dark:bg-[#1D1A24]/75 gap-4 z-50
+               <div className={`fixed flex flex-col bg-[#1E1E1E]/40 dark:bg-[#1D1A24]/75 gap-4 z-50
                backdrop-blur-md top-0 right-0 w-7/12 pl-8 pb-10 pt-32 rounded-b-2xl
                ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
                lg:translate-x-0 lg:opacity-100 lg:bg-transparent lg:flex-row lg:gap-8 lg:backdrop-blur-none 

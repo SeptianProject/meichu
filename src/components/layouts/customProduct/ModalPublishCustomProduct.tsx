@@ -16,7 +16,7 @@ const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = ({
                <ModalOverlay isModalClose={isModalClose} isModalOpen={isModalOpen} />
                <div className={`fixed size-[22rem] top-1/2 left-1/2 
                transform -translate-x-1/2 -translate-y-1/2 rounded-2xl border 
-               border-[#5E5A5A] bg-[#1E1E1E] transition-all duration-500 ease-in-out
+               border-[#5E5A5A] bg-light dark:bg-[#1E1E1E] transition-all duration-500 ease-in-out
                lg:w-2/5 lg:min-h-[50vh]
                     ${isModalOpen ? 'opacity-100 z-50' : 'opacity-0 z-0 scale-0'}`}>
                     <div className="flex flex-col items-center justify-center relative overflow-hidden">

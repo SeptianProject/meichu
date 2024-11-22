@@ -9,7 +9,7 @@ const AuthBadgeButton = () => {
                </p>
                <div className="flex items-center justify-center gap-x-3">
                     <ListBadgeSosmed badgeItems={badgeAuthItems}
-                         className="rounded-full bg-light" />
+                         className="rounded-full border border-dark dark:border-transparent dark:bg-light" />
                </div>
           </>
      );

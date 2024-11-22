@@ -5,9 +5,14 @@ import RegisterLayout from './Regis'
 interface AuthModalContainerProps {
      isOpen: boolean
      onClose: () => void
+     onProfile: () => void
 }
 
-const AuthModalContainer: React.FC<AuthModalContainerProps> = ({ isOpen, onClose }) => {
+const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
+     isOpen,
+     onClose,
+     onProfile
+}) => {
      const [activeModal, setActiveModal] = React.useState<'login' | 'register'>('login')
      const [isAnimating, setIsAnimating] = React.useState(false)
      const [showPassword, setShowPassword] = React.useState(false)
@@ -47,6 +52,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({ isOpen, onClose
           <>
                {activeModal === 'login' ? (
                     <LoginLayout
+                         onProfile={onProfile}
                          isModalOpen={isOpen}
                          isModalClose={onClose}
                          onSwitchModal={() => handleSwitchModal('register')}

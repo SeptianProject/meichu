@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { assetsImage } from "../../assets/assets"
 import NavButton from "../elements/NavButton"
 import NavIcon from "../elements/NavIcon"
 import HamburgerMenu from "../fragments/nav/HamburgerMenu"
 import NavItems from "../fragments/nav/NavItems"
-import { MdOutlineEmail } from "react-icons/md"
+import { MdOutlineEmail, MdSunny } from "react-icons/md"
 import { BsWhatsapp } from "react-icons/bs"
+import { IoMoonOutline } from "react-icons/io5"
+import { assetsImage } from "../../assets/assets"
 
 type NavbarProps = {
      modalOnClick: (modalType: 'login' | 'register') => void;
@@ -86,7 +87,6 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
           px-5 lg:px-20 h-28">
                <NavItems modalOnClick={() => modalOnClick('login')} isActive={hamburgerActive} />
                <div className="flex items-center gap-x-7 z-10 relative">
-                    {/* Contact */}
                     <div className="hidden lg:block">
                          <NavButton text="Contact" onClick={handleContactActive} />
                          <div className={`pt-1 absolute flex flex-col items-center 
@@ -96,15 +96,14 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
                               <NavButton icon={BsWhatsapp} text="Whatsapp" />
                          </div>
                     </div>
-                    {/* Mode */}
-                    <NavIcon icon={isDarkMode ? assetsImage.Moon : assetsImage.Sun}
+                    <NavIcon
+                         icon={isDarkMode ? IoMoonOutline : MdSunny}
                          onClick={handleToggleDarkMode}
-                         className="size-[1.4rem] lg:size-6" />
-                    {/* Mobile */}
+                         className={`transition-all duration-500 ease-in-out
+                              ${hamburgerActive ? 'text-[#d9d9d9]' : ''} 
+                              ${isDarkMode ? '' : ''}`} />
                     <HamburgerMenu handleActive={handleToggleHamburger} isActive={hamburgerActive} />
-                    {/* Profile */}
-                    <NavIcon icon={assetsImage.Profile} onClick={() => modalOnClick('login')}
-                         className="hidden size-8 lg:block" />
+                    <NavIcon icon={assetsImage.Profile} onClick={() => modalOnClick('login')} />
                </div>
           </nav>
      )

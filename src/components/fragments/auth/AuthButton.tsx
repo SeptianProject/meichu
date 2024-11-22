@@ -7,12 +7,12 @@ interface AuthButtonProps {
 
 const AuthButton: React.FC<AuthButtonProps> = ({ text, onClick }) => {
      return (
-          <button onClick={onClick}
-               className={`w-full py-[10px] rounded-full text-light 
+          <button type="button" onClick={onClick}
+               className={`w-full py-[10px] rounded-full 
                font-semibold font-poppins border
                ${text === 'Login'
-                         ? 'bg-[#312058] border-transparent'
-                         : 'bg-transparent border-[#6A45BE]'}`}>
+                         ? 'bg-[#312058] border-transparent text-light'
+                         : 'bg-transparent border-[#6A45BE] text-[#6A45BE] dark:text-light'}`}>
                {text}
           </button>
      );
