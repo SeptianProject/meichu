@@ -2,8 +2,9 @@ import { assetsImage, bestSellerImages } from '../../../assets/assets'
 
 const CardBestSeller = () => {
      return (
-          <div className='bg-transparent border border-[#5E5A5A] dark:bg-[#48484D] bg-opacity-50 w-full h-[22rem] rounded-3xl 
-                    flex flex-col items-start p-5 gap-y-5'>
+          <div className='bg-transparent border border-[#5E5A5A] 
+          dark:bg-[#48484D] bg-opacity-50 w-full h-[20rem] sm:h-[21rem] md:h-[20rem] lg:h-[17.5rem] xl:h-[21rem]
+          rounded-3xl flex flex-col items-start p-5 gap-y-5'>
                {/* photo & typograph */}
                <div className='flex items-center gap-x-4'>
                     <img className='rounded-full size-14'

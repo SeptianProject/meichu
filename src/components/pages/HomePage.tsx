@@ -1,14 +1,14 @@
 import HeadCarousel from "../fragments/home/HeadCarousel"
 import Heading from "../fragments/home/Heading"
 import 'swiper/swiper-bundle.css'
-import BundleProducts from "../layouts/home/BundleProducts"
-import BestSeller from "../layouts/home/BestSeller"
-import Catalog from "../layouts/home/Catalog"
-import CustomProducts from "../layouts/home/CustomProducts"
+import BundleProductsLayout from "../layouts/home/BundleProductsLayout"
+import BestSellerLayout from "../layouts/home/BestSellerLayout"
+import CatalogLayout from "../layouts/home/CatalogLayout"
+import CustomProductsLayout from "../layouts/home/CustomProductsLayout"
 
 const HomePage = () => {
      return (
-          <section className="px-7 lg:px-20 overflow-hidden flex flex-col gap-y-20">
+          <section className="px-7 md:px-12 lg:px-20 overflow-hidden flex flex-col gap-y-20">
                <div className="bg-[#8474DB]/20 size-60 lg:size-[32rem]
                absolute -left-40 top-10 rounded-full blur-[100px] pointer-events-none"/>
                <div className="bg-[#8474DB]/20 size-60 lg:size-[32rem]
@@ -16,7 +16,7 @@ const HomePage = () => {
                <div className="bg-[#8474DB]/20 size-60 lg:size-[30rem] z-10
                absolute -left-40 top-[70rem] rounded-full blur-[100px] pointer-events-none"/>
                {/* Main */}
-               <div className='min-h-[50vh] pt-40 flex items-center 
+               <div className='min-h-[50vh] pt-32 lg:pt-40 flex items-center 
                justify-center lg:min-h-screen'>
                     <div className="flex flex-col items-center gap-y-10">
                          <HeadCarousel />
@@ -24,13 +24,13 @@ const HomePage = () => {
                     </div>
                </div>
                {/* Bundle Products */}
-               <BundleProducts />
+               <BundleProductsLayout />
                {/* Best Seller */}
-               <BestSeller />
+               <BestSellerLayout />
                {/* Catalog */}
-               <Catalog />
+               <CatalogLayout />
                {/* Custom Product */}
-               <CustomProducts />
+               <CustomProductsLayout />
           </section>
      )
 }

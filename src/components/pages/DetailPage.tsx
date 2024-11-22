@@ -1,6 +1,6 @@
 import { assetsImage } from "../../assets/assets"
 import BtnBorderGradient from "../elements/BtnBorderGradient"
-import CardCatalog from "../fragments/home/CardCatalog"
+import CatalogCard from "../layouts/catalog/CatalogCard"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../layouts/RouteHistory"
 
@@ -63,9 +63,9 @@ const DetailPage = () => {
                     </h1>
                     <div className="flex flex-col items-center gap-y-16">
                          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 w-full">
-                              <CardCatalog />
-                              <CardCatalog />
-                              <CardCatalog />
+                              <CatalogCard />
+                              <CatalogCard />
+                              <CatalogCard />
                          </div>
                          <BtnBorderGradient />
                     </div>

@@ -2,11 +2,23 @@ import { EffectCards } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import TextTagline from "../../fragments/home/TextTagline"
 import { assetsImage, bundleProducts } from "../../../assets/assets"
-import { useState } from "react"
+import React from "react"
 
 
-const BundleProducts = () => {
-     const [activeIndex, setActiveIndex] = useState(0)
+const BundleProductsLayout = () => {
+     const [activeIndex, setActiveIndex] = React.useState(0)
+     const [isMobile, setIsMobile] = React.useState(false)
+
+     React.useEffect(() => {
+          const handleResize = () => {
+               if (window.innerWidth <= 375) {
+                    setIsMobile(true)
+               }
+          }
+          handleResize()
+          window.addEventListener('resize', handleResize)
+          return () => window.removeEventListener('resize', handleResize)
+     }, [])
 
      return (
           <div className="lg:min-h-screen relative isolate">
@@ -14,15 +26,17 @@ const BundleProducts = () => {
                <div className="mt-8 relative lg:mt-20">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:gap-x-10">
                          <img className="rounded-tl-[12rem] h-[40vh] w-[60vw] object-cover 
-                         object-center border-4 border-[#5E5A5A]
-                         lg:rounded-t-full lg:w-[23vw] lg:h-[65vh] lg:ml-40"
+                         object-top border-4 border-[#5E5A5A]
+                         md:rounded-tl-[20rem] md:h-[50vh] md:w-[55vw]
+                         lg:rounded-t-full lg:w-[30vw] lg:h-[60vh] lg:ml-40"
                               src={assetsImage.BundleProduct} alt="" />
                          <h1 className="text-2xl mt-6 font-semibold
                               lg:text-3xl lg:pb-40 text-[#312058] dark:text-light">
                               Nama Products Bundle
                          </h1>
                     </div>
-                    <div className="mt-5 lg:absolute -bottom-10 left-80 lg:max-w-screen-md">
+                    <div className="mt-5 -bottom-10 left-80 
+                    lg:absolute lg:max-w-screen-md">
                          <Swiper
                               effect={'cards'}
                               grabCursor={true}
@@ -32,16 +46,17 @@ const BundleProducts = () => {
                               slidesPerView={1}
                               cardsEffect={{
                                    rotate: false,
-                                   perSlideOffset: 40,
+                                   // 375 = 50, 440 = 40, 768 = 40
+                                   perSlideOffset: isMobile ? 50 : 40,
                                    slideShadows: false,
                               }}
                               modules={[EffectCards]}
-                              className='mx-auto'
+                              className='mx-auto size-full'
                          >
                               {bundleProducts.map((product, index) => (
                                    <SwiperSlide key={index}>
                                         <div className={`overflow-hidden w-36 h-52 rounded-xl 
-                                        border-[#5E5A5A] border-2 lg:w-72 lg:h-60
+                                        border-[#5E5A5A] border-2 md:w-64 md:h-56 lg:w-72 lg:h-60
                                         transition-all duration-500 
                                              ${index === activeIndex ? 'scale-100' : 'scale-[.8]'}`}>
                                              <img className={`size-full object-cover object-top`}
@@ -59,4 +74,4 @@ const BundleProducts = () => {
      )
 }
 
-export default BundleProducts
+export default BundleProductsLayout
