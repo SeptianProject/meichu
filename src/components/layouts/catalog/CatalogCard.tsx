@@ -1,23 +1,21 @@
-import { useNavigate } from 'react-router-dom'
 import { assetsImage, bestSellerImages } from '../../../assets/assets'
 import ButtonBuyCatalog from '../../fragments/catalogs/ButtonBuyCatalog'
 import CreditCatalog from '../../fragments/catalogs/CreditCatalog'
 import HeadProductCatalog from '../../fragments/catalogs/HeadProductCatalog'
 
 const CatalogCard = () => {
-     const navigate = useNavigate()
 
      return (
-          <div onClick={() => navigate('/catalog-detail')}
-               className='bg-transparent border border-[#5E5A5A] dark:bg-[#302F35] 
-               p-2 pb-5 rounded-2xl h-full md:p-5 xl:pb-10'>
+          <div className='bg-transparent border border-[#5E5A5A] dark:bg-[#302F35]
+               p-2 pb-5 rounded-2xl h-full md:p-5 xl:pb-10
+               hover:-translate-y-3 transition-all duration-500'>
                {/* Product name */}
                <div className='mt-2 flex items-center justify-between md:mt-0'>
                     <HeadProductCatalog />
                </div>
                {/* Profile */}
                <div className='flex items-center gap-x-2 my-2'>
-                    <img className='rounded-full size-7 md:size-12'
+                    <img className='rounded-full size-7 md:size-12 cursor-pointer'
                          src={assetsImage.BestSellerProfile} alt="" />
                     <h4 className='dark:text-light text-xs font-medium md:text-base'>
                          @Meichu

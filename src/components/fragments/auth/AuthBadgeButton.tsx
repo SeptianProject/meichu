@@ -9,7 +9,9 @@ const AuthBadgeButton = () => {
                </p>
                <div className="flex items-center justify-center gap-x-3">
                     <ListBadgeSosmed badgeItems={badgeAuthItems}
-                         className="rounded-full border border-dark dark:border-transparent dark:bg-light" />
+                         className="rounded-full border border-dark 
+                         dark:border-transparent dark:bg-light
+                         transition-all duration-300 hover:-translate-y-1 hover:scale-110" />
                </div>
           </>
      );

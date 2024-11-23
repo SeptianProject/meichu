@@ -1,21 +1,27 @@
+import React from "react"
 
 
 type buttonSwitchDiscoverProps = {
      onClick: () => void
      text: string
-     isFavored: boolean
+     value?: number
+     onFavored: boolean
 }
 
 const ButtonSwitchDiscover: React.FC<buttonSwitchDiscoverProps> = ({
      onClick,
      text,
-     isFavored
+     value,
+     onFavored
 }) => {
+
      return (
           <button onClick={onClick}
                className={`dark:text-light text-xs lg:text-base
-               ${isFavored ? 'font-semibold' : ' font-light'}`}>
+                    transition-all duration-500 ease-in-out
+               ${onFavored ? 'font-semibold' : ' font-light'}`}>
                {text}
+               <span className="">({value})</span>
           </button>
      )
 }

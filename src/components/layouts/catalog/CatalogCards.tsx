@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 import BtnBorderGradient from '../../elements/BtnBorderGradient'
 import CatalogCard from './CatalogCard'
+import { useNavigate } from 'react-router-dom'
+
 
 const CatalogCards = () => {
      const [isMobile, setIsMobile] = useState(false)
+     const navigate = useNavigate()
+
      const handleResize = () => {
           if (window.innerWidth < 1024) {
                setIsMobile(true)
@@ -32,7 +36,7 @@ const CatalogCards = () => {
                     </>
                     }
                </div>
-               <BtnBorderGradient />
+               <BtnBorderGradient onClick={() => navigate('/catalog-detail')} />
           </div>
      )
 }

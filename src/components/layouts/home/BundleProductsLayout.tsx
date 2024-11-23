@@ -28,7 +28,7 @@ const BundleProductsLayout = () => {
                          <img className="rounded-tl-[12rem] h-[40vh] w-[60vw] object-cover 
                          object-top border-4 border-[#5E5A5A]
                          md:rounded-tl-[20rem] md:h-[50vh] md:w-[55vw]
-                         lg:rounded-t-full lg:w-[30vw] lg:h-[60vh] lg:ml-40"
+                         lg:rounded-t-full lg:w-[30vw] lg:h-[60vh] lg:ml-40 xl:h-[75vh]"
                               src={assetsImage.BundleProduct} alt="" />
                          <h1 className="text-2xl mt-6 font-semibold
                               lg:text-3xl lg:pb-40 text-[#312058] dark:text-light">

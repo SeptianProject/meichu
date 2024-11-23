@@ -37,9 +37,8 @@ const BestSellerLayout = () => {
                     {/* Card best seller */}
                     {isMobile ?
                          <Swiper
-                              grabCursor={true}
                               slidesPerView={1}
-                              className='w-full'>
+                              className='size-full'>
                               {bestSeller.map((card, index) => (
                                    <SwiperSlide key={index} className='px-2'>
                                         {card}
@@ -48,9 +47,8 @@ const BestSellerLayout = () => {
                          </Swiper>
                          : isTablet ?
                               <Swiper
-                                   grabCursor={true}
                                    slidesPerView={2}
-                                   className='w-full'>
+                                   className='size-full'>
                                    {bestSeller.map((card, index) => (
                                         <SwiperSlide key={index} className='px-2'>
                                              {card}
@@ -58,11 +56,10 @@ const BestSellerLayout = () => {
                                    ))}
                               </Swiper>
                               : <Swiper
-                                   grabCursor={true}
                                    slidesPerView={3}
-                                   className='w-full'>
+                                   className='size-full'>
                                    {bestSeller.map((card, index) => (
-                                        <SwiperSlide key={index} className='px-2'>
+                                        <SwiperSlide key={index} className='px-2 py-5'>
                                              {card}
                                         </SwiperSlide>
                                    ))}

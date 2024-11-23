@@ -1,49 +1,18 @@
-import { Link } from "react-router-dom"
-import { assetsImage, badgeSosmedItems, marketPlaceItems, meichuFooterItems } from "../../assets/assets"
-import ListBadgeSosmed from "../elements/ListBadgeSosmed"
+import { marketPlaceItems, meichuFooterItems } from "../../assets/assets"
+import FooterItems from "../fragments/FooterItems"
+import FooterLogoBadge from "../fragments/FooterLogoBadge"
 
 const Footer = () => {
      return (
-          <div className='min-h-[65vh] mt-20 bg-transparent dark:bg-[#1F1F27] lg:bg-transparent px-10 lg:px-20
-          flex flex-col lg:flex-row lg:items-center gap-y-10 lg:gap-x-40 lg:dark:bg-transparent'>
+          <div className='min-h-[65vh] mt-20 bg-transparent
+          px-10 lg:px-20 flex flex-col gap-y-10
+          lg:flex-row lg:items-center lg:gap-x-40 lg:bg-transparent
+          dark:lg:bg-transparent dark:bg-[#1F1F27]'>
                {/* Logo & more */}
-               <div className="flex flex-col items-start relative gap-y-10 lg:gap-y-4">
-                    <img className="size-48 absolute -top-5 -left-5"
-                         src={assetsImage.MeichuLogo} alt="Meichu" />
-                    <h3 className="dark:text-light hidden lg:block mt-36">Follow Us</h3>
-                    <div className="flex items-center gap-x-2 mt-36 lg:mt-0">
-                         <ListBadgeSosmed badgeItems={badgeSosmedItems}
-                              className="rounded-xl bg-[#D9D9D9]" />
-                    </div>
-                    <h6 className="dark:text-light text-opacity-50 text-sm font-light">
-                         2024Meichu | All rights reserved
-                    </h6>
-               </div>
-               <div className="flex items-start gap-x-20">
-                    {/* Marketplace */}
-                    <div className="flex flex-col gap-y-5">
-                         <h3 className="dark:text-light text-base font-bold">MarketPlace</h3>
-                         <div className="flex flex-col gap-y-2">
-                              {marketPlaceItems.map((item, index) => (
-                                   <Link key={index} to={item.link}
-                                        className="text-dark dark:text-light text-sm font-poppins text-opacity-70">
-                                        {item.name}
-                                   </Link>
-                              ))}
-                         </div>
-                    </div>
-                    {/* Meichu */}
-                    <div className="flex flex-col gap-y-5">
-                         <h3 className="dark:text-light text-base font-bold">Meichu</h3>
-                         <div className="flex flex-col gap-y-2">
-                              {meichuFooterItems.map((item, index) => (
-                                   <Link key={index} to={item.link}
-                                        className="text-dark dark:text-light text-sm font-poppins text-opacity-70">
-                                        {item.name}
-                                   </Link>
-                              ))}
-                         </div>
-                    </div>
+               <FooterLogoBadge />
+               <div className="flex items-start gap-x-20 lg:gap-x-32">
+                    <FooterItems title="MarketPlace" listFooterItem={marketPlaceItems} />
+                    <FooterItems title="Meichu" listFooterItem={meichuFooterItems} />
                </div>
           </div>
      )

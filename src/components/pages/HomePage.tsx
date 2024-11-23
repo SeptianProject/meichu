@@ -16,7 +16,7 @@ const HomePage = () => {
                <div className="bg-[#8474DB]/20 size-60 lg:size-[30rem] z-10
                absolute -left-40 top-[70rem] rounded-full blur-[100px] pointer-events-none"/>
                {/* Main */}
-               <div className='min-h-[50vh] pt-32 lg:pt-40 flex items-center 
+               <div className='min-h-[50vh] pt-36 flex items-center 
                justify-center lg:min-h-screen'>
                     <div className="flex flex-col items-center gap-y-10">
                          <HeadCarousel />
