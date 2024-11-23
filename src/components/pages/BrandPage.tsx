@@ -12,7 +12,7 @@ const BrandPage = () => {
                {/* Main Content */}
                <div className="flex flex-col items-center gap-y-16">
                     <MainContentBA />
-                    <BtnBorderGradient />
+                    <BtnBorderGradient onClick={() => { }} />
                </div>
           </section>
      )

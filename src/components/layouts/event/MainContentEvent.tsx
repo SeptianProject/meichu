@@ -10,7 +10,7 @@ const MainContentEvent = () => {
                     <CardEvent />
                     <CardEvent />
                </div>
-               <BtnBorderGradient />
+               <BtnBorderGradient onClick={() => { }} />
           </div>
      )
 }

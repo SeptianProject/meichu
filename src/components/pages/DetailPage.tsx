@@ -67,7 +67,7 @@ const DetailPage = () => {
                               <CatalogCard />
                               <CatalogCard />
                          </div>
-                         <BtnBorderGradient />
+                         <BtnBorderGradient onClick={() => { }} />
                     </div>
                </div>
           </section>
