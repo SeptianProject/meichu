@@ -4,7 +4,7 @@ import FacebookAuth from './images/facebook-auth.svg';
 import Apple from './images/apple.svg';
 import SingleEmoji from './images/singleEmoji.svg';
 import DuoEmoji from './images/duoEmoji.svg';
-import BaPerson from './images/baPerson.png';
+import BaPerson from './images/BaPerson.png';
 import CloudSend from './images/cloudSend.png';
 import Sun from './images/sun.svg';
 import Moon from './images/moon.svg';
@@ -39,7 +39,7 @@ import Product4 from './images/product4.jpg';
 
 export const assetsImage = {
      Star, MeichuLogo, Sun, Moon, Profile, BundleProduct, BestSellerProfile,
-     SingleEmoji, DuoEmoji, CloudSend, DetailImg1, DetailImg2, DetailImg3,
+     SingleEmoji, DuoEmoji, CloudSend, DetailImg1, DetailImg2, DetailImg3
 }
 
 export const badgeSosmedItems = [
