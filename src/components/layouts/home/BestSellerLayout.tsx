@@ -5,8 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 
 const BestSellerLayout = () => {
-     const [isMobile, setIsMobile] = useState(false)
-     const [isTablet, setIsTablet] = useState(false)
+     const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
      const [bestSeller] = useState([
           <CardBestSeller />,
           <CardBestSeller />,
@@ -17,10 +16,13 @@ const BestSellerLayout = () => {
      ])
 
      const handleResize = () => {
-          if (window.innerWidth < 768) {
-               setIsMobile(true)
-          } else if (window.innerWidth > 760 && window.innerWidth < 1024) {
-               setIsTablet(true)
+          const width = window.innerWidth
+          if (width < 768) {
+               setScreenSize('mobile')
+          } else if (width >= 768 && width < 1024) {
+               setScreenSize('tablet')
+          } else {
+               setScreenSize('desktop')
           }
      }
 
@@ -28,43 +30,23 @@ const BestSellerLayout = () => {
           handleResize()
           window.addEventListener('resize', handleResize)
           return () => window.removeEventListener('resize', handleResize)
-     })
+     }, [])
 
      return (
           <div className="min-h-full">
                <TextTagline text="Best Seller" className='font-semibold' />
                <div className='mt-6'>
                     {/* Card best seller */}
-                    {isMobile ?
-                         <Swiper
-                              slidesPerView={1}
-                              className='size-full'>
-                              {bestSeller.map((card, index) => (
-                                   <SwiperSlide key={index} className='px-2'>
-                                        {card}
-                                   </SwiperSlide>
-                              ))}
-                         </Swiper>
-                         : isTablet ?
-                              <Swiper
-                                   slidesPerView={2}
-                                   className='size-full'>
-                                   {bestSeller.map((card, index) => (
-                                        <SwiperSlide key={index} className='px-2'>
-                                             {card}
-                                        </SwiperSlide>
-                                   ))}
-                              </Swiper>
-                              : <Swiper
-                                   slidesPerView={3}
-                                   className='size-full'>
-                                   {bestSeller.map((card, index) => (
-                                        <SwiperSlide key={index} className='px-2 py-5'>
-                                             {card}
-                                        </SwiperSlide>
-                                   ))}
-                              </Swiper>
-                    }
+                    <Swiper
+                         slidesPerView={screenSize === 'mobile' ? 1 :
+                              screenSize === 'tablet' ? 2 : 3}
+                         className='size-full'>
+                         {bestSeller.map((card, index) => (
+                              <SwiperSlide key={index} className='px-2 py-5'>
+                                   {card}
+                              </SwiperSlide>
+                         ))}
+                    </Swiper>
                </div>
           </div>
      )

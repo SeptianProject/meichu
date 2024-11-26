@@ -1,13 +1,13 @@
 import React from 'react'
 import { BiX } from 'react-icons/bi'
-import { assetsImage, bestSellerImages } from '../../../assets/assets'
+import { assetsImage } from '../../../assets/assets'
 import TextTitleValue from '../../fragments/profile/TextTitleValue'
 import ButtonSwitchDiscover from '../../fragments/profile/ButtonSwitchDiscover'
 import ButtonActionInProfile from '../../fragments/profile/ButtonActionInProfile'
 import ModalOverlay from '../../fragments/ModalOverlay'
 import CardEvent from '../../fragments/event/CardEvent'
-import { FaHeart } from 'react-icons/fa6'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import CardFavoredProfile from './CardFavoredProfile'
 
 interface ProfileLayoutProps {
      profileOpen: boolean
@@ -19,10 +19,10 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
      profileClose
 }) => {
      const listCardFavored = [
-          <CardFavoredItem />,
-          <CardFavoredItem />,
-          <CardFavoredItem />,
-          <CardFavoredItem />
+          <CardFavoredProfile />,
+          <CardFavoredProfile />,
+          <CardFavoredProfile />,
+          <CardFavoredProfile />
      ]
      const listCardRequest = [
           <CardEvent />,
@@ -54,13 +54,17 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
 
           if (profileOpen) {
                document.body.style.overflow = 'hidden'
-               document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`
+               document.body.style.position = 'fixed'
+               document.body.style.width = '100%'
+               document.body.style.top = `-${window.scrollY}px`
           } else {
-               const timer = setTimeout(() => {
-                    document.body.style.overflow = ''
-                    document.body.style.paddingRight = ''
-               }, 200);
-               return () => clearTimeout(timer)
+               const scrollY = document.body.style.top
+               document.body.style.overflow = ''
+               document.body.style.position = ''
+               document.body.style.width = ''
+               document.body.style.top = ''
+
+               window.scrollTo(0, parseInt(scrollY || '0') * -1)
           }
 
           handleResize()
@@ -83,7 +87,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
           <>
                <ModalOverlay isModalClose={profileClose} isModalOpen={profileOpen} />
                <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-               w-4/5 rounded-xl bg-light dark:bg-[#1e1e1e] border border-[#5e5a5a]
+               w-4/5 rounded-xl bg-light dark:bg-[#1e1e1e] border border-[#5e5a5a] overflow-y-hidden
                transition-all duration-500 ease-in-out lg:w-3/5 lg:min-h-[85vh] lg:rounded-3xl
                ${isTapDiscover ? 'min-h-[60vh]' : 'min-h-[70vh]'}
                ${profileOpen || !profileClose ? 'z-50 opacity-100' : 'z-0 scale-0 opacity-0'}`}
@@ -183,59 +187,3 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
 
 export default ProfileLayout
 
-const CardFavoredItem = () => {
-     return (
-          <div className='bg-transparent border border-[#5E5A5A] dark:bg-[#302F35]
-               p-2 pb-5 md:p-3 rounded-2xl h-full w-full
-               hover:-translate-y-3 transition-all duration-500'>
-               {/* Product name */}
-               <div className='mt-2 flex items-center justify-between md:mt-0'>
-                    <h3 className='dark:text-light text-[14px] text-sm font-bold'>
-                         Nama Product
-                    </h3>
-                    <div className='border border-[#5E5A5A] dark:border-light cursor-pointer 
-                    rounded-full p-[5px] w-fit group hover:bg-red-500 
-                    hover:border-transparent dark:hover:border-transparent hover:scale-105
-                    transition-all duration-300'>
-                         <FaHeart className='text-[#5E5A5A] dark:text-light size-3
-                    group-hover:text-light group-hover:scale-75 transition-all duration-300' />
-                    </div>
-               </div>
-               {/* Profile */}
-               <div className='flex items-center gap-x-2 my-2'>
-                    <img className='rounded-full size-7 cursor-pointer'
-                         src={assetsImage.BestSellerProfile} alt="" />
-                    <h4 className='dark:text-light text-xs font-medium'>
-                         @Meichu
-                    </h4>
-               </div>
-               {/* image content */}
-               <div className='mt-3'>
-                    <img className='w-full h-32 sm:h-24 object-cover object-center rounded-xl'
-                         src={bestSellerImages[1]} alt="Product" />
-               </div>
-               {/* more Button */}
-               <div className='mt-5 flex items-center justify-between'>
-                    <div className='flex items-center gap-x-2'>
-                         <img className='size-6 sm:size-7 rounded-full'
-                              src={assetsImage.BundleProduct} alt='' />
-                         <div className='flex flex-col'>
-                              <h4 className='dark:text-light text-[12px] sm:text-xs font-normal'>
-                                   Credits
-                              </h4>
-                              <h4 className='dark:text-light text-xs font-semibold'>
-                                   4.3
-                              </h4>
-                         </div>
-                    </div>
-                    <button className='border border-[#5E5A5A] text-[#5E5A5A] font-inter w-fit
-                    rounded-full text-[10px] p-1 text-xs
-                    dark:border-light dark:text-light hover:bg-bluePrimary 
-                    hover:border-transparent hover:text-light dark:hover:border-transparent
-                    dark:hover:bg-bluePrimary transition-all duration-300'>
-                         Buy Now!
-                    </button>
-               </div>
-          </div>
-     )
-}
