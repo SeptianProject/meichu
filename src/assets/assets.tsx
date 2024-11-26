@@ -12,7 +12,7 @@ import Instagram from './images/instagram.svg';
 import Facebook from './images/facebook.svg';
 import Gmail from './images/gmail.svg';
 import Profile from './images/profile.svg';
-import BestSellerImg from './images/bestSellerImg.png';
+import BestSellerImg from './images/BestSellerImg.png';
 import BestSellerImg2 from './images/bestSellerImg2.png';
 import BestSellerImg3 from './images/bestSellerImg3.png';
 import BestSellerProfile from './images/bestSellerProfile.png';
