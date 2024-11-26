@@ -4,7 +4,6 @@ import Navbar from "./components/layouts/Navbar"
 import AppRouter from "./routes/AppRouter"
 import FloatingButton from "./components/elements/FloatingButton"
 import AuthModalContainer from "./components/layouts/auth/AuthModalContainer"
-import CircleTrackingCursorAnimation from "./components/elements/CircleTrackingCursorAnimation"
 import ProfileLayout from "./components/layouts/profile/ProfileLayout"
 
 const App = () => {
@@ -39,7 +38,6 @@ const App = () => {
                <AppRouter />
                <Footer />
                <FloatingButton />
-               <CircleTrackingCursorAnimation />
           </div>
      )
 }

@@ -3,18 +3,19 @@ import BtnBorderGradient from '../../elements/BtnBorderGradient'
 import CatalogCard from './CatalogCard'
 import { useNavigate } from 'react-router-dom'
 
+const catalogCard = <CatalogCard type='catalog' />
+
+const listCatalog = [
+     { id: 1, component: catalogCard },
+     { id: 2, component: catalogCard },
+     { id: 3, component: catalogCard },
+     { id: 4, component: catalogCard },
+     { id: 5, component: catalogCard },
+]
 
 const CatalogCards = () => {
      const [screenSize, setScreenSize] = useState<'mobile' | 'desktop'>('desktop')
      const navigate = useNavigate()
-
-     const listCatalog = [
-          { id: 1, component: <CatalogCard /> },
-          { id: 2, component: <CatalogCard /> },
-          { id: 3, component: <CatalogCard /> },
-          { id: 4, component: <CatalogCard /> },
-          { id: 5, component: <CatalogCard /> },
-     ]
 
      const displayedCards = screenSize === 'mobile'
           ? listCatalog.slice(0, 4) : listCatalog.slice(0, 3)

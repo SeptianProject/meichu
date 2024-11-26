@@ -1,8 +1,16 @@
-const DescCardEvent = () => {
+import React from "react"
+
+type TDescCardEvent = {
+     type: 'event' | 'profile'
+}
+
+const DescCardEvent: React.FC<TDescCardEvent> = ({ type }) => {
      return (
           <p className="font-light text-xs text-opacity-80 tracking-wide dark:text-light
                     dark:text-opacity-80">
-               Whether you have a question about talents, pricing, portfolio, or anything else, our team, Whether you have a question about talents, pricing.
+               {type === 'event'
+                    ? 'Whether you have a question about talents, pricing, portfolio, or anything else, our team, Whether you have a question about talents, pricing.'
+                    : 'Your request is being processed. Please hold on for a moment as we carefully craft your product to ensure the highest quality, Thank You!'}
           </p>
      )
 }
