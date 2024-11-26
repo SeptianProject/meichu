@@ -63,9 +63,9 @@ const DetailPage = () => {
                     </h1>
                     <div className="flex flex-col items-center gap-y-16">
                          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 w-full">
-                              <CatalogCard />
-                              <CatalogCard />
-                              <CatalogCard />
+                              <CatalogCard type="catalog" />
+                              <CatalogCard type="catalog" />
+                              <CatalogCard type="catalog" />
                          </div>
                          <BtnBorderGradient onClick={() => { }} />
                     </div>
