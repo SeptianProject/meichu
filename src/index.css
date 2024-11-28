@@ -23,20 +23,6 @@ p {
   @apply text-dark;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  @apply bg-light;
-  @apply rounded-full;
-  @apply p-5;
-  @apply justify-center;
-  @apply items-center;
-}
-
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  @apply text-dark;
-}
-
 @keyframes float {
   0% {
     transform: translateY(0);

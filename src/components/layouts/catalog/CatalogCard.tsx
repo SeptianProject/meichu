@@ -11,7 +11,8 @@ type CatalogCardProps = {
 const CatalogCard: React.FC<CatalogCardProps> = ({ type }) => {
 
      return (
-          <div className={`bg-transparent border border-[#5E5A5A] dark:bg-[#302F35]
+          <div className={`bg-transparent border-2 border-[#5E5A5A] 
+               dark:bg-[#302F35] dark:border-transparent
                p-2 pb-5 rounded-2xl h-full w-full hover:-translate-y-3
                transition-all duration-500
                ${type === 'catalog' ? 'md:p-5 xl:pb-10' : 'md:p-3'}`}>

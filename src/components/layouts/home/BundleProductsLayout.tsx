@@ -7,12 +7,16 @@ import React from "react"
 
 const BundleProductsLayout = () => {
      const [activeIndex, setActiveIndex] = React.useState(0)
-     const [isMobile, setIsMobile] = React.useState(false)
+     const [screenSize, setScreenSize] = React.useState<'mobile' | 'tablet' | 'desktop'>('desktop')
 
      React.useEffect(() => {
           const handleResize = () => {
-               if (window.innerWidth <= 375) {
-                    setIsMobile(true)
+               if (window.innerWidth < 768) {
+                    setScreenSize('mobile')
+               } else if (window.innerWidth < 1024) {
+                    setScreenSize('tablet')
+               } else {
+                    setScreenSize('desktop')
                }
           }
           handleResize()
@@ -20,43 +24,41 @@ const BundleProductsLayout = () => {
           return () => window.removeEventListener('resize', handleResize)
      }, [])
 
+     const isMobile = screenSize === 'mobile'
+
      return (
           <div className="lg:min-h-screen relative isolate">
                <TextTagline text="Bundle Products" className="font-semibold" />
-               <div className="mt-8 relative lg:mt-20">
-                    <div className="flex flex-col lg:flex-row lg:items-center lg:gap-x-10">
-                         <img className="rounded-tl-[12rem] h-[40vh] w-[60vw] object-cover 
-                         object-top border-4 border-[#5E5A5A]
-                         md:rounded-tl-[20rem] md:h-[50vh] md:w-[55vw]
-                         lg:rounded-t-full lg:w-[30vw] lg:h-[60vh] lg:ml-40 xl:h-[75vh]"
+               <div className="mt-8 relative lg:mt-20 lg:absolute xl:right-60">
+                    <div className="flex flex-col relative lg:flex-row lg:items-center lg:gap-x-10 h-full">
+                         <img className="rounded-tl-[12rem] object-cover object-center border-4 
+                         border-[#5E5A5A] md:rounded-tl-[15rem] lg:rounded-t-full
+                         h-full w-[18rem] md:w-[22rem] lg:w-[25rem]"
                               src={assetsImage.BundleProduct} alt="" />
-                         <h1 className="text-2xl mt-6 font-semibold
-                              lg:text-3xl lg:pb-40 text-[#312058] dark:text-light">
+                         <h1 className="text-2xl mt-6 font-semibold lg:text-3xl lg:pb-10
+                         text-[#312058] dark:text-light">
                               Nama Products Bundle
                          </h1>
                     </div>
-                    <div className="mt-5 -bottom-10 left-80 
-                    lg:absolute lg:max-w-screen-md">
+                    <div className="mt-5 -bottom-10 left-40 
+                    lg:absolute lg:max-w-[45rem]">
                          <Swiper
                               effect={'cards'}
                               grabCursor={true}
-                              centeredSlides={true}
                               initialSlide={activeIndex}
                               onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
                               slidesPerView={1}
                               cardsEffect={{
                                    rotate: false,
-                                   // 375 = 50, 440 = 40, 768 = 40
                                    perSlideOffset: isMobile ? 50 : 40,
                                    slideShadows: false,
                               }}
                               modules={[EffectCards]}
-                              className='mx-auto size-full'
-                         >
+                              className='mx-auto size-full'>
                               {bundleProducts.map((product, index) => (
                                    <SwiperSlide key={index}>
                                         <div className={`overflow-hidden w-36 h-52 rounded-xl 
-                                        border-[#5E5A5A] border-2 md:w-64 md:h-56 lg:w-72 lg:h-60
+                                        border-[#5E5A5A] border-2 md:w-64 md:h-56 lg:w-64
                                         transition-all duration-500 
                                              ${index === activeIndex ? 'scale-100' : 'scale-[.8]'}`}>
                                              <img className={`size-full object-cover object-top`}

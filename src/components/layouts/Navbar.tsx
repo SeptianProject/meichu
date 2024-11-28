@@ -83,7 +83,7 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
 
 
      return (
-          <nav className="absolute inset-x-0 flex items-center justify-between 
+          <nav className="absolute inset-x-0 -right-5 flex items-center justify-between 
           px-5 md:px-14 xl:px-20 h-28">
                <NavItems modalOnClick={() => modalOnClick('login')} isActive={hamburgerActive} />
                <div className="flex items-center gap-x-7 z-10 relative">
