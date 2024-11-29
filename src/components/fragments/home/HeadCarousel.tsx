@@ -74,19 +74,18 @@ const HeadCarousel: React.FC = () => {
                     </Swiper>
 
                     {/* Arrow Custom */}
-                    <div className='hidden absolute top-1/2 -translate-y-1/2 z-10 lg:flex items-center justify-between w-full'>
+                    <div className='hidden absolute top-1/2 -translate-y-1/2 -translate-x-1 z-10
+                    lg:flex items-center justify-between w-full px-10'>
                          <BounceAnimation
                               delayVal={1.2}
-                              hiddenCoordinates={{ x: -50 }}
-                              visibleCoordinates={{ x: 0 }}>
+                              hiddenCoordinates={{ x: -50 }}>
                               <ArrowCardCarousel
                                    onClick={() => swiperRef.current?.slidePrev()}
                                    icon={SlArrowLeft} />
                          </BounceAnimation>
                          <BounceAnimation
                               delayVal={1.2}
-                              hiddenCoordinates={{ x: 50 }}
-                              visibleCoordinates={{ x: 0 }}>
+                              hiddenCoordinates={{ x: 50 }}>
                               <ArrowCardCarousel
                                    onClick={() => swiperRef.current?.slideNext()}
                                    icon={SlArrowRight} />

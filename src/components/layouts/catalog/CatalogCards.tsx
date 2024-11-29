@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import BtnBorderGradient from '../../elements/BtnBorderGradient'
 import CatalogCard from './CatalogCard'
 import { useNavigate } from 'react-router-dom'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../../animations/StaggerAnimation'
 
 const catalogCard = <CatalogCard type='catalog' />
 
@@ -9,8 +10,6 @@ const listCatalog = [
      { id: 1, component: catalogCard },
      { id: 2, component: catalogCard },
      { id: 3, component: catalogCard },
-     { id: 4, component: catalogCard },
-     { id: 5, component: catalogCard },
 ]
 
 const CatalogCards = () => {
@@ -36,14 +35,19 @@ const CatalogCards = () => {
 
      return (
           <div className='flex flex-col items-center gap-y-10'>
-               <div className='mt-12 grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 w-full'>
-                    {/* Card catalog */}
+               <ContainerStaggerAnimation
+                    initialDelay={0.5}
+                    staggerDelay={0.4}
+                    className='mt-12 grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 w-full'>
                     {displayedCards.map((card) => (
-                         <div key={card.id} className='w-full'>
+                         <CardStaggerAnimation
+                              key={card.id}
+                              hiddenPosition={{ y: 100 }}
+                              className='w-full'>
                               {card.component}
-                         </div>
+                         </CardStaggerAnimation>
                     ))}
-               </div>
+               </ContainerStaggerAnimation>
                <BtnBorderGradient onClick={() => navigate('/catalog-detail')} />
           </div>
      )

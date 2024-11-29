@@ -3,14 +3,14 @@ import React from "react";
 
 interface ContainerStaggerAnimationProps {
      children: React.ReactNode
-     initialDelay: number
+     initialDelay?: number
      staggerDelay: number
      className?: string
 }
 
 interface CardStaggerAnimationProps {
      children: React.ReactNode
-     hiddenPosition: { x: number, y: number }
+     hiddenPosition: { x?: number, y?: number }
      className?: string
 }
 
@@ -54,7 +54,7 @@ export const CardStaggerAnimation: React.FC<CardStaggerAnimationProps> = ({
                opacity: 1, y: 0, x: 0,
                transition: {
                     type: 'spring',
-                    stiffness: 80,
+                    stiffness: 100,
                     damping: 10,
                }
           }

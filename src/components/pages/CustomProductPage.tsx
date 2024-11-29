@@ -36,14 +36,21 @@ const CustomProductPage = () => {
                          <RouteHistory currentRoute="/custom-product" currentText="Custom Product" />
                          <TextTagline text="custom product" className="dark:text-light font-semibold" />
                     </div>
-                    <form action="" className="space-y-16">
+                    <form action=""
+                         className="space-y-16">
                          <CustomTypeProduct />
                          <UploadImageProduct />
-                         <TextInput label="Name Your Product"
+                         <TextInput
+                              delayAnimation={0.5}
+                              label="Name Your Product"
                               placeholder="E.G Redeemable T-Shirt With Logo" />
                          <ChooseTypeProduct />
-                         <TextInput label="Enter Your Name" placeholder="Ex: Septianzz" />
-                         <ActionButtonProduct onPublish={handleOnPublish} />
+                         <TextInput
+                              delayAnimation={0.5}
+                              label="Enter Your Name"
+                              placeholder="Ex: Septianzz" />
+                         <ActionButtonProduct
+                              onPublish={handleOnPublish} />
                     </form>
                </section>
                <ModalPublishCustomProduct

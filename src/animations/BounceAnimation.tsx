@@ -2,9 +2,8 @@ import React from "react";
 import { motion } from 'framer-motion'
 
 interface BounceAnimationProps {
-     delayVal: number;
+     delayVal?: number;
      hiddenCoordinates: { x?: number, y?: number };
-     visibleCoordinates: { x?: number, y?: number };
      children: React.ReactNode;
      className?: string;
 }
@@ -14,11 +13,10 @@ const BounceAnimation: React.FC<BounceAnimationProps> = ({
      children,
      className,
      hiddenCoordinates,
-     visibleCoordinates
 }) => {
      const bounceEffect = {
           hidden: { opacity: 0, y: hiddenCoordinates.y, x: hiddenCoordinates.x },
-          visible: { opacity: 1, y: visibleCoordinates.y, x: visibleCoordinates.x }
+          visible: { opacity: 1, y: 0, x: 0 }
      }
 
      return (

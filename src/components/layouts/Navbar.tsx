@@ -86,7 +86,7 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
           <nav className="absolute inset-x-0 -right-5 flex items-center justify-between 
           px-5 md:px-14 xl:px-20 h-28">
                <NavItems modalOnClick={() => modalOnClick('login')} isActive={hamburgerActive} />
-               <div className="flex items-center gap-x-7 z-10 relative">
+               <div className="flex items-center gap-x-7 z-20 relative">
                     <div className="hidden lg:block">
                          <NavButton text="Contact" onClick={handleContactActive} />
                          <div className={`pt-1 absolute flex flex-col items-center 

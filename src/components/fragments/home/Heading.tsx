@@ -6,10 +6,9 @@ const Heading = () => {
      return (
           <div className="relative flex flex-col items-center text-center gap-y-2">
                <BounceAnimation
-                    className="w-fit"
+                    className="w-fit z-10"
                     delayVal={0.8}
-                    hiddenCoordinates={{ y: 100 }}
-                    visibleCoordinates={{ y: 0 }}>
+                    hiddenCoordinates={{ y: 100 }}>
                     <h1 className='text-2xl font-semibold w-[20rem] dark:text-light
                          sm:text-[25px] sm:leading-[30px] 
                          md:text-[35px] md:leading-[40px] md:w-[30rem]
@@ -18,10 +17,9 @@ const Heading = () => {
                     </h1>
                </BounceAnimation>
                <BounceAnimation
-                    className="w-full"
+                    className="w-full z-10"
                     delayVal={1.2}
-                    hiddenCoordinates={{ y: -50 }}
-                    visibleCoordinates={{ y: 0 }}>
+                    hiddenCoordinates={{ y: -50 }}>
                     <p className='text-sm font-light w-[22rem] tracking-wider
                          sm:text-[15px] md:text-[18px] md:w-[28rem]
                          lg:text-[20px] lg:leading-[50px] lg:w-full
@@ -29,14 +27,18 @@ const Heading = () => {
                          With smooth HD Quality, Korean Style, Goth Style & Cute Stuff.
                     </p>
                </BounceAnimation>
-               <Star className='-left-2 -top-1 md:-left-8 md:top-1 lg:-left-16 lg:top-4 xl:top-2'
+               <BounceAnimation
                     delayVal={1.5}
-                    initial={-50}
-               />
-               <Star className='right-7 md:right-2 md:bottom-12 lg:-right-12 bottom-14 xl:-right-8'
+                    hiddenCoordinates={{ x: -100 }}
+                    className="size-full absolute">
+                    <Star className='-left-2 -top-1 md:-left-8 md:top-1 lg:-left-16 lg:top-4 xl:top-2' />
+               </BounceAnimation>
+               <BounceAnimation
                     delayVal={1.5}
-                    initial={100}
-               />
+                    hiddenCoordinates={{ x: 100 }}
+                    className="size-full absolute">
+                    <Star className='right-7 bottom-14 md:right-2 md:bottom-12 lg:-right-12 xl:-right-8' />
+               </BounceAnimation>
           </div>
      )
 }

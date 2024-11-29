@@ -10,7 +10,7 @@ const NavItems = ({ isActive, modalOnClick }: NavItemsProps) => {
      const location = useLocation()
 
      return (
-          <div className='flex items-center gap-x-6 z-10 relative overflow-hidden'>
+          <div className='flex items-center gap-x-6 z-20 relative overflow-hidden'>
                <div className='w-fit'>
                     <img src={assetsImage.MeichuLogo} alt="meichuLogo"
                          className='size-24 lg:size-32' />
