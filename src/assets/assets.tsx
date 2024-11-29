@@ -30,11 +30,12 @@ import Product1 from './images/product1.jpg';
 import Product2 from './images/product2.jpg';
 import Product3 from './images/product3.jpg';
 import Product4 from './images/product4.jpg';
+import imvuLogo from './images/imvuLogo.png';
 
 
 export const assetsImage = {
      Star, MeichuLogo, Sun, Moon, Profile, BundleProduct, BestSellerProfile,
-     SingleEmoji, DuoEmoji, CloudSend, DetailImg1, DetailImg2, DetailImg3
+     SingleEmoji, DuoEmoji, CloudSend, DetailImg1, DetailImg2, DetailImg3, imvuLogo
 }
 
 export const badgeSosmedItems = [
@@ -66,13 +67,13 @@ export const badgeAuthItems = [
 export const marketPlaceItems = [
      {
           name: 'Explore',
-          link: '/'
+          link: '/catalog'
      }, {
           name: 'Items detail',
-          link: '/'
+          link: '/catalog'
      }, {
           name: 'Request',
-          link: '/'
+          link: '/custom-product'
      }
 ]
 
@@ -82,7 +83,7 @@ export const meichuFooterItems = [
           link: '/'
      }, {
           name: 'Shop',
-          link: '/'
+          link: '/catalog'
      }, {
           name: 'Brand Ambassador',
           link: '/brand-ambassador'

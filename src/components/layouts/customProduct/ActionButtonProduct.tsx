@@ -20,7 +20,7 @@ const ActionButtonProduct: React.FC<ActionButtonProductProps> = ({ onPublish }) 
                          className="bg-transparent text-[#5E5A5A] border-[#5E5A5A]" />
                </BounceAnimation>
                <BounceAnimation
-                    delayVal={1}
+                    delayVal={0.8}
                     hiddenCoordinates={{ y: 50 }}>
                     <RoundedButton onClick={onPublish} title="Publish"
                          className="bg-bluePrimary text-light border-transparent" />

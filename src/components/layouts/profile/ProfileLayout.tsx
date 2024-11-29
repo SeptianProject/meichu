@@ -133,12 +133,12 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
                            <div className='flex items-center justify-between lg:justify-center lg:gap-x-5'>
                               <ButtonSwitchDiscover
                                  text='Favored Items'
-                                 value={4}
+                                 value={6}
                                  onClick={handleSwitchDiscover}
                                  onFavored={isFavored} />
                               <ButtonSwitchDiscover
                                  text='Products Requests'
-                                 value={2}
+                                 value={6}
                                  onClick={handleSwitchDiscover}
                                  onFavored={!isFavored} />
                            </div>
@@ -154,7 +154,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
                                        ))}
                                     </Swiper>
                                  ) : (
-                                    <div className='grid grid-cols-3 w-full gap-2'>
+                                    <div className='grid grid-cols-3 w-full gap-2 gap-y-5'>
                                        {listCardFavored.map((item, index) => (
                                           <div key={index} className='w-full'>{item}</div>
                                        ))}

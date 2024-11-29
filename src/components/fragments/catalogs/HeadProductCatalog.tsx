@@ -16,7 +16,7 @@ const HeadProductCatalog: React.FC<HeadProductCatalogProps> = ({ type }) => {
                     rounded-full p-[5px] w-fit group hover:bg-red-500 
                     hover:border-transparent dark:hover:border-transparent hover:scale-105
                     transition-all duration-300
-                    ${type === 'catalog' ? 'md:p-2' : ''}`}>
+                    ${type === 'catalog' ? 'md:p-2' : 'bg-red-500 dark:border-transparent'}`}>
                     <FaHeart className={`text-[#5E5A5A] dark:text-light size-3 
                     group-hover:text-light group-hover:scale-75 transition-all duration-300
                     ${type === 'catalog' ? 'md:size-5' : ''}`} />

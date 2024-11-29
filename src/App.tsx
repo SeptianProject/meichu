@@ -5,6 +5,7 @@ import AppRouter from "./routes/AppRouter"
 import FloatingButton from "./components/elements/FloatingButton"
 import AuthModalContainer from "./components/layouts/auth/AuthModalContainer"
 import ProfileLayout from "./components/layouts/profile/ProfileLayout"
+import ScrollToTop from "./routes/ScrollToTop"
 
 const App = () => {
      const [isAuthModalOpen, setIsAuthModalOpen] = React.useState(false)
@@ -38,6 +39,7 @@ const App = () => {
                <AppRouter />
                <Footer />
                <FloatingButton />
+               <ScrollToTop />
           </div>
      )
 }

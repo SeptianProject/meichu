@@ -1,9 +1,8 @@
 import TextTagline from "../fragments/home/TextTagline"
 import TextInput from "../fragments/customProduct/TextInput"
 import RouteHistory from "../layouts/RouteHistory"
-import CustomTypeProduct from "../layouts/customProduct/CustomTypeProduct"
-import UploadImageProduct from "../layouts/customProduct/UploadImageProduct"
 import ChooseTypeProduct from "../layouts/customProduct/ChooseTypeProduct"
+import UploadImageProduct from "../layouts/customProduct/UploadImageProduct"
 import ActionButtonProduct from "../layouts/customProduct/ActionButtonProduct"
 import React from "react"
 import ModalPublishCustomProduct from "../layouts/customProduct/ModalPublishCustomProduct"
@@ -38,19 +37,12 @@ const CustomProductPage = () => {
                     </div>
                     <form action=""
                          className="space-y-16">
-                         <CustomTypeProduct />
+                         <ChooseTypeProduct type="product" />
                          <UploadImageProduct />
-                         <TextInput
-                              delayAnimation={0.5}
-                              label="Name Your Product"
-                              placeholder="E.G Redeemable T-Shirt With Logo" />
-                         <ChooseTypeProduct />
-                         <TextInput
-                              delayAnimation={0.5}
-                              label="Enter Your Name"
-                              placeholder="Ex: Septianzz" />
-                         <ActionButtonProduct
-                              onPublish={handleOnPublish} />
+                         <TextInput name="product" />
+                         <ChooseTypeProduct type="imvu" />
+                         <TextInput name="person" />
+                         <ActionButtonProduct onPublish={handleOnPublish} />
                     </form>
                </section>
                <ModalPublishCustomProduct
