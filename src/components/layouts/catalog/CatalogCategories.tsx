@@ -21,8 +21,9 @@ const CatalogCategories = () => {
 
                     return (
                          <CardStaggerAnimation
+                              key={index}
                               hiddenPosition={{ x: -50 }}>
-                              <button onClick={() => handleSelect(category)} key={index}
+                              <button onClick={() => handleSelect(category)}
                                    className={`${active} border w-fit py-1 px-5  hover:border-transparent 
                                    rounded-full font-semibold font-inter transition-all duration-300 
                                    hover:bg-bluePrimary dark:hover:bg-bluePrimary hover:text-white`}>

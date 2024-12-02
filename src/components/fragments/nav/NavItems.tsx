@@ -24,8 +24,9 @@ const NavItems = ({ isActive, modalOnClick }: NavItemsProps) => {
                transition-all duration-500
                `}>
                     {navItems.map((item, index) => (
-                         <div className='relative box-border group w-fit'>
-                              <Link key={index} to={item.link}
+                         <div key={index}
+                              className='relative box-border group w-fit'>
+                              <Link to={item.link}
                                    className={`font-poppins text-light
                               lg:text-dark lg:dark:text-light cursor-pointer
                               lg:tracking-wider transition-all duration-300

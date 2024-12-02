@@ -11,7 +11,7 @@ const CatalogPage = () => {
                <div className="">
                     <TextTagline text="Catalog" className="font-semibold" />
                     <CatalogCategories />
-                    <CatalogCards />
+                    <CatalogCards type="catalogPage" />
                </div>
           </section>
      )

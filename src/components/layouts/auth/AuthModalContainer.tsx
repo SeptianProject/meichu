@@ -1,6 +1,6 @@
 import React from 'react'
-import LoginLayout from './Login'
-import RegisterLayout from './Regis'
+import LoginLayout from './login/LoginLayout'
+import RegisterLayout from './regis/RegisLayout'
 
 interface AuthModalContainerProps {
      isOpen: boolean

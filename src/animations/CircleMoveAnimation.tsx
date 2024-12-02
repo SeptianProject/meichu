@@ -26,7 +26,7 @@ const CircleMoveAnimation: React.FC<CircleMoveAnimationProps> = ({
      const moveVariants: AnimationProps["variants"] = {
           visible: {
                // y: initialPosition === 'right' ? [0, 50, 0] : [0, -50, 0],
-               x: initialPosition === 'right' ? [20, -130, 20] : [-20, 130, -20],
+               x: initialPosition === 'right' ? [20, -180, 20] : [-20, 180, -20],
                transition: {
                     type: 'tween',
                     ease: 'linear',

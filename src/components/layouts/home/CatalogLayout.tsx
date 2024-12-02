@@ -8,7 +8,7 @@ const CatalogLayout = () => {
           <div className="min-h-full">
                <TextTagline text="Catalog" className='font-semibold' />
                <CatalogCategories />
-               <CatalogCards />
+               <CatalogCards type='homePage' />
           </div>
      )
 }

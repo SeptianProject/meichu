@@ -1,4 +1,4 @@
-import BtnBorderGradient from "../elements/BtnBorderGradient"
+import BtnBorderGradient from "../elements/buttons/BorderGradientBtn"
 import HeadingBA from "../layouts/brand/HeadingBA"
 import MainContentBA from "../layouts/brand/MainContentBA"
 import RouteHistory from "../layouts/RouteHistory"

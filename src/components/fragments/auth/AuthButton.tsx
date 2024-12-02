@@ -2,12 +2,17 @@ import React from "react";
 
 interface AuthButtonProps {
      text: string;
-     onClick: () => void;
+     onClick?: () => void;
+     type: 'submit' | 'button' | 'reset';
 }
 
-const AuthButton: React.FC<AuthButtonProps> = ({ text, onClick }) => {
+const AuthButton: React.FC<AuthButtonProps> = ({
+     text, onClick, type = "button"
+}) => {
      return (
-          <button type="button" onClick={onClick}
+          <button
+               type={type}
+               onClick={onClick}
                className={`w-full py-[10px] rounded-full 
                font-semibold font-poppins border
                ${text === 'Login'

@@ -1,5 +1,5 @@
 import React from "react";
-import RoundedButton from "../../elements/RoundedButton"
+import RoundedButton from "../../elements/buttons/RoundedBtn"
 import BounceAnimation from "../../../animations/BounceAnimation";
 
 

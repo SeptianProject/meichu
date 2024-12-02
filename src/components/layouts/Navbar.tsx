@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import NavButton from "../elements/NavButton"
+import NavButton from "../elements/buttons/NavBtn"
 import NavIcon from "../elements/NavIcon"
 import HamburgerMenu from "../fragments/nav/HamburgerMenu"
 import NavItems from "../fragments/nav/NavItems"

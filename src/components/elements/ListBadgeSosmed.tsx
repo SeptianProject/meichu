@@ -13,8 +13,9 @@ const ListBadgeSosmed = ({ className, badgeItems }: BadgeSosmedItem) => {
           <>
                {badgeItems.map((item, index) => (
                     <CardStaggerAnimation
+                         key={index}
                          hiddenPosition={{ x: -50 }}>
-                         <div key={index} className={`flex justify-center 
+                         <div className={`flex justify-center 
                          items-center size-11 ${className}`}>
                               <a href={item.link} target='_blank'>
                                    <img className='size-6' src={item.icon} alt="" />

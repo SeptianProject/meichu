@@ -31,9 +31,10 @@ const FooterItems: React.FC<FooterItemsProps> = ({
                     className="flex flex-col gap-y-2 lg:gap-y-3">
                     {listFooterItem.map((item, index) => (
                          <CardStaggerAnimation
+                              key={index}
                               hiddenPosition={{ x: -100 }}
                               className="w-fit">
-                              <Link key={index} to={item.link}
+                              <Link to={item.link}
                                    className="w-fit text-dark flex items-center 
                                         gap-x-1 text-sm font-poppins text-opacity-70 
                                         dark:text-opacity-70 dark:text-light group

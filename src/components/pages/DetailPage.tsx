@@ -1,9 +1,9 @@
 import { assetsImage } from "../../assets/assets"
-import BtnBorderGradient from "../elements/BtnBorderGradient"
+import BtnBorderGradient from "../elements/buttons/BorderGradientBtn"
 import CatalogCard from "../layouts/catalog/CatalogCard"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../layouts/RouteHistory"
-import RoundedButton from "../elements/RoundedButton"
+import RoundedButton from "../elements/buttons/RoundedBtn"
 
 const DetailPage = () => {
      return (
