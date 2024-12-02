@@ -64,7 +64,8 @@ const RegisterLayout: React.FC<RegisterLayoutProps> = ({
                                              showPassword={showConfirmPass}
                                              onTogglePassword={handleToggleConfirmPass} />
                                         <button onClick={() => { }}
-                                             className="dark:text-[#676767] text-xs max-w-56 text-start">
+                                             className="text-dark dark:text-[#676767] text-xs font-medium dark:font-normal 
+                                             max-w-60 dark:max-w-56 text-start">
                                              By clicking the
                                              <span className="text-[#6A45BE] px-1">
                                                   Register

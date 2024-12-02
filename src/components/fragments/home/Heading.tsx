@@ -1,4 +1,5 @@
 import BounceAnimation from "../../../animations/BounceAnimation"
+import TextCursorAnimation from "../../../animations/TextCursorAnimation"
 import Star from "../../elements/Star"
 
 
@@ -13,7 +14,11 @@ const Heading = () => {
                          sm:text-[25px] sm:leading-[30px] 
                          md:text-[35px] md:leading-[40px] md:w-[30rem]
                          lg:text-[50px] lg:leading-[60px] lg:w-[41rem]'>
-                         Meichu Products Make You Unique And Special
+                         Meichu Products Make You
+                         <TextCursorAnimation
+                              words={['Unique', 'And', 'Special']}
+                              className="text-bluePrimary ml-1"
+                         />
                     </h1>
                </BounceAnimation>
                <BounceAnimation

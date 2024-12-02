@@ -56,7 +56,7 @@ const LoginLayout = ({
                                         showPassword={showPassword}
                                         onTogglePassword={handleTogglePassword} />
                                    <button onClick={() => { }}
-                                        className="text-[#A78CE4] text-xs lg:text-sm">
+                                        className="text-dark/80 dark:text-[#A78CE4] text-xs lg:text-sm font-medium">
                                         Forgot Password?
                                    </button>
                               </div>

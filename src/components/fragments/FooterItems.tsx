@@ -19,8 +19,11 @@ const FooterItems: React.FC<FooterItemsProps> = ({
           <div className="flex flex-col gap-y-5">
                <BounceAnimation
                     hiddenCoordinates={{ y: 80 }}
-                    delayVal={title === 'MarketPlace' ? 1.5 : 2.5}>
-                    <h3 className="dark:text-light text-base font-bold lg:text-lg">{title}</h3>
+                    delayVal={title === 'MarketPlace' ? 1.5 : 2.5}
+                    className="size-fit">
+                    <h3 className="dark:text-light text-base font-bold lg:text-lg">
+                         {title}
+                    </h3>
                </BounceAnimation>
                <ContainerStaggerAnimation
                     staggerDelay={0.2}
@@ -28,7 +31,8 @@ const FooterItems: React.FC<FooterItemsProps> = ({
                     className="flex flex-col gap-y-2 lg:gap-y-3">
                     {listFooterItem.map((item, index) => (
                          <CardStaggerAnimation
-                              hiddenPosition={{ x: -100 }}>
+                              hiddenPosition={{ x: -100 }}
+                              className="w-fit">
                               <Link key={index} to={item.link}
                                    className="w-fit text-dark flex items-center 
                                         gap-x-1 text-sm font-poppins text-opacity-70 

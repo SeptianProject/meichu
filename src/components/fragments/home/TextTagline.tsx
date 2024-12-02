@@ -11,7 +11,7 @@ const TextTagline = ({ text, className }: TextTaglineProps) => {
                <BounceAnimation
                     delayVal={0.5}
                     hiddenCoordinates={{ x: -50 }}>
-                    <h1 className={`text-2xl dark:text-light uppercase ${className}`}>{text}</h1>
+                    <h1 className={`text-2xl md:text-3xl dark:text-light uppercase ${className}`}>{text}</h1>
                </BounceAnimation>
                <BounceAnimation
                     delayVal={0.5}

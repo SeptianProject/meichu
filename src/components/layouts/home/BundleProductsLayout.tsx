@@ -46,7 +46,7 @@ const BundleProductsLayout = () => {
                               delayVal={0.5}
                               hiddenCoordinates={{ y: 100 }}
                               className="">
-                              <h1 className="text-2xl mt-6 font-semibold lg:text-3xl lg:pb-10
+                              <h1 className="text-2xl mt-6 font-semibold lg:text-4xl lg:pb-10
                                    text-[#312058] dark:text-light">
                                    Nama Products Bundle
                               </h1>
@@ -74,6 +74,7 @@ const BundleProductsLayout = () => {
                                                   hiddenPosition={{ x: 100 }}>
                                                   <div className={`overflow-hidden w-36 h-52 rounded-xl 
                                                   border-[#5E5A5A] border-2 md:w-64 md:h-56 lg:w-64
+                                                  transition-all duration-500
                                                   ${index === activeIndex ? 'scale-100' : 'scale-[.8]'}`}>
                                                        <img className={`size-full object-cover object-top`}
                                                             src={product} alt="" />

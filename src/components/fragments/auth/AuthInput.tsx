@@ -26,9 +26,10 @@ const AuthInput: React.FC<AuthInputProps> = ({
      const inputType = type === 'password' && showPassword ? 'text' : type;
 
      return (
-          <div className="dark:bg-light border dark:border-gray-500 p-3 w-60
-                              rounded-md flex items-center justify-between
-                              lg:w-72 lg:rounded-xl">
+          <div className="text-dark border-dark p-3 w-60 border rounded-md 
+               flex items-center justify-between     
+               dark:bg-light dark:border-gray-500
+               lg:w-72 lg:rounded-xl">
                <div className="flex items-center gap-x-2">
                     <Icon className={`text-[#626262]
                          ${type === 'password' ? 'size-5' : 'size-fit'}`} />
@@ -41,6 +42,7 @@ const AuthInput: React.FC<AuthInputProps> = ({
                          onChange={onChange}
                          className={`border-none outline-none font-medium  
                               font-poppins placeholder:text-[12px] text-[12px]
+                              text-dark/90 placeholder:text-dark/80
                               dark:placeholder:text-dark/50 dark:text-dark/70 
                               bg-transparent dark:selection:text-light dark:selection:bg-blueDark
                               ${type === 'password' ? 'w-40 lg:w-52' : 'w-44 lg:w-56'}`} />
@@ -51,9 +53,9 @@ const AuthInput: React.FC<AuthInputProps> = ({
                          onClick={onTogglePassword}
                          className="cursor-pointer">
                          {showPassword ?
-                              <IoEyeOffOutline className="size-5 text-[#626262]" />
+                              <IoEyeOffOutline className="size-5 text-dark dark:text-[#626262]" />
                               :
-                              <IoEyeOutline className="size-5 text-[#626262]" />}
+                              <IoEyeOutline className="size-5 text-dark dark:text-[#626262]" />}
                     </button>
                )}
           </div>

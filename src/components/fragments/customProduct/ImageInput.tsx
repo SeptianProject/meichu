@@ -66,8 +66,7 @@ const ImageInput: React.FC<ImageInputProps> = ({
                     ref={fileInputRef}
                     onChange={handleFileChange}
                     accept="image/png, image/gif, image/webp, video/mp4, audio/mp3"
-                    className="hidden"
-               />
+                    className="hidden" />
                <img alt="Upload Image"
                     src={assetsImage.CloudSend}
                     className="size-16 lg:size-28" />
@@ -75,12 +74,12 @@ const ImageInput: React.FC<ImageInputProps> = ({
                     <h1 className="text-xl dark:text-light font-semibold lg:text-2xl">
                          {selectedFile ? "File Name: " + selectedFile.name : "Drag your item to upload"}
                     </h1>
-                    <p className="text-xs text-opacity-60 lg:text-sm">
+                    <p className="text-xs dark:text-light text-opacity-60 lg:text-sm">
                          PNG, GIF, WebP, MP4 Or MP3. Maximum File Size 100 Mb
                     </p>
-                    {selectedFile && (
-                         <p className="dark:text-light">File Size: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
-                    )}
+                    <p className="dark:text-light">
+                         File Size: {selectedFile && (selectedFile.size / 1024).toFixed(2)} MB
+                    </p>
                </div>
           </div>
      );

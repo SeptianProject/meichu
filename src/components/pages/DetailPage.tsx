@@ -3,6 +3,7 @@ import BtnBorderGradient from "../elements/BtnBorderGradient"
 import CatalogCard from "../layouts/catalog/CatalogCard"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../layouts/RouteHistory"
+import RoundedButton from "../elements/RoundedButton"
 
 const DetailPage = () => {
      return (
@@ -45,14 +46,13 @@ const DetailPage = () => {
                          </div>
                          {/* buy button */}
                          <div className="flex items-center gap-x-5 pb-10">
-                              <button className="text-light bg-bluePrimary font-semibold 
-                              border border-transparent w-36 py-3 rounded-full lg:w-52">
-                                   Buy Now!
-                              </button>
-                              <button className="text-[#5E5A5A] border border-[#5E5A5A] 
-                              font-semibold bg-transparent rounded-full w-36 py-3 lg:w-52">
-                                   Cancel
-                              </button>
+                              <RoundedButton
+                                   title="Buy Now!"
+                                   onClick={() => { }}
+                                   className="lg:w-52" />
+                              <RoundedButton
+                                   title="Cancel"
+                                   className="lg:w-52" />
                          </div>
                     </div>
                </div>
