@@ -6,10 +6,8 @@ import RouteHistory from "../layouts/RouteHistory"
 
 const CatalogPage = () => {
      return (
-          <section className='px-7 space-y-10 lg:px-20'>
-               {/* Route History */}
+          <section className='px-7 space-y-10 lg:px-20 relative'>
                <RouteHistory currentRoute="/catalog" currentText="Catalog" />
-               {/* main */}
                <div className="">
                     <TextTagline text="Catalog" className="font-semibold" />
                     <CatalogCategories />

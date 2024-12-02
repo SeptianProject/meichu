@@ -4,7 +4,7 @@ import RouteHistory from "../layouts/RouteHistory"
 
 const EventPage = () => {
      return (
-          <section className="px-7 space-y-10 lg:px-20">
+          <section className="px-7 space-y-10 lg:px-20 relative">
                <RouteHistory currentRoute="/event" currentText="Event" />
                <HeadEvent />
                <MainContentEvent />

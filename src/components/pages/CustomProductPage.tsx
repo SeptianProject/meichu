@@ -30,7 +30,7 @@ const CustomProductPage = () => {
 
      return (
           <>
-               <section className="px-7 space-y-16 lg:px-20">
+               <section className="px-7 space-y-16 lg:px-20 relative">
                     <div className="space-y-10">
                          <RouteHistory currentRoute="/custom-product" currentText="Custom Product" />
                          <TextTagline text="custom product" className="dark:text-light font-semibold" />

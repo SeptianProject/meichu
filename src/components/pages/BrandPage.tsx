@@ -5,7 +5,7 @@ import RouteHistory from "../layouts/RouteHistory"
 
 const BrandPage = () => {
      return (
-          <section className="px-7 space-y-10 lg:px-20">
+          <section className="px-7 space-y-10 lg:px-20 relative">
                <RouteHistory currentRoute="/brand-ambassador"
                     currentText="Brand Ambassador Meichu" />
                <HeadingBA />

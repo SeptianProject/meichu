@@ -7,7 +7,7 @@ import RoundedButton from "../elements/RoundedButton"
 
 const DetailPage = () => {
      return (
-          <section className="px-7 space-y-10 lg:px-20">
+          <section className="px-7 space-y-10 lg:px-20 relative">
                <RouteHistory prevRoute="/catalog" prevText="Catalog"
                     currentRoute="/catalog-detail" currentText="Detail" />
                <div className="space-y-10 lg:flex items-center gap-x-16">
