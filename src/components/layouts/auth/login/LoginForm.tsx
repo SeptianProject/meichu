@@ -13,12 +13,14 @@ interface LoginFormProps {
      showPassword: boolean;
      handleTogglePassword: () => void;
      onProfile: () => void;
+     onForgotPassword: () => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
      showPassword,
      handleTogglePassword,
-     onProfile
+     onProfile,
+     onForgotPassword
 }) => {
      const {
           register,
@@ -54,7 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                     {errors.password && (
                          <p className="text-red-500 text-sm">{errors.password.message}</p>
                     )}
-                    <ForgotPasswordBtn onClick={() => { }} />
+                    <ForgotPasswordBtn onClick={onForgotPassword} />
                </div>
                <AuthButton text="Login" type="submit" />
                <AuthBadgeButton />

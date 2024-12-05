@@ -46,9 +46,7 @@ const RegisForm: React.FC<RegisFormProps> = ({
                          placeholder="Your Email"
                          {...register('email')}
                     />
-                    {errors.email && (
-                         <p className="text-red-500 text-sm">{errors.email.message}</p>
-                    )}
+                    {errors.email && (<p className="text-red-500 text-sm">{errors.email.message}</p>)}
                     <AuthInput
                          icon={IoIosLock}
                          type="password"

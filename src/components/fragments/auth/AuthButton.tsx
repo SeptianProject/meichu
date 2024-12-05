@@ -15,7 +15,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({
                onClick={onClick}
                className={`w-full py-[10px] rounded-full 
                font-semibold font-poppins border
-               ${text === 'Login'
+               ${text === 'Login' || text === 'Submit'
                          ? 'bg-[#312058] border-transparent text-light'
                          : 'bg-transparent border-[#6A45BE] text-[#6A45BE] hover:text-light dark:text-light hover:bg-[#312058] hover:border-transparent transition-all duration-300'}`}>
                {text}

@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginLayout from './login/LoginLayout'
 import RegisterLayout from './regis/RegisLayout'
+import ForgotPasswordLayout from './ForgotPassword'
 
 interface AuthModalContainerProps {
      isOpen: boolean
@@ -13,7 +14,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
      onClose,
      onProfile
 }) => {
-     const [activeModal, setActiveModal] = React.useState<'login' | 'register'>('login')
+     const [activeModal, setActiveModal] = React.useState<'login' | 'register' | 'forgot-password'>('login')
      const [isAnimating, setIsAnimating] = React.useState(false)
      const [showPassword, setShowPassword] = React.useState(false)
      const [showConfirmPass, setShowConfirmPass] = React.useState(false)
@@ -40,7 +41,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
           }
      }, [isOpen])
 
-     const handleSwitchModal = (modalType: 'login' | 'register') => {
+     const handleSwitchModal = (modalType: 'login' | 'register' | 'forgot-password') => {
           setIsAnimating(true)
           setActiveModal(modalType)
           setTimeout(() => {
@@ -53,6 +54,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
                {activeModal === 'login' ? (
                     <LoginLayout
                          onProfile={onProfile}
+                         onForgotPassword={() => handleSwitchModal('forgot-password')}
                          isModalOpen={isOpen}
                          isModalClose={onClose}
                          onSwitchModal={() => handleSwitchModal('register')}
@@ -60,7 +62,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
                          showPassword={showPassword}
                          handleTogglePassword={handleTogglePassword}
                     />
-               ) : (
+               ) : activeModal === 'register' ? (
                     <RegisterLayout
                          isModalOpen={isOpen}
                          isModalClose={onClose}
@@ -71,7 +73,11 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
                          showConfirmPass={showConfirmPass}
                          handleToggleConfirmPass={handleToggleConfirmPass}
                     />
-               )}
+               ) : <ForgotPasswordLayout
+                    isAnimating={isAnimating}
+                    isModalOpen={isOpen}
+                    isModalClose={onClose} />
+               }
           </>
      )
 }
