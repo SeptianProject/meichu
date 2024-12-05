@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BtnBorderGradient from '../../elements/buttons/BorderGradientBtn'
 import CatalogCard from './CatalogCard'
 import { useNavigate } from 'react-router-dom'
-import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../../animations/StaggerAnimation'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'

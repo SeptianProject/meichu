@@ -1,7 +1,8 @@
 import React from "react"
-import { assetsImage } from "../../../assets/assets"
 import ButtonSelectProduct from "../../fragments/customProduct/ButtonSelectProduct"
 import TitleDesc from "../../fragments/customProduct/TitleDesc"
+import { assetItems } from "../../../assets/AnotherAssets";
+import { useDarkMode } from "../../../hooks/useDarkMode";
 
 interface CustomTypeProductProps {
      type: 'product' | 'imvu';
@@ -10,12 +11,10 @@ interface CustomTypeProductProps {
 const CustomTypeProduct: React.FC<CustomTypeProductProps> = ({ type }) => {
      const [selectedProduct, setSelectedProduct] = React.useState<string | null>(null)
      const buttonRef = React.useRef<HTMLDivElement>(null)
+     const { isDarkMode } = useDarkMode()
 
      const handleSelectProduct = (title: string) => {
-          if (selectedProduct !== title) {
-               setSelectedProduct(null)
-          }
-          setSelectedProduct(title)
+          setSelectedProduct(title === selectedProduct ? null : title)
      }
 
      React.useEffect(() => {
@@ -28,12 +27,18 @@ const CustomTypeProduct: React.FC<CustomTypeProductProps> = ({ type }) => {
           return () => document.removeEventListener('mousedown', handleMouseDown)
      })
 
+     const getIcon = (darkIcon: string, lightIcon: string) => isDarkMode ? darkIcon : lightIcon
+
      const productTypes = [
           {
-               icon: type === 'product' ? assetsImage.SingleEmoji : assetsImage.imvuLogo,
+               icon: type === 'product'
+                    ? getIcon(assetItems.DarkSingleEmoji, assetItems.LightSingleEmoji)
+                    : getIcon(assetItems.DarkImvu, assetItems.LightImvu),
                title: type === 'product' ? "Create Single Product" : "Imvu+"
           }, {
-               icon: type === 'product' ? assetsImage.DuoEmoji : assetsImage.imvuLogo,
+               icon: type === 'product'
+                    ? getIcon(assetItems.DarkDuoEmoji, assetItems.LightDuoEmoji)
+                    : getIcon(assetItems.DarkImvu, assetItems.LightImvu),
                title: type === 'product' ? "Create Bundle" : "Non Imvu+"
           }
      ]
@@ -42,21 +47,21 @@ const CustomTypeProduct: React.FC<CustomTypeProductProps> = ({ type }) => {
           <div className="space-y-8">
                <TitleDesc
                     delayAnimation={0.5}
-                    title={type === 'product'
-                         ? "Custom Product Type For Custom"
-                         : "Choose Type Product"}
+                    title={type === 'product' ? "Custom Product Type For Custom" : "Choose Type Product"}
                     desc={type === 'product'
                          ? "They All Serve The Same Purpose, But Each One Takes."
-                         : "They All Serve The Same Purpose"
-                    } />
+                         : "They All Serve The Same Purpose"}
+               />
                <div ref={buttonRef}
                     className="flex flex-col lg:flex-row gap-5">
                     {productTypes.map((product) => (
                          <ButtonSelectProduct
+                              key={product.title}
                               icon={product.icon}
                               title={product.title}
                               isSelected={selectedProduct === product.title}
-                              onSelect={() => handleSelectProduct(product.title)} />
+                              onSelect={() => handleSelectProduct(product.title)}
+                         />
                     ))}
                </div>
           </div>

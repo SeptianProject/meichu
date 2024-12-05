@@ -1,6 +1,6 @@
 import React from 'react'
 import { BiX } from 'react-icons/bi'
-import { assetsImage } from '../../../assets/assets'
+import { abstrakImages } from '../../../assets/AnotherAssets'
 import TextTitleValue from '../../fragments/profile/TextTitleValue'
 import ButtonSwitchDiscover from '../../fragments/profile/ButtonSwitchDiscover'
 import ButtonActionInProfile from '../../fragments/profile/ButtonActionInProfile'
@@ -107,7 +107,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
                               lg:gap-x-5 lg:flex-row lg:items-end lg:border-b lg:pt-0 lg:pb-5
                               ${isTapDiscover ? 'hidden' : 'block'}`}>
                      <div className='size-40 lg:w-60 lg:h-64'>
-                        <img src={assetsImage.DetailImg1} alt="profile-picture"
+                        <img src={abstrakImages[1]} alt="profile-picture"
                            className='rounded-xl object-cover object-center size-full' />
                      </div>
                      <div className='flex w-full flex-col gap-y-5 lg:w-80 lg:h-64'>

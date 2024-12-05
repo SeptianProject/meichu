@@ -1,5 +1,5 @@
 import { FC } from "react";
-import BounceAnimation from "../../../animations/BounceAnimation";
+import BounceAnimation from "../../animations/BounceAnimation";
 
 interface TextInputProps {
      name: 'product' | 'person'
@@ -20,8 +20,9 @@ const TextInput: FC<TextInputProps> = ({ name }) => {
                     placeholder={name === 'product'
                          ? 'E.G Redeemable T-Shirt With Logo'
                          : 'Ex: Septianzz'}
-                    className="text-dark dark:text-light font-poppins dark:text-opacity-70 bg-transparent border 
-                                   border-[#5E5A5A] w-full py-8 rounded-2xl px-10" />
+                    className="text-dark dark:text-light font-poppins dark:text-opacity-70 
+                    ring-[1.5px]  ring-graySecondary w-full py-8 rounded-2xl px-10 bg-transparent 
+                    dark:bg-[#191820] transition-all duration-300 outline-none border-none focus:ring-[2.5px]" />
           </div>
      );
 }

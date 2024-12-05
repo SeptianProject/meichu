@@ -1,5 +1,5 @@
 import React from "react";
-import CircleMoveAnimation from "../animations/CircleMoveAnimation";
+import CircleMoveAnimation from "../components/animations/CircleMoveAnimation";
 
 export const getCircleAnimations = (pathname: string): React.ReactNode[] => {
      switch (pathname) {

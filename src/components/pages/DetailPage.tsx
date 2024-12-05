@@ -3,8 +3,8 @@ import MainContentDetail from "../layouts/detail/MainContentDetail"
 import MainDescriptionDetail from "../layouts/detail/MainDescriptionDetail"
 import React from "react"
 import ListProductDetail from "../layouts/detail/ListProductDetail"
-import { assetsImage } from "../../assets/assets"
-import { FadeAnimation } from "../../animations/fadeAnimation"
+import { FadeAnimation } from "../animations/FadeAnimation"
+import { detailProducts } from "../../assets/meichuBundle"
 
 type ImageContent = {
      id: 'first' | 'second' | 'third';
@@ -15,9 +15,9 @@ type ImageContent = {
 const DetailPage = () => {
      const [selectContent, setSelectContent] = React.useState<ImageContent['id']>('first')
      const images: ImageContent[] = [
-          { id: 'first', source: assetsImage.DetailImg1 },
-          { id: 'second', source: assetsImage.DetailImg2 },
-          { id: 'third', source: assetsImage.DetailImg3 },
+          { id: 'first', source: detailProducts[0] },
+          { id: 'second', source: detailProducts[1] },
+          { id: 'third', source: detailProducts[2] },
      ]
 
      const handleSelectContent = (content: ImageContent['id']) => {

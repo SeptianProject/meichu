@@ -1,6 +1,6 @@
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
-import BounceAnimation from '../../animations/BounceAnimation'
+import BounceAnimation from '../animations/BounceAnimation'
 
 type RouteHistoryProps = {
      prevRoute?: string | boolean

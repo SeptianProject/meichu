@@ -1,5 +1,5 @@
-import BounceAnimation from "../../../animations/BounceAnimation"
-import TextCursorAnimation from "../../../animations/TextCursorAnimation"
+import BounceAnimation from "../../animations/BounceAnimation"
+import TextCursorAnimation from "../../animations/TextCursorAnimation"
 import ButtonToCustomProduct from "../../fragments/home/ButtonToCustomProduct"
 import CardProductAnimate from "../../fragments/home/CardProductAnimate"
 

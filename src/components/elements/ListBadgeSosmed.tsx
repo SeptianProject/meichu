@@ -1,4 +1,4 @@
-import { CardStaggerAnimation } from "../../animations/StaggerAnimation";
+import { CardStaggerAnimation } from "../animations/StaggerAnimation";
 
 type BadgeSosmedItem = {
      className: string;

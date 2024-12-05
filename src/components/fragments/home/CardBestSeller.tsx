@@ -1,4 +1,6 @@
-import { assetsImage, bestSellerImages } from '../../../assets/assets'
+import { assetItems } from "../../../assets/AnotherAssets"
+import { butterflyBundle } from "../../../assets/meichuBundle"
+
 
 const CardBestSeller = () => {
      return (
@@ -9,14 +11,14 @@ const CardBestSeller = () => {
                {/* photo & typograph */}
                <div className='flex items-center gap-x-4'>
                     <img className='rounded-full size-14'
-                         src={assetsImage.BestSellerProfile} alt="" />
+                         src={assetItems.AnyIcon} alt="" />
                     <div className='flex flex-col items-start'>
                          <h3 className='dark:text-light text-lg font-semibold'>Name Product</h3>
                          <h6 className='dark:text-light text-base font-extralight'>@meichu</h6>
                     </div>
                </div>
                <div className='w-full h-44 grid grid-cols-3 grid-rows-2 gap-2'>
-                    {bestSellerImages.map((img, index) => {
+                    {butterflyBundle.map((img, index) => {
                          const gridApply = index === 1 ? 'col-span-2 row-span-2' : ''
                          return (
                               <img key={index} src={img} alt={`Best-${index}`}

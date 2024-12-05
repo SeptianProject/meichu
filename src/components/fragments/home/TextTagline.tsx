@@ -1,4 +1,4 @@
-import BounceAnimation from "../../../animations/BounceAnimation"
+import BounceAnimation from "../../animations/BounceAnimation"
 
 type TextTaglineProps = {
      text: string

@@ -1,6 +1,6 @@
 import React from "react";
 import RoundedButton from "../../elements/buttons/RoundedBtn"
-import BounceAnimation from "../../../animations/BounceAnimation";
+import BounceAnimation from "../../animations/BounceAnimation";
 
 
 type ActionButtonProductProps = {

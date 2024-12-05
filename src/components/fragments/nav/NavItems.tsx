@@ -1,5 +1,7 @@
-import { assetsImage, navItems } from '../../../assets/assets'
+
 import { Link, useLocation } from 'react-router-dom'
+import { assetItems } from '../../../assets/AnotherAssets'
+import { navItems } from '../../../assets/navigateAssets'
 
 type NavItemsProps = {
      isActive: boolean
@@ -12,7 +14,7 @@ const NavItems = ({ isActive, modalOnClick }: NavItemsProps) => {
      return (
           <div className='flex items-center gap-x-6 z-20 relative overflow-hidden'>
                <div className='w-fit'>
-                    <img src={assetsImage.MeichuLogo} alt="meichuLogo"
+                    <img src={assetItems.MeichuLogo} alt="meichuLogo"
                          className='size-24 lg:size-32' />
                </div>
                <div className={`fixed flex flex-col bg-[#1E1E1E]/40 dark:bg-[#1D1A24]/75 gap-4 z-50

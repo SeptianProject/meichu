@@ -1,16 +1,20 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { headImgSwiper } from "../../../assets/assets";
-import { EffectCards, Navigation } from 'swiper/modules';
+import { Autoplay, EffectCoverflow, Navigation } from 'swiper/modules';
 import { motion, AnimationProps } from 'framer-motion';
-import 'swiper/swiper-bundle.css';
 import { Swiper as SwiperType } from 'swiper/types';
 import ArrowCardCarousel from '../../elements/ArrowCardCarousel';
-import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
-import BounceAnimation from '../../../animations/BounceAnimation';
+import BounceAnimation from '../../animations/BounceAnimation';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
+import { mainProductBundle } from '../../../assets/meichuBundle';
+import 'swiper/swiper-bundle.css';
 
 const HeadCarousel: React.FC = () => {
-     const swiperRef = React.useRef<SwiperType | null>(null);
+     const swiperRef = React.useRef<SwiperType>();
+     const duplicatedBundle = [
+          ...mainProductBundle.slice(0, 5),
+          ...mainProductBundle.slice(0, 5),
+     ];
 
      const containerVariants: AnimationProps["variants"] = {
           hidden: { opacity: 0 },
@@ -36,59 +40,73 @@ const HeadCarousel: React.FC = () => {
      };
 
      return (
-          <div className='max-w-[460px] h-[160px] sm:max-w-[520px] sm:h-[180px] isolate
-               md:max-w-screen-md md:h-[250px] lg:max-w-screen-lg lg:h-[320px] relative'>
+          <div className='relative mx-auto w-full max-w-[1024px] px-[5.5rem]'>
                <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                     variants={containerVariants}
-                    className='size-full'>
+                    className='w-full'>
                     <Swiper
-                         effect={'cards'}
+                         effect={'coverflow'}
+                         centeredSlides={true}
                          grabCursor={true}
+                         loop={true}
+                         loopedSlides={4}
+                         loopPreventsSliding={true}
                          onBeforeInit={(swiper) => {
                               swiperRef.current = swiper;
                          }}
-                         centeredSlides={true}
-                         slidesPerView={4}
-                         initialSlide={2}
-                         cardsEffect={{
-                              rotate: false,
-                              perSlideOffset: 70,
-                              slideShadows: false,
+                         onAfterInit={(swiper) => {
+                              swiperRef.current = swiper;
                          }}
-                         modules={[EffectCards, Navigation]}
-                         className='mx-auto size-full select-none py-10'>
-                         {headImgSwiper.map((img, index) => (
-                              <SwiperSlide key={index} className='rounded-2xl size-full'>
+                         slidesPerView={'auto'}
+                         initialSlide={2}
+                         coverflowEffect={{
+                              rotate: 0,
+                              stretch: 0,
+                              depth: 100,
+                              modifier: 2.5,
+                         }}
+                         autoplay={{
+                              delay: 3000,
+                              disableOnInteraction: false,
+                         }}
+                         modules={[EffectCoverflow, Navigation, Autoplay]}
+                         className='w-full'>
+                         {duplicatedBundle.map((img, index) => (
+                              <SwiperSlide
+                                   key={index}
+                                   className="h-full w-[] sm:!w-60 sm:!h-80">
                                    <motion.div
                                         variants={cardVariants}
-                                        className='rounded-2xl size-full lg:w-60 lg:h-80'>
-                                        <img src={img} alt={`headImg${index + 1}`}
-                                             className='size-full object-cover 
-                                             object-center rounded-2xl' />
+                                        className="h-full w-full overflow-hidden rounded-2xl">
+                                        <img
+                                             src={img}
+                                             alt={`Slide ${index + 1}`}
+                                             className="h-full w-full object-cover object-center" />
                                    </motion.div>
                               </SwiperSlide>
                          ))}
                     </Swiper>
 
                     {/* Arrow Custom */}
-                    <div className='hidden absolute top-1/2 -translate-y-1/2 -translate-x-1 z-10
-                    lg:flex items-center justify-between w-full lg:px-10'>
+                    <div className='hidden absolute left-1/2 top-1/2 
+                    -translate-y-1/2 -translate-x-1/2 z-10
+                    lg:flex items-center justify-between w-[75vw]'>
                          <BounceAnimation
                               delayVal={1.2}
                               hiddenCoordinates={{ x: -50 }}>
                               <ArrowCardCarousel
                                    onClick={() => swiperRef.current?.slidePrev()}
-                                   icon={SlArrowLeft} />
+                                   icon={LuChevronLeft} />
                          </BounceAnimation>
                          <BounceAnimation
                               delayVal={1.2}
                               hiddenCoordinates={{ x: 50 }}>
                               <ArrowCardCarousel
                                    onClick={() => swiperRef.current?.slideNext()}
-                                   icon={SlArrowRight} />
+                                   icon={LuChevronRight} />
                          </BounceAnimation>
                     </div>
                </motion.div>

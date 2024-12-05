@@ -1,5 +1,5 @@
-import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../../animations/StaggerAnimation"
-import { brandAmbassadorItems } from "../../../assets/assets"
+import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation"
+import { brandAmbassadorItems } from "../../../assets/AnotherAssets"
 import CardGradientBA from "../../fragments/brand/CardGradientBA"
 
 const MainContentBA = () => {

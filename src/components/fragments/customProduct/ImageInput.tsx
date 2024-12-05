@@ -1,5 +1,5 @@
 import React from "react";
-import { assetsImage } from "../../../assets/assets";
+import { IoCloudUpload } from "react-icons/io5";
 
 interface ImageInputProps {
      onFileUpload?: (file: File) => void;
@@ -59,26 +59,23 @@ const ImageInput: React.FC<ImageInputProps> = ({
                onDragOver={handleDragOver}
                onDrop={handleDrop}
                className="h-64 flex flex-col items-center gap-y-4 justify-center 
-                    rounded-2xl border border-[#1F1F2C] dark:bg-[#1F1F2C] lg:h-96
-                    cursor-pointer">
+                    rounded-2xl ring-[1.5px] ring-graySecondary 
+                    dark:bg-[#191820] lg:h-[25rem] cursor-pointer">
                <input
                     type="file"
                     ref={fileInputRef}
                     onChange={handleFileChange}
                     accept="image/png, image/gif, image/webp, video/mp4, audio/mp3"
                     className="hidden" />
-               <img alt="Upload Image"
-                    src={assetsImage.CloudSend}
-                    className="size-16 lg:size-28" />
+               <IoCloudUpload className="size-16 lg:size-28 text-graySecondary/50 dark:text-[#353541]" />
                <div className="text-center space-y-2">
                     <h1 className="text-xl dark:text-light font-semibold lg:text-2xl">
                          {selectedFile ? "File Name: " + selectedFile.name : "Drag your item to upload"}
                     </h1>
-                    <p className="text-xs dark:text-light text-opacity-60 lg:text-sm">
-                         PNG, GIF, WebP, MP4 Or MP3. Maximum File Size 100 Mb
-                    </p>
-                    <p className="dark:text-light">
-                         File Size: {selectedFile && (selectedFile.size / 1024).toFixed(2)} MB
+                    <p className="text-xs font-light tracking-wider text-graySecondary 
+                    lg:text-sm dark:text-light">
+                         PNG, GIF, WebP, MP4 Or MP3. Maximum File Size 100 Mb,
+                         Current Size ({selectedFile && (selectedFile.size / 1024 / 1024).toFixed(2)} Mb)
                     </p>
                </div>
           </div>

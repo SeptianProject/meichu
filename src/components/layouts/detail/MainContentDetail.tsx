@@ -1,8 +1,8 @@
 import React from "react";
 import ProductDetail from "../../fragments/detail/ProductDetail";
-import { FadeAnimation } from "../../../animations/fadeAnimation";
-import ScaleAnimation from "../../../animations/ScaleAnimtion";
+import ScaleAnimation from "../../animations/ScaleAnimtion";
 import { AnimatePresence } from "framer-motion";
+import { FadeAnimation } from "../../animations/FadeAnimation";
 
 interface ImageContent {
      images: {

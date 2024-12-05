@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { categories } from '../../../assets/assets'
-import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../../animations/StaggerAnimation'
+import { categories } from '../../../assets/AnotherAssets'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 
 const CatalogCategories = () => {
      const [onSelect, setOnSelect] = useState<string>('All')

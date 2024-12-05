@@ -1,6 +1,6 @@
 import React from "react";
 import ModalOverlay from "../../fragments/ModalOverlay";
-import { assetsImage } from "../../../assets/assets";
+import { assetItems } from "../../../assets/AnotherAssets";
 
 interface ModalPublishCustomProductProps {
      isModalOpen: boolean;
@@ -22,7 +22,7 @@ const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = ({
                     <div className="flex flex-col items-center justify-center relative overflow-hidden">
                          <div className="bg-[#8474DB]/10 absolute -top-10 -right-28
                          size-60 rounded-full blur-2xl"/>
-                         <img src={assetsImage.MeichuLogo} alt=""
+                         <img src={assetItems.MeichuLogo} alt=""
                               className="size-28" />
                          <div className="text-center flex flex-col items-center space-y-5">
                               <h2 className="text-xl font-semibold dark:text-light lg:text-2xl">

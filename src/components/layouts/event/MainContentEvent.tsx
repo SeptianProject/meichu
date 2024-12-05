@@ -1,4 +1,4 @@
-import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../../animations/StaggerAnimation"
+import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation"
 import BtnBorderGradient from "../../elements/buttons/BorderGradientBtn"
 import CardEvent from "../../fragments/event/CardEvent"
 

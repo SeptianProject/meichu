@@ -1,7 +1,6 @@
-import BounceAnimation from "../../../animations/BounceAnimation"
-import TextCursorAnimation from "../../../animations/TextCursorAnimation"
+import BounceAnimation from "../../animations/BounceAnimation"
+import TextCursorAnimation from "../../animations/TextCursorAnimation"
 import Star from "../../elements/Star"
-
 
 const Heading = () => {
      return (

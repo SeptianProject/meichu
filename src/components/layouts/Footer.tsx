@@ -1,4 +1,4 @@
-import { marketPlaceItems, meichuFooterItems } from "../../assets/assets"
+import { footerItems } from "../../assets/navigateAssets"
 import FooterItems from "../fragments/FooterItems"
 import FooterLogoBadge from "../fragments/FooterLogoBadge"
 
@@ -11,8 +11,8 @@ const Footer = () => {
                {/* Logo & more */}
                <FooterLogoBadge />
                <div className="flex items-start gap-x-20 lg:gap-x-32">
-                    <FooterItems title="MarketPlace" listFooterItem={marketPlaceItems} />
-                    <FooterItems title="Meichu" listFooterItem={meichuFooterItems} />
+                    <FooterItems title="MarketPlace" listFooterItem={footerItems.marketplaces} />
+                    <FooterItems title="Meichu" listFooterItem={footerItems.meichu} />
                </div>
           </div>
      )

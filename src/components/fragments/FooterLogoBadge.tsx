@@ -1,6 +1,7 @@
-import BounceAnimation from "../../animations/BounceAnimation"
-import { ContainerStaggerAnimation } from "../../animations/StaggerAnimation"
-import { assetsImage, badgeSosmedItems } from "../../assets/assets"
+import { assetItems } from "../../assets/AnotherAssets"
+import { sosmedIcons } from "../../assets/badgeAssets"
+import BounceAnimation from "../animations/BounceAnimation"
+import { ContainerStaggerAnimation } from "../animations/StaggerAnimation"
 import ListBadgeSosmed from "../elements/ListBadgeSosmed"
 
 const FooterLogoBadge = () => {
@@ -11,7 +12,7 @@ const FooterLogoBadge = () => {
                     hiddenCoordinates={{ y: -50 }}
                     className="w-fit">
                     <img className="size-48 absolute -top-5 -left-5 select-none"
-                         src={assetsImage.MeichuLogo} alt="Meichu" />
+                         src={assetItems.MeichuLogo} alt="Meichu" />
                </BounceAnimation>
                <BounceAnimation
                     delayVal={0.5}
@@ -23,7 +24,7 @@ const FooterLogoBadge = () => {
                     initialDelay={0.5}
                     staggerDelay={0.4}
                     className="flex items-center gap-x-2 mt-20 lg:mt-1">
-                    <ListBadgeSosmed badgeItems={badgeSosmedItems}
+                    <ListBadgeSosmed badgeItems={sosmedIcons}
                          className="rounded-xl bg-[#D9D9D9] transition-all duration-300
                               hover:scale-105 hover:-translate-y-1" />
                </ContainerStaggerAnimation>

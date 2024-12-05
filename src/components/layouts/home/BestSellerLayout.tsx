@@ -3,7 +3,7 @@ import CardBestSeller from '../../fragments/home/CardBestSeller'
 import TextTagline from '../../fragments/home/TextTagline'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
-import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../../animations/StaggerAnimation'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 
 const BestSellerLayout = () => {
      const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')

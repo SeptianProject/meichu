@@ -18,14 +18,15 @@ export default {
         poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
+        dark: '#0B0A13',
         light: '#ffffff',
-        dark: '#1e1e1e',
-        bluePrimary: '#3848E9',
         blueDark: '#1F1F2C',
-      },
-      backgroundColor: {
-        dark: '#191820',
-        light: '#ffffff',
+        bluePrimary: '#3848E9',
+        purplePrimary: '#312058',
+        purpleSecondary: '#8474DB',
+        redDanger: '#C52528',
+        grayPrimary: '#48484D',
+        graySecondary: '#5E5A5A',
       }
     },
   },

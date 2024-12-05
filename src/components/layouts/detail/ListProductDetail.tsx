@@ -1,7 +1,7 @@
 import CatalogCard from '../catalog/CatalogCard'
 import BtnBorderGradient from '../../elements/buttons/BorderGradientBtn'
 import React from 'react'
-import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../../animations/StaggerAnimation'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 
 interface ListProductDetailProps {
      onLoadMore: () => void

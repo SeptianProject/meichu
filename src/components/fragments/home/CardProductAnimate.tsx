@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useRef } from "react";
 import { motion } from 'framer-motion';
-import { productItems } from "../../../assets/assets";
+import { abstrakImages } from "../../../assets/AnotherAssets";
 
 interface CardProductAnimateProps {
      readonly customProductItems?: string[];
@@ -11,7 +11,7 @@ const CardProductAnimate: React.FC<CardProductAnimateProps> = () => {
      const containerRefs = Array(4).fill(null).map(() => useRef(null));
 
      const createColumnProducts = () => {
-          const items = [...Array(8)].flatMap(() => productItems)
+          const items = [...Array(8)].flatMap(() => abstrakImages)
           return [...items, ...items]
      };
 

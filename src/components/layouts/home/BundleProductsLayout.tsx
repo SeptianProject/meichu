@@ -1,13 +1,17 @@
-import { EffectCards } from "swiper/modules"
+import { EffectCards, Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import TextTagline from "../../fragments/home/TextTagline"
-import { assetsImage, bundleProducts } from "../../../assets/assets"
 import React from "react"
-import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../../animations/StaggerAnimation"
-import BounceAnimation from "../../../animations/BounceAnimation"
+import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation"
+import BounceAnimation from "../../animations/BounceAnimation"
+import { bundleProducts } from "../../../assets/meichuBundle"
+import { Swiper as SwiperType } from 'swiper/types';
+import ArrowCardCarousel from "../../elements/ArrowCardCarousel"
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu"
 
 
 const BundleProductsLayout = () => {
+     const swiperRef = React.useRef<SwiperType | null>(null)
      const [activeIndex, setActiveIndex] = React.useState(0)
      const [screenSize, setScreenSize] = React.useState<'mobile' | 'tablet' | 'desktop'>('desktop')
 
@@ -39,8 +43,8 @@ const BundleProductsLayout = () => {
                               className="rounded-tl-[12rem] md:rounded-tl-[15rem] lg:rounded-t-full">
                               <img className="rounded-tl-[12rem] object-cover object-center border-4 
                               border-[#5E5A5A] md:rounded-tl-[15rem] lg:rounded-t-full
-                              h-full w-[18rem] md:w-[22rem] lg:w-[25rem]"
-                                   src={assetsImage.BundleProduct} alt="" />
+                              h-[30rem] w-[22rem]"
+                                   src={bundleProducts[2].main} alt="" />
                          </BounceAnimation>
                          <BounceAnimation
                               delayVal={0.5}
@@ -60,15 +64,18 @@ const BundleProductsLayout = () => {
                                    grabCursor={true}
                                    initialSlide={activeIndex}
                                    onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+                                   onBeforeInit={(swiper) => {
+                                        swiperRef.current = swiper
+                                   }}
                                    slidesPerView={1}
                                    cardsEffect={{
                                         rotate: false,
                                         perSlideOffset: isMobile ? 50 : 40,
                                         slideShadows: false,
                                    }}
-                                   modules={[EffectCards]}
+                                   modules={[EffectCards, Navigation]}
                                    className='mx-auto size-full'>
-                                   {bundleProducts.map((product, index) => (
+                                   {bundleProducts[2].items.map((product, index) => (
                                         <SwiperSlide key={index}>
                                              <CardStaggerAnimation
                                                   hiddenPosition={{ x: 100 }}>
@@ -86,8 +93,16 @@ const BundleProductsLayout = () => {
                          </div>
                     </ContainerStaggerAnimation>
                     <div className="absolute -z-10 bottom-20 inset-x-0 w-[100vw] h-[40vh]
-                         bg-gradient-to-r from-transparent to-[#312058]/50
+                         bg-gradient-to-r from-light via-[#7C64B0]/50 to-[#6A45BE]/60
                          dark:from-[#191820] dark:to-[#312058] lg:h-[50vh] lg:bottom-0" />
+               </div>
+               <div className="absolute w-fit -right-10 top-[30%] flex items-center justify-end gap-x-5">
+                    <ArrowCardCarousel
+                         icon={LuChevronLeft}
+                         onClick={() => swiperRef.current?.slidePrev()} />
+                    <ArrowCardCarousel
+                         icon={LuChevronRight}
+                         onClick={() => swiperRef.current?.slideNext()} />
                </div>
           </div>
      )

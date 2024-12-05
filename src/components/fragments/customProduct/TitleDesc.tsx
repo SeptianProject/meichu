@@ -1,5 +1,5 @@
 import { FC } from "react";
-import BounceAnimation from "../../../animations/BounceAnimation";
+import BounceAnimation from "../../animations/BounceAnimation";
 
 interface TitleDescProps {
      title: string;

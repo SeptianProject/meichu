@@ -6,7 +6,8 @@ import NavItems from "../fragments/nav/NavItems"
 import { MdOutlineEmail, MdSunny } from "react-icons/md"
 import { BsWhatsapp } from "react-icons/bs"
 import { IoMoonOutline } from "react-icons/io5"
-import { assetsImage } from "../../assets/assets"
+import { assetItems } from "../../assets/AnotherAssets"
+import { useDarkMode } from "../../hooks/useDarkMode"
 
 type NavbarProps = {
      modalOnClick: (modalType: 'login' | 'register') => void;
@@ -15,35 +16,7 @@ type NavbarProps = {
 const Navbar = ({ modalOnClick }: NavbarProps) => {
      const [hamburgerActive, setHamburgerActive] = useState(false)
      const [contactActive, setContactActive] = useState(false)
-     const [isDarkMode, setIsDarkMode] = useState(() => {
-          const savedTheme = localStorage.getItem('theme')
-          if (savedTheme) {
-               return savedTheme === 'dark'
-          }
-          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-               return true
-          }
-          return true
-     })
-
-     const handleToggleHamburger = () => {
-          setHamburgerActive(!hamburgerActive)
-     }
-
-     const handleContactActive = () => {
-          setContactActive(!contactActive)
-     }
-
-     const handleToggleDarkMode = () => {
-          const newDarkMode = !isDarkMode
-          setIsDarkMode(newDarkMode)
-          localStorage.setItem('theme', newDarkMode ? 'dark' : 'light')
-          if (newDarkMode) {
-               document.documentElement.classList.add('dark')
-          } else {
-               document.documentElement.classList.remove('dark')
-          }
-     }
+     const { isDarkMode, toggleDarkMode } = useDarkMode()
 
      useEffect(() => {
           const handleHideHamburger = () => {
@@ -51,34 +24,8 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
                     setHamburgerActive(false)
                }
           }
-
           window.addEventListener('scroll', handleHideHamburger)
           return () => window.removeEventListener('scroll', handleHideHamburger)
-     }, [])
-
-     useEffect(() => {
-          if (isDarkMode) {
-               document.documentElement.classList.add('dark')
-          } else {
-               document.documentElement.classList.remove('dark')
-          }
-     }, [isDarkMode])
-
-     useEffect(() => {
-          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-          const handleChange = (e: MediaQueryListEvent) => {
-               const newDarkMode = e.matches
-               setIsDarkMode(newDarkMode)
-               localStorage.setItem('theme', newDarkMode ? 'dark' : 'light')
-               if (newDarkMode) {
-                    document.documentElement.classList.add('dark')
-               } else {
-                    document.documentElement.classList.remove('dark')
-               }
-          }
-
-          mediaQuery.addEventListener('change', handleChange)
-          return () => mediaQuery.removeEventListener('change', handleChange)
      }, [])
 
 
@@ -88,7 +35,9 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
                <NavItems modalOnClick={() => modalOnClick('login')} isActive={hamburgerActive} />
                <div className="flex items-center gap-x-7 z-20 relative">
                     <div className="hidden lg:block">
-                         <NavButton text="Contact" onClick={handleContactActive} />
+                         <NavButton
+                              text="Contact"
+                              onClick={() => setContactActive(!contactActive)} />
                          <div className={`pt-1 absolute flex flex-col items-center 
                          justify-center gap-y-1 transition-all duration-300 ease-in-out
                          ${contactActive ? 'z-0 opacity-100 top-10' : '-z-10 opacity-0 top-0'}`}>
@@ -98,12 +47,14 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
                     </div>
                     <NavIcon
                          icon={isDarkMode ? IoMoonOutline : MdSunny}
-                         onClick={handleToggleDarkMode}
+                         onClick={toggleDarkMode}
                          className={`transition-all duration-500 ease-in-out
                               ${hamburgerActive ? 'text-[#d9d9d9]' : ''} 
                               ${isDarkMode ? '' : ''}`} />
-                    <HamburgerMenu handleActive={handleToggleHamburger} isActive={hamburgerActive} />
-                    <NavIcon icon={assetsImage.Profile} onClick={() => modalOnClick('login')} />
+                    <HamburgerMenu
+                         isActive={hamburgerActive}
+                         handleActive={() => setHamburgerActive(!hamburgerActive)} />
+                    <NavIcon icon={assetItems.Profile} onClick={() => modalOnClick('login')} />
                </div>
           </nav>
      )

@@ -10,7 +10,7 @@ const Star: React.FC<StarProps> = ({ className }) => {
 
      return (
           <Icon path={mdiStarFourPoints}
-               className={`absolute ${className} text-dark dark:text-light 
+               className={`absolute ${className} text-[#6A45BE] dark:text-light 
                     size-5 md:size-8 lg:size-12`} />
      )
 }

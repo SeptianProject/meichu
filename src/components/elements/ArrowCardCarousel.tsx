@@ -12,9 +12,9 @@ const ArrowCardCarousel: React.FC<ArrowCardCarouselProps> = ({
 }) => {
      return (
           <button onClick={onClick}
-               className="bg-dark dark:bg-light rounded-full size-10
+               className="bg-graySecondary dark:bg-light rounded-full size-10
                flex justify-center items-center overflow-hidden">
-               <Icon className='size-6 text-light dark:text-dark' />
+               <Icon className='size-7 text-light dark:text-grayPrimary' />
           </button>
      );
 }

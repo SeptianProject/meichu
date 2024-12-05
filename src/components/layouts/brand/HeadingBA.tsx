@@ -1,4 +1,4 @@
-import BounceAnimation from '../../../animations/BounceAnimation'
+import BounceAnimation from '../../animations/BounceAnimation'
 import TextTagline from '../../fragments/home/TextTagline'
 
 const HeadingBA = () => {

@@ -1,5 +1,5 @@
 import React from "react"
-import BounceAnimation from "../../../animations/BounceAnimation"
+import BounceAnimation from "../../animations/BounceAnimation"
 
 type BtnBorderGradientProps = {
      onClick: () => void
