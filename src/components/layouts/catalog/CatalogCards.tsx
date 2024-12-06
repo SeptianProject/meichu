@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import BtnBorderGradient from '../../elements/buttons/BorderGradientBtn'
 import CatalogCard from './CatalogCard'
 import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
+import { useResize } from '../../../hooks/useResize'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'
@@ -22,26 +23,12 @@ const listCatalog = [
 ]
 
 const CatalogCards: React.FC<CatalogCardsProps> = ({ type }) => {
-     const [screenSize, setScreenSize] = useState<'mobile' | 'desktop'>('desktop')
+     const { screenSize } = useResize()
      const navigate = useNavigate()
 
      const displayedCards = screenSize === 'mobile'
           ? listCatalog.slice(0, 4)
           : type === 'homePage' ? listCatalog.slice(0, 3) : listCatalog
-
-     const handleResize = () => {
-          if (window.innerWidth < 1024) {
-               setScreenSize('mobile')
-          } else {
-               setScreenSize('desktop')
-          }
-     }
-
-     useEffect(() => {
-          handleResize()
-          window.addEventListener('resize', handleResize)
-          return () => window.removeEventListener('resize', handleResize)
-     }, [])
 
      return (
           <div className='flex flex-col items-center gap-y-10'>

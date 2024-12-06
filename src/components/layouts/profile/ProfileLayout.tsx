@@ -8,6 +8,7 @@ import ModalOverlay from '../../fragments/ModalOverlay'
 import CardEvent from '../../fragments/event/CardEvent'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import CatalogCard from '../catalog/CatalogCard'
+import { useResize } from '../../../hooks/useResize'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -28,21 +29,11 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
    const profileContentRef = React.useRef<HTMLDivElement>(null)
    const [maxHeight, setMaxHeight] = React.useState<number>(0)
    const [isTapDiscover, setIsTapDiscover] = React.useState(false)
-   const [screenSize, setScreenSize] = React.useState<'mobile' | 'tablet' | 'desktop'>('desktop')
+   const { screenSize } = useResize()
    const isMobile = screenSize === 'mobile'
 
    const handleSwitchDiscover = () => {
       setIsFavored(!isFavored)
-   }
-
-   const handleResize = () => {
-      if (window.innerWidth < 768) {
-         setScreenSize('mobile')
-      } else if (window.innerWidth < 1024) {
-         setScreenSize('tablet')
-      } else {
-         setScreenSize('desktop')
-      }
    }
 
    React.useEffect(() => {
@@ -68,12 +59,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
          window.scrollTo(0, parseInt(scrollY || '0') * -1)
       }
 
-      handleResize()
-      window.addEventListener('resize', handleResize)
-      return () => {
-         window.removeEventListener('resize', handleResize)
-         window.removeEventListener('resize', updateMaxHeight)
-      }
+      return () => window.removeEventListener('resize', updateMaxHeight)
    }, [profileOpen])
 
    const handleTapDiscover = () => {

@@ -18,7 +18,7 @@ const FloatingButton = () => {
      }, [])
 
      return (
-          <div className={`fixed right-10 transition-all  ease-in-out duration-300
+          <div className={`fixed right-10 transition-all  ease-in-out duration-300 z-50
           ${onScroll ? 'bottom-10' : '-bottom-20'}`}>
                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     className="bg-blueDark text-light dark:text-dark dark:bg-light

@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import React from 'react'
 import CardBestSeller from '../../fragments/home/CardBestSeller'
 import TextTagline from '../../fragments/home/TextTagline'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
+import { useResize } from '../../../hooks/useResize'
 
 const BestSellerLayout = () => {
-     const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'desktop'>('desktop')
-     const [bestSeller] = useState([
+     const { screenSize } = useResize()
+     const [bestSeller] = React.useState([
           <CardBestSeller />,
           <CardBestSeller />,
           <CardBestSeller />,
@@ -16,25 +17,9 @@ const BestSellerLayout = () => {
           <CardBestSeller />
      ])
 
-     const handleResize = () => {
-          const width = window.innerWidth
-          if (width < 768) {
-               setScreenSize('mobile')
-          } else if (width >= 768 && width < 1024) {
-               setScreenSize('tablet')
-          } else {
-               setScreenSize('desktop')
-          }
-     }
-
-     useEffect(() => {
-          handleResize()
-          window.addEventListener('resize', handleResize)
-          return () => window.removeEventListener('resize', handleResize)
-     }, [])
 
      return (
-          <div className="min-h-full">
+          <div className="min-h-full relative">
                <TextTagline text="Best Seller" className='font-semibold' />
                <ContainerStaggerAnimation
                     initialDelay={0.5}

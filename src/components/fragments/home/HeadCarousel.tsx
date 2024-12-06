@@ -40,7 +40,8 @@ const HeadCarousel: React.FC = () => {
      };
 
      return (
-          <div className='relative mx-auto w-full max-w-[1024px] px-[5.5rem]'>
+          <div className='relative mx-auto w-full max-w-[360px] sm:max-w-[430px] 
+          md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem]'>
                <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -77,7 +78,8 @@ const HeadCarousel: React.FC = () => {
                          {duplicatedBundle.map((img, index) => (
                               <SwiperSlide
                                    key={index}
-                                   className="h-full w-[] sm:!w-60 sm:!h-80">
+                                   className="!w-28 !h-36 sm:!w-32 sm:!h-40 
+                                   md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <motion.div
                                         variants={cardVariants}
                                         className="h-full w-full overflow-hidden rounded-2xl">
@@ -93,7 +95,7 @@ const HeadCarousel: React.FC = () => {
                     {/* Arrow Custom */}
                     <div className='hidden absolute left-1/2 top-1/2 
                     -translate-y-1/2 -translate-x-1/2 z-10
-                    lg:flex items-center justify-between w-[75vw]'>
+                    lg:flex items-center justify-between w-[95vw] xl:w-[80vw]'>
                          <BounceAnimation
                               delayVal={1.2}
                               hiddenCoordinates={{ x: -50 }}>
