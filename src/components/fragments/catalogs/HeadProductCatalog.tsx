@@ -8,14 +8,20 @@ type HeadProductCatalogProps = {
 const HeadProductCatalog: React.FC<HeadProductCatalogProps> = ({ type }) => {
      const [isLiked, setIsLiked] = React.useState(false)
 
+     const handleOnLike = () => {
+          setIsLiked(!isLiked)
+          if (!isLiked) {
+               alert('Login boy🚀🚀')
+          }
+     }
+
      return (
           <>
                <h3 className={`dark:text-light text-[14px] font-bold
                     ${type === 'catalog' ? 'sm:text-sm md:text-xl' : ' text-sm'}`}>
                     Nama Product
                </h3>
-               <div
-                    onClick={() => setIsLiked(!isLiked)}
+               <div onClick={handleOnLike}
                     className={`border border-[#5E5A5A] dark:border-light cursor-pointer 
                     rounded-full p-[5px] w-fit group hover:scale-105 transition-all duration-300
                     ${type === 'catalog' ? 'md:p-2' : 'bg-red-500 border-transparent dark:border-transparent'}

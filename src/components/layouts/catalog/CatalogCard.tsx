@@ -33,7 +33,7 @@ const CatalogCard: React.FC<CatalogCardProps> = ({ type }) => {
                </div>
                {/* image content */}
                <div className='mt-3'>
-                    <img className={`h-full object-cover object-center rounded-xl 
+                    <img className={`h-full lg:h-80 object-cover object-center rounded-xl 
                     ${type === 'catalog'
                               ? 'md:rounded-2xl w-[20rem] md:w-full'
                               : 'h-36 sm:h-24 xl:h-40'}`}

@@ -7,7 +7,7 @@ const CustomProductsLayout = () => {
 
      return (
           <div className="lg:min-h-screen w-full
-          flex items-center gap-x-10">
+          flex items-center gap-x-10 pb-20 lg:pb-5">
                <div className="max-w-full sm:max-w-[80vw] md:max-w-[75vw] lg:max-w-[60vw] h-full relative 
                flex flex-col gap-y-5 lg:pb-20">
                     <BounceAnimation

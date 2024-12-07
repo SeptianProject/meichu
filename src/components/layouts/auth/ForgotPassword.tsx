@@ -23,7 +23,7 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = ({
                isModalOpen={isModalOpen}
                className="min-h-[40vh]">
                <AuthHeading title="Forgot Your Password" />
-               <form className="space-y-5 ">
+               <form className="space-y-5 flex flex-col w-full max-w-[20rem] bg-red-400 items-center justify-center ">
                     <AuthInput
                          icon={FaUser}
                          type="email"

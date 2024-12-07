@@ -11,7 +11,6 @@ type ImageContent = {
      source: string
 }
 
-
 const DetailPage = () => {
      const [selectContent, setSelectContent] = React.useState<ImageContent['id']>('first')
      const images: ImageContent[] = [

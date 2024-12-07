@@ -5,7 +5,15 @@ import CardEvent from "../../fragments/event/CardEvent"
 const cardEvent = <CardEvent type="event" />
 
 const listCardEvent = [
-     cardEvent, cardEvent, cardEvent, cardEvent, cardEvent, cardEvent, cardEvent, cardEvent, cardEvent
+     cardEvent,
+     cardEvent,
+     cardEvent,
+     cardEvent,
+     cardEvent,
+     cardEvent,
+     cardEvent,
+     cardEvent,
+     cardEvent
 ]
 
 const MainContentEvent = () => {

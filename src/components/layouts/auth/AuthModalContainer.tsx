@@ -2,6 +2,7 @@ import React from 'react'
 import LoginLayout from './login/LoginLayout'
 import RegisterLayout from './regis/RegisLayout'
 import ForgotPasswordLayout from './ForgotPassword'
+import { useAuthModal } from '../../../hooks/useAuthModal'
 
 interface AuthModalContainerProps {
      isOpen: boolean
@@ -14,10 +15,9 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
      onClose,
      onProfile
 }) => {
-     const [activeModal, setActiveModal] = React.useState<'login' | 'register' | 'forgot-password'>('login')
-     const [isAnimating, setIsAnimating] = React.useState(false)
      const [showPassword, setShowPassword] = React.useState(false)
      const [showConfirmPass, setShowConfirmPass] = React.useState(false)
+     const { activeModal, isAnimating, handleSwitchModal } = useAuthModal(isOpen)
 
      const handleTogglePassword = () => {
           setShowPassword(!showPassword)
@@ -25,28 +25,6 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
 
      const handleToggleConfirmPass = () => {
           setShowConfirmPass(!showConfirmPass)
-     }
-
-     React.useEffect(() => {
-          if (isOpen) {
-               document.body.style.overflow = 'hidden'
-               document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`
-          } else {
-               const timer = setTimeout(() => {
-                    document.body.style.overflow = ''
-                    document.body.style.paddingRight = ''
-                    setActiveModal('login')
-               }, 200);
-               return () => clearTimeout(timer)
-          }
-     }, [isOpen])
-
-     const handleSwitchModal = (modalType: 'login' | 'register' | 'forgot-password') => {
-          setIsAnimating(true)
-          setActiveModal(modalType)
-          setTimeout(() => {
-               setIsAnimating(false)
-          }, 200);
      }
 
      return (
