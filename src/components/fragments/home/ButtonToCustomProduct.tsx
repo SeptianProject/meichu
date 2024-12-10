@@ -1,17 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 interface ButtonToCustomProductProps {
      text: string
+     onClick: () => void
 }
 
 const ButtonToCustomProduct: React.FC<ButtonToCustomProductProps> = ({
-     text
+     text,
+     onClick
 }) => {
-     const navigate = useNavigate();
-
      return (
-          <button onClick={() => navigate("/custom-product")}
+          <button onClick={onClick}
                className={`text-sm font-semibold rounded-full w-32 py-2 border 
                          lg:text-base lg:w-44 transition-all duration-300 ease-out 
                          hover:scale-105 hover:-translate-y-1

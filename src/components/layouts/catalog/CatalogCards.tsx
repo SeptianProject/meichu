@@ -46,7 +46,9 @@ const CatalogCards: React.FC<CatalogCardsProps> = ({ type }) => {
                          </CardStaggerAnimation>
                     ))}
                </ContainerStaggerAnimation>
-               <BtnBorderGradient onClick={() => navigate('/catalog-detail')} />
+               {type === 'homePage' && (
+                    <BtnBorderGradient onClick={() => navigate('/catalog')} />
+               )}
           </div>
      )
 }

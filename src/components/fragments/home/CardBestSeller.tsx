@@ -1,10 +1,15 @@
+import { useNavigate } from "react-router-dom"
 import { assetItems } from "../../../assets/AnotherAssets"
 import { butterflyBundle } from "../../../assets/meichuBundle"
 
 
 const CardBestSeller = () => {
+     const navigate = useNavigate()
+
      return (
-          <div className='bg-transparent border border-[#5E5A5A] 
+          <div
+               onClick={() => navigate('/catalog-detail')}
+               className='bg-transparent border border-[#5E5A5A] 
           dark:bg-[#48484D] bg-opacity-50 w-full p-5 rounded-3xl
           flex flex-col items-start gap-y-5 cursor-pointer
           hover:-translate-y-3 transition-all duration-500 h-[21rem]'>

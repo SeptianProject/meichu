@@ -1,6 +1,5 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCoverflow, Navigation } from 'swiper/modules';
 import { motion, AnimationProps } from 'framer-motion';
 import { Swiper as SwiperType } from 'swiper/types';
 import ArrowCardCarousel from '../../elements/ArrowCardCarousel';
@@ -8,9 +7,11 @@ import BounceAnimation from '../../animations/BounceAnimation';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { mainProductBundle } from '../../../assets/meichuBundle';
 import 'swiper/swiper-bundle.css';
+import { createHeadCarouselSwiperConfig } from '../../../configs/createHeadCarouselSwiperConfig';
 
 const HeadCarousel: React.FC = () => {
      const swiperRef = React.useRef<SwiperType>();
+     const headSwiperCarouselConfig = createHeadCarouselSwiperConfig(swiperRef);
      const duplicatedBundle = [
           ...mainProductBundle.slice(0, 5),
           ...mainProductBundle.slice(0, 5),
@@ -48,32 +49,7 @@ const HeadCarousel: React.FC = () => {
                     viewport={{ once: true }}
                     variants={containerVariants}
                     className='w-full'>
-                    <Swiper
-                         effect={'coverflow'}
-                         centeredSlides={true}
-                         grabCursor={true}
-                         loop={true}
-                         loopedSlides={4}
-                         loopPreventsSliding={true}
-                         onBeforeInit={(swiper) => {
-                              swiperRef.current = swiper;
-                         }}
-                         onAfterInit={(swiper) => {
-                              swiperRef.current = swiper;
-                         }}
-                         slidesPerView={'auto'}
-                         initialSlide={2}
-                         coverflowEffect={{
-                              rotate: 0,
-                              stretch: 0,
-                              depth: 100,
-                              modifier: 2.5,
-                         }}
-                         autoplay={{
-                              delay: 3000,
-                              disableOnInteraction: false,
-                         }}
-                         modules={[EffectCoverflow, Navigation, Autoplay]}
+                    <Swiper {...headSwiperCarouselConfig}
                          className='w-full'>
                          {duplicatedBundle.map((img, index) => (
                               <SwiperSlide
@@ -92,7 +68,6 @@ const HeadCarousel: React.FC = () => {
                          ))}
                     </Swiper>
 
-                    {/* Arrow Custom */}
                     <div className='hidden absolute left-1/2 top-1/2 
                     -translate-y-1/2 -translate-x-1/2 z-10
                     lg:flex items-center justify-between w-[95vw] xl:w-[80vw]'>

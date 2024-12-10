@@ -1,10 +1,9 @@
 import React from "react";
 import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation";
-import { EffectCoverflow, Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { BundleProducts } from "../../../interfaces";
+import { BundleProducts } from "../../../interface";
 import 'swiper/swiper-bundle.css'
-import { useResize } from "../../../hooks/useResize";
+import { createItemsBundleSwiperConfig } from "../../../configs/createItemsBundleSwiperConfig";
 
 interface ItemsBundleCarouselProps {
      bundleProducts: BundleProducts[]
@@ -15,28 +14,14 @@ const ItemsBundleCarousel: React.FC<ItemsBundleCarouselProps> = ({
      activeIndex,
      bundleProducts,
 }) => {
-     const { screenSize } = useResize()
+     const swiperConfigItemsBundle = createItemsBundleSwiperConfig()
 
      return (
           <ContainerStaggerAnimation
                staggerDelay={0.3}
                className="w-full">
                <div className="max-w-full -bottom-10 left-40 lg:absolute lg:max-w-[40rem]">
-                    <Swiper
-                         effect={'coverflow'}
-                         grabCursor={true}
-                         slidesPerView={'auto'}
-                         centeredSlides={true}
-                         loop={true}
-                         loopedSlides={1}
-                         coverflowEffect={{
-                              rotate: 0,
-                              stretch: (screenSize === 'mobile') ? 50 : -25,
-                              depth: 100,
-                              modifier: 3,
-                              slideShadows: false
-                         }}
-                         modules={[EffectCoverflow, Navigation]}
+                    <Swiper {...swiperConfigItemsBundle}
                          className='mx-auto size-full'>
                          {bundleProducts[activeIndex].items.map((product, index) => (
                               <SwiperSlide key={index} className="!w-auto rounded-xl">

@@ -44,31 +44,27 @@ const RegisForm: React.FC<RegisFormProps> = ({
                          icon={FaUser}
                          type="email"
                          placeholder="Your Email"
+                         error={errors.email}
                          {...register('email')}
                     />
-                    {errors.email && (<p className="text-red-500 text-sm">{errors.email.message}</p>)}
                     <AuthInput
                          icon={IoIosLock}
                          type="password"
                          placeholder="Password"
                          showPassword={showPassword}
                          onTogglePassword={handleTogglePassword}
+                         error={errors.password}
                          {...register('password')}
                     />
-                    {errors.password && (
-                         <p className="text-red-500 text-sm">{errors.password.message}</p>
-                    )}
                     <AuthInput
                          icon={IoIosLock}
                          type="password"
                          placeholder="Confirm Password"
                          showPassword={showConfirmPass}
                          onTogglePassword={handleToggleConfirmPass}
+                         error={errors.confirmPassword}
                          {...register('confirmPassword')}
                     />
-                    {errors.confirmPassword && (
-                         <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>
-                    )}
                     <RegisTextDesc />
                </div>
                <div className="space-y-5">

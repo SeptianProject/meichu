@@ -13,11 +13,12 @@ const AuthButton: React.FC<AuthButtonProps> = ({
           <button
                type={type}
                onClick={onClick}
-               className={`w-full py-[10px] rounded-full 
+               className={`w-full py-[8px] rounded-full 
                font-semibold font-poppins border
+               transition-all duration-300
                ${text === 'Login' || text === 'Submit'
-                         ? 'bg-[#312058] border-transparent text-light'
-                         : 'bg-transparent border-[#6A45BE] text-[#6A45BE] hover:text-light dark:text-light hover:bg-[#312058] hover:border-transparent transition-all duration-300'}`}>
+                         ? 'bg-purplePrimary border-transparent text-light hover:bg-purplePrimary/80'
+                         : 'bg-transparent border-[#6A45BE] text-[#6A45BE] hover:text-light dark:text-light hover:bg-purplePrimary hover:border-transparent'}`}>
                {text}
           </button>
      );

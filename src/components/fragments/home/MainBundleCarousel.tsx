@@ -1,10 +1,10 @@
 import React from 'react'
 import BounceAnimation from '../../animations/BounceAnimation'
-import { BundleProducts } from '../../../interfaces'
+import { BundleProducts } from '../../../interface'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperType } from 'swiper/types'
-import { Autoplay, EffectCoverflow, Navigation } from 'swiper/modules'
 import 'swiper/swiper-bundle.css'
+import { createMainBundleSwiperConfig } from '../../../configs/createMainBundleSwiperConfig'
 
 interface MainBundleCarouselProps {
      bundleProducts: BundleProducts[]
@@ -18,35 +18,11 @@ const MainBundleCarousel: React.FC<MainBundleCarouselProps> = ({
      bundleProducts,
      setActiveIndex,
 }) => {
+     const swiperConfigMainBundle = createMainBundleSwiperConfig(setActiveIndex, swiperRef)
+
      return (
           <div className='w-full pb-5'>
-               <Swiper
-                    effect={'coverflow'}
-                    initialSlide={0}
-                    slidesPerView={'auto'}
-                    centeredSlides={true}
-                    loop={true}
-                    loopedSlides={1}
-                    loopPreventsSliding={true}
-                    onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-                    onBeforeInit={(swiper) => {
-                         swiperRef.current = swiper;
-                    }}
-                    onAfterInit={(swiper) => {
-                         swiperRef.current = swiper;
-                    }}
-                    coverflowEffect={{
-                         rotate: 0,
-                         stretch: -50,
-                         depth: 100,
-                         modifier: 2.5,
-                         slideShadows: false
-                    }}
-                    autoplay={{
-                         delay: 3000,
-                         disableOnInteraction: false
-                    }}
-                    modules={[EffectCoverflow, Navigation, Autoplay]}
+               <Swiper {...swiperConfigMainBundle}
                     className='size-full max-w-[50rem]'>
                     {bundleProducts.map((product, index) => (
                          <SwiperSlide key={index} className='!max-w-[40rem] lg:!max-w-[50rem]'>

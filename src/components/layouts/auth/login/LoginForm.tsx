@@ -35,28 +35,28 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
      return (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
-               <div className="flex flex-col items-end gap-y-2">
-                    <AuthInput
-                         icon={FaUser}
-                         type="email"
-                         placeholder="Your Email"
-                         {...register('email')}
-                    />
-                    {errors.email && (
-                         <p className="text-red-500 text-sm">{errors.email.message}</p>
-                    )}
-                    <AuthInput
-                         icon={IoIosLock}
-                         type="password"
-                         placeholder="Password"
-                         showPassword={showPassword}
-                         onTogglePassword={handleTogglePassword}
-                         {...register('password')}
-                    />
-                    {errors.password && (
-                         <p className="text-red-500 text-sm">{errors.password.message}</p>
-                    )}
-                    <ForgotPasswordBtn onClick={onForgotPassword} />
+               <div className="flex flex-col items-end gap-y-1">
+                    <div className="flex flex-col items-start gap-y-2">
+                         <AuthInput
+                              icon={FaUser}
+                              type="email"
+                              placeholder="Your Email"
+                              error={errors.email}
+                              {...register('email')}
+                         />
+                         <AuthInput
+                              icon={IoIosLock}
+                              type="password"
+                              placeholder="Password"
+                              showPassword={showPassword}
+                              onTogglePassword={handleTogglePassword}
+                              error={errors.password}
+                              {...register('password')}
+                         />
+                    </div>
+                    <div className="">
+                         <ForgotPasswordBtn onClick={onForgotPassword} />
+                    </div>
                </div>
                <AuthButton text="Login" type="submit" />
                <AuthBadgeButton />

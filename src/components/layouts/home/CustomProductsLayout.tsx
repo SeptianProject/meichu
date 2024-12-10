@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom"
 import BounceAnimation from "../../animations/BounceAnimation"
 import TextCursorAnimation from "../../animations/TextCursorAnimation"
 import ButtonToCustomProduct from "../../fragments/home/ButtonToCustomProduct"
 import CardProductAnimate from "../../fragments/home/CardProductAnimate"
 
 const CustomProductsLayout = () => {
+     const navigate = useNavigate()
 
      return (
           <div className="lg:min-h-screen w-full
@@ -34,12 +36,16 @@ const CustomProductsLayout = () => {
                          <BounceAnimation
                               delayVal={0.5}
                               hiddenCoordinates={{ y: -50 }}>
-                              <ButtonToCustomProduct text="Custom Product" />
+                              <ButtonToCustomProduct
+                                   onClick={() => navigate("/custom-product")}
+                                   text="Custom Product" />
                          </BounceAnimation>
                          <BounceAnimation
                               delayVal={1}
                               hiddenCoordinates={{ y: 50 }}>
-                              <ButtonToCustomProduct text="More Product" />
+                              <ButtonToCustomProduct
+                                   onClick={() => navigate("/catalog")}
+                                   text="More Product" />
                          </BounceAnimation>
                     </div>
                </div>

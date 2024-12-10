@@ -2,7 +2,7 @@ import React from "react";
 import { Swiper as SwiperType } from 'swiper/types';
 import 'swiper/swiper-bundle.css'
 import MainBundleCarousel from "./MainBundleCarousel";
-import { BundleProducts } from "../../../interfaces";
+import { BundleProducts } from "../../../interface";
 import ItemsBundleCarousel from "./ItemsBundleCarousel";
 
 interface BundleCarouselLayoutProps {
