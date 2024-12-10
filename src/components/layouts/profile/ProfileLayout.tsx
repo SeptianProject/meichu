@@ -1,6 +1,6 @@
 import React from 'react'
 import { BiX } from 'react-icons/bi'
-import { abstrakImages } from '../../../assets/AnotherAssets'
+import { abstrakImages, assetItems } from '../../../assets/AnotherAssets'
 import TextTitleValue from '../../fragments/profile/TextTitleValue'
 import ButtonSwitchDiscover from '../../fragments/profile/ButtonSwitchDiscover'
 import ButtonActionInProfile from '../../fragments/profile/ButtonActionInProfile'
@@ -9,6 +9,7 @@ import CardEvent from '../../fragments/event/CardEvent'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import CatalogCard from '../catalog/CatalogCard'
 import { useResize } from '../../../hooks/useResize'
+import 'swiper/swiper-bundle.css'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -90,13 +91,23 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
                <div className='w-full pt-5 z-10'>
                   {/* Content */}
                   <div className={`w-full space-y-5 lg:flex flex-col items-start border-light/70 
-                              lg:gap-x-5 lg:flex-row lg:items-end lg:border-b lg:pt-0 lg:pb-5
+                              lg:gap-x-5 lg:flex-row lg:items-start lg:border-b lg:pt-0 lg:pb-5
                               ${isTapDiscover ? 'hidden' : 'block'}`}>
-                     <div className='size-40 lg:w-60 lg:h-64'>
-                        <img src={abstrakImages[1]} alt="profile-picture"
+                     <div className='size-40 lg:w-3/5 lg:h-[20rem] relative'>
+                        <img
+                           src={abstrakImages[1]}
+                           alt="profile-picture"
                            className='rounded-xl object-cover object-center size-full' />
+                        <button
+                           type="button"
+                           className='bg-light size-8 p-1 rounded-md absolute bottom-2 right-2
+                           group transition-all duration-300'>
+                           <img src={assetItems.EditIcon}
+                              alt="edit-icon"
+                              className='size-fit group-hover:scale-90' />
+                        </button>
                      </div>
-                     <div className='flex w-full flex-col gap-y-5 lg:w-80 lg:h-64'>
+                     <div className='size-full flex flex-col gap-y-5'>
                         <div className='space-y-3 lg:space-y-5'>
                            <TextTitleValue title='Your Email' value='septianz@gmail.com' />
                            <TextTitleValue title='Date Joined' value='21-January-2020' />
@@ -132,7 +143,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
                            <div className='flex items-center gap-x-3'>
                               {isFavored ? (
                                  isMobile ? (
-                                    <Swiper>
+                                    <Swiper className='w-full'>
                                        {listCardFavored.map((item, index) => (
                                           <SwiperSlide key={index} className='px-2 py-5'>
                                              {item}
@@ -148,7 +159,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
                                  )
                               ) :
                                  isMobile ? (
-                                    <Swiper>
+                                    <Swiper className='w-full'>
                                        {listCardRequest.map((item, index) => (
                                           <SwiperSlide key={index} className='px-2 py-5'>
                                              {item}

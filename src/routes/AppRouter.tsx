@@ -1,12 +1,12 @@
-import { Routes, Route, useLocation } from "react-router-dom"
-import HomePage from "../components/pages/HomePage"
-import CatalogPage from "../components/pages/CatalogPage"
-import BrandPage from "../components/pages/BrandPage"
-import CustomProductPage from "../components/pages/CustomProductPage"
-import EventPage from "../components/pages/EventPage"
-import DetailPage from "../components/pages/DetailPage"
 import React from "react"
+import { Routes, Route, useLocation } from "react-router-dom"
 import { getCircleAnimations } from "../helper/CircleAnimationHelper"
+import HomePage from "../components/pages/HomePage"
+const CatalogPage = React.lazy(() => import('../components/pages/CatalogPage'))
+const BrandPage = React.lazy(() => import('../components/pages/BrandPage'))
+const CustomProductPage = React.lazy(() => import('../components/pages/CustomProductPage'))
+const EventPage = React.lazy(() => import('../components/pages/EventPage'))
+const DetailPage = React.lazy(() => import('../components/pages/DetailPage'))
 
 const AppRouter = () => {
      const location = useLocation()
@@ -21,17 +21,27 @@ const AppRouter = () => {
      return (
           <>
                {circleAnimations}
-               <Routes>
-                    <Route path='*' element={<HomePage />} />
-                    <Route path='/' element={<HomePage />} />
-                    <Route path="/catalog" element={<CatalogPage />} />
-                    <Route path="/brand-ambassador" element={<BrandPage />} />
-                    <Route path="/custom-product" element={<CustomProductPage />} />
-                    <Route path="/event" element={<EventPage />} />
-                    <Route path="/catalog-detail" element={<DetailPage />} />
-               </Routes>
+               <React.Suspense fallback={<Loading></Loading>}>
+                    <Routes>
+                         <Route path='*' element={<HomePage />} />
+                         <Route path='/' element={<HomePage />} />
+                         <Route path="/catalog" element={<CatalogPage />} />
+                         <Route path="/brand-ambassador" element={<BrandPage />} />
+                         <Route path="/custom-product" element={<CustomProductPage />} />
+                         <Route path="/event" element={<EventPage />} />
+                         <Route path="/catalog-detail" element={<DetailPage />} />
+                    </Routes>
+               </React.Suspense>
           </>
      )
 }
 
 export default AppRouter
+
+const Loading = () => {
+     return (
+          <div className="flex justify-center items-center ">
+               Loading...
+          </div>
+     )
+}

@@ -13,7 +13,7 @@ const CardBestSeller = () => {
                     <img className='rounded-full size-14'
                          src={assetItems.AnyIcon} alt="" />
                     <div className='flex flex-col items-start'>
-                         <h3 className='dark:text-light text-lg font-semibold'>Name Product</h3>
+                         <h3 className='dark:text-light text-lg font-bold'>Name Product</h3>
                          <h6 className='dark:text-light text-base font-extralight'>@meichu</h6>
                     </div>
                </div>

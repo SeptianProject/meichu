@@ -40,7 +40,7 @@ const HeadCarousel: React.FC = () => {
      };
 
      return (
-          <div className='relative mx-auto w-full max-w-[360px] sm:max-w-[430px] 
+          <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
           md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem]'>
                <motion.div
                     initial="hidden"
@@ -82,7 +82,7 @@ const HeadCarousel: React.FC = () => {
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <motion.div
                                         variants={cardVariants}
-                                        className="h-full w-full overflow-hidden rounded-2xl">
+                                        className="h-full w-full overflow-hidden rounded-xl">
                                         <img
                                              src={img}
                                              alt={`Slide ${index + 1}`}

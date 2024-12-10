@@ -30,7 +30,7 @@ const LoginLayout = ({
                isAnimating={isAnimating}
                isModalClose={isModalClose}
                isModalOpen={isModalOpen}
-               className="min-h-[60vh]">
+               className="min-h-[60vh] lg:min-h-[85vh]">
                <AuthHeading title="Reconnect and Explore!" />
                <LoginForm
                     onForgotPassword={onForgotPassword}

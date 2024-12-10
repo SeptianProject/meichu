@@ -33,25 +33,40 @@ export const butterflyBundle = [
 // bundle products
 export const bundleProducts = [
      {
-          id: 1,
           name: 'Autumn',
           main: AutumnMain,
-          items: [AutumnItem1, AutumnItem2, AutumnItem3]
+          items: [
+               AutumnItem1, AutumnItem2, AutumnItem3,
+               AutumnItem1, AutumnItem2, AutumnItem3,
+               AutumnItem1, AutumnItem2, AutumnItem3
+          ]
      }, {
-          id: 2,
+
           name: 'Witch',
           main: WitchMain,
-          items: [WitchItem1, WitchItem2, WitchItem3]
+          items: [
+               WitchItem1, WitchItem2, WitchItem3,
+               WitchItem1, WitchItem2, WitchItem3,
+               WitchItem1, WitchItem2, WitchItem3
+          ]
      }, {
-          id: 3,
+
           name: 'Butterfly',
           main: ButterflyMain,
-          items: [ButterflyItem1, ButterflyItem2, ButterflyItem1]
+          items: [
+               ButterflyItem1, ButterflyItem2, ButterflyItem1,
+               ButterflyItem1, ButterflyItem2, ButterflyItem1,
+               ButterflyItem1, ButterflyItem2, ButterflyItem1
+          ]
      }, {
-          id: 4,
+
           name: 'RedPlaid',
           main: RedPlaidMain,
-          items: [RedPlaidItem1, RedPlaidItem2, RedPlaidItem1]
+          items: [
+               RedPlaidItem1, RedPlaidItem2, RedPlaidItem1,
+               RedPlaidItem1, RedPlaidItem2, RedPlaidItem1,
+               RedPlaidItem1, RedPlaidItem2, RedPlaidItem1
+          ]
      }
 ]
 

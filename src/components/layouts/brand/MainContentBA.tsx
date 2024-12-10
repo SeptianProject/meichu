@@ -11,8 +11,9 @@ const MainContentBA = () => {
                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {brandAmbassadorItems.map((item, index) => (
                          <CardStaggerAnimation
+                              key={index}
                               hiddenPosition={{ y: 100 }}>
-                              <CardGradientBA key={index} image={item} title="Jenny RubyJane"
+                              <CardGradientBA image={item} title="Jenny RubyJane"
                                    desc="Whether you have a question about talents, pricing, portfolio, or anything else, our team..." />
                          </CardStaggerAnimation>
                     ))}

@@ -5,7 +5,7 @@ export const useResize = () => {
 
      const handleResize = () => {
           const width = window.innerWidth
-          if (width < 768) {
+          if (width < 768 && width < 1024) {
                setScreenSize('mobile')
           } else if (width >= 768 && width < 1024) {
                setScreenSize('tablet')

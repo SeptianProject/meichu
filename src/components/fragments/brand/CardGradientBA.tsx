@@ -5,15 +5,14 @@ import SingleBadgeSosmed from "../../elements/SingleBadgeSosmed";
 
 
 interface CardGradientBAProps {
-     key: number;
      image: string;
      title: string;
      desc: string;
 }
 
-const CardGradientBA: FC<CardGradientBAProps> = ({ key, image, title, desc }) => {
+const CardGradientBA: FC<CardGradientBAProps> = ({ image, title, desc }) => {
      return (
-          <div key={key}
+          <div
                className="h-[30rem] bg-center bg-cover rounded-2xl relative overflow-hidden
                lg:h-[25rem] xl:h-[35rem]"
                style={{ backgroundImage: `url(${image})` }}>

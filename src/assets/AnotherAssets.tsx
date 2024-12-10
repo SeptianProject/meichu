@@ -13,10 +13,12 @@ import Abstrak2 from './images/abstrak-image/abstrak2.jpg'
 import Abstrak3 from './images/abstrak-image/abstrak3.jpg'
 import Abstrak4 from './images/abstrak-image/abstrak4.jpg'
 import EventImage from './images/another/event-image.png'
+import EditIcon from './images/another/edit-icon.svg'
 
 export const assetItems = {
      MeichuLogo, Profile, AnyIcon, DarkImvu, LightImvu, EventImage,
-     DarkSingleEmoji, DarkDuoEmoji, LightSingleEmoji, LightDuoEmoji
+     DarkSingleEmoji, DarkDuoEmoji, LightSingleEmoji, LightDuoEmoji,
+     EditIcon
 }
 
 export const brandAmbassadorItems = [

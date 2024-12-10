@@ -18,7 +18,7 @@ export const useAuthModal = (isOpen?: boolean) => {
      }
 
      const handleModalProfile = () => {
-          setIsAuthModalOpen(true)
+          setProfileActive(true)
           if (isAuthModalOpen) {
                setIsAuthModalOpen(false)
           }

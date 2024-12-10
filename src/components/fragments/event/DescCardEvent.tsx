@@ -6,7 +6,7 @@ type TDescCardEvent = {
 
 const DescCardEvent: React.FC<TDescCardEvent> = ({ type }) => {
      return (
-          <p className="font-light text-xs text-opacity-80 tracking-wide dark:text-light
+          <p className="font-light text-[10px] sm:text-xs md:text-sm text-opacity-80 tracking-wide dark:text-light
                     dark:text-opacity-80">
                {type === 'event'
                     ? 'Whether you have a question about talents, pricing, portfolio, or anything else, our team, Whether you have a question about talents, pricing.'

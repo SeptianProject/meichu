@@ -21,15 +21,16 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = ({
                isAnimating={isAnimating}
                isModalClose={isModalClose}
                isModalOpen={isModalOpen}
-               className="min-h-[40vh]">
-               <AuthHeading title="Forgot Your Password" />
-               <form className="space-y-5 flex flex-col w-full max-w-[20rem] bg-red-400 items-center justify-center ">
+               className="min-h-[30vh] lg:min-h-[70vh]">
+               <AuthHeading title="Forgot Your Password?" />
+               <form
+                    className="space-y-5 flex flex-col w-full h-full max-w-72 items-center justify-center ">
                     <AuthInput
                          icon={FaUser}
                          type="email"
                          placeholder="Enter Your Email Address" />
                     <p className="text-white text-sm font-light">
-                         <span className="text-red-600">*</span>
+                         <span className="text-red-600 text-xl mr-1">*</span>
                          We will send you a message to set or reset your new password
                     </p>
                     <AuthButton

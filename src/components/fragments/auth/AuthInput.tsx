@@ -26,10 +26,9 @@ const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(({
      const inputType = type === 'password' && showPassword ? 'text' : type;
 
      return (
-          <div className="text-dark border-dark p-3 w-60 border rounded-md
-                    flex items-center justify-between
-                    dark:bg-light dark:border-gray-500
-                    lg:w-72 lg:rounded-xl">
+          <div className="text-dark border-dark p-3 w-60 border rounded-lg
+                    flex items-center justify-between dark:bg-light
+                    dark:border-gray-500 lg:w-full">
                <div className="flex items-center gap-x-2">
                     <Icon className={`text-[#626262]
                               ${type === 'password' ? 'size-5' : 'size-fit'}`} />

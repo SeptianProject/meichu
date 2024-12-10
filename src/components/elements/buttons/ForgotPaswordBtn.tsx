@@ -7,6 +7,7 @@ interface BtnForgotPasswordProps {
 const BtnForgotPassword: React.FC<BtnForgotPasswordProps> = ({ onClick }) => {
      return (
           <button
+               type="button"
                onClick={onClick}
                className="text-dark/80 dark:text-[#A78CE4] 
                          text-xs lg:text-sm font-medium">

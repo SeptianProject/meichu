@@ -27,7 +27,7 @@ const CatalogCards: React.FC<CatalogCardsProps> = ({ type }) => {
      const navigate = useNavigate()
 
      const displayedCards = screenSize === 'mobile'
-          ? listCatalog.slice(0, 4)
+          ? listCatalog.slice(0, 2)
           : type === 'homePage' ? listCatalog.slice(0, 3) : listCatalog
 
      return (
@@ -35,7 +35,8 @@ const CatalogCards: React.FC<CatalogCardsProps> = ({ type }) => {
                <ContainerStaggerAnimation
                     initialDelay={0.5}
                     staggerDelay={0.4}
-                    className='mt-12 grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 w-full'>
+                    className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+                    gap-6 lg:gap-4 w-full'>
                     {displayedCards.map((card) => (
                          <CardStaggerAnimation
                               key={card.id}
