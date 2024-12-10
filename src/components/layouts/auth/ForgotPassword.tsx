@@ -28,7 +28,8 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = ({
                     <AuthInput
                          icon={FaUser}
                          type="email"
-                         placeholder="Enter Your Email Address" />
+                         placeholder="Enter Your Email Address"
+                    />
                     <p className="text-white text-sm font-light">
                          <span className="text-red-600 text-xl mr-1">*</span>
                          We will send you a message to set or reset your new password
