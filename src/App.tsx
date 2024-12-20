@@ -29,8 +29,8 @@ const App = () => {
                     profileOpen={profileActive}
                     profileClose={handleModalClose} />
                <AppRouter />
-               <Footer />
                <FloatingButton />
+               <Footer />
                <ScrollToTop />
           </div>
      )

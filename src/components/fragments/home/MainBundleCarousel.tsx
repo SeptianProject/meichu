@@ -41,7 +41,7 @@ const MainBundleCarousel: React.FC<MainBundleCarouselProps> = ({
                                              alt={`${product.name} Bundle`} />
                                    </BounceAnimation>
                                    <h1 className="text-2xl mt-6 font-semibold lg:text-4xl lg:pb-10
-                                   text-[#312058] dark:text-light lg:max-w-[20rem]">
+                                   text-light lg:max-w-[20rem]">
                                         {product.name} Product Bundle
                                    </h1>
                               </div>

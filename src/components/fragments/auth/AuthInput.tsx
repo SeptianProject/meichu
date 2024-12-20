@@ -12,7 +12,7 @@ interface AuthInputProps {
      onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
      showPassword?: boolean;
      onTogglePassword?: () => void;
-     error?: FieldError | undefined
+     error: FieldError | undefined
 }
 
 const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(({

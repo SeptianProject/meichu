@@ -18,7 +18,7 @@ const BundleProductsLayout = () => {
                          swiperRef={swiperRef}
                     />
                     <div className="absolute -z-10 top-60 left-0 w-[100vw] h-[40vh]
-                         bg-gradient-to-r from-light via-[#7C64B0]/50 to-[#6A45BE]/60
+                         bg-gradient-to-r from-light via-[#7C64B0]/75 to-[#6A45BE]/75
                          dark:from-transparent dark:to-[#312058] lg:h-[50vh] lg:top-40 lg:bottom-0" />
                     <div className="hidden absolute w-fit -right-10 top-20 lg:flex items-center justify-end gap-x-5">
                          <ArrowCardCarousel
