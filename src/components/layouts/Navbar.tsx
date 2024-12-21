@@ -8,15 +8,23 @@ import { BsWhatsapp } from "react-icons/bs"
 import { IoMoonOutline } from "react-icons/io5"
 import { assetItems } from "../../assets/AnotherAssets"
 import { useDarkMode } from "../../hooks/useDarkMode"
+import { useAppDispatch, useAppSelector } from "../../redux/hook"
+import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSlice"
 
-type NavbarProps = {
-     modalOnClick: (modalType: 'login' | 'register') => void;
-}
-
-const Navbar = ({ modalOnClick }: NavbarProps) => {
+const Navbar = () => {
      const [hamburgerActive, setHamburgerActive] = useState(false)
      const [contactActive, setContactActive] = useState(false)
      const { isDarkMode, toggleDarkMode } = useDarkMode()
+     const { token } = useAppSelector((state) => state.auth)
+     const dispatch = useAppDispatch()
+
+     const handleOpenModal = () => {
+          if (token) {
+               dispatch(setProfileActive(true))
+          } else {
+               dispatch(setIsAuthModalOpen(true))
+          }
+     }
 
      useEffect(() => {
           const handleHideHamburger = () => {
@@ -32,7 +40,7 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
      return (
           <nav className="absolute inset-x-0 -right-5 flex items-center justify-between 
           px-5 md:px-14 xl:px-20 h-28">
-               <NavItems modalOnClick={() => modalOnClick('login')} isActive={hamburgerActive} />
+               <NavItems modalOnClick={handleOpenModal} isActive={hamburgerActive} />
                <div className="flex items-center gap-x-7 z-20 relative">
                     <div className="hidden lg:block">
                          <NavButton
@@ -54,7 +62,7 @@ const Navbar = ({ modalOnClick }: NavbarProps) => {
                     <HamburgerMenu
                          isActive={hamburgerActive}
                          handleActive={() => setHamburgerActive(!hamburgerActive)} />
-                    <NavIcon icon={assetItems.Profile} onClick={() => modalOnClick('login')} />
+                    <NavIcon icon={assetItems.Profile} onClick={handleOpenModal} />
                </div>
           </nav>
      )

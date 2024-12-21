@@ -2,14 +2,16 @@ type ButtonActionInProfileProps = {
      text: string
      onClick: () => void
      className?: string
+     disabled?: boolean
 }
 
 const ButtonActionInProfile: React.FC<ButtonActionInProfileProps> = ({
      onClick,
      text,
+     disabled = false,
      className }) => {
      return (
-          <button onClick={onClick} type='button'
+          <button onClick={onClick} type='button' disabled={disabled}
                className={`border rounded-full w-32 py-[10px] font-semibold text-sm ${className}
                     transition-all duration-300
                ${text === 'Log Out'

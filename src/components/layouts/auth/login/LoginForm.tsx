@@ -8,6 +8,10 @@ import ForgotPasswordBtn from "../../../elements/buttons/ForgotPaswordBtn.tsx";
 import { loginFormSchema, LoginFormSchema } from "../../../../context/AuthContext.tsx";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { loginAuth } from "../../../../services/AuthService.ts";
+import { useAppDispatch } from "../../../../redux/hook.ts";
+import { login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
 
 interface LoginFormProps {
      showPassword: boolean;
@@ -22,14 +26,31 @@ const LoginForm: React.FC<LoginFormProps> = ({
      onProfile,
      onForgotPassword
 }) => {
+     const dispatch = useAppDispatch()
      const {
           register,
           handleSubmit,
           formState: { errors }
      } = useForm<LoginFormSchema>({ resolver: zodResolver(loginFormSchema) })
 
+     const loginMutation = useMutation({
+          mutationFn: loginAuth,
+          onSuccess: (data) => {
+               dispatch(login({
+                    token: data.jwt,
+                    userId: data.user.id
+               }))
+               dispatch(setIsAuthModalOpen(false))
+               dispatch(setProfileActive(true))
+          },
+          onError: (error) => {
+               console.log('Login error:', error)
+               alert('Login error')
+          }
+     })
+
      const onSubmit = (data: LoginFormSchema) => {
-          console.log('Login data:', data);
+          loginMutation.mutate(data)
           onProfile()
      }
 
@@ -41,8 +62,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
                               icon={FaUser}
                               type="email"
                               placeholder="Your Email"
-                              error={errors.email}
-                              {...register('email')}
+                              error={errors.identifier}
+                              {...register('identifier')}
                          />
                          <AuthInput
                               icon={IoIosLock}

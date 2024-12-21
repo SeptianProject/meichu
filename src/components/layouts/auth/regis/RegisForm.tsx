@@ -5,10 +5,11 @@ import { FaUser } from "react-icons/fa";
 import { IoIosLock } from "react-icons/io";
 import React from "react";
 import RegisTextDesc from "./RegisTextDesc";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { registerFormSchema, RegisterFormSchema } from "../../../../context/AuthContext";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useMutation } from "@tanstack/react-query";
+import { registerAuth } from "../../../../services/AuthService";
 
 interface RegisFormProps {
      showPassword: boolean;
@@ -31,8 +32,19 @@ const RegisForm: React.FC<RegisFormProps> = ({
           formState: { errors }
      } = useForm<RegisterFormSchema>({ resolver: zodResolver(registerFormSchema) })
 
-     const onSubmit = (data: RegisterFormSchema) => {
-          console.log('Register data:', data);
+     const registerMutation = useMutation({
+          mutationFn: registerAuth,
+          onSuccess: (data) => {
+               localStorage.setItem('authToken', data.jwt)
+          },
+          onError: (error) => {
+               console.log('Register error:', error)
+               alert('Register error')
+          }
+     })
+
+     const onSubmit: SubmitHandler<RegisterFormSchema> = (data) => {
+          registerMutation.mutate(data)
           onLogin()
      }
 
@@ -58,12 +70,12 @@ const RegisForm: React.FC<RegisFormProps> = ({
                     />
                     <AuthInput
                          icon={IoIosLock}
-                         type="password"
-                         placeholder="Confirm Password"
+                         type="text"
+                         placeholder="Enter Username"
                          showPassword={showConfirmPass}
                          onTogglePassword={handleToggleConfirmPass}
-                         error={errors.confirmPassword}
-                         {...register('confirmPassword')}
+                         error={errors.username}
+                         {...register('username')}
                     />
                     <RegisTextDesc />
                </div>

@@ -8,6 +8,8 @@ import 'swiper/swiper-bundle.css'
 import HeadProfile from '../../fragments/profile/HeadProfile'
 import ProfileContent from './ProfileContent'
 import ProfileDiscover from './ProfileDiscover'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { getUser } from '../../../services/AuthService'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -22,6 +24,14 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
    const [isTapDiscover, setIsTapDiscover] = React.useState(false)
    const [maxHeight, setMaxHeight] = React.useState(0)
    const { screenSize } = useResize()
+   const queryClient = useQueryClient()
+   const { data: userData, error, isLoading } = useQuery({
+      queryKey: ['user'],
+      queryFn: getUser,
+      staleTime: 0,
+      cacheTime: 0,
+   })
+
    const isMobile = screenSize === 'mobile'
 
    const listCardFavored = React.useMemo(() =>
@@ -33,6 +43,12 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
       Array(6).fill(null).map(() => <CardEvent type='profile' />),
       []
    )
+
+   React.useEffect(() => {
+      if (profileOpen) {
+         queryClient.invalidateQueries({ queryKey: ['user'] })
+      }
+   }, [profileOpen, queryClient])
 
    React.useEffect(() => {
       const updateMaxHeight = () => {
@@ -82,6 +98,9 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
       )
    )
 
+   if (error) return null
+   if (isLoading) return null
+
    return (
       <>
          <ModalOverlay isModalClose={profileClose} isModalOpen={profileOpen} />
@@ -99,6 +118,11 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
                   <ProfileContent
                      isTapDiscover={isTapDiscover}
                      handleTapDiscover={handleTapDiscover}
+                     emailValue={userData?.email}
+                     dateValue={userData?.createdAt.split('T')[0]}
+                     username={userData?.username}
+                     telpNumber={userData?.telpNumber}
+                     profilePicture={userData?.profilePicture}
                   />
                   <ProfileDiscover
                      isFavored={isFavored}

@@ -2,7 +2,8 @@ import React from 'react'
 import LoginLayout from './login/LoginLayout'
 import RegisterLayout from './regis/RegisLayout'
 import ForgotPasswordLayout from './ForgotPassword'
-import { useAuthModal } from '../../../hooks/useAuthModal'
+import { useAppDispatch, useAppSelector } from '../../../redux/hook'
+import { setActiveModal, setIsAnimating } from '../../../redux/slices/authSlice'
 
 interface AuthModalContainerProps {
      isOpen: boolean
@@ -15,9 +16,18 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
      onClose,
      onProfile
 }) => {
+     const dispatch = useAppDispatch()
+     const { activeModal, isAnimating } = useAppSelector((state) => state.auth)
      const [showPassword, setShowPassword] = React.useState(false)
      const [showConfirmPass, setShowConfirmPass] = React.useState(false)
-     const { activeModal, isAnimating, handleSwitchModal } = useAuthModal(isOpen)
+
+     const handleSwitchModal = (modalType: 'login' | 'register' | 'forgot-password') => {
+          dispatch(setIsAnimating(true))
+          dispatch(setActiveModal(modalType))
+          setTimeout(() => {
+               dispatch(setIsAnimating(false))
+          }, 200);
+     }
 
      const handleTogglePassword = () => {
           setShowPassword(!showPassword)
@@ -26,6 +36,22 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
      const handleToggleConfirmPass = () => {
           setShowConfirmPass(!showConfirmPass)
      }
+
+     React.useEffect(() => {
+          if (isOpen) {
+               document.body.style.overflow = 'hidden'
+               document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`
+          } else {
+               const resetTimer = setTimeout(() => {
+                    document.body.style.overflow = ''
+                    document.body.style.paddingRight = ''
+                    dispatch(setActiveModal('login'))
+               }, 200);
+               return () => {
+                    clearTimeout(resetTimer)
+               }
+          }
+     }, [isOpen, dispatch])
 
      return (
           <>

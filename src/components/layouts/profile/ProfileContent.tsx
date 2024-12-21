@@ -1,44 +1,136 @@
 import React from "react";
-import { abstrakImages, assetItems } from "../../../assets/AnotherAssets";
-import TextTitleValue from "../../fragments/profile/TextTitleValue";
 import ButtonActionInProfile from "../../fragments/profile/ButtonActionInProfile";
+import { useAppDispatch } from "../../../redux/hook";
+import { logout, setProfileActive } from "../../../redux/slices/authSlice";
+import ProfileAvatar from "./ProfileAvatar";
+import TextInputProfile from "../../fragments/profile/TextInputProfile";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateUserProfile } from "../../../services/AuthService";
 
 interface ProfileContentProps {
      isTapDiscover: boolean
      handleTapDiscover: () => void
+     emailValue?: string
+     dateValue?: string
+     username?: string
+     telpNumber?: string
+     profilePicture?: string
 }
 
 const ProfileContent: React.FC<ProfileContentProps> = ({
      isTapDiscover,
-     handleTapDiscover
+     handleTapDiscover,
+     emailValue,
+     dateValue,
+     username,
+     telpNumber,
+     profilePicture
 }) => {
+     const dispatch = useAppDispatch()
+     const queryClient = useQueryClient()
+     const [isEditing, setIsEditing] = React.useState(false)
+     const [editedValues, setEditedValues] = React.useState({
+          username: username || '',
+          profilePicture: profilePicture || '',
+          telpNumber: telpNumber || '',
+     })
+
+     const updateProfileMutation = useMutation({
+          mutationFn: () => updateUserProfile(
+               editedValues.username,
+               editedValues.profilePicture,
+               editedValues.telpNumber
+          ),
+          onSuccess: (data) => {
+               console.log('Update Profile Success: ', data)
+               queryClient.invalidateQueries({ queryKey: ['user'] })
+               setIsEditing(false)
+          },
+          onError: (error) => {
+               console.log('Update Profile Error: ', error)
+               alert('Update Profile Error')
+          }
+     })
+
+     const handleEdit = () => {
+          if (isEditing) {
+               updateProfileMutation.mutate()
+          } else {
+               setIsEditing(true)
+          }
+     }
+
+     const handleCancel = () => {
+          setIsEditing(false)
+     }
+
+     const handleLogout = () => {
+          dispatch(logout())
+          dispatch(setProfileActive(false))
+          queryClient.clear()
+     }
+
      return (
           <div className={`w-full space-y-5 lg:flex flex-col items-start 
                border-light/70 lg:gap-x-5 lg:flex-row lg:items-start lg:border-b 
                lg:pt-0 lg:pb-5 ${isTapDiscover ? 'hidden' : 'block'}`}>
-               <div className='size-40 lg:w-3/5 lg:h-[20rem] relative'>
-                    <img
-                         src={abstrakImages[1]}
-                         alt="profile-picture"
-                         className='rounded-xl object-cover object-center size-full' />
-                    <button
-                         type="button"
-                         className='bg-light size-8 p-1 rounded-md absolute bottom-2 right-2
-                         group transition-all duration-300'>
-                         <img src={assetItems.EditIcon}
-                              alt="edit-icon"
-                              className='size-fit group-hover:scale-90' />
-                    </button>
-               </div>
+               <ProfileAvatar
+                    currentImageUrl={profilePicture}
+                    onImageUpload={(imageUrl) => {
+                         setEditedValues(prev => ({
+                              ...prev,
+                              profilePicture: imageUrl
+                         }))
+                    }}
+               />
                <div className='size-full flex flex-col gap-y-5'>
                     <div className='space-y-3 lg:space-y-5'>
-                         <TextTitleValue title='Your Email' value='septianz@gmail.com' />
-                         <TextTitleValue title='Date Joined' value='21-January-2020' />
-                         <TextTitleValue title='Phone Number' value='083848789028' />
+                         {isEditing ? (
+                              <>
+                                   <TextInputProfile
+                                        title="Username"
+                                        value={editedValues.username}
+                                        isEditing={true}
+                                        onChange={(value) => setEditedValues(prev => ({ ...prev, username: value }))}
+                                   />
+                                   <TextInputProfile
+                                        title='Profile Picture'
+                                        value={editedValues.profilePicture}
+                                        isEditing={isEditing}
+                                        onChange={(value) => setEditedValues(prev => ({ ...prev, profilePicture: value }))}
+                                   />
+                              </>
+                         ) : null}
+                         <TextInputProfile
+                              title='Your Email'
+                              value={emailValue ?? '-'} />
+                         <TextInputProfile
+                              title='Date Joined'
+                              value={dateValue ?? '-'} />
+                         <TextInputProfile
+                              title='Phone Number'
+                              value={editedValues.telpNumber}
+                              isEditing={isEditing}
+                              onChange={(value) => setEditedValues(prev => ({ ...prev, telpNumber: value }))}
+                         />
                     </div>
                     <div className='w-full flex items-center gap-x-5'>
-                         <ButtonActionInProfile text='Edit Profile' onClick={() => { }} />
-                         <ButtonActionInProfile text='Log Out' onClick={() => { }} />
+                         <ButtonActionInProfile
+                              text={isEditing ? 'Save Changes' : 'Edit Profile'}
+                              onClick={handleEdit}
+                              disabled={updateProfileMutation.isLoading}
+                         />
+                         {isEditing ? (
+                              <ButtonActionInProfile
+                                   text='Cancel'
+                                   onClick={handleCancel}
+                              />
+                         ) : (
+                              <ButtonActionInProfile
+                                   text='Log Out'
+                                   onClick={handleLogout}
+                              />
+                         )}
                     </div>
                     <ButtonActionInProfile
                          text='Discover More About Me!'
