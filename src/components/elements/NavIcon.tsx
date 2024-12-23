@@ -1,3 +1,4 @@
+import React from "react"
 import { IconType } from "react-icons"
 
 type NavIconProps = {
@@ -6,8 +7,11 @@ type NavIconProps = {
      className?: string
 }
 
-const NavIcon = ({ onClick, icon: Icon, className }: NavIconProps) => {
-
+const NavIcon: React.FC<NavIconProps> = React.memo(({
+     onClick,
+     icon: Icon,
+     className
+}) => {
      return (
           <button className="w-fit rounded-full hover:scale-105 transition-all duration-300" onClick={onClick}>
                {typeof Icon === 'string'
@@ -16,6 +20,6 @@ const NavIcon = ({ onClick, icon: Icon, className }: NavIconProps) => {
                }
           </button>
      )
-}
+})
 
 export default NavIcon

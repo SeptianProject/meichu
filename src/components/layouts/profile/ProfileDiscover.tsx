@@ -12,14 +12,14 @@ interface ProfileDiscoverProps {
      handleBackToProfile: () => void
 }
 
-const ProfileDiscover: React.FC<ProfileDiscoverProps> = ({
+const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
+     handleBackToProfile,
+     handleSwitchDiscover,
      isFavored,
      isTapDiscover,
-     handleSwitchDiscover,
-     renderCardContent,
      listCardFavored,
      listCardRequest,
-     handleBackToProfile
+     renderCardContent,
 }) => {
      return (
           <div className='w-full'>
@@ -37,7 +37,6 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = ({
                                    onClick={handleSwitchDiscover}
                                    onFavored={!isFavored} />
                          </div>
-                         {/* Card Content */}
                          <div className='flex items-center gap-x-3'>
                               {isFavored
                                    ? renderCardContent(listCardFavored)
@@ -52,6 +51,6 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = ({
                </div>
           </div>
      );
-}
+})
 
 export default ProfileDiscover;

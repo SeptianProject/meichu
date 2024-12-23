@@ -7,7 +7,7 @@ interface ModalPublishCustomProductProps {
      isModalClose: () => void;
 }
 
-const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = ({
+const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = React.memo(({
      isModalOpen,
      isModalClose
 }) => {
@@ -41,6 +41,6 @@ const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = ({
                </div>
           </>
      );
-}
+})
 
 export default ModalPublishCustomProduct;

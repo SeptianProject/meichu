@@ -13,7 +13,7 @@ interface MainBundleCarouselProps {
      swiperRef: React.MutableRefObject<SwiperType | null>
 }
 
-const MainBundleCarousel: React.FC<MainBundleCarouselProps> = ({
+const MainBundleCarousel: React.FC<MainBundleCarouselProps> = React.memo(({
      swiperRef,
      bundleProducts,
      setActiveIndex,
@@ -50,6 +50,6 @@ const MainBundleCarousel: React.FC<MainBundleCarouselProps> = ({
                </Swiper>
           </div>
      )
-}
+})
 
 export default MainBundleCarousel

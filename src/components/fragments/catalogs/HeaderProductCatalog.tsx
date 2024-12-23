@@ -1,18 +1,20 @@
 import React from 'react'
 import { FaHeart } from 'react-icons/fa'
 import { assetItems } from '../../../assets/AnotherAssets'
+import { useAppSelector } from '../../../redux/hook'
+import { RootState } from '../../../redux/store'
 
 type HeaderProductCatalogProps = {
      type: 'catalog' | 'profile'
 }
 
-const HeaderProductCatalog: React.FC<HeaderProductCatalogProps> = ({ type }) => {
+const HeaderProductCatalog: React.FC<HeaderProductCatalogProps> = React.memo(({ type }) => {
      const [isLiked, setIsLiked] = React.useState(false)
+     const { isAuthModalOpen } = useAppSelector((state: RootState) => state.auth)
 
      const handleOnLike = () => {
-          setIsLiked(!isLiked)
-          if (!isLiked) {
-               alert('Login boy🚀🚀')
+          if (isAuthModalOpen) {
+               setIsLiked(!isLiked)
           }
      }
 
@@ -49,6 +51,6 @@ const HeaderProductCatalog: React.FC<HeaderProductCatalogProps> = ({ type }) => 
                </div>
           </>
      )
-}
+})
 
 export default HeaderProductCatalog

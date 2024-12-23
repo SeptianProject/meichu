@@ -6,7 +6,7 @@ interface ArrowCardCarouselProps {
      icon: IconType;
 }
 
-const ArrowCardCarousel: React.FC<ArrowCardCarouselProps> = ({
+const ArrowCardCarousel: React.FC<ArrowCardCarouselProps> = React.memo(({
      onClick,
      icon: Icon
 }) => {
@@ -17,6 +17,6 @@ const ArrowCardCarousel: React.FC<ArrowCardCarouselProps> = ({
                <Icon className='size-7 text-light dark:text-grayPrimary' />
           </button>
      );
-}
+})
 
 export default ArrowCardCarousel;

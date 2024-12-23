@@ -1,3 +1,4 @@
+import React from "react";
 import { CardStaggerAnimation } from "../animations/StaggerAnimation";
 
 type BadgeSosmedItem = {
@@ -8,7 +9,10 @@ type BadgeSosmedItem = {
      }[]
 }
 
-const ListBadgeSosmed = ({ className, badgeItems }: BadgeSosmedItem) => {
+const ListBadgeSosmed: React.FC<BadgeSosmedItem> = React.memo(({
+     className,
+     badgeItems
+}) => {
      return (
           <>
                {badgeItems.map((item, index) => (
@@ -25,6 +29,6 @@ const ListBadgeSosmed = ({ className, badgeItems }: BadgeSosmedItem) => {
                ))}
           </>
      )
-}
+})
 
 export default ListBadgeSosmed

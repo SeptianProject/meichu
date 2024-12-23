@@ -11,7 +11,10 @@ interface BundleCarouselLayoutProps {
 }
 
 
-const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = ({ bundleProducts, swiperRef }) => {
+const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
+     bundleProducts,
+     swiperRef
+}) => {
      const [activeIndex, setActiveIndex] = React.useState(0)
 
      return (
@@ -28,6 +31,6 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = ({ bundleProdu
                />
           </div>
      );
-}
+})
 
 export default BundleCarouselLayout;

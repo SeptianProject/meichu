@@ -5,7 +5,7 @@ interface AuthHeadingProps {
      title: string;
 }
 
-const AuthHeading: React.FC<AuthHeadingProps> = ({ title }) => {
+const AuthHeading: React.FC<AuthHeadingProps> = React.memo(({ title }) => {
      return (
           <div className="flex flex-col items-center">
                <div>
@@ -17,6 +17,6 @@ const AuthHeading: React.FC<AuthHeadingProps> = ({ title }) => {
                </h2>
           </div>
      );
-}
+})
 
 export default AuthHeading;

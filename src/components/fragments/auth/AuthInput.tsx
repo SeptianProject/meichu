@@ -15,7 +15,7 @@ interface AuthInputProps {
      error: FieldError | undefined
 }
 
-const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(({
+const AuthInput = React.memo(forwardRef<HTMLInputElement, AuthInputProps>(({
      icon: Icon,
      placeholder,
      type,
@@ -70,6 +70,6 @@ const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(({
           </>
      );
 
-})
+}))
 
 export default AuthInput;

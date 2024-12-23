@@ -13,7 +13,7 @@ interface ImageContent {
      onSelectContent: (content: 'first' | 'second' | 'third') => void;
 }
 
-const MainContentDetail: React.FC<ImageContent> = ({
+const MainContentDetail: React.FC<ImageContent> = React.memo(({
      images,
      content,
      onSelectContent
@@ -38,6 +38,6 @@ const MainContentDetail: React.FC<ImageContent> = ({
                </AnimatePresence>
           </FadeAnimation>
      );
-}
+})
 
 export default MainContentDetail;

@@ -2,16 +2,17 @@ import React from "react"
 import ButtonSelectProduct from "../../fragments/customProduct/ButtonSelectProduct"
 import TitleDesc from "../../fragments/customProduct/TitleDesc"
 import { assetItems } from "../../../assets/AnotherAssets";
-import { useDarkMode } from "../../../hooks/useDarkMode";
+import useUI from "../../../hooks/useUI";
 
 interface CustomTypeProductProps {
      type: 'product' | 'imvu';
 }
 
-const CustomTypeProduct: React.FC<CustomTypeProductProps> = ({ type }) => {
+const CustomTypeProduct: React.FC<CustomTypeProductProps> = React.memo(({ type }) => {
      const [selectedProduct, setSelectedProduct] = React.useState<string | null>(null)
      const buttonRef = React.useRef<HTMLDivElement>(null)
-     const { isDarkMode } = useDarkMode()
+     const { mode } = useUI()
+     const isDarkMode = mode === 'dark'
 
      const handleSelectProduct = (title: string) => {
           setSelectedProduct(title === selectedProduct ? null : title)
@@ -66,6 +67,6 @@ const CustomTypeProduct: React.FC<CustomTypeProductProps> = ({ type }) => {
                </div>
           </div>
      )
-}
+})
 
 export default CustomTypeProduct

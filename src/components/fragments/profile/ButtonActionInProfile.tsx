@@ -1,3 +1,5 @@
+import React from "react"
+
 type ButtonActionInProfileProps = {
      text: string
      onClick: () => void
@@ -5,11 +7,12 @@ type ButtonActionInProfileProps = {
      disabled?: boolean
 }
 
-const ButtonActionInProfile: React.FC<ButtonActionInProfileProps> = ({
+const ButtonActionInProfile: React.FC<ButtonActionInProfileProps> = React.memo(({
      onClick,
      text,
      disabled = false,
-     className }) => {
+     className
+}) => {
      return (
           <button onClick={onClick} type='button' disabled={disabled}
                className={`border rounded-full w-32 py-[10px] font-semibold text-sm ${className}
@@ -20,6 +23,6 @@ const ButtonActionInProfile: React.FC<ButtonActionInProfileProps> = ({
                {text}
           </button>
      )
-}
+})
 
 export default ButtonActionInProfile

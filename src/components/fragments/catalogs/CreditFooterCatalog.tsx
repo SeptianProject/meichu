@@ -4,7 +4,7 @@ type CreditFooterCatalogProps = {
      type: 'catalog' | 'profile'
 }
 
-const CreditFooterCatalog: React.FC<CreditFooterCatalogProps> = ({ type }) => {
+const CreditFooterCatalog: React.FC<CreditFooterCatalogProps> = React.memo(({ type }) => {
      return (
           <div className='flex items-center justify-between'>
                <div className='flex items-center gap-x-2'>
@@ -33,6 +33,6 @@ const CreditFooterCatalog: React.FC<CreditFooterCatalogProps> = ({ type }) => {
                </button>
           </div>
      )
-}
+})
 
 export default CreditFooterCatalog

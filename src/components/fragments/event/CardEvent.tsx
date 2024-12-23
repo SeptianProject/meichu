@@ -8,7 +8,7 @@ interface CardEventProps {
      type: 'event' | 'profile'
 }
 
-const CardEvent: React.FC<CardEventProps> = ({ type }) => {
+const CardEvent: React.FC<CardEventProps> = React.memo(({ type }) => {
      return (
           <div className="w-full h-full border border-[#302F35] rounded-2xl p-4 space-y-4
           dark:border-transparent dark:bg-[#302F35]">
@@ -24,6 +24,6 @@ const CardEvent: React.FC<CardEventProps> = ({ type }) => {
                </div>
           </div>
      )
-}
+})
 
 export default CardEvent

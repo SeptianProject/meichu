@@ -1,6 +1,7 @@
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import BounceAnimation from '../animations/BounceAnimation'
+import React from 'react'
 
 type RouteHistoryProps = {
      prevRoute?: string | boolean
@@ -9,7 +10,12 @@ type RouteHistoryProps = {
      currentText: string
 }
 
-const RouteHistory = ({ currentRoute, currentText, prevRoute, prevText }: RouteHistoryProps) => {
+const RouteHistory: React.FC<RouteHistoryProps> = React.memo(({
+     currentRoute,
+     currentText,
+     prevRoute,
+     prevText
+}) => {
      return (
           <div className="flex items-center pt-32 lg:pt-40">
                <BounceAnimation
@@ -50,6 +56,6 @@ const RouteHistory = ({ currentRoute, currentText, prevRoute, prevText }: RouteH
                </BounceAnimation>
           </div>
      )
-}
+})
 
 export default RouteHistory

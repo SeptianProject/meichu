@@ -23,6 +23,11 @@ export const loginAuth = async (data: Pick<LoginFormSchema, 'identifier' | 'pass
 export const getUser = async () => {
      const token = localStorage.getItem('authToken');
      const id = localStorage.getItem('userId');
+
+     if (!token || !id) {
+          throw new Error("User not authenticated");
+     }
+
      const response = await axios.get(`${apiUrl}/users/${id}`, {
           headers: {
                Authorization: `Bearer ${token}`

@@ -1,3 +1,4 @@
+import React from "react"
 import { IconType } from "react-icons"
 
 type NavButtonProps = {
@@ -7,8 +8,12 @@ type NavButtonProps = {
      onClick?: () => void
 }
 
-const NavButton = ({ text, className, icon: Icon, onClick }: NavButtonProps) => {
-
+const NavButton: React.FC<NavButtonProps> = React.memo(({
+     text,
+     className,
+     icon: Icon,
+     onClick
+}) => {
      return (
           <button onClick={onClick}
                className={`w-32 xl:w-40 py-[6px] bg-transparent border text-[#5E5A5A] font-medium
@@ -23,6 +28,6 @@ const NavButton = ({ text, className, icon: Icon, onClick }: NavButtonProps) => 
                {text}
           </button>
      )
-}
+})
 
 export default NavButton

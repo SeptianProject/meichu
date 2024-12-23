@@ -2,6 +2,7 @@ import AuthHeading from "../../../fragments/auth/AuthHeading";
 import AuthButtonSwitch from "../../../fragments/auth/AuthButtonSwitch";
 import RegisForm from "./RegisForm";
 import AuthLayout from "../AuthLayout";
+import React from "react";
 
 
 interface RegisterLayoutProps {
@@ -15,15 +16,16 @@ interface RegisterLayoutProps {
      handleToggleConfirmPass: () => void;
 }
 
-const RegisterLayout: React.FC<RegisterLayoutProps> = ({
-     isModalClose,
+const RegisterLayout: React.FC<RegisterLayoutProps> = React.memo(({
      isModalOpen,
+     isModalClose,
      isAnimating,
      onSwitchModal,
      showPassword,
      handleTogglePassword,
      showConfirmPass,
-     handleToggleConfirmPass }) => {
+     handleToggleConfirmPass
+}) => {
      return (
           <AuthLayout
                isAnimating={isAnimating}
@@ -43,6 +45,6 @@ const RegisterLayout: React.FC<RegisterLayoutProps> = ({
                     onSwitchModal={onSwitchModal} />
           </AuthLayout>
      );
-}
+})
 
 export default RegisterLayout;

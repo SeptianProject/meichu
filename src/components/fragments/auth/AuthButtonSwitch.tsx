@@ -6,7 +6,11 @@ interface AuthButtonSwitchProps {
      onSwitchModal: () => void;
 }
 
-const AuthButtonSwitch: React.FC<AuthButtonSwitchProps> = ({ text, textBtn, onSwitchModal }) => {
+const AuthButtonSwitch: React.FC<AuthButtonSwitchProps> = React.memo(({
+     text,
+     textBtn,
+     onSwitchModal
+}) => {
      return (
           <div className="flex items-center gap-x-2 justify-center">
                <h4 className="dark:text-light/40 text-xs">{text}</h4>
@@ -16,6 +20,6 @@ const AuthButtonSwitch: React.FC<AuthButtonSwitchProps> = ({ text, textBtn, onSw
                </button>
           </div>
      );
-}
+})
 
 export default AuthButtonSwitch;

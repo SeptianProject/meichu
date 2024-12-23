@@ -4,7 +4,7 @@ interface BtnForgotPasswordProps {
      onClick: () => void;
 }
 
-const BtnForgotPassword: React.FC<BtnForgotPasswordProps> = ({ onClick }) => {
+const BtnForgotPassword: React.FC<BtnForgotPasswordProps> = React.memo(({ onClick }) => {
      return (
           <button
                type="button"
@@ -14,6 +14,6 @@ const BtnForgotPassword: React.FC<BtnForgotPasswordProps> = ({ onClick }) => {
                Forgot Password?
           </button>
      );
-}
+})
 
 export default BtnForgotPassword;

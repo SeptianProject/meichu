@@ -8,7 +8,7 @@ type buttonSwitchDiscoverProps = {
      onFavored: boolean
 }
 
-const ButtonSwitchDiscover: React.FC<buttonSwitchDiscoverProps> = ({
+const ButtonSwitchDiscover: React.FC<buttonSwitchDiscoverProps> = React.memo(({
      onClick,
      text,
      value,
@@ -24,6 +24,6 @@ const ButtonSwitchDiscover: React.FC<buttonSwitchDiscoverProps> = ({
                <span className="">({value})</span>
           </button>
      )
-}
+})
 
 export default ButtonSwitchDiscover

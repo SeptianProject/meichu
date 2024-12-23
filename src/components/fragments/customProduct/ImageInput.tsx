@@ -6,7 +6,7 @@ interface ImageInputProps {
      maxSizeMb?: number;
 }
 
-const ImageInput: React.FC<ImageInputProps> = ({
+const ImageInput: React.FC<ImageInputProps> = React.memo(({
      onFileUpload,
      maxSizeMb = 100
 }) => {
@@ -80,6 +80,6 @@ const ImageInput: React.FC<ImageInputProps> = ({
                </div>
           </div>
      );
-}
+})
 
 export default ImageInput;

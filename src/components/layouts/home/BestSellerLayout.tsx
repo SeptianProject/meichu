@@ -4,18 +4,20 @@ import TextTagline from '../../fragments/home/TextTagline'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
-import { useResize } from '../../../hooks/useResize'
+import useUI from '../../../hooks/useUI'
 
 const BestSellerLayout = () => {
-     const { screenSize } = useResize()
-     const [bestSeller] = React.useState([
-          <CardBestSeller />,
-          <CardBestSeller />,
-          <CardBestSeller />,
-          <CardBestSeller />,
-          <CardBestSeller />,
-          <CardBestSeller />
-     ])
+     const { screenSize } = useUI()
+     const [bestSeller] = React.useState(
+          React.useMemo(() => [
+               <CardBestSeller />,
+               <CardBestSeller />,
+               <CardBestSeller />,
+               <CardBestSeller />,
+               <CardBestSeller />,
+               <CardBestSeller />
+          ], [])
+     )
 
 
      return (

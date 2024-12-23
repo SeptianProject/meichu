@@ -5,7 +5,7 @@ type BtnBorderGradientProps = {
      onClick: () => void
 }
 
-const BtnBorderGradient: React.FC<BtnBorderGradientProps> = ({ onClick }) => {
+const BtnBorderGradient: React.FC<BtnBorderGradientProps> = React.memo(({ onClick }) => {
      return (
           <BounceAnimation
                delayVal={0.5}
@@ -22,6 +22,6 @@ const BtnBorderGradient: React.FC<BtnBorderGradientProps> = ({ onClick }) => {
                </div>
           </BounceAnimation>
      )
-}
+})
 
 export default BtnBorderGradient

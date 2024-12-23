@@ -1,11 +1,11 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import BounceAnimation from "../../animations/BounceAnimation";
 
 interface TextInputProps {
      name: 'product' | 'person'
 }
 
-const TextInput: FC<TextInputProps> = ({ name }) => {
+const TextInput: FC<TextInputProps> = React.memo(({ name }) => {
      return (
           <div className="space-y-8">
                <BounceAnimation
@@ -25,6 +25,6 @@ const TextInput: FC<TextInputProps> = ({ name }) => {
                     dark:bg-[#191820] transition-all duration-300 outline-none border-none focus:ring-[2.5px]" />
           </div>
      );
-}
+})
 
 export default TextInput;

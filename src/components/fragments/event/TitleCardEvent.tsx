@@ -4,7 +4,7 @@ type TitleCardEventProps = {
      type: 'event' | 'profile'
 }
 
-const TitleCardEvent: React.FC<TitleCardEventProps> = ({ type }) => {
+const TitleCardEvent: React.FC<TitleCardEventProps> = React.memo(({ type }) => {
      return (
           <div className="flex items-center justify-between w-full">
                <h1 className="text-[12px] font-semibold dark:text-light
@@ -19,6 +19,6 @@ const TitleCardEvent: React.FC<TitleCardEventProps> = ({ type }) => {
                </button>
           </div>
      )
-}
+})
 
 export default TitleCardEvent

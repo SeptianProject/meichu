@@ -2,6 +2,7 @@ import AuthHeading from "../../../fragments/auth/AuthHeading.tsx";
 import LoginForm from "./LoginForm.tsx";
 import AuthLayout from "../AuthLayout.tsx";
 import AuthButtonSwitch from "../../../fragments/auth/AuthButtonSwitch.tsx";
+import React from "react";
 
 interface LoginLayoutProps {
      isModalOpen: boolean;
@@ -14,17 +15,16 @@ interface LoginLayoutProps {
      onProfile: () => void;
 }
 
-const LoginLayout = ({
+const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
      isModalOpen,
      isModalClose,
      isAnimating,
-     onSwitchModal,
+     onProfile,
      showPassword,
      handleTogglePassword,
      onForgotPassword,
-     onProfile
-}: LoginLayoutProps) => {
-
+     onSwitchModal
+}) => {
      return (
           <AuthLayout
                isAnimating={isAnimating}
@@ -43,6 +43,6 @@ const LoginLayout = ({
                     onSwitchModal={onSwitchModal} />
           </AuthLayout>
      )
-}
+})
 
 export default LoginLayout

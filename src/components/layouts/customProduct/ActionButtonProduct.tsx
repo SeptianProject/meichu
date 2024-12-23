@@ -7,7 +7,7 @@ type ActionButtonProductProps = {
      onPublish: () => void;
 }
 
-const ActionButtonProduct: React.FC<ActionButtonProductProps> = ({ onPublish }) => {
+const ActionButtonProduct: React.FC<ActionButtonProductProps> = React.memo(({ onPublish }) => {
 
      return (
           <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
@@ -26,6 +26,6 @@ const ActionButtonProduct: React.FC<ActionButtonProductProps> = ({ onPublish }) 
                </BounceAnimation>
           </div>
      )
-}
+})
 
 export default ActionButtonProduct

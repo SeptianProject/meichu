@@ -11,7 +11,7 @@ interface AuthModalContainerProps {
      onProfile: () => void
 }
 
-const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
+const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
      isOpen,
      onClose,
      onProfile
@@ -84,6 +84,6 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
                }
           </>
      )
-}
+})
 
 export default AuthModalContainer

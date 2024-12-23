@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { BsInstagram, BsTiktok, BsTwitterX, BsYoutube } from "react-icons/bs"
 import SingleBadgeSosmed from "../../elements/SingleBadgeSosmed";
 
@@ -9,7 +9,7 @@ interface CardGradientBAProps {
      desc: string;
 }
 
-const CardGradientBA: FC<CardGradientBAProps> = ({ image, title, desc }) => {
+const CardGradientBA: FC<CardGradientBAProps> = React.memo(({ image, title, desc }) => {
      return (
           <div
                className="h-[30rem] bg-center bg-cover rounded-2xl relative overflow-hidden
@@ -34,6 +34,6 @@ const CardGradientBA: FC<CardGradientBAProps> = ({ image, title, desc }) => {
                to-transparent via-60% from-[5%]"/>
           </div>
      );
-}
+})
 
 export default CardGradientBA;

@@ -2,7 +2,6 @@ import TitleDesc from '../../fragments/customProduct/TitleDesc'
 import ImageInput from '../../fragments/customProduct/ImageInput'
 
 const UploadImageProduct = () => {
-
      return (
           <div className="space-y-8">
                <TitleDesc

@@ -1,3 +1,4 @@
+import React from 'react'
 import HamburgerItem from '../../elements/HamburgerItem'
 
 type HamburgerMenuProps = {
@@ -5,8 +6,10 @@ type HamburgerMenuProps = {
      isActive: boolean
 }
 
-const HamburgerMenu = ({ handleActive, isActive }: HamburgerMenuProps) => {
-
+const HamburgerMenu: React.FC<HamburgerMenuProps> = React.memo(({
+     handleActive,
+     isActive
+}) => {
      return (
           <button onClick={handleActive} className={`lg:hidden w-6
           ${isActive ? 'space-y-0' : 'space-y-1'}`}>
@@ -18,6 +21,6 @@ const HamburgerMenu = ({ handleActive, isActive }: HamburgerMenuProps) => {
                     className={`${isActive ? 'rotate-45' : ''}`} />
           </button>
      )
-}
+})
 
 export default HamburgerMenu

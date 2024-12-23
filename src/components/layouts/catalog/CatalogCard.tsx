@@ -8,7 +8,7 @@ type CatalogCardProps = {
      type: 'catalog' | 'profile'
 }
 
-const CatalogCard: React.FC<CatalogCardProps> = ({ type }) => {
+const CatalogCard: React.FC<CatalogCardProps> = React.memo(({ type }) => {
      const navigate = useNavigate()
 
      return (
@@ -24,6 +24,6 @@ const CatalogCard: React.FC<CatalogCardProps> = ({ type }) => {
                <CreditFooterCatalog type={type} />
           </div>
      )
-}
+})
 
 export default CatalogCard

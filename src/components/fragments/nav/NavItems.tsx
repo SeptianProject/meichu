@@ -2,13 +2,14 @@
 import { Link, useLocation } from 'react-router-dom'
 import { assetItems } from '../../../assets/AnotherAssets'
 import { navItems } from '../../../assets/navigateAssets'
+import React from 'react'
 
 type NavItemsProps = {
      isActive: boolean
      modalOnClick: () => void
 }
 
-const NavItems = ({ isActive, modalOnClick }: NavItemsProps) => {
+const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }) => {
      const location = useLocation()
 
      return (
@@ -55,6 +56,6 @@ const NavItems = ({ isActive, modalOnClick }: NavItemsProps) => {
                </div>
           </div>
      )
-}
+})
 
 export default NavItems

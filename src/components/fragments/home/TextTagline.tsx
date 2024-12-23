@@ -1,3 +1,4 @@
+import React from "react"
 import BounceAnimation from "../../animations/BounceAnimation"
 
 type TextTaglineProps = {
@@ -5,7 +6,7 @@ type TextTaglineProps = {
      className?: string
 }
 
-const TextTagline = ({ text, className }: TextTaglineProps) => {
+const TextTagline: React.FC<TextTaglineProps> = React.memo(({ text, className }) => {
      return (
           <div className={`flex flex-col gap-y-2 w-fit`}>
                <BounceAnimation
@@ -21,6 +22,6 @@ const TextTagline = ({ text, className }: TextTaglineProps) => {
                </BounceAnimation>
           </div>
      )
-}
+})
 
 export default TextTagline

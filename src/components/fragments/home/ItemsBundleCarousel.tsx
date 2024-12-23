@@ -10,7 +10,7 @@ interface ItemsBundleCarouselProps {
      activeIndex: number
 }
 
-const ItemsBundleCarousel: React.FC<ItemsBundleCarouselProps> = ({
+const ItemsBundleCarousel: React.FC<ItemsBundleCarouselProps> = React.memo(({
      activeIndex,
      bundleProducts,
 }) => {
@@ -43,6 +43,6 @@ const ItemsBundleCarousel: React.FC<ItemsBundleCarouselProps> = ({
                </div>
           </ContainerStaggerAnimation>
      );
-}
+})
 
 export default ItemsBundleCarousel;

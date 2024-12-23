@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface RoundedButtonProps {
@@ -7,7 +7,7 @@ interface RoundedButtonProps {
      className?: string;
 }
 
-const RoundedButton: FC<RoundedButtonProps> = ({
+const RoundedButton: FC<RoundedButtonProps> = React.memo(({
      onClick,
      title,
      className,
@@ -27,5 +27,5 @@ const RoundedButton: FC<RoundedButtonProps> = ({
           </button >
      );
 }
-
+)
 export default RoundedButton;

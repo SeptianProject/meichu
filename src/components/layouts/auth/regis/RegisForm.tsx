@@ -19,7 +19,7 @@ interface RegisFormProps {
      onLogin: () => void;
 }
 
-const RegisForm: React.FC<RegisFormProps> = ({
+const RegisForm: React.FC<RegisFormProps> = React.memo(({
      showPassword,
      handleTogglePassword,
      showConfirmPass,
@@ -85,6 +85,6 @@ const RegisForm: React.FC<RegisFormProps> = ({
                </div>
           </form>
      );
-}
+})
 
 export default RegisForm;

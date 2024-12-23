@@ -10,7 +10,7 @@ interface AuthLayoutProps {
      className?: string;
 }
 
-const AuthLayout: React.FC<AuthLayoutProps> = ({
+const AuthLayout: React.FC<AuthLayoutProps> = React.memo(({
      children,
      isModalOpen,
      isModalClose,
@@ -34,6 +34,6 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
                </section>
           </>
      );
-}
+})
 
 export default AuthLayout;

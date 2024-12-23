@@ -5,7 +5,7 @@ interface ButtonToCustomProductProps {
      onClick: () => void
 }
 
-const ButtonToCustomProduct: React.FC<ButtonToCustomProductProps> = ({
+const ButtonToCustomProduct: React.FC<ButtonToCustomProductProps> = React.memo(({
      text,
      onClick
 }) => {
@@ -20,6 +20,6 @@ const ButtonToCustomProduct: React.FC<ButtonToCustomProductProps> = ({
                {text}
           </button>
      );
-}
+})
 
 export default ButtonToCustomProduct;

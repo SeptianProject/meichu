@@ -6,7 +6,7 @@ interface AuthButtonProps {
      type: 'submit' | 'button' | 'reset';
 }
 
-const AuthButton: React.FC<AuthButtonProps> = ({
+const AuthButton: React.FC<AuthButtonProps> = React.memo(({
      text, onClick, type = "button"
 }) => {
      return (
@@ -22,6 +22,6 @@ const AuthButton: React.FC<AuthButtonProps> = ({
                {text}
           </button>
      );
-}
+})
 
 export default AuthButton;

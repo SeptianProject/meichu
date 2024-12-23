@@ -3,27 +3,27 @@ import ModalOverlay from '../../fragments/ModalOverlay'
 import CardEvent from '../../fragments/event/CardEvent'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import CatalogCard from '../catalog/CatalogCard'
-import { useResize } from '../../../hooks/useResize'
 import 'swiper/swiper-bundle.css'
 import HeadProfile from '../../fragments/profile/HeadProfile'
 import ProfileContent from './ProfileContent'
 import ProfileDiscover from './ProfileDiscover'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '../../../services/AuthService'
+import useUI from '../../../hooks/useUI'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
    profileClose: () => void
 }
 
-const ProfileLayout: React.FC<ProfileLayoutProps> = ({
+const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    profileOpen,
    profileClose
 }) => {
    const [isFavored, setIsFavored] = React.useState(true)
    const [isTapDiscover, setIsTapDiscover] = React.useState(false)
    const [maxHeight, setMaxHeight] = React.useState(0)
-   const { screenSize } = useResize()
+   const { screenSize } = useUI()
    const queryClient = useQueryClient()
    const { data: userData, error, isLoading } = useQuery({
       queryKey: ['user'],
@@ -35,15 +35,9 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
 
    const isMobile = screenSize === 'mobile'
 
-   const listCardFavored = React.useMemo(() =>
-      Array(6).fill(null).map(() => <CatalogCard type='profile' />),
-      []
-   )
+   const listCardFavored = React.useMemo(() => Array(6).fill(null).map(() => <CatalogCard type='profile' />), [])
 
-   const listCardRequest = React.useMemo(() =>
-      Array(6).fill(null).map(() => <CardEvent type='profile' />),
-      []
-   )
+   const listCardRequest = React.useMemo(() => Array(6).fill(null).map(() => <CardEvent type='profile' />), [])
 
    React.useEffect(() => {
       if (profileOpen) {
@@ -139,7 +133,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
          </div >
       </>
    )
-}
+})
 
 export default ProfileLayout
 

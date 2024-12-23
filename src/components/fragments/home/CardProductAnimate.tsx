@@ -1,21 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useRef } from "react";
+import React from "react";
 import { motion } from 'framer-motion';
 import { abstrakImages } from "../../../assets/AnotherAssets";
 
-interface CardProductAnimateProps {
-     readonly customProductItems?: string[];
-}
-
-const CardProductAnimate: React.FC<CardProductAnimateProps> = () => {
-     const containerRefs = Array(4).fill(null).map(() => useRef(null));
+const CardProductAnimate = () => {
+     const containerRefs = Array(4).fill(null).map(() => React.useRef(null));
 
      const createColumnProducts = () => {
           const items = [...Array(8)].flatMap(() => abstrakImages)
           return [...items, ...items]
      };
 
-     const columns = [...Array(4)].map(() => createColumnProducts())
+     const columns = React.useMemo(() => [...Array(4)].map(() => createColumnProducts()), [])
 
 
      const scrollAnimate = (duration: number, direction: number = 1) => ({

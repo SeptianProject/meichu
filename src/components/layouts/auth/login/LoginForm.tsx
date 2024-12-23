@@ -20,7 +20,7 @@ interface LoginFormProps {
      onForgotPassword: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({
+const LoginForm: React.FC<LoginFormProps> = React.memo(({
      showPassword,
      handleTogglePassword,
      onProfile,
@@ -83,6 +83,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
                <AuthBadgeButton />
           </form>
      );
-}
+})
 
 export default LoginForm;

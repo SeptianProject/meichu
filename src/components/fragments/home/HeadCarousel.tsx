@@ -9,13 +9,13 @@ import { mainProductBundle } from '../../../assets/meichuBundle';
 import 'swiper/swiper-bundle.css';
 import { createHeadCarouselSwiperConfig } from '../../../configs/createHeadCarouselSwiperConfig';
 
-const HeadCarousel: React.FC = () => {
+const HeadCarousel = () => {
      const swiperRef = React.useRef<SwiperType>();
      const headSwiperCarouselConfig = createHeadCarouselSwiperConfig(swiperRef);
-     const duplicatedBundle = [
+     const duplicatedBundle = React.useMemo(() => [
           ...mainProductBundle.slice(0, 5),
           ...mainProductBundle.slice(0, 5),
-     ];
+     ], [])
 
      const containerVariants: AnimationProps["variants"] = {
           hidden: { opacity: 0 },

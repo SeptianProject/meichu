@@ -1,3 +1,5 @@
+import React from "react"
+
 type TextInputProfileProps = {
      title: string
      value: string
@@ -5,7 +7,7 @@ type TextInputProfileProps = {
      onChange?: (e: string) => void
 }
 
-const TextInputProfile: React.FC<TextInputProfileProps> = ({
+const TextInputProfile: React.FC<TextInputProfileProps> = React.memo(({
      title,
      value,
      isEditing = false,
@@ -40,6 +42,6 @@ const TextInputProfile: React.FC<TextInputProfileProps> = ({
                </p>
           </div>
      )
-}
+})
 
 export default TextInputProfile

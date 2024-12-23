@@ -4,18 +4,18 @@ import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animation
 import { EffectCards, Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Swiper as SwiperType } from 'swiper/types';
-import { useResize } from "../../../hooks/useResize"
 
 import 'swiper/swiper-bundle.css'
 import { bundleProducts } from "../../../assets/meichuBundle";
+import useUI from "../../../hooks/useUI";
 
 interface BundleCarouselProps {
      swiperRef: React.MutableRefObject<SwiperType | null>
 }
 
-const BundleCarousel: React.FC<BundleCarouselProps> = ({ swiperRef }) => {
+const BundleCarousel: React.FC<BundleCarouselProps> = React.memo(({ swiperRef }) => {
      const [activeIndex, setActiveIndex] = React.useState(0)
-     const { screenSize } = useResize()
+     const { screenSize } = useUI()
      const isMobile = screenSize === 'mobile'
 
      return (
@@ -78,6 +78,6 @@ const BundleCarousel: React.FC<BundleCarouselProps> = ({ swiperRef }) => {
                </ContainerStaggerAnimation>
           </>
      );
-}
+})
 
 export default BundleCarousel;

@@ -12,7 +12,7 @@ interface FooterItemsProps {
      }[]
 }
 
-const FooterItems: React.FC<FooterItemsProps> = ({
+const FooterItems: React.FC<FooterItemsProps> = React.memo(({
      title, listFooterItem
 }) => {
      return (
@@ -52,6 +52,6 @@ const FooterItems: React.FC<FooterItemsProps> = ({
                </ContainerStaggerAnimation>
           </div>
      );
-}
+})
 
 export default FooterItems;

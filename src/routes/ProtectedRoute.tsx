@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
      children: React.ReactNode
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = React.memo(({ children }) => {
      const location = useLocation()
      const dispatch = useAppDispatch()
      const { isAuthenticated } = useAppSelector((state) => state.auth)
@@ -23,6 +23,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
      }
 
      return <>{children}</>
-}
+})
 
 export default ProtectedRoute;

@@ -13,11 +13,11 @@ type ImageContent = {
 
 const DetailPage = () => {
      const [selectContent, setSelectContent] = React.useState<ImageContent['id']>('first')
-     const images: ImageContent[] = [
+     const images: ImageContent[] = React.useMemo(() => [
           { id: 'first', source: detailProducts[0] },
           { id: 'second', source: detailProducts[1] },
           { id: 'third', source: detailProducts[2] },
-     ]
+     ], [])
 
      const handleSelectContent = (content: ImageContent['id']) => {
           setSelectContent(content)

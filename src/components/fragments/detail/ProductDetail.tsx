@@ -6,14 +6,13 @@ interface ProductDetailProps {
      className?: string;
 }
 
-const ProductDetail: React.FC<ProductDetailProps> = ({
+const ProductDetail: React.FC<ProductDetailProps> = React.memo(({
      onClick,
      source,
      className,
 }) => {
      return (
-          <button
-               type="button"
+          <button type="button"
                onClick={onClick}
                className="transition-all duration-300 ease-in-out">
                <img
@@ -23,6 +22,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                          lg:h-32 ${className}`} />
           </button>
      );
-}
+})
 
 export default ProductDetail;

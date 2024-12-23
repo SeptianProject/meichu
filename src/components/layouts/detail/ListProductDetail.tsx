@@ -8,18 +8,19 @@ interface ListProductDetailProps {
 }
 
 const catalogCard = <CatalogCard type="catalog" />
-const listCatalog = [
-     { id: 1, component: catalogCard },
-     { id: 2, component: catalogCard },
-     { id: 3, component: catalogCard },
-     { id: 4, component: catalogCard },
-     { id: 5, component: catalogCard },
-     { id: 6, component: catalogCard },
-]
 
-const ListProductDetail: React.FC<ListProductDetailProps> = ({
+const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({
      onLoadMore
 }) => {
+     const listCatalog = React.useMemo(() => [
+          { id: 1, component: catalogCard },
+          { id: 2, component: catalogCard },
+          { id: 3, component: catalogCard },
+          { id: 4, component: catalogCard },
+          { id: 5, component: catalogCard },
+          { id: 6, component: catalogCard },
+     ], [])
+
      return (
           <div className="border-t-2 border-dark/30 dark:border-light/20 space-y-10 pb-40 lg:pb-0">
                <h1 className="text-2xl font-semibold pt-5 dark:text-light">
@@ -43,6 +44,6 @@ const ListProductDetail: React.FC<ListProductDetailProps> = ({
                </div>
           </div>
      )
-}
+})
 
 export default ListProductDetail

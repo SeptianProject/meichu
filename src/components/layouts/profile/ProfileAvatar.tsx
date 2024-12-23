@@ -16,9 +16,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
 }) => {
      const fileInputRef = React.useRef<HTMLInputElement>(null)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
-     const [previewUrl, setPreviewUrl] = React.useState<string>(
-          currentImageUrl ? getFullImageUrl(currentImageUrl) : abstrakImages[1]
-     )
+     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ? getFullImageUrl(currentImageUrl) : abstrakImages[1])
 
      React.useEffect(() => {
           if (currentImageUrl) {
@@ -90,6 +88,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                     type="file"
                     ref={fileInputRef}
                     onChange={handleFileChange}
+                    aria-label='Upload Image'
                     accept='image/png, image/jpg, image/jpeg'
                     className='hidden'
                />

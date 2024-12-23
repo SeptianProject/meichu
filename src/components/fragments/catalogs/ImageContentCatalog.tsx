@@ -1,6 +1,11 @@
+import React from "react"
 import { mainProductBundle } from "../../../assets/meichuBundle"
 
-const ImageContentCatalog = ({ type }: { type: 'catalog' | 'profile' }) => {
+type ImageContentCatalogProps = {
+     type: 'catalog' | 'profile'
+}
+
+const ImageContentCatalog: React.FC<ImageContentCatalogProps> = React.memo(({ type }) => {
      return (
           <div className='my-5'>
                <img className={`object-cover object-top rounded-xl 
@@ -10,6 +15,6 @@ const ImageContentCatalog = ({ type }: { type: 'catalog' | 'profile' }) => {
                     src={mainProductBundle[2]} alt="Product" />
           </div>
      )
-}
+})
 
 export default ImageContentCatalog

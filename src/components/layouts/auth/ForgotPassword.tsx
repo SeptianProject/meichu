@@ -11,7 +11,7 @@ interface ForgotPasswordLayoutProps {
      isModalClose: () => void;
 }
 
-const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = ({
+const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = React.memo(({
      isAnimating,
      isModalOpen,
      isModalClose
@@ -43,6 +43,6 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = ({
                </form>
           </AuthLayout>
      );
-}
+})
 
 export default ForgotPasswordLayout;

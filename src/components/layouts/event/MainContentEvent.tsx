@@ -1,22 +1,22 @@
+import React from "react"
 import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation"
 import BtnBorderGradient from "../../elements/buttons/BorderGradientBtn"
 import CardEvent from "../../fragments/event/CardEvent"
 
 const cardEvent = <CardEvent type="event" />
 
-const listCardEvent = [
-     cardEvent,
-     cardEvent,
-     cardEvent,
-     cardEvent,
-     cardEvent,
-     cardEvent,
-     cardEvent,
-     cardEvent,
-     cardEvent
-]
-
 const MainContentEvent = () => {
+     const listCardEvent = React.useMemo(() => [
+          cardEvent,
+          cardEvent,
+          cardEvent,
+          cardEvent,
+          cardEvent,
+          cardEvent,
+          cardEvent,
+          cardEvent,
+          cardEvent
+     ], [])
 
      return (
           <div className="flex flex-col items-center gap-y-20">

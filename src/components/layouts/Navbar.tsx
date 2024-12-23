@@ -7,16 +7,18 @@ import { MdOutlineEmail, MdSunny } from "react-icons/md"
 import { BsWhatsapp } from "react-icons/bs"
 import { IoMoonOutline } from "react-icons/io5"
 import { assetItems } from "../../assets/AnotherAssets"
-import { useDarkMode } from "../../hooks/useDarkMode"
 import { useAppDispatch, useAppSelector } from "../../redux/hook"
 import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSlice"
+import useUI from "../../hooks/useUI"
 
 const Navbar = () => {
      const [hamburgerActive, setHamburgerActive] = useState(false)
      const [contactActive, setContactActive] = useState(false)
-     const { isDarkMode, toggleDarkMode } = useDarkMode()
+     const { mode, toggleDarkMode } = useUI()
      const { token } = useAppSelector((state) => state.auth)
      const dispatch = useAppDispatch()
+
+     const isDarkMode = mode === 'dark'
 
      const handleOpenModal = () => {
           if (token) {

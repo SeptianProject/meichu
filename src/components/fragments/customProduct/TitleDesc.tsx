@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import BounceAnimation from "../../animations/BounceAnimation";
 
 interface TitleDescProps {
@@ -7,7 +7,7 @@ interface TitleDescProps {
      delayAnimation?: number;
 }
 
-const TitleDesc: FC<TitleDescProps> = ({ desc, title, delayAnimation }) => {
+const TitleDesc: FC<TitleDescProps> = React.memo(({ desc, title, delayAnimation }) => {
      return (
           <div className="space-y-1">
                <BounceAnimation
@@ -26,6 +26,6 @@ const TitleDesc: FC<TitleDescProps> = ({ desc, title, delayAnimation }) => {
                </BounceAnimation>
           </div>
      );
-}
+})
 
 export default TitleDesc;
