@@ -1,103 +1,90 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { abstrakImages, assetItems } from "../../../assets/AnotherAssets";
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { uploadAvatar } from '../../../services/AuthService';
+import { useMutation } from '@tanstack/react-query';
+import { getFullImageUrl, uploadAvatar } from '../../../services/AuthService';
 import { AxiosError } from 'axios';
-
-interface UploadResponse {
-     id: number
-     formats: {
-          thumbnail: {
-               url: string
-          }
-     }
-     url: string
-}
+import { UploadResponse } from '../../../interface';
 
 interface ProfileAvatarProps {
      currentImageUrl?: string
-     onImageUpload?: (imageUrl: string) => void
+     onUploadSuccess?: (imageUrl: string, imageId: number) => void
 }
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
      currentImageUrl,
-     onImageUpload
+     onUploadSuccess
 }) => {
-     const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
-     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl || abstrakImages[1])
      const fileInputRef = React.useRef<HTMLInputElement>(null)
-     const queryClient = useQueryClient()
+     const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
+     const [previewUrl, setPreviewUrl] = React.useState<string>(
+          currentImageUrl ? getFullImageUrl(currentImageUrl) : abstrakImages[1]
+     )
 
-     const uploadMutation = useMutation<UploadResponse, AxiosError, File>({
+     React.useEffect(() => {
+          if (currentImageUrl) {
+               setPreviewUrl(getFullImageUrl(currentImageUrl))
+          }
+     }, [currentImageUrl])
+
+     const uploadMutation = useMutation<UploadResponse[], AxiosError, File>({
           mutationFn: uploadAvatar,
           onSuccess: (data) => {
-               setPreviewUrl(data.formats.thumbnail.url)
-               if (onImageUpload) {
-                    onImageUpload(data.id.toString())
-               }
-               queryClient.invalidateQueries({ queryKey: ['user'] })
-               console.log('Upload Success: ', data.formats.thumbnail.url)
+               const uploadedImage = data[0]
+               const imageUrl = getFullImageUrl(uploadedImage.url)
+               setPreviewUrl(imageUrl)
+               onUploadSuccess?.(imageUrl, uploadedImage.id)
           },
           onError: (error) => {
                console.log('Upload Error: ', error)
-               alert('Upload Error')
+               alert(`Upload Error ${error.message}`)
           }
      })
 
-     const processFile = (file?: File) => {
-          if (!file) return
-
+     const validateFile = (file: File) => {
           const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
           if (!allowedTypes.includes(file.type)) {
-               alert("Invalid file type. Please upload PNG or JPG/JPEG images only.");
-               return
+               return "Invalid file type. Please upload PNG or JPG/JPEG images only."
           }
 
           const maxSize = 5 * 1024 * 1024
           if (file.size > maxSize) {
-               alert("File is too large. Maximum size is 5MB.")
-               return
+               return "File is too large. Maximum size is 5MB."
           }
 
-          setSelectedFile(file)
-          setPreviewUrl(URL.createObjectURL(file))
+          return null
      }
 
      const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           const file = e.target.files?.[0]
+          if (!file) return
 
-          if (file) {
-               processFile(file)
-               uploadMutation.mutate(file)
+          const error = validateFile(file)
+          if (error) {
+               alert(error)
+               return
           }
+
+          setSelectedFile(file)
+          uploadMutation.mutate(file)
      }
 
-     const triggerFileInput = () => {
+     const handleUploadClick = async () => {
           fileInputRef.current?.click()
      }
 
      React.useEffect(() => {
-          if (currentImageUrl) {
-               setPreviewUrl(currentImageUrl)
-          }
-     }, [currentImageUrl])
-
-     React.useEffect(() => {
           return () => {
-               if (previewUrl !== abstrakImages[1] && previewUrl !== currentImageUrl) {
+               if (selectedFile) {
                     URL.revokeObjectURL(previewUrl)
                }
           }
-     }, [previewUrl, currentImageUrl])
-
-     const isLoading = uploadMutation.isLoading
+     }, [selectedFile, previewUrl])
 
      return (
           <div className='size-40 lg:w-3/5 lg:h-[20rem] relative'>
                <img
                     src={previewUrl}
-                    alt={previewUrl.split('/').pop()}
+                    alt='avatar'
                     className='rounded-xl object-cover object-center size-full' />
                <input
                     type="file"
@@ -108,21 +95,24 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                />
                <button
                     type="button"
-                    onClick={triggerFileInput}
-                    disabled={isLoading}
+                    onClick={handleUploadClick}
+                    disabled={uploadMutation.isLoading}
                     className='bg-light size-8 p-1 rounded-md absolute bottom-2 right-2
                          group transition-all duration-300'>
-                    {isLoading ? (
+                    {uploadMutation.isLoading ? (
                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900" />
                     ) : (
                          <img
                               src={assetItems.EditIcon}
                               alt="edit-icon"
                               className='size-fit group-hover:scale-90'
-                         />
-                    )
-                    }
+                         />)}
                </button>
+               {uploadMutation.isError && (
+                    <div className="absolute bottom-12 right-2 bg-red-500 text-white p-2 rounded-md text-sm">
+                         Upload failed. Please try again.
+                    </div>
+               )}
           </div>
      )
 }

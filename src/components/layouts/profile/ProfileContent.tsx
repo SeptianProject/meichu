@@ -29,16 +29,22 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      const dispatch = useAppDispatch()
      const queryClient = useQueryClient()
      const [isEditing, setIsEditing] = React.useState(false)
+     const [uploadedImageId, setUploadedImageId] = React.useState<number | null>(null)
      const [editedValues, setEditedValues] = React.useState({
           username: username || '',
           profilePicture: profilePicture || '',
           telpNumber: telpNumber || '',
      })
 
+     const handleUploadSuccess = (imageUrl: string, imageId: number) => {
+          setUploadedImageId(imageId)
+          setEditedValues(prev => ({ ...prev, profilePicture: imageUrl }))
+     }
+
      const updateProfileMutation = useMutation({
           mutationFn: () => updateUserProfile(
                editedValues.username,
-               editedValues.profilePicture,
+               uploadedImageId,
                editedValues.telpNumber
           ),
           onSuccess: (data) => {
@@ -62,6 +68,11 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
 
      const handleCancel = () => {
           setIsEditing(false)
+          setEditedValues({
+               username: username || '',
+               profilePicture: profilePicture || '',
+               telpNumber: telpNumber || ''
+          })
      }
 
      const handleLogout = () => {
@@ -70,18 +81,21 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
           queryClient.clear()
      }
 
+     React.useEffect(() => {
+          setEditedValues({
+               username: username || '',
+               profilePicture: profilePicture || '',
+               telpNumber: telpNumber || ''
+          })
+     }, [username, profilePicture, telpNumber])
+
      return (
           <div className={`w-full space-y-5 lg:flex flex-col items-start 
                border-light/70 lg:gap-x-5 lg:flex-row lg:items-start lg:border-b 
                lg:pt-0 lg:pb-5 ${isTapDiscover ? 'hidden' : 'block'}`}>
                <ProfileAvatar
                     currentImageUrl={profilePicture}
-                    onImageUpload={(imageUrl) => {
-                         setEditedValues(prev => ({
-                              ...prev,
-                              profilePicture: imageUrl
-                         }))
-                    }}
+                    onUploadSuccess={handleUploadSuccess}
                />
                <div className='size-full flex flex-col gap-y-5'>
                     <div className='space-y-3 lg:space-y-5'>

@@ -30,6 +30,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({
       queryFn: getUser,
       staleTime: 0,
       cacheTime: 0,
+      refetchOnWindowFocus: false,
    })
 
    const isMobile = screenSize === 'mobile'
