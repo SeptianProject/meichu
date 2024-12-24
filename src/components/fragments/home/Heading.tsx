@@ -22,7 +22,7 @@ const Heading = () => {
                </BounceAnimation>
                <BounceAnimation
                     className="w-full z-10"
-                    delayVal={1.2}
+                    delayVal={0.8}
                     hiddenCoordinates={{ y: -50 }}>
                     <p className='text-sm font-light w-[22rem] tracking-wider
                          sm:text-[15px] md:text-[18px] md:w-[28rem]
@@ -32,13 +32,13 @@ const Heading = () => {
                     </p>
                </BounceAnimation>
                <BounceAnimation
-                    delayVal={1.5}
+                    delayVal={0.8}
                     hiddenCoordinates={{ x: -100 }}
                     className="size-full absolute">
                     <Star className='-left-2 -top-1 md:-left-8 md:top-1 lg:-left-16 lg:top-4 xl:top-2' />
                </BounceAnimation>
                <BounceAnimation
-                    delayVal={1.5}
+                    delayVal={0.8}
                     hiddenCoordinates={{ x: 100 }}
                     className="size-full absolute">
                     <Star className='right-7 bottom-14 md:right-2 md:bottom-12 lg:-right-12 xl:-right-8' />

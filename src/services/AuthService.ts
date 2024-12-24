@@ -1,14 +1,6 @@
 import axios from 'axios';
-import { LoginFormSchema, RegisterFormSchema } from '../context/AuthContext';
-
-const baseUrl = import.meta.env.VITE_PUBLIC_STRAPI_BASE_URL.replace('/api', '');
-const apiUrl = `${baseUrl}/api`;
-
-export const getFullImageUrl = (path: string) => {
-     if (!path) return '';
-     const cleanPath = path.replace('/api', '');
-     return `${baseUrl}${cleanPath}`;
-}
+import { LoginFormSchema, RegisterFormSchema } from '../schema/AuthSchema';
+import { apiUrl, token, userId } from '.';
 
 export const registerAuth = async (data: Pick<RegisterFormSchema, 'email' | 'password' | 'username'>) => {
      const response = await axios.post(`${apiUrl}/auth/local/register`, data)
@@ -20,15 +12,12 @@ export const loginAuth = async (data: Pick<LoginFormSchema, 'identifier' | 'pass
      return response.data;
 }
 
-export const getUser = async () => {
-     const token = localStorage.getItem('authToken');
-     const id = localStorage.getItem('userId');
-
-     if (!token || !id) {
+export const getUser = async (params?: string) => {
+     if (!token || !userId) {
           throw new Error("User not authenticated");
      }
 
-     const response = await axios.get(`${apiUrl}/users/${id}`, {
+     const response = await axios.get(`${apiUrl}/users/${userId}?${params}`, {
           headers: {
                Authorization: `Bearer ${token}`
           }

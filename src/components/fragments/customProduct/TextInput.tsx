@@ -1,30 +1,39 @@
-import React, { FC } from "react";
-import BounceAnimation from "../../animations/BounceAnimation";
+import React from "react";
+import { FieldError } from "react-hook-form";
 
 interface TextInputProps {
-     name: 'product' | 'person'
+     label: 'product' | 'user'
+     error: FieldError | undefined
 }
 
-const TextInput: FC<TextInputProps> = React.memo(({ name }) => {
+const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(({
+     label,
+     error
+}, ref) => {
      return (
-          <div className="space-y-8">
-               <BounceAnimation
-                    delayVal={0.5}
-                    hiddenCoordinates={{ x: -50 }}>
+          <>
+               <div className="space-y-8">
                     <h1 className="text-xl text-dark dark:text-light font-semibold">
-                         {name === 'product' ? 'Name Your Product' : 'Enter Your Name'}
+                         {label === 'product' ? 'Name Your Product' : 'Enter Your Name'}
                     </h1>
-               </BounceAnimation>
-               <input
-                    type="text"
-                    placeholder={name === 'product'
-                         ? 'E.G Redeemable T-Shirt With Logo'
-                         : 'Ex: Septianzz'}
-                    className="text-dark dark:text-light font-poppins dark:text-opacity-70 
-                    ring-[1.5px]  ring-graySecondary w-full py-8 rounded-2xl px-10 bg-transparent 
-                    dark:bg-[#191820] transition-all duration-300 outline-none border-none focus:ring-[2.5px]" />
-          </div>
+                    <input
+                         ref={ref}
+                         autoComplete="on"
+                         type="text"
+                         placeholder={label === 'product'
+                              ? 'E.G Redeemable T-Shirt With Logo'
+                              : 'Ex: Septianzz'}
+                         className={`text-dark font-poppins ring-[1.5px] w-full py-8 
+                         rounded-2xl px-10 bg-transparent outline-none border-none 
+                         dark:bg-[#191820] dark:text-light dark:text-opacity-70
+                         transition-all duration-300 focus:ring-[2.5px]
+                         ${error ? 'ring-redDanger' : 'ring-graySecondary'}`} />
+                    {error && (
+                         <p className="text-redDanger text-[12px] text-start">{error.message}</p>
+                    )}
+               </div>
+          </>
      );
-})
+}))
 
 export default TextInput;

@@ -72,14 +72,14 @@ const HeadCarousel = () => {
                     -translate-y-1/2 -translate-x-1/2 z-10
                     lg:flex items-center justify-between w-[95vw] xl:w-[80vw]'>
                          <BounceAnimation
-                              delayVal={1.2}
+                              delayVal={0.8}
                               hiddenCoordinates={{ x: -50 }}>
                               <ArrowCardCarousel
                                    onClick={() => swiperRef.current?.slidePrev()}
                                    icon={LuChevronLeft} />
                          </BounceAnimation>
                          <BounceAnimation
-                              delayVal={1.2}
+                              delayVal={0.8}
                               hiddenCoordinates={{ x: 50 }}>
                               <ArrowCardCarousel
                                    onClick={() => swiperRef.current?.slideNext()}

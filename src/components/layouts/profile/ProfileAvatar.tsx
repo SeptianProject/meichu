@@ -1,10 +1,11 @@
 import React from 'react'
 import { abstrakImages, assetItems } from "../../../assets/AnotherAssets";
 import { useMutation } from '@tanstack/react-query';
-import { getFullImageUrl, uploadAvatar } from '../../../services/AuthService';
+import { uploadAvatar } from '../../../services/AuthService';
 import { AxiosError } from 'axios';
 import { UploadResponse } from '../../../interface';
 
+import { getFullImageUrl } from '../../../services/FileUploadService';
 interface ProfileAvatarProps {
      currentImageUrl?: string
      onUploadSuccess?: (imageUrl: string, imageId: number) => void
@@ -16,7 +17,9 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
 }) => {
      const fileInputRef = React.useRef<HTMLInputElement>(null)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
-     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ? getFullImageUrl(currentImageUrl) : abstrakImages[1])
+     const [previewUrl, setPreviewUrl] = React.useState<string>(
+          currentImageUrl ? getFullImageUrl(currentImageUrl) : abstrakImages[1]
+     )
 
      React.useEffect(() => {
           if (currentImageUrl) {
@@ -66,7 +69,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
           uploadMutation.mutate(file)
      }
 
-     const handleUploadClick = async () => {
+     const handleUploadClick = () => {
           fileInputRef.current?.click()
      }
 

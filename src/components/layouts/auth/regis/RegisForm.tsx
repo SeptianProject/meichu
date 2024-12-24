@@ -6,7 +6,7 @@ import { IoIosLock } from "react-icons/io";
 import React from "react";
 import RegisTextDesc from "./RegisTextDesc";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { registerFormSchema, RegisterFormSchema } from "../../../../context/AuthContext";
+import { registerFormSchema, RegisterFormSchema } from "../../../../schema/AuthSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { registerAuth } from "../../../../services/AuthService";

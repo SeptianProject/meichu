@@ -3,14 +3,60 @@ import TextInput from "../fragments/customProduct/TextInput"
 import RouteHistory from "../layouts/RouteHistory"
 import ChooseTypeProduct from "../layouts/customProduct/ChooseTypeProduct"
 import UploadImageProduct from "../layouts/customProduct/UploadImageProduct"
-import ActionButtonProduct from "../layouts/customProduct/ActionButtonProduct"
 import React from "react"
 import ModalPublishCustomProduct from "../layouts/customProduct/ModalPublishCustomProduct"
+import { useForm } from "react-hook-form"
+import { createProductSchema, CreateProductSchema } from "../../schema/ProductSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { createProductRequest } from "../../services/ProductService"
+import RoundedButton from "../elements/buttons/RoundedBtn"
+import { getUser } from "../../services/AuthService"
+import { UserProfile } from "../../interface"
+import { v4 as uuidv4 } from "uuid"
 
 const CustomProductPage = () => {
      const [onPublish, setOnPublish] = React.useState(false)
+     const queryClient = useQueryClient()
+     const { data: userData } = useQuery<UserProfile>({
+          queryKey: ['user'],
+          queryFn: () => getUser('')
+     })
 
-     const handleOnPublish = () => {
+     const {
+          register,
+          handleSubmit,
+          setValue,
+          formState: { errors }
+     } = useForm<CreateProductSchema>({
+          resolver: zodResolver(createProductSchema),
+          defaultValues: {
+               uuid: uuidv4(),
+               user: userData?.username,
+          }
+     })
+
+     React.useEffect(() => {
+          if (userData?.id) {
+               setValue('user', userData.username)
+          }
+     }, [setValue, userData])
+
+     const createProductMutation = useMutation({
+          mutationFn: createProductRequest,
+          onSuccess: (data) => {
+               alert('Create product success')
+               console.log('UserId:', userData?.id)
+               console.log('Create product success:', data)
+               queryClient.invalidateQueries(['user', userData?.id])
+          },
+          onError: (error) => {
+               console.log('Create product error:', error)
+          }
+     })
+
+     const onSubmit = (data: CreateProductSchema) => {
+          createProductMutation.mutate(data)
           setOnPublish(true)
      }
 
@@ -35,14 +81,34 @@ const CustomProductPage = () => {
                          <RouteHistory currentRoute="/custom-product" currentText="Custom Product" />
                          <TextTagline text="custom product" className="dark:text-light font-semibold" />
                     </div>
-                    <form action=""
-                         className="space-y-16">
-                         <ChooseTypeProduct type="product" />
-                         <UploadImageProduct />
-                         <TextInput name="product" />
-                         <ChooseTypeProduct type="imvu" />
-                         <TextInput name="person" />
-                         <ActionButtonProduct onPublish={handleOnPublish} />
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-16">
+                         <input type="hidden" {...register('uuid')} />
+                         <ChooseTypeProduct
+                              type="product"
+                              {...register('productType')}
+                         />
+                         <UploadImageProduct
+                              currentImageUrl=""
+                         // onUploadSuccess={(imageUrl: string, imageId: number) => setValue('references', imageUrl)}
+                         />
+                         <TextInput
+                              label="product"
+                              error={errors.name}
+                              {...register('name')}
+                         />
+                         <ChooseTypeProduct
+                              type="imvu"
+                              {...register('imvu')}
+                         />
+                         <TextInput
+                              label="user"
+                              error={errors.user}
+                              {...register('user')}
+                         />
+                         <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
+                              <RoundedButton title="Cancel" />
+                              <RoundedButton type="submit" title="Publish" />
+                         </div>
                     </form>
                </section>
                <ModalPublishCustomProduct

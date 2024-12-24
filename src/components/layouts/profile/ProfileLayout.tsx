@@ -10,6 +10,7 @@ import ProfileDiscover from './ProfileDiscover'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '../../../services/AuthService'
 import useUI from '../../../hooks/useUI'
+import { UserProfile } from '../../../interface'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -25,12 +26,9 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const [maxHeight, setMaxHeight] = React.useState(0)
    const { screenSize } = useUI()
    const queryClient = useQueryClient()
-   const { data: userData, error, isLoading } = useQuery({
+   const { data: userData, error, isLoading } = useQuery<UserProfile>({
       queryKey: ['user'],
-      queryFn: getUser,
-      staleTime: 0,
-      cacheTime: 0,
-      refetchOnWindowFocus: false,
+      queryFn: () => getUser('populate=profilePicture'),
    })
 
    const isMobile = screenSize === 'mobile'
@@ -117,7 +115,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      dateValue={userData?.createdAt.split('T')[0]}
                      username={userData?.username}
                      telpNumber={userData?.telpNumber}
-                     profilePicture={userData?.profilePicture}
+                     profilePicture={userData?.profilePicture?.url}
                   />
                   <ProfileDiscover
                      isFavored={isFavored}

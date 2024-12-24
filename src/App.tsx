@@ -30,7 +30,7 @@ const App = () => {
      }
 
      return (
-          <div className={`bg-light selection:bg-dark selection:text-light
+          <div className={` bg-light selection:bg-dark selection:text-light
           dark:bg-dark dark:selection:bg-light transition-all duration-500
           dark:selection:text-dark relative min-h-screen overflow-hidden`}>
                <Navbar />

@@ -1,6 +1,5 @@
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
-import BounceAnimation from '../animations/BounceAnimation'
 import React from 'react'
 
 type RouteHistoryProps = {
@@ -18,42 +17,22 @@ const RouteHistory: React.FC<RouteHistoryProps> = React.memo(({
 }) => {
      return (
           <div className="flex items-center pt-32 lg:pt-40">
-               <BounceAnimation
-                    hiddenCoordinates={{ x: -50 }}>
-                    <Link to={'/'}
-                         className='font-medium text-dark dark:text-light font-poppins 
+               <Link to={'/'}
+                    className='font-medium text-dark dark:text-light font-poppins 
                     text-opacity-80'>
-                         Home
-                    </Link>
-               </BounceAnimation>
+                    Home
+               </Link>
                {prevRoute && (
                     <>
-                         <BounceAnimation
-                              delayVal={0.5}
-                              hiddenCoordinates={{ x: -20 }}>
-                              <MdKeyboardArrowRight className="text-dark dark:text-light size-6 text-opacity-80" />
-                         </BounceAnimation>
-                         <BounceAnimation
-                              delayVal={1}
-                              hiddenCoordinates={{ x: -20 }}>
-                              <Link to={prevRoute.toString()} className='font-medium text-dark dark:text-light font-poppins text-opacity-80'>{prevText}</Link>
-                         </BounceAnimation>
+                         <MdKeyboardArrowRight className="text-dark dark:text-light size-6 text-opacity-80" />
+                         <Link to={prevRoute.toString()} className='font-medium text-dark dark:text-light font-poppins text-opacity-80'>{prevText}</Link>
                     </>
                )}
-               <BounceAnimation
-                    delayVal={prevRoute ? 1.5 : 0.5}
-                    hiddenCoordinates={{ x: -20 }}>
-                    <MdKeyboardArrowRight
-                         className="text-dark dark:text-light size-6 text-opacity-80" />
-               </BounceAnimation>
-               <BounceAnimation
-                    delayVal={prevRoute ? 2 : 1}
-                    hiddenCoordinates={{ x: -20 }}>
-                    <Link to={currentRoute} className='font-medium text-dark dark:text-light 
+               <MdKeyboardArrowRight className="text-dark dark:text-light size-6 text-opacity-80" />
+               <Link to={currentRoute} className='font-medium text-dark dark:text-light 
                     font-poppins text-opacity-80'>
-                         {currentText}
-                    </Link>
-               </BounceAnimation>
+                    {currentText}
+               </Link>
           </div>
      )
 })

@@ -8,7 +8,7 @@ type BtnBorderGradientProps = {
 const BtnBorderGradient: React.FC<BtnBorderGradientProps> = React.memo(({ onClick }) => {
      return (
           <BounceAnimation
-               delayVal={0.5}
+               delayVal={0.8}
                hiddenCoordinates={{ y: 100 }}>
                <div className='bg-gradient-to-r from-[#FFBA00] to-[#0163E0] 
                rounded-full w-28 md:w-32 p-[2px] group hover:bg-bluePrimary hover:from-transparent

@@ -28,9 +28,8 @@ const MainContentDetail: React.FC<ImageContent> = React.memo(({
                gap-y-5 p-5 lg:h-[40rem]">
                <AnimatePresence>
                     {images.map((image) => (
-                         <ScaleAnimation>
+                         <ScaleAnimation key={image.id}>
                               <ProductDetail
-                                   key={image.id}
                                    source={image.source}
                                    onClick={() => onSelectContent(image.id)} />
                          </ScaleAnimation>

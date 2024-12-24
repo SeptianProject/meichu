@@ -5,19 +5,21 @@ interface RoundedButtonProps {
      title: string;
      onClick?: () => void;
      className?: string;
+     type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 const RoundedButton: FC<RoundedButtonProps> = React.memo(({
      onClick,
      title,
      className,
+     type = 'button'
 }) => {
      const navigate = useNavigate()
 
      return (
           <button
                onClick={title.includes('Cancel') ? () => navigate('/') : onClick}
-               type="button"
+               type={type}
                className={`${className} font-semibold border rounded-full w-36 py-3 
                     lg:w-44 transition-all duration-300
                     ${title.includes('Cancel')

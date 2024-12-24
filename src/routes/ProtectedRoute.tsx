@@ -1,25 +1,25 @@
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { setIsAuthModalOpen } from "../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
      children: React.ReactNode
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = React.memo(({ children }) => {
-     const location = useLocation()
+     const navigate = useNavigate()
      const dispatch = useAppDispatch()
-     const { isAuthenticated } = useAppSelector((state) => state.auth)
+     const { isAuthenticated, token, userId } = useAppSelector((state) => state.auth)
 
      React.useEffect(() => {
-          if (!isAuthenticated) {
+          if (!isAuthenticated && !token && !userId) {
                dispatch(setIsAuthModalOpen(true))
           }
-     }, [isAuthenticated, dispatch])
+     }, [token, userId, isAuthenticated, dispatch])
 
-     if (!isAuthenticated) {
-          return <Navigate to='/' state={{ from: location }} replace />
+     if (!isAuthenticated && !token && !userId) {
+          return navigate('/', { replace: true })
      }
 
      return <>{children}</>

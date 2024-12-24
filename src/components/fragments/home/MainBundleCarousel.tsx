@@ -29,7 +29,7 @@ const MainBundleCarousel: React.FC<MainBundleCarouselProps> = React.memo(({
                               <div className="flex flex-col h-full
                               lg:flex-row lg:items-center lg:gap-x-10">
                                    <BounceAnimation
-                                        delayVal={0.5}
+                                        delayVal={0.8}
                                         hiddenCoordinates={{ x: -50 }}
                                         className="rounded-tl-[12rem] md:rounded-tl-[15rem] lg:rounded-t-full">
                                         <img className="rounded-tl-[12rem] object-cover object-center border-4 

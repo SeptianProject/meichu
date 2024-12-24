@@ -8,14 +8,14 @@ const FooterLogoBadge = () => {
      return (
           <div className="flex flex-col items-start relative gap-y-10 lg:gap-y-4">
                <BounceAnimation
-                    delayVal={0.5}
+                    delayVal={0.8}
                     hiddenCoordinates={{ y: -50 }}
                     className="w-fit">
                     <img className="size-48 absolute -top-5 -left-5 select-none"
                          src={assetItems.MeichuLogo} alt="Meichu" />
                </BounceAnimation>
                <BounceAnimation
-                    delayVal={0.5}
+                    delayVal={0.8}
                     hiddenCoordinates={{ y: 100 }}>
                     <h3 className="dark:text-light font-semibold hidden lg:block mt-36
                     dark:text-opacity-80 z-10">Follow Us</h3>
@@ -29,7 +29,7 @@ const FooterLogoBadge = () => {
                               hover:scale-105 hover:-translate-y-1" />
                </ContainerStaggerAnimation>
                <BounceAnimation
-                    delayVal={0.5}
+                    delayVal={0.8}
                     hiddenCoordinates={{ x: -100 }}>
                     <h6 className="dark:text-light text-opacity-50 text-sm font-light
                     dark:text-opacity-80 lg:tracking-wider">

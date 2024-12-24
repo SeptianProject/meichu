@@ -1,29 +1,19 @@
 import React, { FC } from "react";
-import BounceAnimation from "../../animations/BounceAnimation";
 
 interface TitleDescProps {
      title: string;
      desc: string;
-     delayAnimation?: number;
 }
 
-const TitleDesc: FC<TitleDescProps> = React.memo(({ desc, title, delayAnimation }) => {
+const TitleDesc: FC<TitleDescProps> = React.memo(({ desc, title }) => {
      return (
           <div className="space-y-1">
-               <BounceAnimation
-                    delayVal={delayAnimation}
-                    hiddenCoordinates={{ x: -50 }}>
-                    <h3 className="dark:text-light font-semibold text-xl">
-                         {title}
-                    </h3>
-               </BounceAnimation>
-               <BounceAnimation
-                    delayVal={delayAnimation! + 0.5}
-                    hiddenCoordinates={{ x: 50 }}>
-                    <p className="dark:text-light font-extralight text-opacity-80">
-                         {desc}
-                    </p>
-               </BounceAnimation>
+               <h3 className="dark:text-light font-semibold text-xl">
+                    {title}
+               </h3>
+               <p className="dark:text-light font-extralight text-opacity-80">
+                    {desc}
+               </p>
           </div>
      );
 })

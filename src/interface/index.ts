@@ -5,14 +5,16 @@ export interface BundleProducts {
 }
 
 export interface UserProfile {
-     id: string
+     id: number
      username: string
      email: string
+     telpNumber: string
      provider: string
      confirmed: boolean
      blocked: boolean,
      createdAt: string
      updatedAt: string
+     profilePicture: UploadResponse
 }
 
 export interface ImageFormat {

@@ -20,7 +20,7 @@ const AppRouter = () => {
      }, [location.pathname])
 
      return (
-          <>
+          <div className="min-h-screen">
                {circleAnimations}
                <React.Suspense fallback={<Loading></Loading>}>
                     <Routes>
@@ -37,16 +37,12 @@ const AppRouter = () => {
                          } />
                     </Routes>
                </React.Suspense>
-          </>
+          </div>
      )
 }
 
 export default AppRouter
 
 const Loading = () => {
-     return (
-          <div className="flex justify-center items-center ">
-               Loading...
-          </div>
-     )
+     return null
 }

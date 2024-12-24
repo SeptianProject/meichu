@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import { FieldError } from "react-hook-form";
 import { IconType } from "react-icons";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
@@ -7,21 +7,15 @@ interface AuthInputProps {
      icon: IconType;
      placeholder: string;
      type: string;
-     name?: string;
-     value?: string;
-     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
      showPassword?: boolean;
      onTogglePassword?: () => void;
      error: FieldError | undefined
 }
 
-const AuthInput = React.memo(forwardRef<HTMLInputElement, AuthInputProps>(({
+const AuthInput = React.memo(React.forwardRef<HTMLInputElement, AuthInputProps>(({
      icon: Icon,
      placeholder,
      type,
-     name,
-     value,
-     onChange,
      showPassword,
      onTogglePassword,
      error,
@@ -41,10 +35,7 @@ const AuthInput = React.memo(forwardRef<HTMLInputElement, AuthInputProps>(({
                               ref={ref}
                               autoComplete="on"
                               type={inputType}
-                              name={name}
-                              value={value}
                               placeholder={placeholder}
-                              onChange={onChange}
                               className={`border-none outline-none font-medium
                                    font-poppins placeholder:text-[12px] text-[12px]
                                    text-dark/90 placeholder:text-dark/80

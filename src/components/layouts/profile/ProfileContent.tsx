@@ -64,15 +64,12 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
           } else {
                setIsEditing(true)
           }
+          console.log('Edited Values: ', editedValues)
      }
 
      const handleCancel = () => {
           setIsEditing(false)
-          setEditedValues({
-               username: username || '',
-               profilePicture: profilePicture || '',
-               telpNumber: telpNumber || ''
-          })
+          console.log('Edited Cancel Values: ', editedValues)
      }
 
      const handleLogout = () => {

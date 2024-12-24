@@ -37,9 +37,9 @@ const authSlice = createSlice({
                state.isAuthModalOpen = action.payload
           },
           login: (state, action: PayloadAction<{ token: string, userId: string }>) => {
-               state.isAuthenticated = true
                state.token = action.payload.token
                state.userId = action.payload.userId
+               state.isAuthenticated = true
                localStorage.setItem('authToken', action.payload.token)
                localStorage.setItem('userId', action.payload.userId)
           },

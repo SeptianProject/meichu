@@ -22,7 +22,7 @@ const BundleCarousel: React.FC<BundleCarouselProps> = React.memo(({ swiperRef })
           <>
                <div className="flex flex-col relative lg:flex-row lg:items-center lg:gap-x-10 h-full">
                     <BounceAnimation
-                         delayVal={0.5}
+                         delayVal={0.8}
                          hiddenCoordinates={{ x: -50 }}
                          className="rounded-tl-[12rem] md:rounded-tl-[15rem] lg:rounded-t-full">
                          <img className="rounded-tl-[12rem] object-cover object-center border-4 
@@ -31,7 +31,7 @@ const BundleCarousel: React.FC<BundleCarouselProps> = React.memo(({ swiperRef })
                               src={bundleProducts[2].main} alt="" />
                     </BounceAnimation>
                     <BounceAnimation
-                         delayVal={0.5}
+                         delayVal={0.8}
                          hiddenCoordinates={{ y: 100 }}
                          className="">
                          <h1 className="text-2xl mt-6 font-semibold lg:text-4xl lg:pb-10

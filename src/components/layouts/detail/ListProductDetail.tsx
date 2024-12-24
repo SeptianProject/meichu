@@ -33,8 +33,9 @@ const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({
                          className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-full">
                          {listCatalog.map((item) => (
                               <CardStaggerAnimation
+                                   key={item.id}
                                    hiddenPosition={{ y: 100 }}>
-                                   <div key={item.id}>
+                                   <div>
                                         {item.component}
                                    </div>
                               </CardStaggerAnimation>

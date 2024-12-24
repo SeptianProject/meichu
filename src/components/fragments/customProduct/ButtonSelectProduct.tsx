@@ -7,14 +7,16 @@ interface ButtonSelectProductProps {
      onSelect: () => void;
 }
 
-const ButtonSelectProduct: React.FC<ButtonSelectProductProps> = React.memo(({
+const ButtonSelectProduct = React.memo(React.forwardRef<HTMLButtonElement, ButtonSelectProductProps>(({
      icon,
      title,
      isSelected,
-     onSelect,
-}) => {
+     onSelect
+}, ref) => {
      return (
-          <div onClick={onSelect}
+          <button
+               ref={ref}
+               onClick={onSelect}
                className={`h-20 xl:h-24 rounded-2xl flex items-center gap-x-5 px-5 w-full 
                     cursor-pointer transition-all duration-300 ease-in-out bg-transparent
                     ${isSelected ? 'dark:bg-[#1F1F2C] ring ring-purplePrimary dark:ring-transparent'
@@ -34,8 +36,8 @@ const ButtonSelectProduct: React.FC<ButtonSelectProductProps> = React.memo(({
                     ${isSelected ? 'text-purplePrimary' : 'text-graySecondary '}`}>
                     {title}
                </h2>
-          </div>
+          </button>
      );
-})
+}))
 
 export default ButtonSelectProduct;

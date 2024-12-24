@@ -5,7 +5,7 @@ import AuthButton from "../../../fragments/auth/AuthButton.tsx";
 import AuthBadgeButton from "../../../fragments/auth/AuthBadgeButton.tsx";
 import React from "react";
 import ForgotPasswordBtn from "../../../elements/buttons/ForgotPaswordBtn.tsx";
-import { loginFormSchema, LoginFormSchema } from "../../../../context/AuthContext.tsx";
+import { loginFormSchema, LoginFormSchema } from "../../../../schema/AuthSchema.ts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
