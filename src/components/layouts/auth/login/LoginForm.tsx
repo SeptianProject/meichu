@@ -26,12 +26,12 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      onProfile,
      onForgotPassword
 }) => {
+     const dispatch = useAppDispatch()
      const {
           register,
           handleSubmit,
           formState: { errors }
      } = useForm<LoginFormSchema>({ resolver: zodResolver(loginFormSchema) })
-     const dispatch = useAppDispatch()
 
      const loginMutation = useMutation({
           mutationFn: loginAuth,

@@ -83,7 +83,7 @@ const ImageInput: React.FC<ImageInputProps> = React.memo(({
                className="h-64 flex flex-col items-center gap-y-4 justify-center 
                     rounded-2xl ring-[1.5px] ring-graySecondary 
                     dark:bg-[#191820] lg:h-[25rem] cursor-pointer">
-               <img src={previewUrl} alt="" className="size-10 object-cover object-center" />
+               <img src={previewUrl} alt="" className="hidden" />
                <input
                     type="file"
                     ref={fileInputRef}

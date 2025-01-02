@@ -19,7 +19,10 @@ const CustomProductPage = () => {
      const [imageId, setImageId] = React.useState<number>(0)
      const [onPublish, setOnPublish] = React.useState(false)
      const queryClient = useQueryClient()
-     const { data: userData } = useQuery(['user'], () => getUser(''))
+     const { data: userData } = useQuery({
+          queryKey: ['user'],
+          queryFn: () => getUser('')
+     })
 
      const {
           register,
@@ -30,23 +33,22 @@ const CustomProductPage = () => {
           resolver: zodResolver(createProductSchema),
           defaultValues: {
                uuid: uuidv4(),
-               user: userData?.username,
+               user: userData?.id as number,
+               productType: 'Single',
+               imvu: false
           }
      })
 
      React.useEffect(() => {
           if (userData?.id) {
-               setValue('user', userData.username)
+               setValue('user', userData?.id as number)
           }
      }, [setValue, userData])
 
-     const createProductMutation = useMutation({
-          mutationFn: createProductRequest,
-          onSuccess: (data) => {
-               alert('Create product success')
-               console.log('UserId:', userData?.id)
-               console.log('Create product success:', data)
+     const createProductMutation = useMutation(createProductRequest, {
+          onSuccess: () => {
                queryClient.invalidateQueries(['user', userData?.id])
+               setOnPublish(true)
           },
           onError: (error) => {
                console.log('Create product error:', error)
@@ -54,16 +56,24 @@ const CustomProductPage = () => {
      })
 
      const onSubmit = (data: CreateProductSchema) => {
-          createProductMutation.mutate({
-               ...data,
-               references: imageId
-          })
-          setOnPublish(true)
+          if (!createProductMutation.isLoading) {
+               createProductMutation.mutate({
+                    ...data,
+                    user: userData?.id as number,
+                    references: imageId,
+               });
+          }
      }
 
      const handleImageUpload = (url: string, id: number) => {
           setImageUrl(url)
           setImageId(id)
+          setValue('references', id)
+     }
+
+     const handleModalClose = () => {
+          setOnPublish(false)
+          queryClient.clear()
      }
 
      React.useEffect(() => {
@@ -91,6 +101,8 @@ const CustomProductPage = () => {
                          <input type="hidden" {...register('uuid')} />
                          <ProductTypeSelect
                               {...register('productType')}
+                              onBlur={() => setValue('productType', 'Single')}
+                              name="productType"
                               type="product"
                               error={errors.productType}
                          />
@@ -99,19 +111,23 @@ const CustomProductPage = () => {
                               onUploadSuccess={handleImageUpload}
                          />
                          <TextInput
+                              {...register('name')}
+                              type="text"
                               label="product"
                               error={errors.name}
-                              {...register('name')}
                          />
                          <ProductTypeSelect
                               {...register('imvu')}
+                              onBlur={() => setValue('imvu', false)}
+                              name="imvu"
                               type="imvu"
-                              error={errors.user}
+                              error={errors.imvu}
                          />
                          <TextInput
-                              {...register('user')}
+                              type="number"
                               label="user"
                               error={errors.user}
+                              {...register('user')}
                          />
                          <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
                               <RoundedButton title="Cancel" />
@@ -121,7 +137,7 @@ const CustomProductPage = () => {
                </section>
                <ModalPublishCustomProduct
                     isModalOpen={onPublish}
-                    isModalClose={() => setOnPublish(false)} />
+                    isModalClose={handleModalClose} />
           </>
      )
 }

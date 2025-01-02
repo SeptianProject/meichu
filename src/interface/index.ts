@@ -54,3 +54,33 @@ export interface UploadResponse {
      createdAt: string;
      updatedAt: string;
 }
+
+export interface ProductRequestsResponse {
+     data: {
+          id: number;
+          attributes: {
+               name: string;
+               productType: string;
+               imvu: boolean;
+               createdAt: string;
+               references: {
+                    data: {
+                         id: number,
+                         attributes: {
+                              name: string;
+                              url: string;
+                         }
+                    }
+               }
+               user: {
+                    data: {
+                         id: number,
+                         attributes: {
+                              username: string;
+                              email: string;
+                         }
+                    }
+               }
+          };
+     }[]
+}

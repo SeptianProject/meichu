@@ -2,14 +2,15 @@ import React from "react"
 
 type TitleCardEventProps = {
      type: 'event' | 'profile'
+     title?: string
 }
 
-const TitleCardEvent: React.FC<TitleCardEventProps> = React.memo(({ type }) => {
+const TitleCardEvent: React.FC<TitleCardEventProps> = React.memo(({ type, title }) => {
      return (
           <div className="flex items-center justify-between w-full">
                <h1 className="text-[12px] font-semibold dark:text-light
                sm:text-sm md:text-base">
-                    {type === 'event' ? 'Giveaway Assets Chinnese' : 'Eyebrows Cute Style'}
+                    {title ? title : 'Event Title'}
                </h1>
                <button className="font-semibold text-[12px] font-inter 
                text-light bg-bluePrimary w-20 py-[3px] rounded-full

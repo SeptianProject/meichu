@@ -10,7 +10,9 @@ import ProfileDiscover from './ProfileDiscover'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '../../../services/AuthService'
 import useUI from '../../../hooks/useUI'
-import { UserProfile } from '../../../interface'
+import { ProductRequestsResponse, UserProfile } from '../../../interface'
+import { getProductRequests } from '../../../services/ProductService'
+import { getFullImageUrl } from '../../../services/FileUploadService'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -26,22 +28,54 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const [maxHeight, setMaxHeight] = React.useState(0)
    const { screenSize } = useUI()
    const queryClient = useQueryClient()
-   const { data: userData, error, isLoading } = useQuery<UserProfile>({
-      queryKey: ['user'],
-      queryFn: () => getUser('populate=profilePicture'),
-   })
+   const { data: userData
+   } = useQuery<UserProfile>(['user'], () => getUser('populate=profilePicture'))
+   const { data: productRequests
+   } = useQuery<ProductRequestsResponse>(['productRequests'], getProductRequests)
 
    const isMobile = screenSize === 'mobile'
 
    const listCardFavored = React.useMemo(() => Array(6).fill(null).map(() => <CatalogCard type='profile' />), [])
-
-   const listCardRequest = React.useMemo(() => Array(6).fill(null).map(() => <CardEvent type='profile' />), [])
+   const listCardRequest = React.useMemo(() => productRequests?.data.map((product) =>
+      <CardEvent
+         key={product.id}
+         type='event'
+         title={product?.attributes?.name}
+         image={getFullImageUrl(product?.attributes?.references?.data?.attributes?.url)}
+         time={product?.attributes?.createdAt.split('T')[0]}
+      />),
+      [productRequests])
 
    React.useEffect(() => {
+      console.log('product datas: ', productRequests)
       if (profileOpen) {
          queryClient.invalidateQueries({ queryKey: ['user'] })
       }
-   }, [profileOpen, queryClient])
+   }, [profileOpen, queryClient, productRequests])
+
+   const handleSwitchDiscover = () => setIsFavored(!isFavored)
+   const handleTapDiscover = () => setIsTapDiscover(true)
+   const handleBackToProfile = () => setIsTapDiscover(false)
+
+   const renderCardContent = React.useCallback((items: React.ReactNode[]) => (
+      isMobile ? (
+         <Swiper className='w-full'>
+            {items.map((item, index) => (
+               <SwiperSlide key={index} className='px-2 py-5'>
+                  {item}
+               </SwiperSlide>
+            ))}
+         </Swiper>
+      ) : (
+         <div
+            className={`grid ${items === listCardFavored ? 'grid-cols-3' : 'grid-cols-2'} 
+               w-full gap-2 gap-y-5`}>
+            {items.map((item, index) => (
+               <div key={index} className='w-full'>{item}</div>
+            ))}
+         </div>
+      )
+   ), [isMobile, listCardFavored])
 
    React.useEffect(() => {
       const updateMaxHeight = () => {
@@ -67,32 +101,8 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       return () => window.removeEventListener('resize', updateMaxHeight)
    }, [profileOpen])
 
-   const handleSwitchDiscover = () => setIsFavored(!isFavored)
-   const handleTapDiscover = () => setIsTapDiscover(true)
-   const handleBackToProfile = () => setIsTapDiscover(false)
-
-   const renderCardContent = (items: React.ReactNode[]) => (
-      isMobile ? (
-         <Swiper className='w-full'>
-            {items.map((item, index) => (
-               <SwiperSlide key={index} className='px-2 py-5'>
-                  {item}
-               </SwiperSlide>
-            ))}
-         </Swiper>
-      ) : (
-         <div
-            className={`grid ${items === listCardFavored ? 'grid-cols-3' : 'grid-cols-2'} 
-               w-full gap-2 gap-y-5`}>
-            {items.map((item, index) => (
-               <div key={index} className='w-full'>{item}</div>
-            ))}
-         </div>
-      )
-   )
-
-   if (error) return null
-   if (isLoading) return null
+   // if (error) return null
+   // if (isLoading) return null
 
    return (
       <>
@@ -124,7 +134,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      handleBackToProfile={handleBackToProfile}
                      renderCardContent={renderCardContent}
                      listCardFavored={listCardFavored}
-                     listCardRequest={listCardRequest}
+                     listCardRequest={listCardRequest || []}
                   />
                </div>
             </div>

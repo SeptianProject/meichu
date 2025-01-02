@@ -18,7 +18,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({ type }) => {
                dark:bg-[#302F35] dark:border-transparent cursor-pointer
                p-5 rounded-2xl h-full w-full hover:-translate-y-3
                transition-all duration-500
-               ${type === 'catalog' ? 'md:p-5 xl:pb-10' : 'md:p-3'}`}>
+               ${type === 'catalog' ? 'md:p-5' : 'md:p-3'}`}>
                <HeaderProductCatalog type={type} />
                <ImageContentCatalog type={type} />
                <CreditFooterCatalog type={type} />

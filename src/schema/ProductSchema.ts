@@ -2,9 +2,9 @@ import { z } from "zod";
 
 export const createProductSchema = z.object({
      uuid: z.string().uuid(),
-     user: z.string(),
+     user: z.number(),
      name: z.string(),
-     productType: z.string(),
+     productType: z.enum(['Single', 'Bundle']),
      references: z.number(),
      imvu: z.boolean()
 })
