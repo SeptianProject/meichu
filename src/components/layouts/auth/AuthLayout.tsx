@@ -25,7 +25,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = React.memo(({
                transition-all duration-500 ease-in-out lg:w-1/2 lg:rounded-3xl ${className}
                ${isModalOpen && !isAnimating ? 'z-50 opacity-100 scale-100' : 'z-0 opacity-0 scale-0'}`}>
                     <div className="relative flex items-center justify-center size-full overflow-hidden pb-5">
-                         <div className="bg-[#8474DB]/10 absolute -top-10 -right-28 size-80 rounded-full blur-2xl" />
+                         <div className="bg-[#8474DB]/10 absolute -top-10 -z-30 -right-28 size-80 rounded-full blur-2xl" />
                          <BiX onClick={isModalClose} className="text-dark dark:text-light size-10 top-4 left-5 absolute cursor-pointer" />
                          <div className="flex flex-col items-center gap-y-4">
                               {children}

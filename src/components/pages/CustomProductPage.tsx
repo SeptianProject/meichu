@@ -1,7 +1,7 @@
 import TextTagline from "../fragments/home/TextTagline"
 import TextInput from "../fragments/customProduct/TextInput"
 import RouteHistory from "../layouts/RouteHistory"
-import ChooseTypeProduct from "../layouts/customProduct/ChooseTypeProduct"
+import ProductTypeSelect from "../layouts/customProduct/ProductTypeSelect"
 import UploadImageProduct from "../layouts/customProduct/UploadImageProduct"
 import React from "react"
 import ModalPublishCustomProduct from "../layouts/customProduct/ModalPublishCustomProduct"
@@ -12,16 +12,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createProductRequest } from "../../services/ProductService"
 import RoundedButton from "../elements/buttons/RoundedBtn"
 import { getUser } from "../../services/AuthService"
-import { UserProfile } from "../../interface"
 import { v4 as uuidv4 } from "uuid"
 
 const CustomProductPage = () => {
+     const [imageUrl, setImageUrl] = React.useState<string>("")
+     const [imageId, setImageId] = React.useState<number>(0)
      const [onPublish, setOnPublish] = React.useState(false)
      const queryClient = useQueryClient()
-     const { data: userData } = useQuery<UserProfile>({
-          queryKey: ['user'],
-          queryFn: () => getUser('')
-     })
+     const { data: userData } = useQuery(['user'], () => getUser(''))
 
      const {
           register,
@@ -56,8 +54,16 @@ const CustomProductPage = () => {
      })
 
      const onSubmit = (data: CreateProductSchema) => {
-          createProductMutation.mutate(data)
+          createProductMutation.mutate({
+               ...data,
+               references: imageId
+          })
           setOnPublish(true)
+     }
+
+     const handleImageUpload = (url: string, id: number) => {
+          setImageUrl(url)
+          setImageId(id)
      }
 
      React.useEffect(() => {
@@ -83,27 +89,29 @@ const CustomProductPage = () => {
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-16">
                          <input type="hidden" {...register('uuid')} />
-                         <ChooseTypeProduct
-                              type="product"
+                         <ProductTypeSelect
                               {...register('productType')}
+                              type="product"
+                              error={errors.productType}
                          />
                          <UploadImageProduct
-                              currentImageUrl=""
-                         // onUploadSuccess={(imageUrl: string, imageId: number) => setValue('references', imageUrl)}
+                              currentImageUrl={imageUrl}
+                              onUploadSuccess={handleImageUpload}
                          />
                          <TextInput
                               label="product"
                               error={errors.name}
                               {...register('name')}
                          />
-                         <ChooseTypeProduct
-                              type="imvu"
+                         <ProductTypeSelect
                               {...register('imvu')}
+                              type="imvu"
+                              error={errors.user}
                          />
                          <TextInput
+                              {...register('user')}
                               label="user"
                               error={errors.user}
-                              {...register('user')}
                          />
                          <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
                               <RoundedButton title="Cancel" />

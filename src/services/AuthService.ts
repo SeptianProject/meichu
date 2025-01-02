@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { LoginFormSchema, RegisterFormSchema } from '../schema/AuthSchema';
-import { apiUrl, token, userId } from '.';
+import { apiUrl } from '.';
 
 export const registerAuth = async (data: Pick<RegisterFormSchema, 'email' | 'password' | 'username'>) => {
      const response = await axios.post(`${apiUrl}/auth/local/register`, data)
@@ -13,8 +13,11 @@ export const loginAuth = async (data: Pick<LoginFormSchema, 'identifier' | 'pass
 }
 
 export const getUser = async (params?: string) => {
+     const token = localStorage.getItem('authToken')
+     const userId = localStorage.getItem('userId')
+
      if (!token || !userId) {
-          throw new Error("User not authenticated");
+          throw new Error('Token or userId not found')
      }
 
      const response = await axios.get(`${apiUrl}/users/${userId}?${params}`, {

@@ -15,6 +15,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({ currentImageUrl
                     desc="They All Serve The Same Purpose, But Each One Takes.But Each One Takes A Different Approach And Makes Different Tradeoffs." />
                <ImageInput
                     currentImageUrl={currentImageUrl}
+                    maxSizeMb={100}
                     onUploadSuccess={(imageUrl: string, imageId: number) => onUploadSuccess!(imageUrl, imageId)}
                />
           </div>

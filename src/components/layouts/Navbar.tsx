@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React from "react"
 import NavButton from "../elements/buttons/NavBtn"
 import NavIcon from "../elements/NavIcon"
 import HamburgerMenu from "../fragments/nav/HamburgerMenu"
@@ -10,13 +10,19 @@ import { assetItems } from "../../assets/AnotherAssets"
 import { useAppDispatch, useAppSelector } from "../../redux/hook"
 import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSlice"
 import useUI from "../../hooks/useUI"
+import { useQuery } from "@tanstack/react-query"
+import { getUser } from "../../services/AuthService"
+import { UserProfile } from "../../interface"
+import { getFullImageUrl } from "../../services/FileUploadService"
 
 const Navbar = () => {
-     const [hamburgerActive, setHamburgerActive] = useState(false)
-     const [contactActive, setContactActive] = useState(false)
+     const [hamburgerActive, setHamburgerActive] = React.useState(false)
+     const [contactActive, setContactActive] = React.useState(false)
+     const [avatar, setAvatar] = React.useState<string | undefined>('')
      const { mode, toggleDarkMode } = useUI()
-     const { token } = useAppSelector((state) => state.auth)
+     const { token, userId } = useAppSelector((state) => state.auth)
      const dispatch = useAppDispatch()
+     const { data: dataUser } = useQuery<UserProfile>(['user'], () => getUser('populate=profilePicture'))
 
      const isDarkMode = mode === 'dark'
 
@@ -27,8 +33,17 @@ const Navbar = () => {
                dispatch(setIsAuthModalOpen(true))
           }
      }
+     React.useEffect(() => {
+          const handleUserProfile = () => {
+               if (token && userId || dataUser) {
+                    setAvatar(getFullImageUrl(dataUser?.profilePicture?.url || ''))
+               } else {
+                    setAvatar(assetItems.Profile)
+               }
+          }
 
-     useEffect(() => {
+          handleUserProfile()
+
           const handleHideHamburger = () => {
                if (window.scrollY > 0) {
                     setHamburgerActive(false)
@@ -36,7 +51,7 @@ const Navbar = () => {
           }
           window.addEventListener('scroll', handleHideHamburger)
           return () => window.removeEventListener('scroll', handleHideHamburger)
-     }, [])
+     }, [dataUser, token, userId])
 
 
      return (
@@ -64,7 +79,9 @@ const Navbar = () => {
                     <HamburgerMenu
                          isActive={hamburgerActive}
                          handleActive={() => setHamburgerActive(!hamburgerActive)} />
-                    <NavIcon icon={assetItems.Profile} onClick={handleOpenModal} />
+                    <NavIcon
+                         image={avatar}
+                         onClick={handleOpenModal} />
                </div>
           </nav>
      )

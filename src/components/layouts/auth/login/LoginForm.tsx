@@ -10,8 +10,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { loginAuth } from "../../../../services/AuthService.ts";
-import { useAppDispatch } from "../../../../redux/hook.ts";
 import { login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
+import { useAppDispatch } from "../../../../redux/hook.ts";
 
 interface LoginFormProps {
      showPassword: boolean;
@@ -26,12 +26,12 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      onProfile,
      onForgotPassword
 }) => {
-     const dispatch = useAppDispatch()
      const {
           register,
           handleSubmit,
           formState: { errors }
      } = useForm<LoginFormSchema>({ resolver: zodResolver(loginFormSchema) })
+     const dispatch = useAppDispatch()
 
      const loginMutation = useMutation({
           mutationFn: loginAuth,
@@ -45,7 +45,6 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
           },
           onError: (error) => {
                console.log('Login error:', error)
-               alert('Login error')
           }
      })
 

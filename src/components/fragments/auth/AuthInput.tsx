@@ -3,7 +3,7 @@ import { FieldError } from "react-hook-form";
 import { IconType } from "react-icons";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
-interface AuthInputProps {
+interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
      icon: IconType;
      placeholder: string;
      type: string;
@@ -19,6 +19,7 @@ const AuthInput = React.memo(React.forwardRef<HTMLInputElement, AuthInputProps>(
      showPassword,
      onTogglePassword,
      error,
+     ...props
 }, ref) => {
      const inputType = type === 'password' && showPassword ? 'text' : type;
 
@@ -36,6 +37,7 @@ const AuthInput = React.memo(React.forwardRef<HTMLInputElement, AuthInputProps>(
                               autoComplete="on"
                               type={inputType}
                               placeholder={placeholder}
+                              {...props}
                               className={`border-none outline-none font-medium
                                    font-poppins placeholder:text-[12px] text-[12px]
                                    text-dark/90 placeholder:text-dark/80
