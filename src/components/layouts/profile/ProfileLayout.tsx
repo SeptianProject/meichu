@@ -47,9 +47,9 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       [productRequests])
 
    React.useEffect(() => {
-      console.log('product datas: ', productRequests)
       if (profileOpen) {
          queryClient.invalidateQueries({ queryKey: ['user'] })
+         queryClient.invalidateQueries({ queryKey: ['productRequests'] })
       }
    }, [profileOpen, queryClient, productRequests])
 
