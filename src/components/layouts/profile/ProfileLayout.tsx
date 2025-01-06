@@ -28,8 +28,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const [maxHeight, setMaxHeight] = React.useState(0)
    const { screenSize } = useUI()
    const queryClient = useQueryClient()
-   const { data: userData
-   } = useQuery<UserProfile>(['user'], () => getUser('populate=profilePicture'))
+   const { data: userData } = useQuery<UserProfile>(['user'], () => getUser('populate=profilePicture'))
    const { data: productRequests
    } = useQuery<ProductRequestsResponse>(['productRequests'], getProductRequests)
 

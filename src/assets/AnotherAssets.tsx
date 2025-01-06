@@ -1,4 +1,5 @@
 import MeichuLogo from './images/meichu-bundle/meichu-logo.png'
+import DarkImvuPlus from './images/imvu/dark-imvuPlus.svg'
 import DarkImvu from './images/imvu/dark-imvu.svg'
 import LightImvu from './images/imvu/light-imvu.svg'
 import Profile from './images/another/profile.svg'
@@ -16,7 +17,7 @@ import EventImage from './images/another/event-image.png'
 import EditIcon from './images/another/edit-icon.svg'
 
 export const assetItems = {
-     MeichuLogo, Profile, AnyIcon, DarkImvu, LightImvu, EventImage,
+     MeichuLogo, Profile, AnyIcon, DarkImvuPlus, DarkImvu, LightImvu, EventImage,
      DarkSingleEmoji, DarkDuoEmoji, LightSingleEmoji, LightDuoEmoji,
      EditIcon
 }

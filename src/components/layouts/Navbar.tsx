@@ -36,7 +36,8 @@ const Navbar = () => {
      React.useEffect(() => {
           const handleUserProfile = () => {
                if (token && userId || dataUser) {
-                    setAvatar(getFullImageUrl(dataUser?.profilePicture?.url || ''))
+                    const imageUrl = dataUser?.profilePicture?.url
+                    setAvatar(imageUrl ? getFullImageUrl(imageUrl) : assetItems.Profile)
                } else {
                     setAvatar(assetItems.Profile)
                }

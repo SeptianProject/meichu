@@ -1,4 +1,4 @@
-import BtnBorderGradient from "../elements/buttons/BorderGradientBtn"
+import ButtonBorderGradient from "../elements/buttons/ButtonBorderGradient"
 import TextTagline from "../fragments/home/TextTagline"
 import MainContentBA from "../layouts/brand/MainContentBA"
 import RouteHistory from "../layouts/RouteHistory"
@@ -16,7 +16,7 @@ const BrandPage = () => {
                </div>
                <div className="flex flex-col items-center gap-y-16">
                     <MainContentBA />
-                    <BtnBorderGradient onClick={() => { }} />
+                    <ButtonBorderGradient onClick={() => { }} />
                </div>
           </section>
      )

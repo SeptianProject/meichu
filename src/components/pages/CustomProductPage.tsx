@@ -10,14 +10,16 @@ import { createProductSchema, CreateProductSchema } from "../../schema/ProductSc
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createProductRequest } from "../../services/ProductService"
-import RoundedButton from "../elements/buttons/RoundedBtn"
 import { getUser } from "../../services/AuthService"
 import { v4 as uuidv4 } from "uuid"
+import Button from "../elements/buttons/Button"
+import { useNavigate } from "react-router-dom"
 
 const CustomProductPage = () => {
      const [imageUrl, setImageUrl] = React.useState<string>("")
      const [imageId, setImageId] = React.useState<number>(0)
      const [onPublish, setOnPublish] = React.useState(false)
+     const navigate = useNavigate()
      const queryClient = useQueryClient()
      const { data: userData } = useQuery({
           queryKey: ['user'],
@@ -130,8 +132,17 @@ const CustomProductPage = () => {
                               {...register('user')}
                          />
                          <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
-                              <RoundedButton title="Cancel" />
-                              <RoundedButton type="submit" title="Publish" />
+                              <Button
+                                   isCancel
+                                   isGradient={false}
+                                   title="Cancel"
+                                   onClick={() => navigate('/')}
+                              />
+                              <Button
+                                   isGradient
+                                   type="submit"
+                                   title="Publish"
+                              />
                          </div>
                     </form>
                </section>

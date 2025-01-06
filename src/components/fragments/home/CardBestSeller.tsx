@@ -9,10 +9,9 @@ const CardBestSeller = () => {
      return (
           <div
                onClick={() => navigate('/catalog-detail')}
-               className='bg-transparent border border-[#5E5A5A] 
-          dark:bg-[#48484D] bg-opacity-50 w-full p-5 rounded-3xl
-          flex flex-col items-start gap-y-5 cursor-pointer
-          hover:-translate-y-3 transition-all duration-500 h-[21rem]'>
+               className='bg-transparent dark:bg-cardBackground bg-opacity-50 w-full p-5 
+               rounded-3xl flex flex-col items-start gap-y-5 cursor-pointer
+               hover:-translate-y-3 transition-all duration-500 h-[21rem]'>
                {/* photo & typograph */}
                <div className='flex items-center gap-x-4'>
                     <img className='rounded-full size-14'

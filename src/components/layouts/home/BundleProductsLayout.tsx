@@ -17,9 +17,12 @@ const BundleProductsLayout = () => {
                          bundleProducts={bundleProducts}
                          swiperRef={swiperRef}
                     />
-                    <div className="absolute -z-10 top-60 left-0 w-[100vw] h-[40vh]
-                         bg-gradient-to-r from-light via-[#7C64B0]/75 to-[#6A45BE]/75
-                         dark:from-transparent dark:to-[#312058] lg:h-[50vh] lg:top-40 lg:bottom-0" />
+                    <div className="absolute -z-10 top-[23.5rem] -right-7 w-[100vw] h-[8rem]
+                         bg-gradient-to-t from-yellowBloobs via-yellowBloobs/30 to-transparent 
+                         via-50% to-100%
+                         lg:bg-gradient-to-br lg:from-[#D59A29]/30 lg:to-transparent 
+                         lg:to-40%
+                         lg:h-[50vh] lg:top-40 lg:w-[70vw] lg:bottom-0 lg:right-0" />
                     <div className="hidden absolute w-fit -right-10 top-20 lg:flex items-center justify-end gap-x-5">
                          <ArrowCardCarousel
                               icon={LuChevronLeft}

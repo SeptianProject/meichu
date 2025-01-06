@@ -34,15 +34,13 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                               lg:text-dark lg:dark:text-light cursor-pointer
                               lg:tracking-wider transition-all duration-300
                               ${location.pathname === item.link
-                                             ? 'text-lg lg:text-base font-semibold text-opacity-100 xl:text-lg  group-active:font-semibold'
+                                             ? 'text-lg lg:text-base font-semibold text-opacity-100 xl:text-lg group-active:font-semibold'
                                              : 'text-base lg:text-sm text-opacity-75 xl:text-base'}
                               `}>
                                    {item.name}
                               </Link>
-                              <div className={`absolute h-[3px] rounded-full
-                              bg-gradient-to-r from-[#6A45BE] to-transparent
-                              dark:to-[#312058] dark:to-50 transition-all duration-500
-                              ease-in-out
+                              <div className={`absolute h-[2px] rounded-full bg-gold 
+                              transition-all duration-500 ease-in-out
                               ${location.pathname === item.link
                                         ? 'w-full'
                                         : 'w-0 group-hover:w-full'}`} />

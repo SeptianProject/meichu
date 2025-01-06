@@ -8,7 +8,7 @@ type TimeCardEventProps = {
 const TimeCardEvent: React.FC<TimeCardEventProps> = ({ time }) => {
      return (
           <div className="flex items-center gap-x-3">
-               <BsClock className="text-bluePrimary size-4 md:size-6" />
+               <BsClock className="text-yellowLinear1 size-4 md:size-6" />
                <p className="text-xs font-light text-opacity-80 dark:text-light
                          dark:text-opacity-80 sm:text-sm">
                     {time ? time : 'Feb 25, 2024'}

@@ -47,8 +47,8 @@ const CircleMoveAnimation: React.FC<CircleMoveAnimationProps> = ({
                <motion.span
                     animate="visible"
                     variants={moveVariants}
-                    className={`bg-[#8474DB]/15 size-60 lg:size-[30rem] absolute
-               rounded-full blur-[50px] pointer-events-none
+                    className={`bg-circle-gold bg-opacity-10 size-60 lg:size-[30rem] absolute
+               rounded-full blur-[80px] pointer-events-none
                ${initialPosition === 'right' ? 'right-0' : 'left-0'}`}>
                </motion.span>
           </motion.div>

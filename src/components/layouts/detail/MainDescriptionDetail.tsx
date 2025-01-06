@@ -1,6 +1,7 @@
 import React from "react";
 import TextTagline from "../../fragments/home/TextTagline";
-import RoundedButton from "../../elements/buttons/RoundedBtn";
+import GradientButton from "../../elements/buttons/Button";
+import { useNavigate } from "react-router-dom";
 
 interface MainDescriptionDetailProps {
      onBuyCLick: () => void;
@@ -9,6 +10,8 @@ interface MainDescriptionDetailProps {
 const MainDescriptionDetail: React.FC<MainDescriptionDetailProps> = React.memo(({
      onBuyCLick
 }) => {
+     const navigate = useNavigate();
+
      return (
           <div className="space-y-10 lg:space-y-5 w-full">
                <div className="space-y-4 lg:max-w-80">
@@ -29,13 +32,19 @@ const MainDescriptionDetail: React.FC<MainDescriptionDetailProps> = React.memo((
                     <p className="dark:text-light/70 text-lg font-light">$70000</p>
                </div>
                <div className="flex items-center gap-x-5 pb-10">
-                    <RoundedButton
+                    <GradientButton
+                         isGradient
                          title="Buy Now!"
                          onClick={onBuyCLick}
-                         className="lg:w-52" />
-                    <RoundedButton
+                         className="lg:w-52"
+                    />
+                    <GradientButton
+                         isCancel
+                         isGradient={false}
                          title="Cancel"
-                         className="lg:w-52" />
+                         onClick={() => navigate('/')}
+                         className="lg:w-52"
+                    />
                </div>
           </div>
      );

@@ -42,7 +42,7 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                {
                     value: true,
                     label: 'IMVU+',
-                    icon: getIcon(assetItems.DarkImvu, assetItems.LightImvu)
+                    icon: getIcon(assetItems.DarkImvuPlus, assetItems.LightImvu)
                },
                {
                     value: false,
@@ -66,8 +66,8 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                <TitleDesc
                     title={type === 'product' ? "Custom Product Type For Custom" : "Choose Type Product"}
                     desc={type === 'product'
-                         ? "They All Serve The Same Purpose, But Each One Takes."
-                         : "They All Serve The Same Purpose"}
+                         ? "Custom Products Perfectly Tailored Just for You."
+                         : "You can choose the type of product you want such as imvu+ and non imvu+. The difference is only that imvu+ looks higher quality and HD, While non imvu+ is standard."}
                />
                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                     {options.map((option) => (
@@ -84,11 +84,14 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                                    onBlur={onBlur}
                                    className="hidden"
                               />
-                              <div className={`p-4 flex items-center gap-x-4 w-full rounded-lg border-none transition-all
+                              <div className={`p-4 flex items-center gap-x-4 w-full rounded-2xl 
+                              border-none transition-all
                               ${value === option.value
                                         ? 'dark:bg-[#1F1F2C] ring ring-purplePrimary dark:ring-yellow-500'
-                                        : 'dark:bg-[#191820] ring-[1.5px] ring-graySecondary/80'}`}>
-                                   <img src={option.icon} alt={option.label} className="w-10 h-10" />
+                                        : 'dark:bg-dark ring-[1.5px] ring-graySurface1'}`}>
+                                   <div className="bg-graySurface2 p-2 rounded-lg w-20 h-full flex justify-center">
+                                        <img src={option.icon} alt={option.label} className="size-10" />
+                                   </div>
                                    <span className="font-medium text-white/80">
                                         {option.label}
                                    </span>

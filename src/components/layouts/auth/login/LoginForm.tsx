@@ -4,7 +4,6 @@ import AuthInput from "../../../fragments/auth/AuthInput.tsx";
 import AuthButton from "../../../fragments/auth/AuthButton.tsx";
 import AuthBadgeButton from "../../../fragments/auth/AuthBadgeButton.tsx";
 import React from "react";
-import ForgotPasswordBtn from "../../../elements/buttons/ForgotPaswordBtn.tsx";
 import { loginFormSchema, LoginFormSchema } from "../../../../schema/AuthSchema.ts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -75,7 +74,12 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                          />
                     </div>
                     <div className="">
-                         <ForgotPasswordBtn onClick={onForgotPassword} />
+                         <button
+                              onClick={onForgotPassword}
+                              className="text-dark/80 dark:text-[#A78CE4] 
+                              text-xs lg:text-sm font-medium">
+                              Forgot Password?
+                         </button>
                     </div>
                </div>
                <AuthButton text="Login" type="submit" />

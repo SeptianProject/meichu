@@ -31,12 +31,12 @@ const MainBundleCarousel: React.FC<MainBundleCarouselProps> = React.memo(({
                                    <BounceAnimation
                                         delayVal={0.8}
                                         hiddenCoordinates={{ x: -50 }}
-                                        className="rounded-tl-[12rem] md:rounded-tl-[15rem] lg:rounded-t-full">
-                                        <img className="rounded-tl-[12rem] object-cover object-center border-4 
-                                        border-[#5E5A5A] md:rounded-tl-[15rem] lg:rounded-t-full
-                                        w-full h-[24rem] max-w-[65vw] sm:h-[25rem] sm:max-w-[70vw]
-                                        md:h-[28rem] md:max-w-[22rem] lg:h-[30rem] 
-                                        xl:h-[34rem] lg:max-w-[22rem] xl:max-w-[24rem]"
+                                        className="rounded-3xl">
+                                        <img className="rounded-3xl object-cover object-center 
+                                        border-4 border-[#5E5A5A] w-full h-[22rem] max-w-[65vw] 
+                                        sm:h-[25rem] sm:max-w-[70vw] md:h-[28rem] 
+                                        md:max-w-[22rem] lg:h-[30rem] xl:h-[34rem] 
+                                        lg:max-w-[22rem] xl:max-w-[24rem]"
                                              src={product.main}
                                              alt={`${product.name} Bundle`} />
                                    </BounceAnimation>

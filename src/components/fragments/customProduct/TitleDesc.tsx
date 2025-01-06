@@ -11,7 +11,7 @@ const TitleDesc: FC<TitleDescProps> = React.memo(({ desc, title }) => {
                <h3 className="dark:text-light font-semibold text-xl">
                     {title}
                </h3>
-               <p className="dark:text-light font-extralight text-opacity-80">
+               <p className="dark:text-light/50 font-light text-opacity-60">
                     {desc}
                </p>
           </div>

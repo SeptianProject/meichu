@@ -1,6 +1,5 @@
 import React from 'react'
 import { FaHeart } from 'react-icons/fa'
-import { assetItems } from '../../../assets/AnotherAssets'
 import { useAppSelector } from '../../../redux/hook'
 import { RootState } from '../../../redux/store'
 
@@ -41,9 +40,6 @@ const HeaderProductCatalog: React.FC<HeaderProductCatalogProps> = React.memo(({ 
                     </div>
                </div>
                <div className='flex items-center gap-x-2 my-2'>
-                    <img className={`rounded-full size-9 cursor-pointer 
-                    ${type === 'catalog' ? 'md:size-12' : ''}`}
-                         src={assetItems.AnyIcon} alt="" />
                     <h4 className={`dark:text-light text-sm font-medium
                     ${type === 'catalog' ? 'md:text-base' : ''}`}>
                          @Meichu

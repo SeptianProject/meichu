@@ -12,7 +12,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({ currentImageUrl
           <div className="space-y-8">
                <TitleDesc
                     title="Upload Your Product"
-                    desc="They All Serve The Same Purpose, But Each One Takes.But Each One Takes A Different Approach And Makes Different Tradeoffs." />
+                    desc="Send the reference photo you want for custom product." />
                <ImageInput
                     currentImageUrl={currentImageUrl}
                     maxSizeMb={100}

@@ -80,9 +80,8 @@ const ImageInput: React.FC<ImageInputProps> = React.memo(({
      return (
           <div
                onClick={triggerFileInput}
-               className="h-64 flex flex-col items-center gap-y-4 justify-center 
-                    rounded-2xl ring-[1.5px] ring-graySecondary 
-                    dark:bg-[#191820] lg:h-[25rem] cursor-pointer">
+               className="h-64 flex flex-col items-center gap-y-4 justify-center rounded-2xl 
+               ring-[1.5px] ring-graySurface1 dark:bg-dark lg:h-[25rem] cursor-pointer">
                <img src={previewUrl} alt="" className="hidden" />
                <input
                     type="file"
@@ -90,13 +89,13 @@ const ImageInput: React.FC<ImageInputProps> = React.memo(({
                     onChange={handleFileChange}
                     accept="image/png, image/gif, image/webp, video/mp4, audio/mp3"
                     className="hidden" />
-               <IoCloudUpload className="size-16 lg:size-28 text-graySecondary/50 dark:text-[#353541]" />
+               <IoCloudUpload className="size-16 lg:size-28 text-graySecondary/50 dark:text-graySurface2" />
                <div className="text-center space-y-2">
-                    <h1 className="text-xl dark:text-light font-semibold lg:text-2xl">
+                    <h1 className="text-xl dark:text-light font-semibold ">
                          {selectedFile ? "File Name: " + selectedFile.name : "Drag your item to upload"}
                     </h1>
                     <p className="text-xs font-light tracking-wider text-graySecondary 
-                    lg:text-sm dark:text-light">
+                    lg:text-sm dark:text-light/60">
                          PNG, GIF, WebP, MP4 Or MP3. Maximum File Size 100 Mb,
                          Current Size ({selectedFile && (selectedFile.size / 1024 / 1024).toFixed(2)} Mb)
                     </p>

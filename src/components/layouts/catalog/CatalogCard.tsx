@@ -15,7 +15,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({ type }) => {
           <div
                onClick={type === 'catalog' ? () => navigate('/catalog-detail') : undefined}
                className={`bg-transparent border border-[#5E5A5A] 
-               dark:bg-[#302F35] dark:border-transparent cursor-pointer
+               dark:bg-cardBackground dark:border-transparent cursor-pointer
                p-5 rounded-2xl h-full w-full hover:-translate-y-3
                transition-all duration-500
                ${type === 'catalog' ? 'md:p-5' : 'md:p-3'}`}>

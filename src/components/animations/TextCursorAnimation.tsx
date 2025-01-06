@@ -52,8 +52,8 @@ const TextCursorAnimation: React.FC<TextCursorAnimationProps> = ({ words, classN
                     </motion.span>
                </AnimatePresence>
                <motion.span
-                    className={`inline-block bg-dark dark:bg-white ml-1
-                         ${words.includes('dreams!') ? 'w-[2px] h-6 lg:h-8' : 'w-[2px] h-4 lg:w-1 lg:h-10'}`}
+                    className={`inline-block bg-gold ml-1
+                         ${words.includes('dreams!') ? 'w-1 h-6 lg:h-8' : 'w-1 h-4 lg:h-10'}`}
                     animate={{
                          opacity: [1, 0],
                          transition: {

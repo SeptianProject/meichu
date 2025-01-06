@@ -21,14 +21,15 @@ const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(
                     </h1>
                     <input
                          ref={ref}
-                         autoComplete="on"
+                         autoComplete="off"
                          type={type}
                          placeholder={label === 'product'
-                              ? 'E.G Redeemable T-Shirt With Logo'
-                              : 'Ex: Septianzz'}
+                              ? 'Enter your text here'
+                              : 'Ex: Meichu'}
                          {...props}
-                         className={`text-dark font-poppins ring-[1.5px] w-full py-8 rounded-2xl px-10 bg-transparent outline-none border-none 
-                         dark:bg-[#191820] dark:text-light dark:text-opacity-70
+                         className={`text-dark font-poppins ring-[1.5px] w-full py-8 
+                              rounded-2xl px-10 bg-transparent outline-none border-none 
+                         dark:bg-dark dark:text-light dark:text-opacity-70
                          transition-all duration-300 focus:ring-[2.5px]
                          ${error ? 'ring-redDanger' : 'ring-graySecondary'}`} />
                     {error && <p className="text-redDanger text-[12px] text-start">{error.message}</p>}

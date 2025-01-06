@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import BounceAnimation from "../../animations/BounceAnimation"
 import TextCursorAnimation from "../../animations/TextCursorAnimation"
-import ButtonToCustomProduct from "../../fragments/home/ButtonToCustomProduct"
 import CardProductAnimate from "../../fragments/home/CardProductAnimate"
+import Button from "../../elements/buttons/Button"
 
 const CustomProductsLayout = () => {
      const navigate = useNavigate()
@@ -20,7 +20,7 @@ const CustomProductsLayout = () => {
                               Make it the style of your
                               <TextCursorAnimation
                                    words={['dreams!']}
-                                   className="text-bluePrimary ml-1 lg:w-fit"
+                                   className="text-gold ml-1 lg:w-fit"
                               />
                          </h1>
                     </BounceAnimation>
@@ -36,16 +36,21 @@ const CustomProductsLayout = () => {
                          <BounceAnimation
                               delayVal={0.8}
                               hiddenCoordinates={{ y: -50 }}>
-                              <ButtonToCustomProduct
+                              <Button
+                                   isGradient
+                                   title="Custom Product"
                                    onClick={() => navigate("/custom-product")}
-                                   text="Custom Product" />
+                              />
                          </BounceAnimation>
                          <BounceAnimation
                               delayVal={0.8}
                               hiddenCoordinates={{ y: 50 }}>
-                              <ButtonToCustomProduct
+                              <Button
+                                   isCancel={false}
+                                   isGradient={false}
+                                   title="More Product"
                                    onClick={() => navigate("/catalog")}
-                                   text="More Product" />
+                              />
                          </BounceAnimation>
                     </div>
                </div>

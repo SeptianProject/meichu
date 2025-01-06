@@ -1,6 +1,6 @@
 import React from "react"
 import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation"
-import BtnBorderGradient from "../../elements/buttons/BorderGradientBtn"
+import ButtonBorderGradient from "../../elements/buttons/ButtonBorderGradient"
 import CardEvent from "../../fragments/event/CardEvent"
 
 const cardEvent = <CardEvent type="event" />
@@ -23,7 +23,7 @@ const MainContentEvent = () => {
                <ContainerStaggerAnimation
                     initialDelay={0.5}
                     staggerDelay={0.4}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                     {listCardEvent.map((item, index) => (
                          <CardStaggerAnimation
                               key={index}
@@ -33,7 +33,7 @@ const MainContentEvent = () => {
                          </CardStaggerAnimation>
                     ))}
                </ContainerStaggerAnimation>
-               <BtnBorderGradient onClick={() => { }} />
+               <ButtonBorderGradient onClick={() => { }} />
           </div>
      )
 }

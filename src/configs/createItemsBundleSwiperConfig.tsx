@@ -10,7 +10,7 @@ export const createItemsBundleSwiperConfig = () => {
           loopedSlides: 1,
           coverflowEffect: {
                rotate: 0,
-               stretch: -25,
+               stretch: -20,
                depth: 100,
                modifier: 2.5,
                slideShadows: false

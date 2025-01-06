@@ -1,5 +1,5 @@
 import React from 'react'
-import BtnBorderGradient from '../../elements/buttons/BorderGradientBtn'
+import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import CatalogCard from './CatalogCard'
 import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
@@ -12,10 +12,7 @@ interface CatalogCardsProps {
 const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type }) => {
      const { screenSize } = useUI()
      const navigate = useNavigate()
-     const listCatalog = React.useMemo(() =>
-          Array(9).fill(null).map(() => <CatalogCard type='catalog' />),
-          []
-     )
+     const listCatalog = React.useMemo(() => Array(9).fill(null).map(() => <CatalogCard type='catalog' />), [])
 
      const displayedCards = screenSize === 'mobile'
           ? listCatalog.slice(0, 2)
@@ -38,9 +35,9 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type }) => {
                     ))}
                </ContainerStaggerAnimation>
                {type === 'homePage'
-                    ? <BtnBorderGradient onClick={() => navigate('/catalog')} />
+                    ? <ButtonBorderGradient onClick={() => navigate('/catalog')} />
                     : screenSize === 'mobile'
-                         ? <BtnBorderGradient onClick={() => navigate('/catalog')} />
+                         ? <ButtonBorderGradient onClick={() => navigate('/catalog')} />
                          : null
                }
           </div>

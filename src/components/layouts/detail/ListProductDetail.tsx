@@ -1,5 +1,5 @@
 import CatalogCard from '../catalog/CatalogCard'
-import BtnBorderGradient from '../../elements/buttons/BorderGradientBtn'
+import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import React from 'react'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 
@@ -41,7 +41,7 @@ const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({
                               </CardStaggerAnimation>
                          ))}
                     </ContainerStaggerAnimation>
-                    <BtnBorderGradient onClick={onLoadMore} />
+                    <ButtonBorderGradient onClick={onLoadMore} />
                </div>
           </div>
      )

@@ -23,6 +23,33 @@ p {
   @apply text-dark;
 }
 
+.text-gold {
+  background: linear-gradient(
+    to right,
+    #865319 9%,
+    #fac561 37%,
+    #a27201 48%,
+    #865319 56%,
+    #ecb859 65%,
+    #a07002 79%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-circle-gold {
+  background: linear-gradient(
+    to right,
+    #865319 9%,
+    #fac561 37%,
+    #a27201 48%,
+    #865319 56%,
+    #ecb859 65%,
+    #a07002 79%
+  );
+  opacity: 0.1;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0);
