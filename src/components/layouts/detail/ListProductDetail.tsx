@@ -7,7 +7,7 @@ interface ListProductDetailProps {
      onLoadMore: () => void
 }
 
-const catalogCard = <CatalogCard type="catalog" />
+const catalogCard = <CatalogCard isFavored={false} />
 
 const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({
      onLoadMore
