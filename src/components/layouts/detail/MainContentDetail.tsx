@@ -25,7 +25,7 @@ const MainContentDetail: React.FC<ImageContent> = React.memo(({
                style={{ backgroundImage: `url(${contentActive})` }}
                className="w-full h-[22rem] rounded-2xl bg-cover bg-center 
                transition-all duration-500 flex flex-col items-start justify-center
-               gap-y-5 p-5 lg:h-[40rem]">
+               gap-y-5 p-5 lg:h-[38rem]">
                <AnimatePresence>
                     {images.map((image) => (
                          <ScaleAnimation key={image.id}>

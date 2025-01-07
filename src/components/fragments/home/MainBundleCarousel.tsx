@@ -23,25 +23,23 @@ const MainBundleCarousel: React.FC<MainBundleCarouselProps> = React.memo(({
      return (
           <div className='w-full pb-5'>
                <Swiper {...swiperConfigMainBundle}
-                    className='size-full max-w-[50rem]'>
+                    className='size-full md:max-w-[50rem]'>
                     {bundleProducts.map((product, index) => (
-                         <SwiperSlide key={index} className='!max-w-[40rem] lg:!max-w-[50rem]'>
-                              <div className="flex flex-col h-full
-                              lg:flex-row lg:items-center lg:gap-x-10">
+                         <SwiperSlide key={index} className='!max-w-[40rem] md:!max-w-[40rem] lg:!max-w-[50rem]'>
+                              <div className="flex flex-col h-full md:flex-row md:items-center md:gap-x-10">
                                    <BounceAnimation
                                         delayVal={0.8}
                                         hiddenCoordinates={{ x: -50 }}
                                         className="rounded-3xl">
                                         <img className="rounded-3xl object-cover object-center 
-                                        border-4 border-[#5E5A5A] w-full h-[22rem] max-w-[65vw] 
-                                        sm:h-[25rem] sm:max-w-[70vw] md:h-[28rem] 
-                                        md:max-w-[22rem] lg:h-[30rem] xl:h-[34rem] 
-                                        lg:max-w-[22rem] xl:max-w-[24rem]"
+                                        border-4 border-[#5E5A5A] w-full h-[20rem] max-w-[65vw] 
+                                        sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
+                                        lg:h-[30rem] lg:max-w-[22rem]"
                                              src={product.main}
                                              alt={`${product.name} Bundle`} />
                                    </BounceAnimation>
-                                   <h1 className="text-2xl mt-6 font-semibold lg:text-4xl lg:pb-10
-                                   text-light lg:max-w-[20rem]">
+                                   <h1 className="text-2xl mt-6 font-semibold lg:text-4xl md:pb-10
+                                   bg-gold bg-clip-text text-transparent dark:text-light md:max-w-[20rem] select-none">
                                         {product.name} Product Bundle
                                    </h1>
                               </div>

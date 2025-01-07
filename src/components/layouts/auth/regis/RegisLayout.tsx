@@ -31,7 +31,7 @@ const RegisterLayout: React.FC<RegisterLayoutProps> = React.memo(({
                isAnimating={isAnimating}
                isModalClose={isModalClose}
                isModalOpen={isModalOpen}
-               className="min-h-[65vh] lg:min-h-[85vh]">
+               className="lg:min-h-[85vh]">
                <AuthHeading title="Step Into Your Space!" />
                <RegisForm
                     onLogin={onSwitchModal}

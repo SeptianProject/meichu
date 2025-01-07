@@ -1,11 +1,11 @@
 import React from "react";
-import ButtonActionInProfile from "../../fragments/profile/ButtonActionInProfile";
 import { useAppDispatch } from "../../../redux/hook";
 import { logout, setProfileActive } from "../../../redux/slices/authSlice";
 import ProfileAvatar from "./ProfileAvatar";
 import TextInputProfile from "../../fragments/profile/TextInputProfile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserProfile } from "../../../services/AuthService";
+import Button from "../../elements/buttons/Button";
 
 interface ProfileContentProps {
      isTapDiscover: boolean
@@ -87,9 +87,9 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      }, [username, profilePicture, telpNumber])
 
      return (
-          <div className={`w-full space-y-5 lg:flex flex-col items-start 
-               border-light/70 lg:gap-x-5 lg:flex-row lg:items-start lg:border-b 
-               lg:pt-0 lg:pb-5 ${isTapDiscover ? 'hidden' : 'block'}`}>
+          <div className={`w-full h-full flex flex-col items-start gap-y-4 border-light/70 
+          md:gap-x-5 md:flex-row md:items-start md:border-b md:pb-10
+          ${isTapDiscover ? 'hidden' : 'block'}`}>
                <ProfileAvatar
                     currentImageUrl={profilePicture}
                     onUploadSuccess={handleUploadSuccess}
@@ -125,28 +125,38 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                               onChange={(value) => setEditedValues(prev => ({ ...prev, telpNumber: value }))}
                          />
                     </div>
-                    <div className='w-full flex items-center gap-x-5'>
-                         <ButtonActionInProfile
-                              text={isEditing ? 'Save Changes' : 'Edit Profile'}
+                    <div className='w-full flex items-center gap-x-3'>
+                         <Button
+                              isGradient
+                              title={isEditing ? 'Save Changes' : 'Edit Profile'}
                               onClick={handleEdit}
                               disabled={updateProfileMutation.isLoading}
+                              className="lg:py-3 lg:w-40"
                          />
                          {isEditing ? (
-                              <ButtonActionInProfile
-                                   text='Cancel'
+                              <Button
+                                   isCancel
+                                   isGradient={false}
+                                   title="Cancel"
                                    onClick={handleCancel}
+                                   className="lg:py-3 lg:w-40"
                               />
                          ) : (
-                              <ButtonActionInProfile
-                                   text='Log Out'
+                              <Button
+                                   isLogout
+                                   isGradient={false}
+                                   title="Log Out"
                                    onClick={handleLogout}
+                                   className="lg:py-3 lg:w-40"
                               />
                          )}
                     </div>
-                    <ButtonActionInProfile
-                         text='Discover More About Me!'
+                    <Button
+                         isGradient
+                         title="Discover More About Me!"
                          onClick={handleTapDiscover}
-                         className='lg:hidden w-full' />
+                         className="md:hidden w-full py-3"
+                    />
                </div>
           </div>
      );

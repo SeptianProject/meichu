@@ -41,12 +41,12 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
           : [
                {
                     value: true,
-                    label: 'IMVU+',
+                    label: 'Imvu+',
                     icon: getIcon(assetItems.DarkImvuPlus, assetItems.LightImvu)
                },
                {
                     value: false,
-                    label: 'Non IMVU+',
+                    label: 'Non Imvu+',
                     icon: getIcon(assetItems.DarkImvu, assetItems.LightImvu)
                }
           ]
@@ -89,10 +89,14 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                               ${value === option.value
                                         ? 'dark:bg-[#1F1F2C] ring ring-purplePrimary dark:ring-yellow-500'
                                         : 'dark:bg-dark ring-[1.5px] ring-graySurface1'}`}>
-                                   <div className="bg-graySurface2 p-2 rounded-lg w-20 h-full flex justify-center">
-                                        <img src={option.icon} alt={option.label} className="size-10" />
+                                   <div className={`${option.label.includes('Imvu+') ? 'bg-transparent'
+                                        : 'bg-[#C2C2C4]/50 dark:bg-graySurface2 py-2 px-5'}
+                                         rounded-lg w-fit h-full flex justify-center`}>
+                                        <img src={option.icon}
+                                             alt={option.label}
+                                             className={`${option.label.includes('Imvu+') ? 'size-12' : 'size-10'} pointer-events-none`} />
                                    </div>
-                                   <span className="font-medium text-white/80">
+                                   <span className="text-lg font-medium text-graySurface1 dark:text-white/80">
                                         {option.label}
                                    </span>
                               </div>

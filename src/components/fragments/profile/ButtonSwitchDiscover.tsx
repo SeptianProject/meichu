@@ -5,21 +5,20 @@ type buttonSwitchDiscoverProps = {
      onClick: () => void
      text: string
      value?: number
-     onFavored: boolean
+     isFavored: boolean
 }
 
 const ButtonSwitchDiscover: React.FC<buttonSwitchDiscoverProps> = React.memo(({
      onClick,
      text,
      value,
-     onFavored
+     isFavored
 }) => {
 
      return (
           <button onClick={onClick}
-               className={`dark:text-light text-xs lg:text-base
-                    transition-all duration-500 ease-in-out
-               ${onFavored ? 'font-semibold' : ' font-light'}`}>
+               className={`text-sm lg:text-base transition-all duration-500 ease-in-out
+               ${isFavored ? 'font-semibold dark:text-light' : ' font-light dark:text-light/60'}`}>
                {text}
                <span className="">({value})</span>
           </button>

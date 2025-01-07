@@ -3,7 +3,7 @@ import AuthLayout from "./AuthLayout";
 import AuthInput from "../../fragments/auth/AuthInput";
 import { FaUser } from "react-icons/fa";
 import AuthHeading from "../../fragments/auth/AuthHeading";
-import AuthButton from "../../fragments/auth/AuthButton";
+import Button from "../../elements/buttons/Button";
 
 interface ForgotPasswordLayoutProps {
      isAnimating: boolean;
@@ -21,24 +21,28 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = React.memo(({
                isAnimating={isAnimating}
                isModalClose={isModalClose}
                isModalOpen={isModalOpen}
-               className="min-h-[30vh] lg:min-h-[70vh]">
+               className="lg:min-h-[70vh] pb-20">
                <AuthHeading title="Forgot Your Password?" />
                <form
-                    className="space-y-5 flex flex-col w-full h-full max-w-72 items-center justify-center ">
-                    <AuthInput
-                         icon={FaUser}
-                         type="email"
-                         placeholder="Enter Your Email Address"
-                         error={undefined}
-                    />
-                    <p className="text-dark dark:text-light text-sm dark:font-light">
-                         <span className="text-red-600 text-xl mr-1">*</span>
-                         We will send you a message to set or reset your new password
-                    </p>
-                    <AuthButton
-                         type="button"
-                         text="Submit"
+                    className="flex gap-y-8 flex-col w-full h-full max-w-60 items-center justify-center">
+                    <div className="space-y-1">
+                         <AuthInput
+                              icon={FaUser}
+                              type="email"
+                              placeholder="Enter Your Email Address"
+                              error={undefined}
+                         />
+                         <p className="text-dark dark:text-light/80 text-[12px] dark:font-extralight">
+                              <span className="text-red-600 text-xl mr-1">*</span>
+                              We will send you a message to set or reset your new password
+                         </p>
+                    </div>
+                    <Button
+                         isGradient
+                         type="submit"
+                         title="Submit"
                          onClick={() => console.log('Submit')}
+                         className="w-full"
                     />
                </form>
           </AuthLayout>

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { assetItems } from '../../../assets/AnotherAssets'
 import { navItems } from '../../../assets/navigateAssets'
 import React from 'react'
+import Button from '../../elements/buttons/Button'
 
 type NavItemsProps = {
      isActive: boolean
@@ -18,7 +19,7 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                     <img src={assetItems.MeichuLogo} alt="meichuLogo"
                          className='size-24 lg:size-32' />
                </div>
-               <div className={`fixed flex flex-col bg-[#1E1E1E]/40 dark:bg-[#1D1A24]/75 gap-4 z-50
+               <div className={`fixed flex flex-col bg-[#08070F]/40 dark:bg-[#08070F]/75 gap-4 z-50
                backdrop-blur-md top-0 right-0 w-7/12 pl-8 pb-10 pt-32 rounded-b-2xl
                md:w-2/5
                ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
@@ -30,13 +31,11 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                          <div key={index}
                               className='relative box-border group w-fit'>
                               <Link to={item.link}
-                                   className={`font-poppins text-light
-                              lg:text-dark lg:dark:text-light cursor-pointer
+                                   className={`font-poppins cursor-pointer
                               lg:tracking-wider transition-all duration-300
                               ${location.pathname === item.link
-                                             ? 'text-lg lg:text-base font-semibold text-opacity-100 xl:text-lg group-active:font-semibold'
-                                             : 'text-base lg:text-sm text-opacity-75 xl:text-base'}
-                              `}>
+                                             ? 'text-dark dark:text-light'
+                                             : 'text-light/70 lg:text-dark/70 lg:dark:text-light/70 text-base lg:text-sm xl:text-base'}`}>
                                    {item.name}
                               </Link>
                               <div className={`absolute h-[2px] rounded-full bg-gold 
@@ -46,11 +45,12 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                                         : 'w-0 group-hover:w-full'}`} />
                          </div>
                     ))}
-                    <button onClick={modalOnClick}
-                         className='font-medium text-light rounded-md bg-[#6A45BE] 
-                         w-32 py-3 lg:hidden'>
-                         Login
-                    </button>
+                    <Button
+                         isGradient
+                         title='Login'
+                         onClick={modalOnClick}
+                         className='rounded-lg py-3 mt-3'
+                    />
                </div>
           </div>
      )

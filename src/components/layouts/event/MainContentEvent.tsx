@@ -3,7 +3,7 @@ import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animation
 import ButtonBorderGradient from "../../elements/buttons/ButtonBorderGradient"
 import CardEvent from "../../fragments/event/CardEvent"
 
-const cardEvent = <CardEvent type="event" />
+const cardEvent = <CardEvent isEvent />
 
 const MainContentEvent = () => {
      const listCardEvent = React.useMemo(() => [

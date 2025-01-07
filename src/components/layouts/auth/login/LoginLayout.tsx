@@ -30,7 +30,7 @@ const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
                isAnimating={isAnimating}
                isModalClose={isModalClose}
                isModalOpen={isModalOpen}
-               className="min-h-[60vh] lg:min-h-[85vh]">
+               className="lg:min-h-[85vh]">
                <AuthHeading title="Reconnect and Explore!" />
                <LoginForm
                     onForgotPassword={onForgotPassword}

@@ -12,7 +12,7 @@ interface CatalogCardsProps {
 const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type }) => {
      const { screenSize } = useUI()
      const navigate = useNavigate()
-     const listCatalog = React.useMemo(() => Array(9).fill(null).map(() => <CatalogCard type='catalog' />), [])
+     const listCatalog = React.useMemo(() => Array(9).fill(null).map(() => <CatalogCard isFavored={false} />), [])
 
      const displayedCards = screenSize === 'mobile'
           ? listCatalog.slice(0, 2)

@@ -1,7 +1,6 @@
 import { FaUser } from "react-icons/fa";
 import { IoIosLock } from "react-icons/io";
 import AuthInput from "../../../fragments/auth/AuthInput.tsx";
-import AuthButton from "../../../fragments/auth/AuthButton.tsx";
 import AuthBadgeButton from "../../../fragments/auth/AuthBadgeButton.tsx";
 import React from "react";
 import { loginFormSchema, LoginFormSchema } from "../../../../schema/AuthSchema.ts";
@@ -11,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { loginAuth } from "../../../../services/AuthService.ts";
 import { login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
 import { useAppDispatch } from "../../../../redux/hook.ts";
+import Button from "../../../elements/buttons/Button.tsx";
 
 interface LoginFormProps {
      showPassword: boolean;
@@ -73,16 +73,21 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                               {...register('password')}
                          />
                     </div>
-                    <div className="">
-                         <button
-                              onClick={onForgotPassword}
-                              className="text-dark/80 dark:text-[#A78CE4] 
-                              text-xs lg:text-sm font-medium">
-                              Forgot Password?
-                         </button>
-                    </div>
+                    <button
+                         type="button"
+                         onClick={onForgotPassword}
+                         className="text-dark/80 text-xs lg:text-sm font-medium 
+                              dark:bg-gradient-to-r from-yellowLinear1 to-yellowLinear2
+                              bg-clip-text dark:text-transparent">
+                         Forgot Password?
+                    </button>
                </div>
-               <AuthButton text="Login" type="submit" />
+               <Button
+                    isGradient
+                    title="Login"
+                    type="submit"
+                    className="w-full"
+               />
                <AuthBadgeButton />
           </form>
      );

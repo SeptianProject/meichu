@@ -137,11 +137,13 @@ const CustomProductPage = () => {
                                    isGradient={false}
                                    title="Cancel"
                                    onClick={() => navigate('/')}
+                                   className="lg:w-44"
                               />
                               <Button
                                    isGradient
                                    type="submit"
                                    title="Publish"
+                                   className="lg:w-44"
                               />
                          </div>
                     </form>

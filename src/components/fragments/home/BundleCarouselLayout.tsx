@@ -18,7 +18,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      const [activeIndex, setActiveIndex] = React.useState(0)
 
      return (
-          <div className="lg:absolute lg:left-20 xl:left-40">
+          <div className="md:absolute md:left-0 lg:left-20 xl:left-40">
                <MainBundleCarousel
                     swiperRef={swiperRef}
                     activeIndex={activeIndex}

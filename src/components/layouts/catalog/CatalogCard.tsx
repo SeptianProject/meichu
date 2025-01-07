@@ -1,27 +1,29 @@
 import React from 'react'
 import HeaderProductCatalog from '../../fragments/catalogs/HeaderProductCatalog'
 import { useNavigate } from 'react-router-dom'
-import ImageContentCatalog from '../../fragments/catalogs/ImageContentCatalog'
 import CreditFooterCatalog from '../../fragments/catalogs/CreditFooterCatalog'
+import { mainProductBundle } from '../../../assets/meichuBundle'
 
 type CatalogCardProps = {
-     type: 'catalog' | 'profile'
+     isFavored?: boolean
 }
 
-const CatalogCard: React.FC<CatalogCardProps> = React.memo(({ type }) => {
+const CatalogCard: React.FC<CatalogCardProps> = React.memo(({ isFavored }) => {
      const navigate = useNavigate()
 
      return (
           <div
-               onClick={type === 'catalog' ? () => navigate('/catalog-detail') : undefined}
-               className={`bg-transparent border border-[#5E5A5A] 
-               dark:bg-cardBackground dark:border-transparent cursor-pointer
-               p-5 rounded-2xl h-full w-full hover:-translate-y-3
-               transition-all duration-500
-               ${type === 'catalog' ? 'md:p-5' : 'md:p-3'}`}>
-               <HeaderProductCatalog type={type} />
-               <ImageContentCatalog type={type} />
-               <CreditFooterCatalog type={type} />
+               onClick={isFavored ? undefined : () => navigate('/catalog-detail')}
+               className={`bg-transparent border border-graySurface1 rounded-2xl 
+               h-full w-full cursor-pointer dark:border-transparent dark:bg-cardBackground
+               hover:-translate-y-3 transition-all duration-500 ${isFavored ? 'p-3' : 'p-5'}`}>
+               <HeaderProductCatalog isFavored={isFavored} />
+               <div className='my-5'>
+                    <img className={`object-cover object-top w-full rounded-2xl  
+                    ${isFavored ? 'h-36 sm:h-44' : 'h-52 lg:h-80'}`}
+                         src={mainProductBundle[2]} alt="Product" />
+               </div>
+               <CreditFooterCatalog isFavored={isFavored} />
           </div>
      )
 })

@@ -29,9 +29,10 @@ const CardProductAnimate = () => {
      })
 
      return (
-          <div className="hidden lg:block min-h-[85vh] relative overflow-y-clip">
-               <div className="absolute right-0 top-0 w-full h-full rotate-[15deg] translate-x-20">
-                    <div className="grid grid-cols-4 gap-x-52 transform -translate-x-20">
+          <div className="hidden md:block md:min-h-[25rem] lg:min-h-[85vh] relative overflow-y-clip">
+               <div className="absolute right-0 top-0 w-full h-full rotate-[15deg] lg:translate-x-20">
+                    <div className="grid grid-cols-4 transform md:gap-x-40
+                    lg:gap-x-52 lg:-translate-x-20">
                          {columns.map((columnProducts, columnIndex) => (
                               <motion.div
                                    variants={scrollAnimate(
@@ -45,7 +46,7 @@ const CardProductAnimate = () => {
                                    <motion.div key={columnIndex}
                                         dragConstraints={containerRefs[columnIndex]}
                                         drag="y"
-                                        className="flex flex-col gap-y-5 cursor-grab active:cursor-grabbing">
+                                        className="flex flex-col gap-y-4 lg:gap-y-5 cursor-grab active:cursor-grabbing">
                                         {columnProducts.map((product: string, index: number) => (
                                              <motion.div
                                                   key={`${columnIndex}-${index}`}
@@ -53,7 +54,7 @@ const CardProductAnimate = () => {
                                                        scale: 1.08,
                                                        transition: { duration: 0.3 }
                                                   }}
-                                                  className="w-48 h-80">
+                                                  className="md:w-36 h-60 lg:w-48 lg:h-80">
                                                   <img src={product} alt={`image-${columnIndex}-${index}`}
                                                        className="size-full object-cover object-center 
                                                        pointer-events-none" />

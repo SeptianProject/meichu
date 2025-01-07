@@ -16,7 +16,7 @@ const Heading = () => {
                          Meichu Products Make You
                          <TextCursorAnimation
                               words={['Unique', 'And', 'Special']}
-                              className="text-gold ml-1"
+                              className="ml-1"
                          />
                     </h1>
                </BounceAnimation>

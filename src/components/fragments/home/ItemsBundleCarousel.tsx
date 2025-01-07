@@ -20,15 +20,15 @@ const ItemsBundleCarousel: React.FC<ItemsBundleCarouselProps> = React.memo(({
           <ContainerStaggerAnimation
                staggerDelay={0.3}
                className="w-full">
-               <div className="max-w-full -bottom-10 left-40 lg:absolute lg:max-w-[40rem]">
+               <div className="max-w-full -bottom-10 left-40 md:absolute md:max-w-[35rem] lg:max-w-[40rem]">
                     <Swiper {...swiperConfigItemsBundle}
                          className='mx-auto size-full'>
                          {bundleProducts[activeIndex].items.map((product, index) => (
                               <SwiperSlide key={index} className="!w-auto rounded-xl">
                                    <CardStaggerAnimation
                                         hiddenPosition={{ x: 100 }}>
-                                        <div className={`w-36 h-48 rounded-xl overflow-hidden
-                                                  border-[#5E5A5A] border-2 md:w-64 md:h-56 
+                                        <div className={`w-32 h-40 rounded-xl overflow-hidden
+                                                  border-[#5E5A5A] border-2 md:w-52 md:h-48 lg:w-64 lg:h-56 
                                                   transition-all duration-500`}>
                                              <img
                                                   src={product}

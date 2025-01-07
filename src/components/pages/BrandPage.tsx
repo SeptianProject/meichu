@@ -11,7 +11,7 @@ const BrandPage = () => {
                <div className="space-y-5">
                     <TextTagline text="Brand Ambassador" className="font-semibold" />
                     <p className="font-light text-dark dark:text-light tracking-wide">
-                         Whether you have a question about talents, pricing, portfolio, or anything else, our team is ready.
+                         MeiChu's Brand Ambassador inspires elegance and trust with passion and authenticity.
                     </p>
                </div>
                <div className="flex flex-col items-center gap-y-16">

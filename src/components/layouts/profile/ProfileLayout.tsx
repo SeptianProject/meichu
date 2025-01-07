@@ -29,21 +29,21 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const { screenSize } = useUI()
    const queryClient = useQueryClient()
    const { data: userData } = useQuery<UserProfile>(['user'], () => getUser('populate=profilePicture'))
-   const { data: productRequests
-   } = useQuery<ProductRequestsResponse>(['productRequests'], getProductRequests)
+   const { data: productRequests } = useQuery<ProductRequestsResponse>(['productRequests'], getProductRequests)
 
    const isMobile = screenSize === 'mobile'
 
-   const listCardFavored = React.useMemo(() => Array(6).fill(null).map(() => <CatalogCard type='profile' />), [])
+   const listCardFavored = React.useMemo(() => Array(6).fill(null).map(() => <CatalogCard isFavored />), [])
    const listCardRequest = React.useMemo(() => productRequests?.data.map((product) =>
       <CardEvent
          key={product.id}
-         type='event'
+         isEvent={false}
          title={product?.attributes?.name}
          image={getFullImageUrl(product?.attributes?.references?.data?.attributes?.url)}
          time={product?.attributes?.createdAt.split('T')[0]}
       />),
-      [productRequests])
+      [productRequests]
+   )
 
    React.useEffect(() => {
       if (profileOpen) {
@@ -60,15 +60,16 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       isMobile ? (
          <Swiper className='w-full'>
             {items.map((item, index) => (
-               <SwiperSlide key={index} className='px-2 py-5'>
+               <SwiperSlide key={index} className={`py-5 px-1 sm:px-2
+               ${items === listCardFavored ? 'sm:max-w-[15rem]' : ''}`}>
                   {item}
                </SwiperSlide>
             ))}
          </Swiper>
       ) : (
          <div
-            className={`grid ${items === listCardFavored ? 'grid-cols-3' : 'grid-cols-2'} 
-               w-full gap-2 gap-y-5`}>
+            className={`grid ${items === listCardFavored ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 lg:grid-cols-2'} 
+               w-full gap-3 gap-y-5`}>
             {items.map((item, index) => (
                <div key={index} className='w-full'>{item}</div>
             ))}
@@ -107,14 +108,13 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       <>
          <ModalOverlay isModalClose={profileClose} isModalOpen={profileOpen} />
          <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-               w-4/5 rounded-xl bg-light dark:bg-[#1e1e1e] border border-[#5e5a5a] overflow-y-hidden
+               w-4/5 rounded-xl bg-light dark:bg-dark border border-graySurface1 overflow-y-hidden
                transition-all duration-500 ease-in-out lg:w-3/5 lg:min-h-[85vh] lg:rounded-3xl
-               ${isTapDiscover ? 'min-h-[60vh]' : 'min-h-[70vh]'}
                ${profileOpen || !profileClose ? 'z-50 opacity-100' : 'z-0 scale-0 opacity-0'}`}
             style={{ maxHeight: profileOpen ? `${maxHeight}px` : '0px' }}>
             <div style={{ maxHeight: profileOpen ? `${maxHeight}px` : '0px' }}
-               className='relative flex flex-col items-center size-full overflow-y-auto p-10'>
-               <div className="bg-[#8474DB]/10 absolute -top-10 -right-20 size-80 rounded-full blur-2xl" />
+               className='relative flex flex-col items-center size-full overflow-y-auto px-6 py-10 md:p-10'>
+               <div className="bg-yellowBloobs/10 absolute -top-10 -right-20 size-80 rounded-full blur-3xl" />
                <HeadProfile profileClose={profileClose} />
                <div className='w-full pt-5 z-10'>
                   <ProfileContent
@@ -123,12 +123,14 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      emailValue={userData?.email}
                      dateValue={userData?.createdAt.split('T')[0]}
                      username={userData?.username}
-                     telpNumber={userData?.telpNumber}
+                     telpNumber={userData?.telpNumber ?? '083848789028'}
                      profilePicture={userData?.profilePicture?.url}
                   />
                   <ProfileDiscover
                      isFavored={isFavored}
                      isTapDiscover={isTapDiscover}
+                     favoredValue={6}
+                     requestedValue={productRequests?.data?.length}
                      handleSwitchDiscover={handleSwitchDiscover}
                      handleBackToProfile={handleBackToProfile}
                      renderCardContent={renderCardContent}

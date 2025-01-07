@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonSwitchDiscover from "../../fragments/profile/ButtonSwitchDiscover";
-import ButtonActionInProfile from "../../fragments/profile/ButtonActionInProfile";
+import Button from "../../elements/buttons/Button";
 
 interface ProfileDiscoverProps {
      isFavored: boolean
@@ -10,6 +10,8 @@ interface ProfileDiscoverProps {
      listCardFavored: JSX.Element[]
      listCardRequest: JSX.Element[]
      handleBackToProfile: () => void
+     favoredValue: number | undefined
+     requestedValue: number | undefined
 }
 
 const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
@@ -19,34 +21,38 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
      isTapDiscover,
      listCardFavored,
      listCardRequest,
+     favoredValue,
+     requestedValue,
      renderCardContent,
 }) => {
      return (
           <div className='w-full'>
-               <div className={`lg:block ${isTapDiscover ? 'block' : 'hidden'}`}>
-                    <div className='pt-5 flex flex-col gap-y-5 lg:border-none'>
-                         <div className='flex items-center justify-between lg:justify-center lg:gap-x-5'>
+               <div className={`md:block ${isTapDiscover ? 'block' : 'hidden'}`}>
+                    <div className='md:pt-4 flex flex-col md:border-none gap-y-2 md:gap-y-7'>
+                         <div className='flex items-center justify-between md:justify-center md:gap-x-5'>
                               <ButtonSwitchDiscover
                                    text='Favored Items'
-                                   value={6}
+                                   value={favoredValue}
                                    onClick={handleSwitchDiscover}
-                                   onFavored={isFavored} />
+                                   isFavored={isFavored} />
                               <ButtonSwitchDiscover
-                                   text='Products Requests'
-                                   value={6}
+                                   text='Products Requested'
+                                   value={requestedValue}
                                    onClick={handleSwitchDiscover}
-                                   onFavored={!isFavored} />
+                                   isFavored={!isFavored} />
                          </div>
-                         <div className='flex items-center gap-x-3'>
+                         <div className='flex items-center gap-x-10'>
                               {isFavored
                                    ? renderCardContent(listCardFavored)
                                    : renderCardContent(listCardRequest)
                               }
                          </div>
-                         <ButtonActionInProfile
-                              text='Back to Profile'
+                         <Button
+                              isGradient
+                              title="Back to Profile"
                               onClick={handleBackToProfile}
-                              className='lg:hidden mx-auto mt-5' />
+                              className="md:hidden mx-auto text-sm"
+                         />
                     </div>
                </div>
           </div>

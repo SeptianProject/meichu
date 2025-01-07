@@ -30,7 +30,7 @@ const DetailPage = () => {
                     prevText="Catalog"
                     currentRoute="/catalog-detail"
                     currentText="Detail" />
-               <div className="space-y-10 lg:flex items-center gap-x-16">
+               <div className="space-y-10 lg:flex items-start gap-x-16">
                     <MainContentDetail
                          images={images}
                          content={selectContent}

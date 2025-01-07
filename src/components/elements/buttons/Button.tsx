@@ -16,6 +16,8 @@ interface ButtonProps {
      onClick?: () => void
      isGradient: boolean
      isCancel?: boolean
+     isLogout?: boolean
+     disabled?: boolean
      type?: 'button' | 'submit' | 'reset'
 }
 
@@ -24,17 +26,21 @@ const Button: React.FC<ButtonProps> = React.memo(({
      className,
      isGradient,
      isCancel,
+     isLogout,
+     disabled,
      type = 'button',
      onClick,
 }) => {
      return (
           <button
+               disabled={disabled}
                type={type}
                onClick={onClick}
                className={`${isGradient ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-light'
-                    : isCancel ? 'border border-graySurface1 text-graySurface1 bg-transparent'
-                         : 'border border-light text-light bg-transparent'}
-                    ${className} font-semibold rounded-full w-36 py-2`}
+                    : isCancel ? 'border border-graySurface1 text-graySurface1 bg-transparent hover:bg-graySurface1 hover:text-white hover:border-transparent'
+                         : isLogout ? 'border-redDanger text-redDanger hover:bg-redDanger hover:text-white border hover:border-transparent'
+                              : 'border bg-transparent text-graySurface1 border-graySurface1 dark:border-light dark:text-light'}
+                    ${className} font-semibold rounded-full w-32 py-2 transition-all duration-300 ease-in-out`}
           >
                {title}
           </button >

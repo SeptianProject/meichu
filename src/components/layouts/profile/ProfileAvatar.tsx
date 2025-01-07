@@ -82,11 +82,11 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
      }, [selectedFile, previewUrl])
 
      return (
-          <div className='size-40 lg:w-3/5 lg:h-[20rem] relative'>
+          <div className='size-44 md:w-7/12 md:h-[15rem] lg:h-[19rem] relative'>
                <img
                     src={previewUrl}
                     alt='avatar'
-                    className='rounded-xl object-cover object-center size-full' />
+                    className='rounded-lg object-cover object-center size-full' />
                <input
                     type="file"
                     ref={fileInputRef}

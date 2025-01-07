@@ -1,6 +1,7 @@
 import React from "react";
 import ModalOverlay from "../../fragments/ModalOverlay";
 import { assetItems } from "../../../assets/AnotherAssets";
+import Button from "../../elements/buttons/Button";
 
 interface ModalPublishCustomProductProps {
      isModalOpen: boolean;
@@ -16,12 +17,11 @@ const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = Reac
                <ModalOverlay isModalClose={isModalClose} isModalOpen={isModalOpen} />
                <div className={`fixed size-[22rem] top-1/2 left-1/2 
                transform -translate-x-1/2 -translate-y-1/2 rounded-2xl border 
-               border-[#5E5A5A] bg-light dark:bg-[#1E1E1E] transition-all duration-500 ease-in-out
+               border-[#5E5A5A] bg-light dark:bg-dark transition-all duration-500 ease-in-out
                lg:w-2/5 lg:min-h-[50vh]
                     ${isModalOpen ? 'opacity-100 z-50' : 'opacity-0 z-0 scale-0'}`}>
                     <div className="flex flex-col items-center justify-center relative overflow-hidden">
-                         <div className="bg-[#8474DB]/10 absolute -top-10 -right-28
-                         size-60 rounded-full blur-2xl"/>
+                         <div className="bg-yellowBloobs/10 absolute -top-10 -right-28 size-60 rounded-full blur-3xl" />
                          <img src={assetItems.MeichuLogo} alt=""
                               className="size-28" />
                          <div className="text-center flex flex-col items-center space-y-5">
@@ -31,11 +31,12 @@ const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = Reac
                               <p className="text-sm font-light dark:text-light/70 max-w-64 lg:max-w-[22rem]">
                                    Thank you for your request. It will be processed within 1-2 weeks. We'll notify you via email once it's ready. Thank you for your patience!
                               </p>
-                              <button onClick={isModalClose}
-                                   className="bg-bluePrimary text-light w-32 
-                                   py-2 mx-auto rounded-full">
-                                   Okay!
-                              </button>
+                              <Button
+                                   isGradient
+                                   title="Okay!"
+                                   onClick={isModalClose}
+                                   className="w-full"
+                              />
                          </div>
                     </div>
                </div>

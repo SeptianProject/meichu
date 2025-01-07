@@ -1,4 +1,3 @@
-import AuthButton from "../../../fragments/auth/AuthButton";
 import AuthBadgeButton from "../../../fragments/auth/AuthBadgeButton";
 import AuthInput from "../../../fragments/auth/AuthInput";
 import { FaUser } from "react-icons/fa";
@@ -80,7 +79,13 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
                     <RegisTextDesc />
                </div>
                <div className="space-y-5">
-                    <AuthButton text="Register" type="submit" />
+                    <div className='bg-gold rounded-full w-full p-[1.5px]'>
+                         <button type="submit"
+                              className='bg-light font-medium dark:bg-dark w-full 
+                              rounded-full dark:text-light p-2'>
+                              Register
+                         </button>
+                    </div>
                     <AuthBadgeButton />
                </div>
           </form>

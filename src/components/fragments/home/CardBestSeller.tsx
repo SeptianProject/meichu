@@ -9,7 +9,8 @@ const CardBestSeller = () => {
      return (
           <div
                onClick={() => navigate('/catalog-detail')}
-               className='bg-transparent dark:bg-cardBackground bg-opacity-50 w-full p-5 
+               className='bg-transparent border border-graySurface1 dark:border-transparent
+               dark:bg-cardBackground bg-opacity-50 w-full p-5 
                rounded-3xl flex flex-col items-start gap-y-5 cursor-pointer
                hover:-translate-y-3 transition-all duration-500 h-[21rem]'>
                {/* photo & typograph */}
@@ -17,8 +18,8 @@ const CardBestSeller = () => {
                     <img className='rounded-full size-14'
                          src={assetItems.AnyIcon} alt="" />
                     <div className='flex flex-col items-start'>
-                         <h3 className='dark:text-light text-lg font-bold'>Name Product</h3>
-                         <h6 className='dark:text-light text-base font-extralight'>@meichu</h6>
+                         <h3 className='text-graySurface1 dark:text-light text-lg font-bold'>Name Product</h3>
+                         <h6 className='text-graySurface1 dark:text-light text-base'>@meichu</h6>
                     </div>
                </div>
                <div className='w-full h-44 grid grid-cols-3 grid-rows-2 gap-2'>
