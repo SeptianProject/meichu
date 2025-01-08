@@ -49,7 +49,7 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                          isGradient
                          title='Login'
                          onClick={modalOnClick}
-                         className='rounded-lg py-3 mt-3'
+                         className='rounded-lg py-3 mt-3 lg:hidden'
                     />
                </div>
           </div>

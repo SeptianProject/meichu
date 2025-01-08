@@ -24,8 +24,8 @@ const CreditFooterCatalog: React.FC<CreditFooterCatalogProps> = React.memo(({ is
                </div>
                <button className={`border border-[#5E5A5A] text-[#5E5A5A] font-inter w-fit
                     px-3 py-2 rounded-full text-sm transition-all duration-300 
-                    dark:border-light dark:text-light hover:bg-bluePrimary hover:text-light
-                    hover:border-transparent dark:hover:border-transparent dark:hover:bg-bluePrimary
+                    dark:border-light dark:text-light hover:bg-yellowLinear1 hover:text-light
+                    hover:border-transparent dark:hover:border-transparent dark:hover:bg-yellowLinear1
                     ${isFavored ? '' : ' font-semibold md:px-12 md:py-[10px]'}`}>
                     Buy Now!
                </button>

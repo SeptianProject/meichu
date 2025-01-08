@@ -1,15 +1,5 @@
 import React from 'react'
 
-// customProduct layout,
-// customProduct page publish,
-// cardEvent,
-// buyNow detailPage
-// login
-// modal Published customProduct page
-// buyNow detailPage
-// forgotPassword
-// editProfile
-
 interface ButtonProps {
      title: string
      className?: string

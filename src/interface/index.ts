@@ -14,6 +14,8 @@ export interface UserProfile {
      blocked: boolean,
      createdAt: string
      updatedAt: string
+     likes: []
+     requests: Requests[]
      profilePicture: UploadResponse
 }
 
@@ -28,6 +30,15 @@ export interface ImageFormat {
      size: number;
      sizeInBytes: number;
      url: string;
+}
+
+export interface Requests {
+     id: number;
+     name: string;
+     productType: string;
+     imvu: boolean;
+     createdAt: string;
+     isNew: boolean;
 }
 
 export interface UploadResponse {

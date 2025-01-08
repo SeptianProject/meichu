@@ -30,14 +30,13 @@ const CustomProductPage = () => {
           register,
           handleSubmit,
           setValue,
+          watch,
           formState: { errors }
      } = useForm<CreateProductSchema>({
           resolver: zodResolver(createProductSchema),
           defaultValues: {
                uuid: uuidv4(),
                user: userData?.id as number,
-               productType: 'Single',
-               imvu: false
           }
      })
 
@@ -58,6 +57,7 @@ const CustomProductPage = () => {
      })
 
      const onSubmit = (data: CreateProductSchema) => {
+          console.log('Data:', data)
           if (!createProductMutation.isLoading) {
                createProductMutation.mutate({
                     ...data,
@@ -103,9 +103,9 @@ const CustomProductPage = () => {
                          <input type="hidden" {...register('uuid')} />
                          <ProductTypeSelect
                               {...register('productType')}
-                              onBlur={() => setValue('productType', 'Single')}
                               name="productType"
                               type="product"
+                              value={watch('productType')}
                               error={errors.productType}
                          />
                          <UploadImageProduct
@@ -120,9 +120,9 @@ const CustomProductPage = () => {
                          />
                          <ProductTypeSelect
                               {...register('imvu')}
-                              onBlur={() => setValue('imvu', false)}
                               name="imvu"
                               type="imvu"
+                              value={watch('imvu')}
                               error={errors.imvu}
                          />
                          <TextInput

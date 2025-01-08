@@ -4,26 +4,21 @@ import { assetItems } from "../../../assets/AnotherAssets";
 import useUI from "../../../hooks/useUI";
 import { FieldError } from "react-hook-form";
 
-// type ProductType = 'Single' | 'Bundle'
-// type ImvuType = boolean
-
 interface ProductTypeSelectProps {
      type: 'product' | 'imvu';
-     value?: string;
+     value?: string | boolean;
      name: string
-     onChange: (e: { target: { name: string, value: string } }) => void;
-     onBlur?: () => void;
+     onChange: (e: { target: { name: string, value: string | boolean } }) => void;
      error?: FieldError
      ref?: React.Ref<HTMLInputElement>
 }
 
 const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectProps>(({
-     onChange, onBlur, type, value, error, name }, ref) => {
+     onChange, type, value, error, name }, ref) => {
      const { mode } = useUI()
      const isDarkMode = mode === 'dark'
 
-     const getIcon = (darkIcon: string, lightIcon: string) =>
-          isDarkMode ? darkIcon : lightIcon
+     const getIcon = (darkIcon: string, lightIcon: string) => isDarkMode ? darkIcon : lightIcon
 
      const options = type === 'product'
           ? [
@@ -42,16 +37,16 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                {
                     value: true,
                     label: 'Imvu+',
-                    icon: getIcon(assetItems.DarkImvuPlus, assetItems.LightImvu)
+                    icon: 'Imvu+'
                },
                {
                     value: false,
                     label: 'Non Imvu+',
-                    icon: getIcon(assetItems.DarkImvu, assetItems.LightImvu)
+                    icon: 'Imvu'
                }
           ]
 
-     const handleChange = (newValue: string) => {
+     const handleChange = (newValue: string | boolean) => {
           console.log('New Value:', newValue)
           onChange({
                target: {
@@ -81,20 +76,24 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                                    value={JSON.stringify(option.value)}
                                    checked={value === String(option.value)}
                                    onChange={(e) => handleChange(JSON.parse(e.target.value))}
-                                   onBlur={onBlur}
                                    className="hidden"
                               />
                               <div className={`p-4 flex items-center gap-x-4 w-full rounded-2xl 
-                              border-none transition-all
+                              border-none transition-all duration-500 dark:bg-dark 
                               ${value === option.value
-                                        ? 'dark:bg-[#1F1F2C] ring ring-purplePrimary dark:ring-yellow-500'
-                                        : 'dark:bg-dark ring-[1.5px] ring-graySurface1'}`}>
-                                   <div className={`${option.label.includes('Imvu+') ? 'bg-transparent'
-                                        : 'bg-[#C2C2C4]/50 dark:bg-graySurface2 py-2 px-5'}
-                                         rounded-lg w-fit h-full flex justify-center`}>
-                                        <img src={option.icon}
-                                             alt={option.label}
-                                             className={`${option.label.includes('Imvu+') ? 'size-12' : 'size-10'} pointer-events-none`} />
+                                        ? 'ring-[3px] ring-yellowLinear1'
+                                        : 'ring-[1.5px] ring-graySurface1'}`}>
+                                   <div className={`${option.label.includes('Imvu+')
+                                        ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 dark:from-graySurface2 dark:to-graySurface2 py-4'
+                                        : 'bg-[#C2C2C4]/50 dark:bg-graySurface2 py-2'} rounded-lg w-24 h-full flex justify-center`}>
+                                        {type === 'product' ?
+                                             <img src={option.icon}
+                                                  alt={option.label}
+                                                  className='size-10 pointer-events-none' />
+                                             : <h5 className="text-lg font-medium text-white dark:text-white/80">
+                                                  {option.icon}
+                                             </h5>
+                                        }
                                    </div>
                                    <span className="text-lg font-medium text-graySurface1 dark:text-white/80">
                                         {option.label}
@@ -109,4 +108,4 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
 })
 ProductTypeSelect.displayName = 'ProductTypeSelect'
 
-export default React.memo(ProductTypeSelect)
+export default ProductTypeSelect
