@@ -4,7 +4,7 @@ import { logout, setProfileActive } from "../../../redux/slices/authSlice";
 import ProfileAvatar from "./ProfileAvatar";
 import TextInputProfile from "../../fragments/profile/TextInputProfile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateUserProfile } from "../../../services/AuthService";
+import { updateUserProfile, uploadAvatar } from "../../../services/AuthService";
 import Button from "../../elements/buttons/Button";
 
 interface ProfileContentProps {
@@ -29,6 +29,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      const dispatch = useAppDispatch()
      const queryClient = useQueryClient()
      const [isEditing, setIsEditing] = React.useState(false)
+     const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [uploadedImageId, setUploadedImageId] = React.useState<number | null>(null)
      const [editedValues, setEditedValues] = React.useState({
           username: username || '',
@@ -36,27 +37,38 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
           telpNumber: telpNumber || '',
      })
 
-     const handleUploadSuccess = (imageUrl: string, imageId: number) => {
-          setUploadedImageId(imageId)
-          setEditedValues(prev => ({ ...prev, profilePicture: imageUrl }))
-     }
-
      const updateProfileMutation = useMutation({
-          mutationFn: () => updateUserProfile(
-               editedValues.username,
-               uploadedImageId,
-               editedValues.telpNumber
-          ),
-          onSuccess: (data) => {
-               console.log('Update Profile Success: ', data)
-               queryClient.invalidateQueries({ queryKey: ['user'] })
+          mutationFn: async () => {
+               let imageId = uploadedImageId
+               if (selectedFile) {
+                    try {
+                         const uploadResult = await uploadAvatar(selectedFile)
+                         const uploadedImage = uploadResult[0]
+                         imageId = uploadedImage.id
+                    } catch (error) {
+                         console.error('Failed upload avatar', error)
+                    }
+               }
+               return updateUserProfile(
+                    editedValues.username,
+                    imageId,
+                    editedValues.telpNumber
+               )
+          },
+          onSuccess: () => {
+               queryClient.invalidateQueries(['user'])
                setIsEditing(false)
+               setSelectedFile(null)
+               setUploadedImageId(null)
           },
           onError: (error) => {
-               console.log('Update Profile Error: ', error)
-               alert('Update Profile Error')
+               alert(`Update Profile Error${error}`)
           }
      })
+
+     const handleFileSelect = (file: File) => {
+          setSelectedFile(file)
+     }
 
      const handleEdit = () => {
           if (isEditing) {
@@ -64,12 +76,17 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
           } else {
                setIsEditing(true)
           }
-          console.log('Edited Values: ', editedValues)
      }
 
      const handleCancel = () => {
           setIsEditing(false)
-          console.log('Edited Cancel Values: ', editedValues)
+          setSelectedFile(null)
+          setUploadedImageId(null)
+          setEditedValues({
+               username: username || '',
+               profilePicture: profilePicture || '',
+               telpNumber: telpNumber || ''
+          })
      }
 
      const handleLogout = () => {
@@ -92,7 +109,9 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
           ${isTapDiscover ? 'hidden' : 'block'}`}>
                <ProfileAvatar
                     currentImageUrl={profilePicture}
-                    onUploadSuccess={handleUploadSuccess}
+                    isEditing={isEditing}
+                    isLoading={updateProfileMutation.isLoading}
+                    onFileSelect={handleFileSelect}
                />
                <div className='size-full flex flex-col gap-y-5'>
                     <div className='space-y-3 lg:space-y-5'>

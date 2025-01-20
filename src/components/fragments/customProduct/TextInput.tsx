@@ -3,8 +3,8 @@ import { FieldError } from "react-hook-form";
 
 interface TextInputProps {
      label: 'product' | 'user'
-     type: React.InputHTMLAttributes<HTMLInputElement>['type']
-     error: FieldError | undefined
+     type?: React.InputHTMLAttributes<HTMLInputElement>['type']
+     error?: FieldError | undefined
 }
 
 const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(({

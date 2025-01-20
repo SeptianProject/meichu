@@ -25,7 +25,7 @@ const AuthInput = React.memo(React.forwardRef<HTMLInputElement, AuthInputProps>(
 
      return (
           <>
-               <div className={`text-dark p-3 w-60 ring-2 rounded-lg
+               <div className={`text-dark p-3 w-60 ring-[0.8px] dark:ring-2 rounded-lg
                     flex items-center justify-between dark:bg-light lg:w-full
                     transition-all duration-300
                     ${error ? 'ring-redDanger' : 'ring-dark dark:ring-graySecondary'}`}>

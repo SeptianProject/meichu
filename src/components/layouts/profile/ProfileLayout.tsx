@@ -10,9 +10,8 @@ import ProfileDiscover from './ProfileDiscover'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '../../../services/AuthService'
 import useUI from '../../../hooks/useUI'
-import { ProductRequestsResponse, UserProfile } from '../../../interface'
-import { getProductRequests } from '../../../services/ProductService'
-import { getFullImageUrl } from '../../../services/FileUploadService'
+import { UserProfile } from '../../../interface'
+import { assetItems } from '../../../assets/AnotherAssets'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -28,29 +27,28 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const [maxHeight, setMaxHeight] = React.useState(0)
    const { screenSize } = useUI()
    const queryClient = useQueryClient()
-   const { data: userData } = useQuery<UserProfile>(['user'], () => getUser('populate=profilePicture'))
-   const { data: productRequests } = useQuery<ProductRequestsResponse>(['productRequests'], getProductRequests)
+   const { data: userData } = useQuery<UserProfile>(['user'], () => getUser('populate=*'))
 
    const isMobile = screenSize === 'mobile'
 
    const listCardFavored = React.useMemo(() => Array(6).fill(null).map(() => <CatalogCard isFavored />), [])
-   const listCardRequest = React.useMemo(() => productRequests?.data.map((product) =>
+   const listCardRequest = React.useMemo(() => userData?.requests?.map((request) =>
       <CardEvent
-         key={product.id}
+         key={request.id}
          isEvent={false}
-         title={product?.attributes?.name}
-         image={getFullImageUrl(product?.attributes?.references?.data?.attributes?.url)}
-         time={product?.attributes?.createdAt.split('T')[0]}
+         title={request?.name}
+         // image request?.attributes?.references?.data?.attributes?.url
+         image={assetItems.EventImage}
+         time={request?.createdAt.split('T')[0]}
       />),
-      [productRequests]
+      [userData]
    )
 
    React.useEffect(() => {
       if (profileOpen) {
-         queryClient.invalidateQueries({ queryKey: ['user'] })
-         queryClient.invalidateQueries({ queryKey: ['productRequests'] })
+         queryClient.invalidateQueries(['user'])
       }
-   }, [profileOpen, queryClient, productRequests])
+   }, [profileOpen, queryClient, userData])
 
    const handleSwitchDiscover = () => setIsFavored(!isFavored)
    const handleTapDiscover = () => setIsTapDiscover(true)
@@ -123,14 +121,14 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      emailValue={userData?.email}
                      dateValue={userData?.createdAt.split('T')[0]}
                      username={userData?.username}
-                     telpNumber={userData?.telpNumber ?? '083848789028'}
+                     telpNumber={userData?.telephoneNumber}
                      profilePicture={userData?.profilePicture?.url}
                   />
                   <ProfileDiscover
                      isFavored={isFavored}
                      isTapDiscover={isTapDiscover}
                      favoredValue={6}
-                     requestedValue={productRequests?.data?.length}
+                     requestedValue={userData?.requests?.length}
                      handleSwitchDiscover={handleSwitchDiscover}
                      handleBackToProfile={handleBackToProfile}
                      renderCardContent={renderCardContent}

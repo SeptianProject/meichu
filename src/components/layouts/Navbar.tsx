@@ -13,7 +13,6 @@ import useUI from "../../hooks/useUI"
 import { useQuery } from "@tanstack/react-query"
 import { getUser } from "../../services/AuthService"
 import { UserProfile } from "../../interface"
-import { getFullImageUrl } from "../../services/FileUploadService"
 
 const Navbar = () => {
      const [hamburgerActive, setHamburgerActive] = React.useState(false)
@@ -35,9 +34,9 @@ const Navbar = () => {
      }
      React.useEffect(() => {
           const handleUserProfile = () => {
-               if (token && userId || dataUser) {
+               if (token && userId && dataUser) {
                     const imageUrl = dataUser?.profilePicture?.url
-                    setAvatar(imageUrl ? getFullImageUrl(imageUrl) : assetItems.Profile)
+                    setAvatar(imageUrl ? imageUrl : assetItems.Profile)
                } else {
                     setAvatar(assetItems.Profile)
                }

@@ -8,7 +8,7 @@ export interface UserProfile {
      id: number
      username: string
      email: string
-     telpNumber: string
+     telephoneNumber: string
      provider: string
      confirmed: boolean
      blocked: boolean,

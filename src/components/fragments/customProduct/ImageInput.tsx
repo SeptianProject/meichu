@@ -1,6 +1,5 @@
 import React from "react";
 import { IoCloudUpload } from "react-icons/io5";
-import { getFullImageUrl } from "../../../services/FileUploadService";
 import { useMutation } from "@tanstack/react-query";
 import { UploadResponse } from "../../../interface";
 import { AxiosError } from "axios";
@@ -20,12 +19,12 @@ const ImageInput: React.FC<ImageInputProps> = React.memo(({
      const fileInputRef = React.useRef<HTMLInputElement>(null);
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
      const [previewUrl, setPreviewUrl] = React.useState<string>(
-          currentImageUrl ? getFullImageUrl(currentImageUrl) : ''
+          currentImageUrl ? currentImageUrl : ''
      );
 
      React.useEffect(() => {
           if (currentImageUrl) {
-               setPreviewUrl(getFullImageUrl(currentImageUrl));
+               setPreviewUrl(currentImageUrl);
           }
      }, [currentImageUrl])
 
@@ -33,12 +32,11 @@ const ImageInput: React.FC<ImageInputProps> = React.memo(({
           mutationFn: uploadAvatar,
           onSuccess: (data) => {
                const uploadedImage = data[0]
-               const imageUrl = getFullImageUrl(uploadedImage.url)
+               const imageUrl = uploadedImage.url
                setPreviewUrl(imageUrl)
                onUploadSuccess?.(imageUrl, uploadedImage.id)
           },
           onError: (error) => {
-               console.log('Upload Error: ', error)
                alert(`Upload Error ${error.message}`)
           }
      })

@@ -126,9 +126,11 @@ const CustomProductPage = () => {
                               error={errors.imvu}
                          />
                          <TextInput
-                              type="number"
                               label="user"
-                              error={errors.user}
+                         />
+                         <input
+                              type="number"
+                              className="hidden"
                               {...register('user')}
                          />
                          <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
