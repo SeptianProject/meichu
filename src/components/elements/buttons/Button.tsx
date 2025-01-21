@@ -7,8 +7,8 @@ interface ButtonProps {
      isGradient: boolean
      isCancel?: boolean
      isLogout?: boolean
-     disabled?: boolean
-     type?: 'button' | 'submit' | 'reset'
+     disabled?: HTMLButtonElement['disabled']
+     type?: HTMLButtonElement['type']
 }
 
 const Button: React.FC<ButtonProps> = React.memo(({

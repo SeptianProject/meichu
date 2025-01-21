@@ -4,7 +4,7 @@ import { logout, setProfileActive } from "../../../redux/slices/authSlice";
 import ProfileAvatar from "./ProfileAvatar";
 import TextInputProfile from "../../fragments/profile/TextInputProfile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateUserProfile, uploadAvatar } from "../../../services/AuthService";
+import { updateUserProfile, uploadFile } from "../../../services/authService";
 import Button from "../../elements/buttons/Button";
 
 interface ProfileContentProps {
@@ -13,7 +13,7 @@ interface ProfileContentProps {
      emailValue?: string
      dateValue?: string
      username?: string
-     telpNumber?: string
+     telephoneNumber?: string
      profilePicture?: string
 }
 
@@ -23,7 +23,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      emailValue,
      dateValue,
      username,
-     telpNumber,
+     telephoneNumber,
      profilePicture
 }) => {
      const dispatch = useAppDispatch()
@@ -33,8 +33,8 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      const [uploadedImageId, setUploadedImageId] = React.useState<number | null>(null)
      const [editedValues, setEditedValues] = React.useState({
           username: username || '',
-          profilePicture: profilePicture || '',
-          telpNumber: telpNumber || '',
+          profilePicture: profilePicture,
+          telephoneNumber: telephoneNumber || '',
      })
 
      const updateProfileMutation = useMutation({
@@ -42,7 +42,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                let imageId = uploadedImageId
                if (selectedFile) {
                     try {
-                         const uploadResult = await uploadAvatar(selectedFile)
+                         const uploadResult = await uploadFile(selectedFile)
                          const uploadedImage = uploadResult[0]
                          imageId = uploadedImage.id
                     } catch (error) {
@@ -52,7 +52,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                return updateUserProfile(
                     editedValues.username,
                     imageId,
-                    editedValues.telpNumber
+                    editedValues.telephoneNumber
                )
           },
           onSuccess: () => {
@@ -82,11 +82,6 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
           setIsEditing(false)
           setSelectedFile(null)
           setUploadedImageId(null)
-          setEditedValues({
-               username: username || '',
-               profilePicture: profilePicture || '',
-               telpNumber: telpNumber || ''
-          })
      }
 
      const handleLogout = () => {
@@ -98,10 +93,10 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      React.useEffect(() => {
           setEditedValues({
                username: username || '',
-               profilePicture: profilePicture || '',
-               telpNumber: telpNumber || ''
+               profilePicture: profilePicture,
+               telephoneNumber: telephoneNumber || ''
           })
-     }, [username, profilePicture, telpNumber])
+     }, [username, profilePicture, telephoneNumber])
 
      return (
           <div className={`w-full h-full flex flex-col items-start gap-y-4 border-light/70 
@@ -125,7 +120,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                                    />
                                    <TextInputProfile
                                         title='Profile Picture'
-                                        value={editedValues.profilePicture}
+                                        value={editedValues.profilePicture!}
                                         isEditing={isEditing}
                                         onChange={(value) => setEditedValues(prev => ({ ...prev, profilePicture: value }))}
                                    />
@@ -136,18 +131,18 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                               value={emailValue ?? '-'} />
                          <TextInputProfile
                               title='Date Joined'
-                              value={dateValue ?? '-'} />
+                              value={dateValue ?? Date.now().toString().split('T')[0]} />
                          <TextInputProfile
                               title='Phone Number'
-                              value={editedValues.telpNumber}
+                              value={editedValues.telephoneNumber}
                               isEditing={isEditing}
-                              onChange={(value) => setEditedValues(prev => ({ ...prev, telpNumber: value }))}
+                              onChange={(value) => setEditedValues(prev => ({ ...prev, telephoneNumber: value }))}
                          />
                     </div>
                     <div className='w-full flex items-center gap-x-3'>
                          <Button
                               isGradient
-                              title={isEditing ? 'Save Changes' : 'Edit Profile'}
+                              title={updateProfileMutation.isLoading ? 'Updating...' : isEditing ? 'Save Changes' : 'Edit Profile'}
                               onClick={handleEdit}
                               disabled={updateProfileMutation.isLoading}
                               className="lg:py-3 lg:w-40"

@@ -4,13 +4,17 @@ import { FieldError } from "react-hook-form";
 interface TextInputProps {
      label: 'product' | 'user'
      type?: React.InputHTMLAttributes<HTMLInputElement>['type']
-     error?: FieldError | undefined
+     error?: FieldError
+     value?: string
+     readOnly?: boolean
 }
 
 const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(({
      label,
      error,
      type,
+     value,
+     readOnly,
      ...props
 }, ref) => {
      return (
@@ -23,6 +27,8 @@ const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(
                          ref={ref}
                          autoComplete="off"
                          type={type}
+                         value={value}
+                         readOnly={readOnly}
                          placeholder={label === 'product'
                               ? 'Enter your text here'
                               : 'Ex: Meichu'}

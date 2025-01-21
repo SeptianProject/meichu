@@ -8,7 +8,7 @@ import HeadProfile from '../../fragments/profile/HeadProfile'
 import ProfileContent from './ProfileContent'
 import ProfileDiscover from './ProfileDiscover'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { getUser } from '../../../services/AuthService'
+import { getUser } from '../../../services/authService'
 import useUI from '../../../hooks/useUI'
 import { UserProfile } from '../../../interface'
 import { assetItems } from '../../../assets/AnotherAssets'
@@ -121,7 +121,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      emailValue={userData?.email}
                      dateValue={userData?.createdAt.split('T')[0]}
                      username={userData?.username}
-                     telpNumber={userData?.telephoneNumber}
+                     telephoneNumber={userData?.telephoneNumber}
                      profilePicture={userData?.profilePicture?.url}
                   />
                   <ProfileDiscover

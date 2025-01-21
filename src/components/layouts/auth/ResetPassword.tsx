@@ -1,17 +1,18 @@
+import React from 'react'
 import AuthLayout from './AuthLayout'
-import AuthHeading from '../../fragments/auth/AuthHeading'
-import AuthInput from '../../fragments/auth/AuthInput'
-import { IoIosLock } from 'react-icons/io'
 import Button from '../../elements/buttons/Button'
+import AuthInput from '../../fragments/auth/AuthInput'
+import AuthHeading from '../../fragments/auth/AuthHeading'
+import { IoIosLock } from 'react-icons/io'
 import { useForm } from 'react-hook-form'
 import { resetPasswordSchema, ResetPasswordSchema } from '../../../schema/AuthSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { resetPasswordAuth } from '../../../services/AuthService'
-import React from 'react'
-
+import { resetPasswordAuth } from '../../../services/authService'
+import { useAppDispatch, useAppSelector } from '../../../redux/hook'
+import { setActiveModal } from '../../../redux/slices/authSlice'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 interface ResetPasswordProps {
-     email: string;
      isAnimating: boolean;
      isModalOpen: boolean;
      isModalClose: () => void;
@@ -22,6 +23,11 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
      isAnimating,
      isModalClose,
 }) => {
+     const { resetCode } = useAppSelector((state) => state.auth)
+     const dispatch = useAppDispatch()
+     const [params] = useSearchParams()
+     const navigate = useNavigate()
+
      const {
           register,
           handleSubmit,
@@ -30,8 +36,12 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
 
      const resetPasswordMutation = useMutation({
           mutationFn: resetPasswordAuth,
-          onSuccess: (data) => {
-               console.log('Reset Password success:', data)
+          onSuccess: () => {
+               if (params.get('code')) {
+                    params.delete('code')
+                    navigate('/')
+               }
+               dispatch(setActiveModal('login'))
                isModalClose()
           },
           onError: (error) => {
@@ -40,8 +50,11 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
      })
 
      const onSubmit = (data: ResetPasswordSchema) => {
-          resetPasswordMutation.mutate({ ...data })
-          console.log('Reset Password data:', data)
+          if (!resetCode) return
+          resetPasswordMutation.mutate({
+               ...data,
+               code: resetCode
+          })
      }
 
      return (
@@ -54,7 +67,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                <AuthHeading title='Reset Your Password' />
                <form onSubmit={handleSubmit(onSubmit)}
                     className='flex gap-y-3 flex-col w-full h-full max-w-60 items-center justify-center'>
-                    <input type="text" className='hidden' {...register('code')} />
+                    <input type="hidden"  {...register('code')} value={resetCode || ''} />
                     <AuthInput
                          icon={IoIosLock}
                          type='password'
@@ -67,9 +80,9 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                          icon={IoIosLock}
                          type='password'
                          placeholder='Confirm Password'
-                         error={errors.confirmPassword}
+                         error={errors.passwordConfirmation}
                          showPassword
-                         {...register('confirmPassword')}
+                         {...register('passwordConfirmation')}
                     />
                     <p className="text-dark dark:text-light/80 text-[12px] dark:font-extralight">
                          <span className="text-red-600 text-xl mr-1">*</span>
@@ -78,7 +91,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                     <Button
                          isGradient
                          type="submit"
-                         title="Submit"
+                         title={resetPasswordMutation.isLoading ? 'Loading...' : 'Submit'}
                          className="w-full"
                     />
                </form>

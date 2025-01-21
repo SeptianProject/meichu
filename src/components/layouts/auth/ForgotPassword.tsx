@@ -1,30 +1,26 @@
 import React from "react";
 import AuthLayout from "./AuthLayout";
-import AuthInput from "../../fragments/auth/AuthInput";
-import { FaUser } from "react-icons/fa";
-import AuthHeading from "../../fragments/auth/AuthHeading";
 import Button from "../../elements/buttons/Button";
+import AuthInput from "../../fragments/auth/AuthInput";
+import AuthHeading from "../../fragments/auth/AuthHeading";
+import { FaUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { ForgotPasswordSchema, forgotPasswordSchema } from "../../../schema/AuthSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { forgotPasswordAuth } from "../../../services/authService";
 import { useMutation } from "@tanstack/react-query";
-import { forgotPasswordAuth } from "../../../services/AuthService";
-import ResetPassword from "./ResetPassword";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ForgotPasswordSchema, forgotPasswordSchema } from "../../../schema/AuthSchema";
 
-interface ForgotPasswordLayoutProps {
+interface ForgotPasswordProps {
      isAnimating: boolean;
      isModalOpen: boolean;
      isModalClose: () => void;
 }
 
-const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = React.memo(({
+const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
      isAnimating,
      isModalOpen,
      isModalClose
 }) => {
-     const [showResetPassword, setShowResetPassword] = React.useState(false)
-     const [email, setEmail] = React.useState('')
-
      const {
           register,
           handleSubmit,
@@ -35,7 +31,6 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = React.memo(({
           mutationFn: forgotPasswordAuth,
           onSuccess: (data) => {
                console.log('Forgot Password success:', data)
-               setShowResetPassword(true)
           },
           onError: (error) => {
                console.error('Forgot Password error:', error)
@@ -43,7 +38,6 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = React.memo(({
      })
 
      const onSubmit = (data: ForgotPasswordSchema) => {
-          setEmail(data.email)
           forgotPasswordMutation.mutate(data)
      }
 
@@ -72,23 +66,15 @@ const ForgotPasswordLayout: React.FC<ForgotPasswordLayoutProps> = React.memo(({
                          </div>
                          <Button
                               isGradient
+                              disabled={forgotPasswordMutation.isLoading}
                               type="submit"
-                              title="Submit"
+                              title={forgotPasswordMutation.isLoading ? 'Loading...' : 'Submit'}
                               className="w-full"
                          />
                     </form>
                </AuthLayout>
-
-               {showResetPassword && (
-                    <ResetPassword
-                         email={email}
-                         isAnimating={false}
-                         isModalOpen={showResetPassword}
-                         isModalClose={() => setShowResetPassword(false)}
-                    />
-               )}
           </>
      );
 })
 
-export default ForgotPasswordLayout;
+export default ForgotPassword;

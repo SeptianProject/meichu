@@ -10,20 +10,26 @@ import { createProductSchema, CreateProductSchema } from "../../schema/ProductSc
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createProductRequest } from "../../services/ProductService"
-import { getUser } from "../../services/AuthService"
+import { getUser, uploadFile } from "../../services/authService"
 import { v4 as uuidv4 } from "uuid"
 import Button from "../elements/buttons/Button"
 import { useNavigate } from "react-router-dom"
 
 const CustomProductPage = () => {
-     const [imageUrl, setImageUrl] = React.useState<string>("")
-     const [imageId, setImageId] = React.useState<number>(0)
-     const [onPublish, setOnPublish] = React.useState(false)
      const navigate = useNavigate()
      const queryClient = useQueryClient()
-     const { data: userData } = useQuery({
-          queryKey: ['user'],
-          queryFn: () => getUser('')
+     const [onPublish, setOnPublish] = React.useState(false)
+     const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
+     const [previewUrl, setPreviewUrl] = React.useState<string>('')
+     const [isPublishDisabled, setIsPublishDisabled] = React.useState(false)
+     const { data: userData } = useQuery(['user'], () => getUser(''))
+     const getDefaultValues = () => ({
+          uuid: uuidv4(),
+          user: userData?.id as number,
+          references: null,
+          name: '',
+          productType: undefined,
+          imvu: undefined
      })
 
      const {
@@ -31,52 +37,88 @@ const CustomProductPage = () => {
           handleSubmit,
           setValue,
           watch,
+          reset,
           formState: { errors }
      } = useForm<CreateProductSchema>({
           resolver: zodResolver(createProductSchema),
-          defaultValues: {
-               uuid: uuidv4(),
-               user: userData?.id as number,
-          }
+          defaultValues: getDefaultValues()
      })
 
-     React.useEffect(() => {
-          if (userData?.id) {
-               setValue('user', userData?.id as number)
+     const resetForm = () => {
+          reset(getDefaultValues())
+          if (previewUrl) {
+               URL.revokeObjectURL(previewUrl)
           }
-     }, [setValue, userData])
+          setSelectedFile(null)
+          setPreviewUrl('')
+     }
 
-     const createProductMutation = useMutation(createProductRequest, {
-          onSuccess: () => {
-               queryClient.invalidateQueries(['user', userData?.id])
+     const createProductMutation = useMutation({
+          mutationFn: async (formData: CreateProductSchema) => {
+               let imageId = null
+               if (selectedFile) {
+                    try {
+                         const uploadResult = await uploadFile(selectedFile)
+                         imageId = uploadResult[0].id
+                    } catch (error) {
+                         console.error('Failed upload ImageProduct', error)
+                    }
+               }
+               return createProductRequest({
+                    ...formData,
+                    references: imageId
+               })
+          },
+          onSuccess: (data) => {
+               queryClient.invalidateQueries(['user'])
                setOnPublish(true)
+               setIsPublishDisabled(true)
+               resetForm()
+               setTimeout(() => {
+                    setIsPublishDisabled(false)
+                    createProductMutation.reset()
+               }, 5000);
+               console.log('Create product success:', data)
           },
           onError: (error) => {
                console.log('Create product error:', error)
+               setIsPublishDisabled(false)
           }
      })
 
      const onSubmit = (data: CreateProductSchema) => {
-          console.log('Data:', data)
-          if (!createProductMutation.isLoading) {
-               createProductMutation.mutate({
-                    ...data,
-                    user: userData?.id as number,
-                    references: imageId,
-               });
-          }
+          if (isPublishDisabled) return
+          createProductMutation.mutate(data)
      }
 
-     const handleImageUpload = (url: string, id: number) => {
-          setImageUrl(url)
-          setImageId(id)
-          setValue('references', id)
+     const handleFileSelect = (file: File) => {
+          setSelectedFile(file)
+          setPreviewUrl(URL.createObjectURL(file))
+     }
+
+     const handleCancel = () => {
+          resetForm()
+          navigate('/')
      }
 
      const handleModalClose = () => {
           setOnPublish(false)
           queryClient.clear()
      }
+
+     React.useEffect(() => {
+          if (userData?.id) {
+               setValue('user', userData.id)
+          }
+     }, [setValue, userData])
+
+     React.useEffect(() => {
+          return () => {
+               if (previewUrl) {
+                    URL.revokeObjectURL(previewUrl)
+               }
+          }
+     }, [previewUrl])
 
      React.useEffect(() => {
           if (onPublish) {
@@ -101,6 +143,8 @@ const CustomProductPage = () => {
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-16">
                          <input type="hidden" {...register('uuid')} />
+                         <input type="hidden" {...register('references')} />
+                         <input type="hidden"{...register('user')} />
                          <ProductTypeSelect
                               {...register('productType')}
                               name="productType"
@@ -109,8 +153,8 @@ const CustomProductPage = () => {
                               error={errors.productType}
                          />
                          <UploadImageProduct
-                              currentImageUrl={imageUrl}
-                              onUploadSuccess={handleImageUpload}
+                              currentImageUrl={previewUrl}
+                              onFileSelect={handleFileSelect}
                          />
                          <TextInput
                               {...register('name')}
@@ -127,24 +171,24 @@ const CustomProductPage = () => {
                          />
                          <TextInput
                               label="user"
-                         />
-                         <input
-                              type="number"
-                              className="hidden"
-                              {...register('user')}
+                              value={userData?.username || userData?.email}
+                              readOnly
                          />
                          <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
                               <Button
                                    isCancel
                                    isGradient={false}
                                    title="Cancel"
-                                   onClick={() => navigate('/')}
+                                   onClick={handleCancel}
                                    className="lg:w-44"
                               />
                               <Button
                                    isGradient
                                    type="submit"
-                                   title="Publish"
+                                   disabled={createProductMutation.isLoading || isPublishDisabled}
+                                   title={createProductMutation.isLoading ? 'Publishing...'
+                                        : isPublishDisabled ? 'Published' : 'Publish'
+                                   }
                                    className="lg:w-44"
                               />
                          </div>

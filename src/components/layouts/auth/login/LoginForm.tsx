@@ -7,10 +7,11 @@ import { loginFormSchema, LoginFormSchema } from "../../../../schema/AuthSchema.
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { loginAuth } from "../../../../services/AuthService.ts";
-import { login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
+import { loginAuth } from "../../../../services/authService.ts";
+import { cleanAuthErrors, login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
 import { useAppDispatch } from "../../../../redux/hook.ts";
 import Button from "../../../elements/buttons/Button.tsx";
+import { handleApiError } from "../../../../utils/errorHandler.ts";
 
 interface LoginFormProps {
      showPassword: boolean;
@@ -26,11 +27,20 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      onForgotPassword
 }) => {
      const dispatch = useAppDispatch()
+
      const {
           register,
           handleSubmit,
+          setError,
+          setValue,
           formState: { errors }
-     } = useForm<LoginFormSchema>({ resolver: zodResolver(loginFormSchema) })
+     } = useForm<LoginFormSchema>({
+          resolver: zodResolver(loginFormSchema),
+          values: {
+               identifier: '',
+               password: ''
+          }
+     })
 
      const loginMutation = useMutation({
           mutationFn: loginAuth,
@@ -41,16 +51,29 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                }))
                dispatch(setIsAuthModalOpen(false))
                dispatch(setProfileActive(true))
+               onProfile()
           },
-          onError: (error) => {
-               console.log('Login error:', error)
+          onError: (error: Error) => {
+               handleApiError(error, setError, dispatch, 'login')
           }
      })
 
      const onSubmit = (data: LoginFormSchema) => {
           loginMutation.mutate(data)
-          onProfile()
      }
+
+     React.useEffect(() => {
+          return () => {
+               dispatch(cleanAuthErrors())
+          }
+     }, [dispatch])
+
+     React.useEffect(() => {
+          if (loginMutation.isSuccess) {
+               setValue('identifier', '')
+               setValue('password', '')
+          }
+     }, [loginMutation.isSuccess, setValue])
 
      return (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
@@ -84,7 +107,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                </div>
                <Button
                     isGradient
-                    title="Login"
+                    title={loginMutation.isLoading ? 'Loading...' : 'Login'}
                     type="submit"
                     className="w-full"
                />

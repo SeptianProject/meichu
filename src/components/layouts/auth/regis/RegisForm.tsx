@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { registerFormSchema, RegisterFormSchema } from "../../../../schema/AuthSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { registerAuth } from "../../../../services/AuthService";
+import { registerAuth } from "../../../../services/authService";
 
 interface RegisFormProps {
      showPassword: boolean;

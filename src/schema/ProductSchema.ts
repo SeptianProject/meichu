@@ -5,7 +5,7 @@ export const createProductSchema = z.object({
      user: z.number(),
      name: z.string(),
      productType: z.enum(['Single', 'Bundle']),
-     references: z.number(),
+     references: z.number().nullable(),
      imvu: z.boolean()
 })
 
