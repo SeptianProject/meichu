@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LoginFormSchema, RegisterFormSchema } from '../schema/AuthSchema';
+import { ForgotPasswordSchema, LoginFormSchema, RegisterFormSchema, ResetPasswordSchema } from '../schema/AuthSchema';
 import { apiUrl } from '.';
 
 export const registerAuth = async (data: Pick<RegisterFormSchema, 'email' | 'password' | 'username'>) => {
@@ -10,6 +10,16 @@ export const registerAuth = async (data: Pick<RegisterFormSchema, 'email' | 'pas
 export const loginAuth = async (data: Pick<LoginFormSchema, 'identifier' | 'password'>) => {
      const response = await axios.post(`${apiUrl}/auth/local`, data)
      return response.data;
+}
+
+export const forgotPasswordAuth = async (data: Pick<ForgotPasswordSchema, 'email'>) => {
+     const response = await axios.post(`${apiUrl}/auth/forgot-password`, data)
+     return response.data
+}
+
+export const resetPasswordAuth = async (data: ResetPasswordSchema) => {
+     const response = await axios.post(`${apiUrl}/auth/reset-password`, data)
+     return response.data
 }
 
 export const getUser = async (params?: string) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import { FieldError } from "react-hook-form";
 import { IconType } from "react-icons";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
@@ -6,7 +6,7 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
      icon: IconType;
      placeholder: string;
-     type: string;
+     type: InputHTMLAttributes<HTMLInputElement>['type'];
      showPassword?: boolean;
      onTogglePassword?: () => void;
      error: FieldError | undefined
