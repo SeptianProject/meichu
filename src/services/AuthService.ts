@@ -1,9 +1,8 @@
-import axios from 'axios';
 import { ForgotPasswordSchema, LoginFormSchema, RegisterFormSchema, ResetPasswordSchema } from '../schema/AuthSchema';
 import { apiUrl, axiosInstance } from '.';
 
 export const registerAuth = async (data: RegisterFormSchema) => {
-     const response = await axios.post(`/auth/local/register`, data)
+     const response = await axiosInstance.post(`/auth/local/register`, data)
      return response.data;
 }
 

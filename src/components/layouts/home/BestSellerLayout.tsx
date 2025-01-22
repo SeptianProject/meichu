@@ -6,20 +6,23 @@ import 'swiper/swiper-bundle.css'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
 import { useQuery } from '@tanstack/react-query'
-import { getProductCatalogs } from '../../../services/productService'
+import { getProductCatalogs } from '../../../services/ProductService'
 import { ProductCatalogsResponse } from '../../../types'
+import { useNavigate } from 'react-router-dom'
 
 const BestSellerLayout = () => {
+     const navigate = useNavigate()
      const { screenSize } = useUI()
      const { data: productData } = useQuery<ProductCatalogsResponse>(['products'], getProductCatalogs)
-     const bestSeller = React.useMemo(() => productData?.data.map((product) =>
+     const bestSeller = React.useMemo(() => productData?.data.map((product) => (
           <CardBestSeller
                key={product.id}
                title={product.attributes.name}
                thumbnail={product.attributes.thumbnail.data.attributes.url}
                images={product.attributes.images.data.map((image) => image.attributes.url)}
+               onClick={() => navigate(`/catalog-detail/${product.id}`)}
           />
-     ), [productData])
+     )), [productData, navigate])
 
 
      return (

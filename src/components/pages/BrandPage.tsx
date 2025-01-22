@@ -6,7 +6,7 @@ import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../layouts/RouteHistory"
 import { useQuery } from "@tanstack/react-query"
 import { BrandAmbassadors } from "../../types"
-import { getBrandAmbassadors } from "../../services/productService"
+import { getBrandAmbassadors } from "../../services/ProductService"
 
 const BrandPage = () => {
      const { data: brandAmbassadorData } = useQuery<BrandAmbassadors>(['ambassador'], getBrandAmbassadors)

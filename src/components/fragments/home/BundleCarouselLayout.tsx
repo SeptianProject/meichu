@@ -4,7 +4,7 @@ import { ContainerStaggerAnimation } from "../../animations/StaggerAnimation";
 import { Swiper as SwiperType } from 'swiper/types';
 import { useQuery } from "@tanstack/react-query";
 import { ProductCatalogsResponse } from "../../../types";
-import { getProductCatalogs } from "../../../services/productService";
+import { getProductCatalogs } from "../../../services/ProductService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { createMainBundleSwiperConfig } from "../../../configs/createMainBundleSwiperConfig";
 import { createItemsBundleSwiperConfig } from "../../../configs/createItemsBundleSwiperConfig";
@@ -77,8 +77,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                              <div className={`w-32 h-40 rounded-xl overflow-hidden
                                                   border-[#5E5A5A] border-2 md:w-52 md:h-48 lg:w-64 lg:h-56 
                                                   transition-all duration-500`}>
-                                                  <img
-                                                       src={image.attributes.url}
+                                                  <img src={image.attributes.url}
                                                        alt={image.attributes.name}
                                                        className="size-full object-cover object-top"
                                                   />

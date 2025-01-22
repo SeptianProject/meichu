@@ -7,7 +7,7 @@ import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useQuery } from '@tanstack/react-query';
 import { ProductCatalogsResponse } from '../../../types';
-import { getProductCatalogs } from '../../../services/productService';
+import { getProductCatalogs } from '../../../services/ProductService';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
 import 'swiper/swiper-bundle.css';
 

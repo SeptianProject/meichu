@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
 import { useQuery } from '@tanstack/react-query'
-import { getProductCatalogs } from '../../../services/productService.ts'
+import { getProductCatalogs } from '../../../services/ProductService.ts'
 import { ProductCatalogsResponse } from '../../../types/product.ts'
 import { useAppSelector } from '../../../redux/hook.ts'
 

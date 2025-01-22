@@ -4,7 +4,7 @@ import React from 'react'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import { useQuery } from '@tanstack/react-query'
 import { ProductCatalogsResponse } from '../../../types'
-import { getProductCatalogs } from '../../../services/productService'
+import { getProductCatalogs } from '../../../services/ProductService'
 
 interface ListProductDetailProps {
      currentProductId: number
