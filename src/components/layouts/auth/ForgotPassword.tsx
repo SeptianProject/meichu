@@ -5,7 +5,7 @@ import AuthInput from "../../fragments/auth/AuthInput";
 import AuthHeading from "../../fragments/auth/AuthHeading";
 import { FaUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { forgotPasswordAuth } from "../../../services/authService";
+import { forgotPasswordAuth } from "../../../services/authService.ts";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ForgotPasswordSchema, forgotPasswordSchema } from "../../../schema/AuthSchema";

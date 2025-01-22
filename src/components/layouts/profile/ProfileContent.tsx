@@ -4,7 +4,7 @@ import { logout, setProfileActive } from "../../../redux/slices/authSlice";
 import ProfileAvatar from "./ProfileAvatar";
 import TextInputProfile from "../../fragments/profile/TextInputProfile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateUserProfile, uploadFile } from "../../../services/authService";
+import { updateUserProfile, uploadFile } from "../../../services/authService.ts";
 import Button from "../../elements/buttons/Button";
 
 interface ProfileContentProps {
