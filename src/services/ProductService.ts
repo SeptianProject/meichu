@@ -1,18 +1,40 @@
-import axios from "axios";
-import { apiUrl, token } from ".";
+import { apiUrl, axiosInstance } from ".";
 import { CreateProductSchema } from "../schema/ProductSchema";
 
 export const createProductRequest = async (data: CreateProductSchema) => {
-     const response = await axios.post(`${apiUrl}/requests`, { data }, {
+     const token = localStorage.getItem('authToken')
+     const response = await axiosInstance.post(`${apiUrl}/requests`, { data }, {
           headers: { Authorization: `Bearer ${token}` }
      })
-     console.log('Create product request:', response.data)
-     return response.data;
+     return response.data
 }
 
-export const getProductRequests = async () => {
-     const response = await axios.get(`${apiUrl}/requests`, {
+export const getBrandAmbassadors = async () => {
+     const response = await axiosInstance.get(`${apiUrl}/ambassadors`)
+     return response.data
+}
+
+export const getProductCategories = async () => {
+     const response = await axiosInstance.get(`${apiUrl}/categories`)
+     return response.data
+}
+
+export const getProductCatalogs = async () => {
+     const response = await axiosInstance.get(`${apiUrl}/products`)
+     return response.data
+}
+
+export const createProductLike = async (userId: number, productId: number) => {
+     const token = localStorage.getItem('authToken')
+
+     const response = await axiosInstance.post(`${apiUrl}/likes`, {
+          data: {
+               user: userId,
+               product: productId
+          }
+     }, {
           headers: { Authorization: `Bearer ${token}` }
      })
-     return response.data;
+     console.log('createProductLike', response.data)
+     return response.data
 }

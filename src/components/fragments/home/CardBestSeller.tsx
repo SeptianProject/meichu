@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom"
 import { assetItems } from "../../../assets/AnotherAssets"
-import { butterflyBundle } from "../../../assets/meichuBundle"
+import React from "react"
 
+interface CardBestSellerProps {
+     title: string
+     thumbnail: string
+     images?: string[]
+}
 
-const CardBestSeller = () => {
+const CardBestSeller: React.FC<CardBestSellerProps> = ({
+     title,
+     thumbnail,
+     images
+}) => {
      const navigate = useNavigate()
 
      return (
@@ -18,12 +27,12 @@ const CardBestSeller = () => {
                     <img className='rounded-full size-14'
                          src={assetItems.AnyIcon} alt="" />
                     <div className='flex flex-col items-start'>
-                         <h3 className='text-graySurface1 dark:text-light text-lg font-bold'>Name Product</h3>
+                         <h3 className='text-graySurface1 dark:text-light text-lg font-bold'>{title}</h3>
                          <h6 className='text-graySurface1 dark:text-light text-base'>@meichu</h6>
                     </div>
                </div>
                <div className='w-full h-44 grid grid-cols-3 grid-rows-2 gap-2'>
-                    {butterflyBundle.map((img, index) => {
+                    {images?.map((img, index) => {
                          const gridApply = index === 1 ? 'col-span-2 row-span-2' : ''
                          return (
                               <img key={index} src={img} alt={`Best-${index}`}
@@ -33,7 +42,7 @@ const CardBestSeller = () => {
                     })}
                </div>
                <div>
-                    <h3 className='dark:text-light font-semibold text-lg'>Nama Collection</h3>
+                    <h3 className='dark:text-light font-semibold text-lg'>{title}</h3>
                </div>
           </div>
      )

@@ -1,7 +1,7 @@
 import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules'
 import { Swiper as SwiperType } from 'swiper'
 
-export const createHeadCarouselSwiperConfig = (
+export const createHeroCarouselSwiperConfig = (
      swiperRef: React.MutableRefObject<SwiperType | undefined>
 ) => {
      return {

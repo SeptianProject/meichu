@@ -9,7 +9,7 @@ interface AuthState {
      isAuthModalOpen: boolean;
      isAuthenticated: boolean;
      token: string | null;
-     userId: string | null;
+     userId: number | null;
      resetCode: string | null;
      authError: {
           loginError?: string;
@@ -24,9 +24,9 @@ const initialState: AuthState = {
      isAnimating: false,
      profileActive: false,
      isAuthModalOpen: false,
-     isAuthenticated: false,
+     isAuthenticated: Boolean(localStorage.getItem('authToken')),
      token: localStorage.getItem('authToken'),
-     userId: localStorage.getItem('userId'),
+     userId: localStorage.getItem('userId') ? Number(localStorage.getItem('userId')) : null,
      resetCode: null,
      authError: {
           loginError: undefined,
@@ -55,12 +55,12 @@ const authSlice = createSlice({
           setResetCode: (state, action: PayloadAction<string | null>) => {
                state.resetCode = action.payload
           },
-          login: (state, action: PayloadAction<{ token: string, userId: string }>) => {
+          login: (state, action: PayloadAction<{ token: string, userId: number }>) => {
                state.token = action.payload.token
                state.userId = action.payload.userId
                state.isAuthenticated = true
                localStorage.setItem('authToken', action.payload.token)
-               localStorage.setItem('userId', action.payload.userId)
+               localStorage.setItem('userId', String(action.payload.userId))
           },
           logout: (state) => {
                state.isAuthenticated = false

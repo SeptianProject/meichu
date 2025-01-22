@@ -10,7 +10,7 @@ import ProfileDiscover from './ProfileDiscover'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '../../../services/authService'
 import useUI from '../../../hooks/useUI'
-import { UserProfile } from '../../../interface'
+import { UserProfile } from '../../../types'
 import { assetItems } from '../../../assets/AnotherAssets'
 
 interface ProfileLayoutProps {
@@ -31,7 +31,15 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
 
    const isMobile = screenSize === 'mobile'
 
-   const listCardFavored = React.useMemo(() => Array(6).fill(null).map(() => <CatalogCard isFavored />), [])
+   const listCardFavored = React.useMemo(() => userData?.likes.map((like) =>
+      <CatalogCard
+         isFavored
+         productId={like.id}
+         title={like.attributes?.product.data.attributes.name}
+         image={like.attributes?.product.data.attributes.name}
+         initialLikeStatus={true}
+      />
+   ), [userData?.likes])
    const listCardRequest = React.useMemo(() => userData?.requests?.map((request) =>
       <CardEvent
          key={request.id}
@@ -99,9 +107,6 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       return () => window.removeEventListener('resize', updateMaxHeight)
    }, [profileOpen])
 
-   // if (error) return null
-   // if (isLoading) return null
-
    return (
       <>
          <ModalOverlay isModalClose={profileClose} isModalOpen={profileOpen} />
@@ -119,7 +124,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      isTapDiscover={isTapDiscover}
                      handleTapDiscover={handleTapDiscover}
                      emailValue={userData?.email}
-                     dateValue={userData?.createdAt.split('T')[0]}
+                     dateValue={userData?.createdAt}
                      username={userData?.username}
                      telephoneNumber={userData?.telephoneNumber}
                      profilePicture={userData?.profilePicture?.url}
@@ -127,12 +132,12 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                   <ProfileDiscover
                      isFavored={isFavored}
                      isTapDiscover={isTapDiscover}
-                     favoredValue={6}
+                     favoredValue={userData?.likes?.length}
                      requestedValue={userData?.requests?.length}
                      handleSwitchDiscover={handleSwitchDiscover}
                      handleBackToProfile={handleBackToProfile}
                      renderCardContent={renderCardContent}
-                     listCardFavored={listCardFavored}
+                     listCardFavored={listCardFavored || []}
                      listCardRequest={listCardRequest || []}
                   />
                </div>

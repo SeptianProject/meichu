@@ -4,7 +4,7 @@ import { Swiper as SwiperType } from 'swiper/types';
 import ArrowCardCarousel from "../../elements/ArrowCardCarousel"
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu"
 import BundleCarouselLayout from "../../fragments/home/BundleCarouselLayout";
-import { bundleProducts } from "../../../assets/meichuBundle";
+
 
 const BundleProductsLayout = () => {
      const swiperRef = React.useRef<SwiperType | null>(null)
@@ -13,10 +13,7 @@ const BundleProductsLayout = () => {
           <div className="lg:min-h-screen relative isolate">
                <TextTagline text="Bundle Products" className="font-semibold" />
                <div className="mt-8 relative md:mt-20 min-h-[30rem] w-full">
-                    <BundleCarouselLayout
-                         bundleProducts={bundleProducts}
-                         swiperRef={swiperRef}
-                    />
+                    <BundleCarouselLayout swiperRef={swiperRef} />
                     <div className="absolute -z-10 top-[23.5rem] -right-7 w-[100vw] h-[8rem]
                          bg-gradient-to-r from-transparent to-yellowBloobs/30 from-40% 
                          md:w-[70rem] md:h-[15rem] lg:h-[20rem] md:top-36 lg:top-36 lg:-right-20

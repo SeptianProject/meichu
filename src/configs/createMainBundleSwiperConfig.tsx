@@ -3,7 +3,7 @@ import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper/types"
 
 export const createMainBundleSwiperConfig = (
-     setActiveIndex: React.Dispatch<React.SetStateAction<number>>,
+     handleSlideChange: (index: number) => void,
      swiperRef: React.MutableRefObject<SwiperType | null>
 ) => {
      return {
@@ -26,7 +26,7 @@ export const createMainBundleSwiperConfig = (
                disableOnInteraction: false
           },
           modules: [EffectCoverflow, Navigation, Autoplay],
-          onSlideChange: (swiper: SwiperType) => setActiveIndex(swiper.realIndex),
+          onSlideChange: (swiper: SwiperType) => handleSlideChange(swiper.realIndex),
           onBeforeInit: (swiper: SwiperType) => {
                swiperRef.current = swiper;
           },

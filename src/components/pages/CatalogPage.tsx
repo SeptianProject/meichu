@@ -1,8 +1,7 @@
-import CatalogCategories from "../layouts/catalog/CatalogCategories"
 import CatalogCards from "../layouts/catalog/CatalogCards"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../layouts/RouteHistory"
-
+import CatalogCategories from "../layouts/catalog/CatalogCategories"
 
 const CatalogPage = () => {
      return (

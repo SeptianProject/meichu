@@ -5,19 +5,21 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
+import { useQuery } from '@tanstack/react-query'
+import { getProductCatalogs } from '../../../services/productService'
+import { ProductCatalogsResponse } from '../../../types'
 
 const BestSellerLayout = () => {
      const { screenSize } = useUI()
-     const [bestSeller] = React.useState(
-          React.useMemo(() => [
-               <CardBestSeller />,
-               <CardBestSeller />,
-               <CardBestSeller />,
-               <CardBestSeller />,
-               <CardBestSeller />,
-               <CardBestSeller />
-          ], [])
-     )
+     const { data: productData } = useQuery<ProductCatalogsResponse>(['products'], getProductCatalogs)
+     const bestSeller = React.useMemo(() => productData?.data.map((product) =>
+          <CardBestSeller
+               key={product.id}
+               title={product.attributes.name}
+               thumbnail={product.attributes.thumbnail.data.attributes.url}
+               images={product.attributes.images.data.map((image) => image.attributes.url)}
+          />
+     ), [productData])
 
 
      return (
@@ -31,7 +33,7 @@ const BestSellerLayout = () => {
                          slidesPerView={screenSize === 'mobile' ? 1 :
                               screenSize === 'tablet' ? 2 : 3}
                          className='size-full'>
-                         {bestSeller.map((card, index) => (
+                         {bestSeller?.map((card, index) => (
                               <SwiperSlide key={index} className='px-2 py-5'>
                                    <CardStaggerAnimation
                                         hiddenPosition={{ y: 100 }}

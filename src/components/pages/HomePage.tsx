@@ -1,4 +1,4 @@
-import HeadCarousel from "../fragments/home/HeadCarousel"
+import HeroCarousel from "../fragments/home/HeroCarousel"
 import Heading from "../fragments/home/Heading"
 import 'swiper/swiper-bundle.css'
 import BundleProductsLayout from "../layouts/home/BundleProductsLayout"
@@ -12,7 +12,7 @@ const HomePage = () => {
                <div className='min-h-[50vh] pt-28 flex items-center 
                justify-center lg:min-h-screen lg:pt-36'>
                     <div className="flex flex-col items-center gap-y-10">
-                         <HeadCarousel />
+                         <HeroCarousel />
                          <Heading />
                     </div>
                </div>

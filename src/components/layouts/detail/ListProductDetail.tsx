@@ -2,24 +2,20 @@ import CatalogCard from '../catalog/CatalogCard'
 import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import React from 'react'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
+import { useQuery } from '@tanstack/react-query'
+import { ProductCatalogsResponse } from '../../../types'
+import { getProductCatalogs } from '../../../services/productService'
 
 interface ListProductDetailProps {
-     onLoadMore: () => void
+     currentProductId: number
 }
 
-const catalogCard = <CatalogCard isFavored={false} />
+const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({ currentProductId }) => {
+     const [limit, setLimit] = React.useState(4)
+     const { data: productData } = useQuery<ProductCatalogsResponse>(['products'], getProductCatalogs)
 
-const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({
-     onLoadMore
-}) => {
-     const listCatalog = React.useMemo(() => [
-          { id: 1, component: catalogCard },
-          { id: 2, component: catalogCard },
-          { id: 3, component: catalogCard },
-          { id: 4, component: catalogCard },
-          { id: 5, component: catalogCard },
-          { id: 6, component: catalogCard },
-     ], [])
+     const filteredProducts = productData?.data.filter((product) => product.id !== currentProductId)
+     const visibleProducts = filteredProducts?.slice(0, limit)
 
      return (
           <div className="border-t-2 border-dark/30 dark:border-light/20 space-y-10 pb-40 lg:pb-0">
@@ -30,18 +26,22 @@ const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({
                     <ContainerStaggerAnimation
                          initialDelay={0.5}
                          staggerDelay={0.4}
-                         className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-                         {listCatalog.map((item) => (
+                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+                         {visibleProducts?.map((item) => (
                               <CardStaggerAnimation
                                    key={item.id}
                                    hiddenPosition={{ y: 100 }}>
-                                   <div>
-                                        {item.component}
-                                   </div>
+                                   <CatalogCard
+                                        isFavored={false}
+                                        productId={item.id}
+                                        title={item.attributes.name}
+                                        image={item.attributes.thumbnail.data.attributes.url}
+                                        initialLikeStatus={false}
+                                   />
                               </CardStaggerAnimation>
                          ))}
                     </ContainerStaggerAnimation>
-                    <ButtonBorderGradient onClick={onLoadMore} />
+                    <ButtonBorderGradient onClick={() => setLimit((prev) => prev + 4)} />
                </div>
           </div>
      )

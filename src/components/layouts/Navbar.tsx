@@ -12,7 +12,7 @@ import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSli
 import useUI from "../../hooks/useUI"
 import { useQuery } from "@tanstack/react-query"
 import { getUser } from "../../services/authService"
-import { UserProfile } from "../../interface"
+import { UserProfile } from "../../types"
 
 const Navbar = () => {
      const [hamburgerActive, setHamburgerActive] = React.useState(false)
