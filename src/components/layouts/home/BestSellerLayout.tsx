@@ -6,9 +6,9 @@ import 'swiper/swiper-bundle.css'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
 import { useQuery } from '@tanstack/react-query'
-import { getProductCatalogs } from '../../../services/ProductService'
 import { ProductCatalogsResponse } from '../../../types'
 import { useNavigate } from 'react-router-dom'
+import { getProductCatalogs } from '../../../services/productService'
 
 const BestSellerLayout = () => {
      const navigate = useNavigate()

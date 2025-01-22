@@ -5,11 +5,11 @@ import { FadeAnimation } from "../animations/FadeAnimation"
 import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { ProductCatalogsResponse } from "../../types"
-import { getProductCatalogs } from "../../services/ProductService"
 import { AnimatePresence } from "framer-motion"
 import ScaleAnimation from "../animations/ScaleAnimtion"
 import ProductDetail from "../fragments/detail/ProductDetail"
 import Button from "../elements/buttons/Button"
+import { getProductCatalogs } from "../../services/productService"
 
 const DetailPage = () => {
      const navigate = useNavigate();

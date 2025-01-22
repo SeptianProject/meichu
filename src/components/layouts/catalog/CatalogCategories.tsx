@@ -2,7 +2,7 @@ import React from 'react'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import { useQuery } from '@tanstack/react-query'
 import { ProductCategoriesResponse } from '../../../types'
-import { getProductCategories } from '../../../services/ProductService'
+import { getProductCategories } from '../../../services/productService'
 
 const CatalogCategories = () => {
      const [onSelect, setOnSelect] = React.useState<number | null>(null)

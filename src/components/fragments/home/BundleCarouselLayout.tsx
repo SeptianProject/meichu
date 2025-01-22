@@ -4,10 +4,10 @@ import { ContainerStaggerAnimation } from "../../animations/StaggerAnimation";
 import { Swiper as SwiperType } from 'swiper/types';
 import { useQuery } from "@tanstack/react-query";
 import { ProductCatalogsResponse } from "../../../types";
-import { getProductCatalogs } from "../../../services/ProductService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { createMainBundleSwiperConfig } from "../../../configs/createMainBundleSwiperConfig";
 import { createItemsBundleSwiperConfig } from "../../../configs/createItemsBundleSwiperConfig";
+import { getProductCatalogs } from "../../../services/productService";
 import 'swiper/swiper-bundle.css'
 
 interface BundleCarouselLayoutProps {

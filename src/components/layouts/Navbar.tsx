@@ -11,8 +11,8 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook"
 import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSlice"
 import useUI from "../../hooks/useUI"
 import { useQuery } from "@tanstack/react-query"
-import { getUser } from "../../services/authService.ts"
 import { UserProfile } from "../../types"
+import { getUser } from "../../services/authService"
 
 const Navbar = () => {
      const [hamburgerActive, setHamburgerActive] = React.useState(false)

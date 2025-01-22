@@ -7,11 +7,11 @@ import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useQuery } from '@tanstack/react-query';
 import { ProductCatalogsResponse } from '../../../types';
-import { getProductCatalogs } from '../../../services/ProductService';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'swiper/swiper-bundle.css';
+import { getProductCatalogs } from '../../../services/productService';
 
 const HeroCarousel = () => {
      const swiperRef = React.useRef<SwiperType>();

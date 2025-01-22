@@ -4,8 +4,8 @@ import { assetItems } from '../../../assets/AnotherAssets'
 import { useAppDispatch, useAppSelector } from '../../../redux/hook'
 import { FaHeart } from 'react-icons/fa'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createProductLike } from '../../../services/ProductService'
 import { setIsAuthModalOpen } from '../../../redux/slices/authSlice'
+import { createProductLike } from '../../../services/productService'
 
 type CatalogCardProps = {
      isFavored?: boolean
