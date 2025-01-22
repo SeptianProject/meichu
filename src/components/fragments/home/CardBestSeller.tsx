@@ -1,4 +1,4 @@
-import { assetItems } from "../../../assets/AnotherAssets"
+import { assetItems } from "../../../assets/assets"
 import React from "react"
 
 interface CardBestSellerProps {

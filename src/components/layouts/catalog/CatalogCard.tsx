@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { assetItems } from '../../../assets/AnotherAssets'
+import { assetItems } from '../../../assets/assets'
 import { useAppDispatch, useAppSelector } from '../../../redux/hook'
 import { FaHeart } from 'react-icons/fa'
 import { useMutation, useQueryClient } from '@tanstack/react-query'

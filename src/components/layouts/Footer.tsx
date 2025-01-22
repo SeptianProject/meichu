@@ -1,4 +1,4 @@
-import { footerItems } from "../../assets/navigateAssets"
+import { footerItems } from "../../assets/assets"
 import FooterItems from "../fragments/FooterItems"
 import FooterLogoBadge from "../fragments/FooterLogoBadge"
 

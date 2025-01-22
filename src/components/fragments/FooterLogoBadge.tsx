@@ -1,5 +1,4 @@
-import { assetItems } from "../../assets/AnotherAssets"
-import { sosmedIcons } from "../../assets/badgeAssets"
+import { assetItems, sosmedIcons, } from "../../assets/assets"
 import BounceAnimation from "../animations/BounceAnimation"
 import { ContainerStaggerAnimation } from "../animations/StaggerAnimation"
 import ListBadgeSosmed from "../elements/ListBadgeSosmed"
@@ -11,14 +10,14 @@ const FooterLogoBadge = () => {
                     delayVal={0.8}
                     hiddenCoordinates={{ y: -50 }}
                     className="w-fit">
-                    <img className="size-48 absolute -top-5 -left-5 select-none"
+                    <img className="w-48 absolute top-10 -left-5 select-none"
                          src={assetItems.MeichuLogo} alt="Meichu" />
                </BounceAnimation>
                <BounceAnimation
                     delayVal={0.8}
                     hiddenCoordinates={{ y: 100 }}>
                     <h3 className="dark:text-light font-semibold hidden lg:block mt-36
-                    dark:text-opacity-80 z-10">Follow Us</h3>
+                    dark:text-opacity-80 z-10 md:text-lg">Follow Us</h3>
                </BounceAnimation>
                <ContainerStaggerAnimation
                     initialDelay={0.5}

@@ -11,7 +11,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '../../../services/authService.ts'
 import useUI from '../../../hooks/useUI'
 import { UserProfile } from '../../../types'
-import { assetItems } from '../../../assets/AnotherAssets'
+import { assetItems } from '../../../assets/assets.ts'
 
 interface ProfileLayoutProps {
    profileOpen: boolean

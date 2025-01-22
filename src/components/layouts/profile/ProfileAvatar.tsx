@@ -1,5 +1,5 @@
 import React from 'react'
-import { abstrakImages, assetItems } from "../../../assets/AnotherAssets";
+import { abstrakImages, assetItems } from "../../../assets/assets";
 interface ProfileAvatarProps {
      currentImageUrl?: string
      isEditing?: boolean

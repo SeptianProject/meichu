@@ -1,4 +1,4 @@
-import { authIcons } from "../../../assets/badgeAssets";
+import { authIcons } from "../../../assets/assets";
 import ListBadgeSosmed from "../../elements/ListBadgeSosmed";
 
 const AuthBadgeButton = () => {

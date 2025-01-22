@@ -1,7 +1,6 @@
 
 import { Link, useLocation } from 'react-router-dom'
-import { assetItems } from '../../../assets/AnotherAssets'
-import { navItems } from '../../../assets/navigateAssets'
+import { assetItems, navItems } from '../../../assets/assets'
 import React from 'react'
 import Button from '../../elements/buttons/Button'
 
@@ -17,7 +16,7 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
           <div className='flex items-center gap-x-6 z-20 relative overflow-hidden'>
                <div className='w-fit'>
                     <img src={assetItems.MeichuLogo} alt="meichuLogo"
-                         className='size-24 lg:size-32' />
+                         className='w-28 lg:w-40' />
                </div>
                <div className={`fixed flex flex-col bg-[#08070F]/40 dark:bg-[#08070F]/75 gap-4 z-50
                backdrop-blur-md top-0 right-0 w-7/12 pl-8 pb-10 pt-32 rounded-b-2xl

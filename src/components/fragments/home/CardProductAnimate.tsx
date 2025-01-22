@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { motion } from 'framer-motion';
-import { abstrakImages } from "../../../assets/AnotherAssets";
+import { abstrakImages } from "../../../assets/assets";
 
 const CardProductAnimate = () => {
      const containerRefs = Array(4).fill(null).map(() => React.useRef(null));

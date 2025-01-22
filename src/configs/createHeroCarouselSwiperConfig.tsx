@@ -21,7 +21,7 @@ export const createHeroCarouselSwiperConfig = (
                slideShadows: false
           },
           autoplay: {
-               delay: 3000,
+               delay: 3500,
                disableOnInteraction: false
           },
           onBeforeInit: (swiper: SwiperType) => {

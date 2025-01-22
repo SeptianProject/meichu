@@ -6,7 +6,7 @@ import { motion, AnimationProps } from 'framer-motion';
 import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useQuery } from '@tanstack/react-query';
-import { ProductCatalogsResponse } from '../../../types';
+import { ProductCatalogsResponse, ProductImage } from '../../../types';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -15,17 +15,15 @@ import { getProductCatalogs } from '../../../services/productService';
 
 const HeroCarousel = () => {
      const swiperRef = React.useRef<SwiperType>();
-     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
-
-     // const minSlides = 10
-     // const repeatCount = React.useMemo(() => {
-     //      if (!productData?.data.length) return 0
-     //      return Math.ceil(minSlides / productData?.data.length)
-     // }, [productData?.data.length])
-
-     React.useEffect(() => {
-          console.log('productData', productData)
-     }, [productData])
+     const [imageLoading, setImageLoading] = React.useState<{ [key: string]: boolean }>({})
+     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
+          ['product'],
+          getProductCatalogs,
+          {
+               staleTime: 5 * 60 * 1000,
+               cacheTime: 30 * 60 * 1000,
+          }
+     )
 
      const slides = React.useMemo(() => {
           if (!productData?.data) return []
@@ -38,18 +36,18 @@ const HeroCarousel = () => {
           ).flat()
      }, [productData?.data])
 
-     const heroSwiperCarouselConfig = React.useMemo(() =>
-          createHeroCarouselSwiperConfig(swiperRef),
-          [swiperRef]
-     )
+     const handleImageLoad = (virtualId: string) => {
+          setImageLoading(prev => ({
+               ...prev,
+               [virtualId]: true
+          }))
+     }
 
      const containerVariants: AnimationProps["variants"] = {
           hidden: { opacity: 0 },
           visible: {
                opacity: 1,
-               transition: {
-                    staggerChildren: 0.2
-               }
+               transition: { staggerChildren: 0.2 }
           }
      }
 
@@ -66,6 +64,31 @@ const HeroCarousel = () => {
           }
      }
 
+     const renderSkeletonLoader = () => (
+          <div className='w-full h-full rounded-xl overflow-hidden'>
+               <Skeleton className='w-full h-full' duration={1.5} />
+          </div>
+     )
+
+     const renderImage = (product: ProductImage) => (
+          <>
+               {(!imageLoading[product.id]) && renderSkeletonLoader()}
+               <img
+                    src={product.attributes.url}
+                    alt={product.attributes.name + ' Bundle'}
+                    className={`w-full h-full object-cover object-center transition-opacity duration-300 
+                         ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'
+                         }`}
+                    onLoad={() => handleImageLoad(String(product.id))}
+                    loading='lazy'
+               />
+          </>
+     )
+
+     if (isLoading) {
+          return null
+     }
+
      return (
           <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
           md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem]'>
@@ -75,7 +98,7 @@ const HeroCarousel = () => {
                     viewport={{ once: true }}
                     variants={containerVariants}
                     className='w-full'>
-                    <Swiper {...heroSwiperCarouselConfig} className='w-full'>
+                    <Swiper {...createHeroCarouselSwiperConfig(swiperRef)} className='w-full'>
                          {slides.map((product) => (
                               <SwiperSlide
                                    key={product.virtualId}
@@ -84,15 +107,7 @@ const HeroCarousel = () => {
                                    <motion.div
                                         variants={cardVariants}
                                         className="h-full w-full overflow-hidden rounded-xl">
-                                        {isLoading ? (
-                                             <Skeleton className='w-full h-full' />
-                                        ) : (
-                                             <img
-                                                  src={product.attributes.thumbnail.data.attributes.url}
-                                                  alt={product.attributes.name + ' Bundle'}
-                                                  className='w-full h-full object-cover object-center'
-                                             />
-                                        )}
+                                        {renderImage(product.attributes.thumbnail.data)}
                                    </motion.div>
                               </SwiperSlide>
                          ))}

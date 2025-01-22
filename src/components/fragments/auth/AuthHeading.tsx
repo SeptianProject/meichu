@@ -1,5 +1,5 @@
 import React from "react";
-import { assetItems } from "../../../assets/AnotherAssets";
+import { assetItems } from "../../../assets/assets";
 
 interface AuthHeadingProps {
      title: string;
@@ -7,10 +7,10 @@ interface AuthHeadingProps {
 
 const AuthHeading: React.FC<AuthHeadingProps> = React.memo(({ title }) => {
      return (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center gap-y-4 pt-5 pb-2">
                <div>
                     <img src={assetItems.MeichuLogo} alt=""
-                         className="size-24 lg:size-36 select-none" />
+                         className="w-28 lg:w-40 select-none" />
                </div>
                <h2 className="dark:text-light text-lg font-semibold lg:text-[1.7rem]">
                     {title}

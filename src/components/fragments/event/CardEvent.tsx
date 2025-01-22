@@ -1,5 +1,5 @@
 import React from 'react'
-import { assetItems } from '../../../assets/AnotherAssets'
+import { assetItems } from '../../../assets/assets'
 import Button from '../../elements/buttons/Button'
 import { BsClock } from 'react-icons/bs'
 

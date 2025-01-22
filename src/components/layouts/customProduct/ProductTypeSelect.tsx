@@ -1,6 +1,6 @@
 import React from "react"
 import TitleDesc from "../../fragments/customProduct/TitleDesc"
-import { assetItems } from "../../../assets/AnotherAssets";
+import { assetItems } from "../../../assets/assets";
 import useUI from "../../../hooks/useUI";
 import { FieldError } from "react-hook-form";
 
