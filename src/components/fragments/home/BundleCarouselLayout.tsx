@@ -19,7 +19,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
 }) => {
      const [activeMainBundleId, setActiveMainBundleId] = React.useState<number | null>(null)
      const { data: productData } = useQuery<ProductCatalogsResponse>(
-          ['products'],
+          ['product'],
           getProductCatalogs,
           { staleTime: 60 * 1000 }
      )

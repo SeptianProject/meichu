@@ -40,7 +40,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                return createProductLike(userId, productId)
           },
           onSuccess: () => {
-               queryClient.invalidateQueries(['products'])
+               queryClient.invalidateQueries(['product'])
                setIsLiked(true)
           },
           onError: (error) => {
@@ -72,7 +72,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                h-full w-full cursor-pointer dark:border-transparent dark:bg-cardBackground
                hover:-translate-y-3 transition-all duration-500 ${isFavored ? 'p-3' : 'p-5'}`}>
                <div className='flex items-center justify-between'>
-                    <h3 className={`${isFavored ? 'text-base  font-semibold' : ' font-bold text-lg md:text-xl'}
+                    <h3 className={`${isFavored ? 'text-base  font-semibold' : 'font-bold text-lg md:text-xl'}
                          text-graySurface1 dark:text-light`}>
                          {title}
                     </h3>

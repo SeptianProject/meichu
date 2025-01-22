@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 const BestSellerLayout = () => {
      const navigate = useNavigate()
      const { screenSize } = useUI()
-     const { data: productData } = useQuery<ProductCatalogsResponse>(['products'], getProductCatalogs)
+     const { data: productData } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
      const bestSeller = React.useMemo(() => productData?.data.map((product) => (
           <CardBestSeller
                key={product.id}

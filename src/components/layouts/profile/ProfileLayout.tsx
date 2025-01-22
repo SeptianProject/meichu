@@ -31,12 +31,12 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
 
    const isMobile = screenSize === 'mobile'
 
-   const listCardFavored = React.useMemo(() => userData?.likes.map((like) =>
+   const listCardFavored = React.useMemo(() => userData?.likes?.map((like) =>
       <CatalogCard
          isFavored
          productId={like.id}
-         title={like.attributes?.product.data.attributes.name}
-         image={like.attributes?.product.data.attributes.name}
+         title={like.attributes?.product?.data?.attributes?.name}
+         image={like.attributes?.product?.data?.attributes?.name}
          initialLikeStatus={true}
       />
    ), [userData?.likes])
@@ -47,7 +47,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
          title={request?.name}
          // image request?.attributes?.references?.data?.attributes?.url
          image={assetItems.EventImage}
-         time={request?.createdAt.split('T')[0]}
+         time={request?.createdAt?.split('T')[0]}
       />),
       [userData]
    )
@@ -124,7 +124,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      isTapDiscover={isTapDiscover}
                      handleTapDiscover={handleTapDiscover}
                      emailValue={userData?.email}
-                     dateValue={userData?.createdAt.split('T')[0]}
+                     dateValue={userData?.createdAt?.split('T')[0]}
                      username={userData?.username}
                      telephoneNumber={userData?.telephoneNumber}
                      profilePicture={userData?.profilePicture?.url}

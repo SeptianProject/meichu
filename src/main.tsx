@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import store from './redux/store.ts'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
 const queryClient = new QueryClient()
 
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')!).render(
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          <App />
+          <SkeletonTheme baseColor='#08070F' highlightColor='#1e1e1e'>
+            <App />
+          </SkeletonTheme>
         </QueryClientProvider>
       </Provider>
     </Router>

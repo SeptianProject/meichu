@@ -9,30 +9,34 @@ import { useQuery } from '@tanstack/react-query';
 import { ProductCatalogsResponse } from '../../../types';
 import { getProductCatalogs } from '../../../services/ProductService';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import 'swiper/swiper-bundle.css';
 
 const HeroCarousel = () => {
      const swiperRef = React.useRef<SwiperType>();
-     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
-          ['products'],
-          getProductCatalogs
-     )
+     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
 
-     const minSlides = 10
-     const repeatCount = React.useMemo(() => {
-          if (!productData?.data.length) return 0
-          return Math.ceil(minSlides / productData?.data.length)
-     }, [productData?.data.length])
+     // const minSlides = 10
+     // const repeatCount = React.useMemo(() => {
+     //      if (!productData?.data.length) return 0
+     //      return Math.ceil(minSlides / productData?.data.length)
+     // }, [productData?.data.length])
+
+     React.useEffect(() => {
+          console.log('productData', productData)
+     }, [productData])
 
      const slides = React.useMemo(() => {
           if (!productData?.data) return []
-          return Array.from({ length: repeatCount }, (_, index) =>
+
+          return Array.from({ length: 10 }, (_, index) =>
                productData.data.map((product) => ({
                     ...product,
                     virtualId: `${product.id}-${index}`
                }))
           ).flat()
-     }, [productData?.data, repeatCount])
+     }, [productData?.data])
 
      const heroSwiperCarouselConfig = React.useMemo(() =>
           createHeroCarouselSwiperConfig(swiperRef),
@@ -47,7 +51,7 @@ const HeroCarousel = () => {
                     staggerChildren: 0.2
                }
           }
-     };
+     }
 
      const cardVariants: AnimationProps["variants"] = {
           hidden: { opacity: 0, scale: 0.5 },
@@ -60,24 +64,6 @@ const HeroCarousel = () => {
                     damping: 10
                }
           }
-     };
-
-     if (isLoading) {
-          return (
-               <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
-                    md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem]'>
-                    <div className='flex gap-4 justify-center'>
-                         {Array.from({ length: 5 }).map((_, index) => (
-                              <div
-                                   key={index}
-                                   className="w-28 h-36 sm:w-32 sm:h-40 
-                                        md:w-48 md:h-60 lg:w-60 lg:h-80
-                                        animate-pulse bg-gray-200 rounded-xl"
-                              />
-                         ))}
-                    </div>
-               </div>
-          );
      }
 
      return (
@@ -98,10 +84,15 @@ const HeroCarousel = () => {
                                    <motion.div
                                         variants={cardVariants}
                                         className="h-full w-full overflow-hidden rounded-xl">
-                                        <img
-                                             src={product.attributes.thumbnail.data.attributes.url}
-                                             alt={product.attributes.name + ' Bundle'}
-                                             className="h-full w-full object-cover object-center" />
+                                        {isLoading ? (
+                                             <Skeleton className='w-full h-full' />
+                                        ) : (
+                                             <img
+                                                  src={product.attributes.thumbnail.data.attributes.url}
+                                                  alt={product.attributes.name + ' Bundle'}
+                                                  className='w-full h-full object-cover object-center'
+                                             />
+                                        )}
                                    </motion.div>
                               </SwiperSlide>
                          ))}

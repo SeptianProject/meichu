@@ -12,7 +12,7 @@ interface ListProductDetailProps {
 
 const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({ currentProductId }) => {
      const [limit, setLimit] = React.useState(4)
-     const { data: productData } = useQuery<ProductCatalogsResponse>(['products'], getProductCatalogs)
+     const { data: productData } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
 
      const filteredProducts = productData?.data.filter((product) => product.id !== currentProductId)
      const visibleProducts = filteredProducts?.slice(0, limit)

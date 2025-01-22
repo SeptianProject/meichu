@@ -17,7 +17,7 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type }) => {
      const { screenSize } = useUI()
      const navigate = useNavigate()
      const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
-     const { data: productData } = useQuery<ProductCatalogsResponse>(['products'], getProductCatalogs)
+     const { data: productData } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
 
      const listCatalog = React.useMemo(() => productData?.data.map((product) => {
           const isLiked = isAuthenticated && Array.isArray(product.attributes.likes)
