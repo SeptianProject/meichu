@@ -9,6 +9,7 @@ import { createMainBundleSwiperConfig } from "../../../configs/createMainBundleS
 import { createItemsBundleSwiperConfig } from "../../../configs/createItemsBundleSwiperConfig";
 import { getProductCatalogs } from "../../../services/productService";
 import 'swiper/swiper-bundle.css'
+import Skeleton from "react-loading-skeleton";
 
 interface BundleCarouselLayoutProps {
      swiperRef: React.MutableRefObject<SwiperType | null>
@@ -18,10 +19,13 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      swiperRef
 }) => {
      const [activeMainBundleId, setActiveMainBundleId] = React.useState<number | null>(null)
-     const { data: productData } = useQuery<ProductCatalogsResponse>(
+     const [mainImageLoading, setMainImageLoading] = React.useState<{ [key: number]: boolean }>({})
+     const [itemsImageLoading, setItemsImageLoading] = React.useState<{ [key: number]: boolean }>({})
+
+     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
           ['product'],
           getProductCatalogs,
-          { staleTime: 60 * 1000 }
+          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 }
      )
 
      const handleSlideChange = React.useCallback((index: number) => {
@@ -29,11 +33,26 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
           setActiveMainBundleId(currentBundleId)
      }, [productData?.data])
 
+     const handleMainImageLoad = (productId: number) => {
+          setMainImageLoading(prev => ({
+               ...prev,
+               [productId]: true
+          }))
+     }
+
+     const handleItemsImageLoad = (imageId: number) => {
+          setItemsImageLoading(prev => ({
+               ...prev,
+               [imageId]: true
+          }))
+     }
+
      const swiperConfigMainBundle = React.useMemo(() =>
           createMainBundleSwiperConfig(handleSlideChange, swiperRef),
-          [handleSlideChange, swiperRef]
-     )
+          [handleSlideChange, swiperRef])
      const swiperConfigItemsBundle = createItemsBundleSwiperConfig()
+
+     if (isLoading) return null
 
      return (
           <div className="md:absolute md:left-0 lg:left-20 xl:left-40">
@@ -46,13 +65,21 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                         <BounceAnimation
                                              delayVal={0.8}
                                              hiddenCoordinates={{ x: -50 }}
-                                             className="rounded-3xl">
+                                             className="rounded-3xl relative">
+                                             {!mainImageLoading[product.id] && (
+                                                  <div className="absolute inset-0 z-10">
+                                                       <Skeleton className='w-full h-full rounded-3xl' duration={1.5} />
+                                                  </div>
+                                             )}
                                              <img className="rounded-3xl object-cover object-center 
-                                        border-4 border-[#5E5A5A] w-full h-[20rem] max-w-[65vw] 
-                                        sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
-                                        lg:h-[30rem] lg:max-w-[22rem]"
+                                                  border-4 border-[#5E5A5A] w-full h-[20rem] max-w-[65vw] 
+                                                  sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
+                                                  lg:h-[30rem] lg:max-w-[22rem]"
                                                   src={product.attributes.thumbnail.data.attributes.url}
-                                                  alt={`${product.attributes.name} Bundle`} />
+                                                  alt={`${product.attributes.name} Bundle`}
+                                                  onLoad={() => handleMainImageLoad(product.id)}
+                                                  loading="lazy"
+                                             />
                                         </BounceAnimation>
                                         <h1 className="text-2xl mt-6 font-semibold lg:text-4xl md:pb-10
                                    bg-gold bg-clip-text text-transparent dark:text-light md:max-w-[20rem] select-none">
@@ -77,9 +104,19 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                              <div className={`w-32 h-40 rounded-xl overflow-hidden
                                                   border-[#5E5A5A] border-2 md:w-52 md:h-48 lg:w-64 lg:h-56 
                                                   transition-all duration-500`}>
-                                                  <img src={image.attributes.url}
+                                                  {!itemsImageLoading[image.id] && (
+                                                       <div className="absolute inset-0 z-10">
+                                                            <Skeleton className='w-full h-full' duration={1.5} />
+                                                       </div>
+                                                  )}
+                                                  <img
+                                                       src={image.attributes.url}
                                                        alt={image.attributes.name}
-                                                       className="size-full object-cover object-top"
+                                                       className={`size-full object-cover object-top
+                                                            transition-opacity duration-300
+                                                            ${itemsImageLoading[image.id] ? 'opacity-100' : 'opacity-0'}`}
+                                                       onLoad={() => handleItemsImageLoad(image.id)}
+                                                       loading="lazy"
                                                   />
                                              </div>
                                         </SwiperSlide>

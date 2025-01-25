@@ -15,20 +15,17 @@ import { getProductCatalogs } from '../../../services/productService';
 
 const HeroCarousel = () => {
      const swiperRef = React.useRef<SwiperType>();
-     const [imageLoading, setImageLoading] = React.useState<{ [key: string]: boolean }>({})
+     const [imageLoading, setImageLoading] = React.useState<{ [key: number]: boolean }>({})
      const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
           ['product'],
           getProductCatalogs,
-          {
-               staleTime: 5 * 60 * 1000,
-               cacheTime: 30 * 60 * 1000,
-          }
+          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 }
      )
 
      const slides = React.useMemo(() => {
           if (!productData?.data) return []
 
-          return Array.from({ length: 10 }, (_, index) =>
+          return Array.from({ length: 5 }, (_, index) =>
                productData.data.map((product) => ({
                     ...product,
                     virtualId: `${product.id}-${index}`
@@ -36,7 +33,7 @@ const HeroCarousel = () => {
           ).flat()
      }, [productData?.data])
 
-     const handleImageLoad = (virtualId: string) => {
+     const handleImageLoad = (virtualId: number) => {
           setImageLoading(prev => ({
                ...prev,
                [virtualId]: true
@@ -57,7 +54,7 @@ const HeroCarousel = () => {
                opacity: 1,
                scale: 1,
                transition: {
-                    type: "spring",
+                    type: 'spring',
                     stiffness: 100,
                     damping: 10
                }
@@ -79,15 +76,15 @@ const HeroCarousel = () => {
                     className={`w-full h-full object-cover object-center transition-opacity duration-300 
                          ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'
                          }`}
-                    onLoad={() => handleImageLoad(String(product.id))}
+                    onLoad={() => handleImageLoad(product.id)}
                     loading='lazy'
                />
           </>
      )
 
-     if (isLoading) {
-          return null
-     }
+     React.useEffect(() => {
+          console.log({ isLoading, slides, productData })
+     }, [isLoading, productData, slides])
 
      return (
           <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
@@ -107,7 +104,9 @@ const HeroCarousel = () => {
                                    <motion.div
                                         variants={cardVariants}
                                         className="h-full w-full overflow-hidden rounded-xl">
-                                        {renderImage(product.attributes.thumbnail.data)}
+                                        {isLoading ? renderSkeletonLoader()
+                                             : renderImage(product.attributes.thumbnail.data)
+                                        }
                                    </motion.div>
                               </SwiperSlide>
                          ))}

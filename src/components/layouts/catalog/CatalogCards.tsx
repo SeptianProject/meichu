@@ -8,37 +8,62 @@ import { useQuery } from '@tanstack/react-query'
 import { ProductCatalogsResponse } from '../../../types/product.ts'
 import { useAppSelector } from '../../../redux/hook.ts'
 import { getProductCatalogs } from '../../../services/productService'
+import Skeleton from 'react-loading-skeleton'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'
+     selectedCategory: number | null
 }
 
-const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type }) => {
+const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCategory }) => {
      const { screenSize } = useUI()
      const navigate = useNavigate()
      const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
-     const { data: productData } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
+     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
 
-     const listCatalog = React.useMemo(() => productData?.data.map((product) => {
-          const isLiked = isAuthenticated && Array.isArray(product.attributes.likes)
-               ? product.attributes.likes.some(like => like.id === userId)
-               : false
+     const fileteredCatalog = React.useMemo(() => {
+          if (!productData) return []
 
+          return productData.data.filter((product) => {
+               if (selectedCategory === null) return true
+               return product.attributes.categories.data.some(category => category.id === selectedCategory)
+          }).map((product) => {
+               const isLiked = isAuthenticated && Array.isArray(product.attributes.likes)
+                    ? product.attributes.likes.some(like => like.id === userId) : false
+
+               return (
+                    <CatalogCard
+                         key={product.id}
+                         productId={product.id}
+                         isFavored={false}
+                         title={product.attributes.name}
+                         image={product.attributes.thumbnail.data.attributes.url}
+                         initialLikeStatus={isLiked}
+                    />
+               )
+          })
+     }, [productData, selectedCategory, isAuthenticated, userId])
+
+
+     if (isLoading) {
           return (
-               <CatalogCard
-                    key={product.id}
-                    productId={product.id}
-                    isFavored={false}
-                    title={product.attributes.name}
-                    image={product.attributes.thumbnail.data.attributes.url}
-                    initialLikeStatus={isLiked}
-               />
+               <div className='flex flex-col items-center gap-y-10'>
+                    <ContainerStaggerAnimation
+                         initialDelay={0.5}
+                         staggerDelay={0.4}
+                         className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+                         gap-6 lg:gap-4 w-full'>
+                         {[...Array(type === 'homePage' ? 3 : 6)].map((_, index) => (
+                              <Skeleton key={index} height={300} className='w-full' />
+                         ))}
+                    </ContainerStaggerAnimation>
+               </div>
           )
-     }), [productData, isAuthenticated, userId])
+     }
 
      const displayedCards = screenSize === 'mobile'
-          ? listCatalog?.slice(0, 2)
-          : type === 'homePage' ? listCatalog?.slice(0, 3) : listCatalog
+          ? fileteredCatalog.slice(0, 2)
+          : type === 'homePage' ? fileteredCatalog.slice(0, 3) : fileteredCatalog
 
      return (
           <div className='flex flex-col items-center gap-y-10'>
@@ -51,7 +76,7 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type }) => {
                          <CardStaggerAnimation
                               key={index}
                               hiddenPosition={{ y: 100 }}
-                              className='w-full'>
+                              className='w-full h-full'>
                               {card}
                          </CardStaggerAnimation>
                     ))}

@@ -1,29 +1,18 @@
-import React from 'react'
 import CardBestSeller from '../../fragments/home/CardBestSeller'
 import TextTagline from '../../fragments/home/TextTagline'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper-bundle.css'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
 import { useQuery } from '@tanstack/react-query'
 import { ProductCatalogsResponse } from '../../../types'
 import { useNavigate } from 'react-router-dom'
 import { getProductCatalogs } from '../../../services/productService'
+import 'swiper/swiper-bundle.css'
 
 const BestSellerLayout = () => {
      const navigate = useNavigate()
      const { screenSize } = useUI()
-     const { data: productData } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
-     const bestSeller = React.useMemo(() => productData?.data.map((product) => (
-          <CardBestSeller
-               key={product.id}
-               title={product.attributes.name}
-               thumbnail={product.attributes.thumbnail.data.attributes.url}
-               images={product.attributes.images.data.map((image) => image.attributes.url)}
-               onClick={() => navigate(`/catalog-detail/${product.id}`)}
-          />
-     )), [productData, navigate])
-
+     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
 
      return (
           <div className="min-h-full relative">
@@ -36,12 +25,19 @@ const BestSellerLayout = () => {
                          slidesPerView={screenSize === 'mobile' ? 1 :
                               screenSize === 'tablet' ? 2 : 3}
                          className='size-full'>
-                         {bestSeller?.map((card, index) => (
+                         {productData?.data.map((product, index) => (
                               <SwiperSlide key={index} className='px-2 py-5'>
                                    <CardStaggerAnimation
                                         hiddenPosition={{ y: 100 }}
                                         className='w-full'>
-                                        {card}
+                                        <CardBestSeller
+                                             key={product.id}
+                                             isLoading={isLoading}
+                                             title={product.attributes.name}
+                                             thumbnail={product.attributes.thumbnail.data.attributes.url}
+                                             images={product.attributes.images.data.map((image) => image.attributes.url)}
+                                             onClick={() => navigate(`/catalog-detail/${product.id}`)}
+                                        />
                                    </CardStaggerAnimation>
                               </SwiperSlide>
                          ))}

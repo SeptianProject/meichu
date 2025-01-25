@@ -3,28 +3,59 @@ import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animation
 import { useQuery } from '@tanstack/react-query'
 import { ProductCategoriesResponse } from '../../../types'
 import { getProductCategories } from '../../../services/productService'
+import Skeleton from 'react-loading-skeleton'
 
-const CatalogCategories = () => {
-     const [onSelect, setOnSelect] = React.useState<number | null>(null)
-     const { data: categoryData } = useQuery<ProductCategoriesResponse>(
-          ['category'], getProductCategories
-     )
+interface CatalogCategoriesProps {
+     onSelectCategory: (categoryId: number | null) => void
+     selectedCategory: number | null
+}
+
+const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
+     onSelectCategory,
+     selectedCategory
+}) => {
+     const { data: categoryData, isLoading } = useQuery<ProductCategoriesResponse>(['category'], getProductCategories)
+
+     if (isLoading) {
+          return (
+               <ContainerStaggerAnimation
+                    initialDelay={0.5}
+                    staggerDelay={0.2}
+                    className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>
+                    {[...Array(5)].map((_, index) => (
+                         <Skeleton key={index} width={100} height={40} borderRadius={9999} />
+                    ))}
+               </ContainerStaggerAnimation>
+          )
+     }
 
      return (
           <ContainerStaggerAnimation
                initialDelay={0.5}
                staggerDelay={0.2}
                className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>
-               {categoryData?.data.map((category, index) => {
-                    const active = onSelect === category.id
+               <CardStaggerAnimation
+                    hiddenPosition={{ x: -50 }}>
+                    <button
+                         onClick={() => onSelectCategory(null)}
+                         className={`${selectedCategory === null
+                              ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-light border-transparent'
+                              : 'bg-transparent dark:bg-dark text-graySurface1 border-graySurface1'} 
+                              border w-fit py-1 px-5 hover:text-white rounded-full font-semibold
+                              transition-all duration-300`}>
+                         All
+                    </button>
+               </CardStaggerAnimation>
+               {categoryData?.data.map((category) => {
+                    const active = selectedCategory === category.id
                          ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-light border-transparent'
                          : 'bg-transparent dark:bg-dark text-graySurface1 border-graySurface1'
 
                     return (
                          <CardStaggerAnimation
-                              key={index}
+                              key={category.id}
                               hiddenPosition={{ x: -50 }}>
-                              <button onClick={() => setOnSelect(category.id)}
+                              <button onClick={() => onSelectCategory(category.id)}
                                    className={`${active} border w-fit py-1 px-5 hover:text-white
                                    rounded-full font-semibold font-inter transition-all duration-300`}>
                                    {category.attributes.name}

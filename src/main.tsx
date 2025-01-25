@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')!).render(
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          <SkeletonTheme baseColor='#08070F' highlightColor='#1e1e1e'>
+          <SkeletonTheme baseColor='#08070F' highlightColor='#15151A'>
             <App />
           </SkeletonTheme>
         </QueryClientProvider>
