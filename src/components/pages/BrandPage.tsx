@@ -1,5 +1,5 @@
 import { BsInstagram, BsTiktok, BsTwitterX, BsYoutube } from "react-icons/bs"
-import { CardStaggerAnimation, ContainerStaggerAnimation } from "../animations/StaggerAnimation"
+import { ContainerStaggerAnimation } from "../animations/StaggerAnimation"
 import ButtonBorderGradient from "../elements/buttons/ButtonBorderGradient"
 import SingleBadgeSosmed from "../elements/SingleBadgeSosmed"
 import TextTagline from "../fragments/home/TextTagline"
@@ -28,28 +28,26 @@ const BrandPage = () => {
                          className="w-full">
                          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                               {brandAmbassadorData?.data.map((brand) => (
-                                   <CardStaggerAnimation key={brand.id} hiddenPosition={{ y: 100 }}>
-                                        <div className="h-[30rem] bg-center bg-cover rounded-2xl relative overflow-hidden lg:h-[25rem] xl:h-[35rem]"
-                                             style={{ backgroundImage: `url(${brand.attributes.image.data.attributes.url})` }}>
-                                             <div className="absolute bottom-7 z-10 left-5 flex flex-col gap-y-2">
-                                                  <h1 className="font-semibold lg:text-lg xl:text-2xl text-light">
-                                                       {brand.attributes.name ?? 'Jane Rubyjane'}
-                                                  </h1>
-                                                  <p className="lg:text-xs xl:text-base font-extralight text-light">
-                                                       {brand.attributes.description ?? 'Whether you have a question about talents, pricing, portfolio,or anything else, our team...'}
-                                                  </p>
-                                                  <div className="flex items-center gap-x-2">
-                                                       <SingleBadgeSosmed icon={BsTwitterX} />
-                                                       <SingleBadgeSosmed icon={BsInstagram} />
-                                                       <SingleBadgeSosmed icon={BsYoutube} />
-                                                       <SingleBadgeSosmed icon={BsTiktok} />
-                                                  </div>
+                                   <div key={brand.id} className="h-[30rem] bg-center bg-cover rounded-2xl relative overflow-hidden lg:h-[25rem] xl:h-[32rem]"
+                                        style={{ backgroundImage: `url(${brand.attributes.image.data.attributes.url})` }}>
+                                        <div className="absolute bottom-7 z-10 left-5 flex flex-col gap-y-2">
+                                             <h1 className="font-semibold lg:text-lg xl:text-2xl text-light">
+                                                  {brand.attributes.name ?? 'Jane Rubyjane'}
+                                             </h1>
+                                             <p className="lg:text-xs xl:text-base font-extralight text-light">
+                                                  {brand.attributes.description ?? 'Whether you have a question about talents, pricing, portfolio,or anything else, our team...'}
+                                             </p>
+                                             <div className="flex items-center gap-x-2">
+                                                  <SingleBadgeSosmed icon={BsTwitterX} />
+                                                  <SingleBadgeSosmed icon={BsInstagram} />
+                                                  <SingleBadgeSosmed icon={BsYoutube} />
+                                                  <SingleBadgeSosmed icon={BsTiktok} />
                                              </div>
-                                             <div className="absolute h-44 w-full bottom-0 rounded-t-2xl 
+                                        </div>
+                                        <div className="absolute h-44 w-full bottom-0 rounded-t-2xl 
                                    bg-gradient-to-t from-yellowBloobs via-yellowBloobs/40
                                    to-transparent via-60% from-[5%]"/>
-                                        </div>
-                                   </CardStaggerAnimation>
+                                   </div>
                               ))}
                          </div>
                     </ContainerStaggerAnimation>

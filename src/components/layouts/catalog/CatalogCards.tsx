@@ -2,7 +2,7 @@ import React from 'react'
 import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import CatalogCard from './CatalogCard'
 import { useNavigate } from 'react-router-dom'
-import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
+import { ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
 import { useQuery } from '@tanstack/react-query'
 import { ProductCatalogsResponse } from '../../../types/product.ts'
@@ -38,17 +38,20 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                     ? product.attributes.likes.some(like => like.id === userId) : false
 
                return (
-                    <CatalogCard
-                         key={product.id}
-                         productId={product.id}
-                         isFavored={false}
-                         title={product.attributes.name}
-                         image={product.attributes.thumbnail.data.attributes.url}
-                         initialLikeStatus={isLiked}
-                    />
+                    <>
+                         {isLoading ? <Skeleton className='h-60 md:h-[22rem] lg:h-[28rem] rounded-xl ' />
+                              : <CatalogCard
+                                   key={product.id}
+                                   productId={product.id}
+                                   isFavored={false}
+                                   title={product.attributes.name}
+                                   image={product.attributes.thumbnail.data.attributes.url}
+                                   initialLikeStatus={isLiked}
+                              />}
+                    </>
                )
           })
-     }, [productData, selectedCategory, isAuthenticated, userId])
+     }, [productData, selectedCategory, isAuthenticated, userId, isLoading])
 
 
      if (isLoading) {
@@ -68,9 +71,16 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
           )
      }
 
-     const displayedCards = screenSize === 'mobile'
-          ? filteredCatalog.slice(0, 2)
-          : isExpanded ? filteredCatalog : filteredCatalog.slice(0, type === 'homePage' ? 3 : 6)
+     const getDisplayCount = () => {
+          if (type === 'homePage') return 3
+          if (isMobile && !isExpanded) return 2
+          return filteredCatalog.length
+     }
+
+     const displayedCards = filteredCatalog.slice(0, isExpanded ? filteredCatalog.length : getDisplayCount())
+
+     const showExpandButton = type === 'catalogPage' &&
+          (isMobile || filteredCatalog.length > getDisplayCount())
 
      return (
           <div className='flex flex-col items-center gap-y-10'>
@@ -80,17 +90,14 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                     className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
                     gap-6 lg:gap-4 w-full'>
                     {displayedCards?.map((card, index) => (
-                         <CardStaggerAnimation
-                              key={index}
-                              hiddenPosition={{ y: 100 }}
-                              className='w-full h-full'>
+                         <div key={index}>
                               {card}
-                         </CardStaggerAnimation>
+                         </div>
                     ))}
                </ContainerStaggerAnimation>
                {type === 'homePage'
                     ? <ButtonBorderGradient onClick={() => navigate('/catalog')} />
-                    : screenSize === 'mobile'
+                    : showExpandButton
                          ? <ButtonBorderGradient
                               isExpanded={isExpanded}
                               onClick={() => setIsExpanded(!isExpanded)} />

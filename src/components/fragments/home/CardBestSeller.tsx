@@ -34,23 +34,26 @@ const CardBestSeller: React.FC<CardBestSellerProps> = ({
                rounded-3xl flex flex-col items-start gap-y-5 cursor-pointer
                hover:-translate-y-3 transition-all duration-500 h-[22rem]'>
                <div className='flex items-center gap-x-4'>
-                    <img className='rounded-full size-14'
-                         src={assetItems.AnyIcon} alt="" />
+                    <div className="relative w-14 h-14">
+                         {isLoading ? <Skeleton className="absolute inset-0 size-full rounded-full border border-graySurface2" />
+                              : <img className='rounded-full size-full'
+                                   src={assetItems.AnyIcon} alt="" />}
+                    </div>
                     <div className='flex flex-col items-start relative'>
-                         {isLoading && <Skeleton className="absolute inset-x-0 border border-graySurface2" />}
-                         <h3 className={`text-graySurface1 dark:text-light text-lg font-bold
-                              ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-                              {title}
+                         <h3 className='text-graySurface1 dark:text-light text-lg font-bold'>
+                              {isLoading ? <Skeleton className="absolute inset-x-0 w-40 border border-graySurface2" />
+                                   : title}
                          </h3>
                          <h6 className='text-graySurface1 dark:text-light text-base'>
-                              @meichu
+                              {isLoading ? <Skeleton className="absolute inset-x-0 w-20 border border-graySurface2" />
+                                   : '@meichu'}
                          </h6>
                     </div>
                </div>
                <div className='w-full h-48 grid grid-flow-col grid-cols-3 grid-rows-2 gap-2'>
                     {images.slice(0, 2).map((img, index) => (
                          <div key={index} className="relative col-span-1 row-span-1">
-                              {imageLoadingStates[img] && (
+                              {!imageLoadingStates[img] && (
                                    <Skeleton
                                         className="absolute inset-0 size-full rounded-2xl border border-graySurface2"
                                         duration={1.5}
@@ -60,14 +63,14 @@ const CardBestSeller: React.FC<CardBestSellerProps> = ({
                                    src={img}
                                    alt={`Image-${index}`}
                                    className={`size-full object-cover object-center rounded-2xl transition-opacity
-                                   duration-300 ${!imageLoadingStates[img] ? 'opacity-100' : 'opacity-0'}`}
+                                   duration-300 ${imageLoadingStates[img] ? 'opacity-100' : 'opacity-0'}`}
                                    onLoad={() => handleImageLoad(img)}
                                    loading="lazy"
                               />
                          </div>
                     ))}
                     <div className="relative col-span-2 row-span-2">
-                         {thumbnailLoaded && (
+                         {!thumbnailLoaded && (
                               <Skeleton
                                    className="absolute inset-0 size-full rounded-2xl border border-graySurface2"
                               />
@@ -76,14 +79,18 @@ const CardBestSeller: React.FC<CardBestSellerProps> = ({
                               src={thumbnail}
                               alt="Thumbnail"
                               className={`size-full object-cover object-top rounded-2xl transition-opacity 
-                              duration-300 ${!thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`}
+                              duration-300 ${thumbnailLoaded ? 'opacity-100' : 'opacity-0'}`}
                               onLoad={() => setThumbnailLoaded(true)}
                               loading="lazy"
                          />
                     </div>
                </div>
                <div>
-                    <h3 className='dark:text-light font-semibold text-lg'>{title}</h3>
+                    <h3 className='dark:text-light font-semibold text-lg relative'>
+                         {isLoading ?
+                              <Skeleton className="absolute inset-0 w-40 h-full border border-graySurface2" />
+                              : title}
+                    </h3>
                </div>
           </div>
      )

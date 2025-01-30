@@ -47,18 +47,18 @@ const HeroCarousel = () => {
           }
      }
 
-     const cardVariants: AnimationProps["variants"] = {
-          hidden: { opacity: 0, scale: 0.5 },
-          visible: {
-               opacity: 1,
-               scale: 1,
-               transition: {
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 10
-               }
-          }
-     }
+     // const cardVariants: AnimationProps["variants"] = {
+     //      hidden: { opacity: 0, scale: 0.5 },
+     //      visible: {
+     //           opacity: 1,
+     //           scale: 1,
+     //           transition: {
+     //                type: 'spring',
+     //                stiffness: 100,
+     //                damping: 10
+     //           }
+     //      }
+     // }
 
      return (
           <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
@@ -75,24 +75,24 @@ const HeroCarousel = () => {
                                    key={product.virtualId}
                                    className="!w-28 !h-36 sm:!w-32 sm:!h-40 
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
-                                   {isLoading ? (
-                                        <div className='absolute inset-0'>
-                                             <Skeleton className='w-full h-full rounded-xl' duration={1.5} />
-                                        </div>
-                                   ) : (
-                                        <motion.div
-                                             variants={cardVariants}
-                                             initial="hidden"
-                                             animate="visible"
-                                             className='w-full h-full rounded-xl overflow-hidden'>
-                                             <img src={product.attributes.thumbnail.data.attributes.url}
+                                   <div className="h-full w-full overflow-hidden rounded-xl relative">
+                                        {isLoading ? (
+                                             <div className='absolute -inset-1 z-10'>
+                                                  <Skeleton className='w-full h-full' duration={1.5} />
+                                             </div>
+                                        ) : (
+                                             <img
+                                                  src={product.attributes.thumbnail.data.attributes.url}
                                                   alt={product.attributes.name + ' Bundle'}
-                                                  className={`w-full h-full object-cover object-center transition-opacity duration-300
-                                                       ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'}`}
+                                                  className={`w-full h-full object-cover object-center transition-opacity duration-300 
+                                             ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'
+                                                       }`}
                                                   onLoad={() => handleImageLoad(product.id)}
-                                                  loading='lazy' />
-                                        </motion.div>
-                                   )}
+                                                  loading='lazy'
+                                             />
+                                        )}
+
+                                   </div>
                               </SwiperSlide>
                          ))}
                     </Swiper>
