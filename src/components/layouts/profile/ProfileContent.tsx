@@ -152,6 +152,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                                    isCancel
                                    isGradient={false}
                                    title="Cancel"
+                                   disabled={updateProfileMutation.isLoading}
                                    onClick={handleCancel}
                                    className="lg:py-3 lg:w-40"
                               />

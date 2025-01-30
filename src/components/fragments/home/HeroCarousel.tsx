@@ -19,8 +19,7 @@ const HeroCarousel = () => {
      const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
           ['product'],
           getProductCatalogs,
-          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 }
-     )
+          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 })
 
      const slides = React.useMemo(() => {
           if (!productData?.data) return []
@@ -82,9 +81,7 @@ const HeroCarousel = () => {
           </>
      )
 
-     React.useEffect(() => {
-          console.log({ isLoading, slides, productData })
-     }, [isLoading, productData, slides])
+     if (isLoading) return renderSkeletonLoader()
 
      return (
           <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
@@ -104,9 +101,7 @@ const HeroCarousel = () => {
                                    <motion.div
                                         variants={cardVariants}
                                         className="h-full w-full overflow-hidden rounded-xl">
-                                        {isLoading ? renderSkeletonLoader()
-                                             : renderImage(product.attributes.thumbnail.data)
-                                        }
+                                        {renderImage(product.attributes.thumbnail.data)}
                                    </motion.div>
                               </SwiperSlide>
                          ))}

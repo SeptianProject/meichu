@@ -33,7 +33,7 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                                    className={`font-poppins cursor-pointer
                               lg:tracking-wider transition-all duration-300
                               ${location.pathname === item.link
-                                             ? 'text-dark dark:text-light'
+                                             ? 'text-light dark:text-light'
                                              : 'text-light/70 lg:text-dark/70 lg:dark:text-light/70 text-base lg:text-sm xl:text-base'}`}>
                                    {item.name}
                               </Link>

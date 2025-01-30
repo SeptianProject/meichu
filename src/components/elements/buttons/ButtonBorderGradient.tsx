@@ -3,9 +3,10 @@ import BounceAnimation from "../../animations/BounceAnimation"
 
 type ButtonBorderGradient = {
      onClick: () => void
+     isExpanded?: boolean
 }
 
-const ButtonBorderGradient: React.FC<ButtonBorderGradient> = React.memo(({ onClick }) => {
+const ButtonBorderGradient: React.FC<ButtonBorderGradient> = React.memo(({ onClick, isExpanded }) => {
      return (
           <BounceAnimation
                delayVal={0.8}
@@ -14,7 +15,7 @@ const ButtonBorderGradient: React.FC<ButtonBorderGradient> = React.memo(({ onCli
                hover:scale-105 transition-all duration-300'>
                     <button onClick={onClick} className='bg-light font-medium dark:bg-dark w-full 
                     rounded-full dark:text-light p-2 transform transition-all duration-300'>
-                         Load More
+                         {isExpanded ? 'Show Less' : 'Load More'}
                     </button>
                </div>
           </BounceAnimation>

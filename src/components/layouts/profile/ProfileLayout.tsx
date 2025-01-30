@@ -116,7 +116,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                ${profileOpen || !profileClose ? 'z-50 opacity-100' : 'z-0 scale-0 opacity-0'}`}
             style={{ maxHeight: profileOpen ? `${maxHeight}px` : '0px' }}>
             <div style={{ maxHeight: profileOpen ? `${maxHeight}px` : '0px' }}
-               className='relative flex flex-col items-center size-full overflow-y-auto px-6 py-10 md:p-10'>
+               className='relative flex flex-col items-center size-full overflow-y-auto px-6 py-10 md:p-10 overflow-hidden'>
                <div className="bg-yellowBloobs/10 absolute -top-10 -right-20 size-80 rounded-full blur-3xl" />
                <HeadProfile profileClose={profileClose} />
                <div className='w-full pt-5 z-10'>

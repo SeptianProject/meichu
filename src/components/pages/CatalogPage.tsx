@@ -11,7 +11,10 @@ const CatalogPage = () => {
           <section className='px-7 space-y-10 lg:px-20 relative'>
                <RouteHistory currentRoute="/catalog" currentText="Catalog" />
                <div className="">
-                    <TextTagline text="Catalog" className="font-semibold" />
+                    <TextTagline
+                         text="Catalog"
+                         className="font-semibold"
+                    />
                     <CatalogCategories
                          onSelectCategory={setSelectedCategory}
                          selectedCategory={selectedCategory}
