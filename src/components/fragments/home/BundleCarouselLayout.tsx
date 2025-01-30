@@ -67,7 +67,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                              hiddenCoordinates={{ x: -50 }}
                                              className="rounded-3xl relative">
                                              {!mainImageLoading[product.id] && (
-                                                  <div className="absolute inset-0 z-10">
+                                                  <div className="absolute -inset-1 z-10">
                                                        <Skeleton className='w-full h-full rounded-3xl' duration={1.5} />
                                                   </div>
                                              )}
@@ -104,20 +104,25 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                              <div className={`w-32 h-40 rounded-xl overflow-hidden
                                                   border-[#5E5A5A] border-2 md:w-52 md:h-48 lg:w-64 lg:h-56 
                                                   transition-all duration-500`}>
-                                                  {!itemsImageLoading[image.id] && (
-                                                       <div className="absolute inset-0 z-10">
-                                                            <Skeleton className='w-full h-full' duration={1.5} />
-                                                       </div>
-                                                  )}
-                                                  <img
-                                                       src={image.attributes.url}
-                                                       alt={image.attributes.name}
-                                                       className={`size-full object-cover object-top
+                                                  <BounceAnimation
+                                                       delayVal={0.5}
+                                                       hiddenCoordinates={{ x: -20 }}
+                                                       className="relative rounded-3xl">
+                                                       {!itemsImageLoading[image.id] && (
+                                                            <div className="absolute -inset-1 z-10">
+                                                                 <Skeleton className='w-full h-full' duration={1.5} />
+                                                            </div>
+                                                       )}
+                                                       <img
+                                                            src={image.attributes.url}
+                                                            alt={image.attributes.name}
+                                                            className={`size-full object-cover object-top
                                                             transition-opacity duration-300
                                                             ${itemsImageLoading[image.id] ? 'opacity-100' : 'opacity-0'}`}
-                                                       onLoad={() => handleItemsImageLoad(image.id)}
-                                                       loading="lazy"
-                                                  />
+                                                            onLoad={() => handleItemsImageLoad(image.id)}
+                                                            loading="lazy"
+                                                       />
+                                                  </BounceAnimation>
                                              </div>
                                         </SwiperSlide>
                                    ))}

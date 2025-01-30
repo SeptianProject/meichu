@@ -1,5 +1,5 @@
 import React from "react"
-import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
+import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper/types"
 
 export const createMainBundleSwiperConfig = (
@@ -21,11 +21,7 @@ export const createMainBundleSwiperConfig = (
                modifier: 2.5,
                slideShadows: false
           },
-          autoplay: {
-               delay: 3000,
-               disableOnInteraction: false
-          },
-          modules: [EffectCoverflow, Navigation, Autoplay],
+          modules: [EffectCoverflow, Navigation],
           onSlideChange: (swiper: SwiperType) => handleSlideChange(swiper.realIndex),
           onBeforeInit: (swiper: SwiperType) => {
                swiperRef.current = swiper;
