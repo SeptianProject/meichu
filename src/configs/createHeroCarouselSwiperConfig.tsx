@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules'
 import { Swiper as SwiperType } from 'swiper'
 
@@ -25,12 +24,7 @@ export const createHeroCarouselSwiperConfig = (
                delay: 3500,
                disableOnInteraction: false
           },
-          onBeforeInit: (swiper: SwiperType) => {
-               swiperInstance = swiper;
-          },
-          onAfterInit: (swiper: SwiperType) => {
-               swiperInstance = swiper;
-          },
+          onSwiper: swiperInstance,
           modules: [EffectCoverflow, Navigation, Autoplay]
      }
 }

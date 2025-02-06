@@ -99,7 +99,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                </div>
                <div className='my-5'>
                     <img className={`object-cover object-top w-full rounded-2xl  
-                    ${isFavored ? 'h-36 sm:h-44' : 'h-52 lg:h-80'}`}
+                    ${isFavored ? 'h-36 sm:h-44' : 'h-52 md:h-56 lg:h-60 xl:h-72'}`}
                          src={image} alt={title} />
                </div>
                <div className='flex items-center justify-between'>
@@ -122,7 +122,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                     px-3 py-2 rounded-full text-sm transition-all duration-300 
                     dark:border-light dark:text-light hover:bg-yellowLinear1 hover:text-light
                     hover:border-transparent dark:hover:border-transparent dark:hover:bg-yellowLinear1
-                    ${isFavored ? '' : ' font-semibold md:px-12 md:py-[10px]'}`}>
+                    ${isFavored ? '' : ' font-semibold md:px-6 md:py-[10px] xl:px-10'}`}>
                          Buy Now!
                     </button>
                </div>
