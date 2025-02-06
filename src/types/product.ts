@@ -24,11 +24,14 @@ export interface ProductLike {
 
 export interface ProductImage {
      readonly id: number
-     readonly name: string
-     readonly url: string
-     readonly formats: {
-          readonly thumbnail: ImageFormat
+     readonly attributes: {
+          readonly name: string
+          readonly url: string
+          readonly formats: {
+               readonly thumbnail: ImageFormat
+          }
      }
+     readonly url: string
 }
 
 export interface ProductRequest {
@@ -85,13 +88,15 @@ export interface ProductCatalogsResponse {
                readonly product_link: string
                readonly createdAt: ISO8601Date
                readonly isBundle: boolean
-               readonly thumbnail: { readonly data: { readonly attributes: ProductImage } }
-               readonly images: { readonly data: Array<{ readonly attributes: ProductImage }> }
+               readonly thumbnail: { readonly data: ProductImage }
+               readonly images: { readonly data: ProductImage[] }
                readonly likes: ProductLike[]
                readonly categories: {
                     readonly data: Array<{
                          readonly id: number
-                         readonly attributes: { readonly name: string }
+                         readonly attributes: {
+                              readonly name: string
+                         }
                     }>
                }
           }

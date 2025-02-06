@@ -42,7 +42,7 @@ const CustomProductPage = () => {
      const getDefaultValues = () => ({
           uuid: isEditing ? requestData?.data.attributes.uuid : uuidv4(),
           user: userData?.id as number,
-          references: isEditing ? requestData?.data.attributes.references.data.id : null,
+          references: isEditing ? requestData?.data.attributes.references.id : null,
           name: isEditing ? requestData?.data.attributes.name : '',
           productType: isEditing ? requestData?.data.attributes.productType : undefined,
           imvu: isEditing ? requestData?.data.attributes.imvu : undefined
@@ -66,10 +66,10 @@ const CustomProductPage = () => {
                setValue('name', attributes.name)
                setValue('productType', attributes.productType)
                setValue('imvu', attributes.imvu)
-               setValue('references', attributes.references.data?.id || null)
+               setValue('references', attributes.references?.id || null)
 
-               if (attributes.references.data?.attributes?.url) {
-                    setPreviewUrl(attributes.references.data.attributes.url)
+               if (attributes.references?.url) {
+                    setPreviewUrl(attributes.references.url)
                }
           }
      }, [requestData, setValue, isEditing])
