@@ -21,7 +21,8 @@ const Navbar = () => {
      const { mode, toggleDarkMode } = useUI()
      const { token, userId } = useAppSelector((state) => state.auth)
      const dispatch = useAppDispatch()
-     const { data: dataUser } = useQuery<UserProfile>(['user'], () => getUser('populate=*'))
+     const { data: dataUser } = useQuery<UserProfile>(
+          ['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
 
      const isDarkMode = mode === 'dark'
 

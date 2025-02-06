@@ -31,7 +31,6 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const queryClient = useQueryClient()
    const dispatch = useAppDispatch()
    const { screenSize } = useUI()
-
    const { data: userData } = useQuery<UserProfile>(
       ['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
 
@@ -41,8 +40,8 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       <CatalogCard
          isFavored
          productId={like.id}
-         title={like.product?.data?.attributes?.name}
-         image={like.product?.data?.attributes?.thumbnail.url}
+         title={like.product?.name}
+         image={like.product?.thumbnail.url}
          initialLikeStatus={true}
       />
    ), [userData?.likes])
@@ -63,7 +62,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                })
             }, 200);
          }}
-         image={request?.references?.data?.attributes?.url || ''}
+         image={request?.references?.url || ''}
          time={request?.createdAt?.split('T')[0]}
       />),
       [userData?.requests, navigate, dispatch]

@@ -11,11 +11,6 @@ export interface ProductAttributes {
      }
 }
 
-export interface ProductData {
-     readonly id: number
-     readonly attributes: ProductAttributes
-}
-
 export interface BundleProducts {
      readonly name: string
      readonly main: string
@@ -24,19 +19,15 @@ export interface BundleProducts {
 
 export interface ProductLike {
      readonly id: number
-     readonly product: {
-          readonly data: ProductData
-     }
+     readonly product: ProductAttributes
 }
 
 export interface ProductImage {
      readonly id: number
-     readonly attributes: {
-          readonly name: string
-          readonly url: string
-          readonly formats: {
-               readonly thumbnail: ImageFormat
-          }
+     readonly name: string
+     readonly url: string
+     readonly formats: {
+          readonly thumbnail: ImageFormat
      }
 }
 
@@ -48,9 +39,7 @@ export interface ProductRequest {
      readonly isNew: boolean
      readonly uuid: string
      readonly createdAt: ISO8601Date
-     readonly references: {
-          readonly data: ProductImage
-     }
+     readonly references: ProductImage
      readonly user: {
           readonly data: UserData
      }
@@ -96,15 +85,13 @@ export interface ProductCatalogsResponse {
                readonly product_link: string
                readonly createdAt: ISO8601Date
                readonly isBundle: boolean
-               readonly thumbnail: { readonly data: ProductImage }
-               readonly images: { readonly data: ProductImage[] }
+               readonly thumbnail: { readonly data: { readonly attributes: ProductImage } }
+               readonly images: { readonly data: Array<{ readonly attributes: ProductImage }> }
                readonly likes: ProductLike[]
                readonly categories: {
                     readonly data: Array<{
                          readonly id: number
-                         readonly attributes: {
-                              readonly name: string
-                         }
+                         readonly attributes: { readonly name: string }
                     }>
                }
           }
