@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules'
 import { Swiper as SwiperType } from 'swiper'
 
 export const createHeroCarouselSwiperConfig = (
-     swiperRef: React.MutableRefObject<SwiperType | undefined>
+     swiperInstance: SwiperType | null
 ) => {
      return {
           effect: 'coverflow',
@@ -25,10 +26,10 @@ export const createHeroCarouselSwiperConfig = (
                disableOnInteraction: false
           },
           onBeforeInit: (swiper: SwiperType) => {
-               swiperRef.current = swiper;
+               swiperInstance = swiper;
           },
           onAfterInit: (swiper: SwiperType) => {
-               swiperRef.current = swiper;
+               swiperInstance = swiper;
           },
           modules: [EffectCoverflow, Navigation, Autoplay]
      }

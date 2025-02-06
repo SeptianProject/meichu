@@ -2,19 +2,19 @@ import React from 'react';
 import BounceAnimation from '../../animations/BounceAnimation';
 import ArrowCardCarousel from '../../elements/ArrowCardCarousel';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { motion, AnimationProps } from 'motion/react'
+import { motion, Variants } from 'motion/react'
 import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useQuery } from '@tanstack/react-query';
 import { ProductCatalogsResponse } from '../../../types';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import 'swiper/swiper-bundle.css';
 import { getProductCatalogs } from '../../../services/productService';
+import 'react-loading-skeleton/dist/skeleton.css';
+import 'swiper/css';
 
 const HeroCarousel = () => {
-     const swiperRef = React.useRef<SwiperType>();
+     const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
      const [imageLoading, setImageLoading] = React.useState<{ [key: number]: boolean }>({})
      const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
           ['product'],
@@ -39,7 +39,7 @@ const HeroCarousel = () => {
           }))
      }
 
-     const containerVariants: AnimationProps["variants"] = {
+     const containerVariants: Variants = {
           hidden: { opacity: 0 },
           visible: {
                opacity: 1,
@@ -47,7 +47,7 @@ const HeroCarousel = () => {
           }
      }
 
-     // const cardVariants: AnimationProps["variants"] = {
+     // const cardVariants: Variants = {
      //      hidden: { opacity: 0, scale: 0.5 },
      //      visible: {
      //           opacity: 1,
@@ -69,7 +69,10 @@ const HeroCarousel = () => {
                     viewport={{ once: true }}
                     variants={containerVariants}
                     className='w-full'>
-                    <Swiper {...createHeroCarouselSwiperConfig(swiperRef)} className='w-full'>
+                    <Swiper
+                         {...createHeroCarouselSwiperConfig(swiperInstance)}
+                         onSwiper={setSwiperInstance}
+                         className='w-full'>
                          {slides.map((product) => (
                               <SwiperSlide
                                    key={product.virtualId}
@@ -104,14 +107,14 @@ const HeroCarousel = () => {
                               delayVal={0.8}
                               hiddenCoordinates={{ x: -50 }}>
                               <ArrowCardCarousel
-                                   onClick={() => swiperRef.current?.slidePrev()}
+                                   onClick={() => swiperInstance?.slidePrev()}
                                    icon={LuChevronLeft} />
                          </BounceAnimation>
                          <BounceAnimation
                               delayVal={0.8}
                               hiddenCoordinates={{ x: 50 }}>
                               <ArrowCardCarousel
-                                   onClick={() => swiperRef.current?.slideNext()}
+                                   onClick={() => swiperInstance?.slideNext()}
                                    icon={LuChevronRight} />
                          </BounceAnimation>
                     </div>

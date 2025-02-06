@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { ProductCatalogsResponse } from "../../types"
 import { AnimatePresence } from "motion/react"
-import ScaleAnimation from "../animations/ScaleAnimtion"
+import ScaleAnimation from "../animations/ScaleAnimation"
 import Button from "../elements/buttons/Button"
 import { getProductCatalogs } from "../../services/productService"
 
