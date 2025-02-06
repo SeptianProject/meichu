@@ -5,9 +5,8 @@ import { FadeAnimation } from "../animations/FadeAnimation"
 import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { ProductCatalogsResponse } from "../../types"
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "motion/react"
 import ScaleAnimation from "../animations/ScaleAnimtion"
-import ProductDetail from "../fragments/detail/ProductDetail"
 import Button from "../elements/buttons/Button"
 import { getProductCatalogs } from "../../services/productService"
 
@@ -67,9 +66,14 @@ const DetailPage = () => {
                          <AnimatePresence>
                               {images.map((image) => (
                                    <ScaleAnimation key={image.id}>
-                                        <ProductDetail
-                                             source={image.source}
-                                             onClick={() => handleSelectContent(image.id)} />
+                                        <button type="button"
+                                             onClick={() => handleSelectContent(image.id)}
+                                             className="transition-all duration-300 ease-in-out">
+                                             <img
+                                                  src={image.source}
+                                                  alt={image.source}
+                                                  className={`w-fit h-24 border-2 border-light rounded-xl lg:h-32 `} />
+                                        </button>
                                    </ScaleAnimation>
                               ))}
                          </AnimatePresence>

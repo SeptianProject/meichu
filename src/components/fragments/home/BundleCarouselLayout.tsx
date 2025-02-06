@@ -65,7 +65,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                          className='size-full md:max-w-[50rem]'>
                          {productData?.data.map((product) => (
                               <SwiperSlide key={product.id} className='!max-w-[40rem] md:!max-w-[40rem] lg:!max-w-[50rem]'>
-                                   <div className="flex flex-col h-full md:flex-row md:items-center md:gap-x-10">
+                                   <div className="flex flex-col h-full md:flex-row md:items-center md:gap-x-10 lg:gap-x-16">
                                         <BounceAnimation
                                              delayVal={0.8}
                                              hiddenCoordinates={{ x: -50 }}
@@ -78,7 +78,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                              <img className="rounded-3xl object-cover object-center 
                                                   border-4 border-[#5E5A5A] w-full h-[20rem] max-w-[65vw] 
                                                   sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
-                                                  lg:h-[30rem] lg:max-w-[22rem] cursor-pointer"
+                                                  lg:h-[30rem] lg:max-w-[24rem] cursor-pointer"
                                                   onClick={handleOnDetail}
                                                   src={product.attributes.thumbnail.data.attributes.url}
                                                   alt={`${product.attributes.name} Bundle`}
@@ -86,9 +86,10 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                                   loading="lazy"
                                              />
                                         </BounceAnimation>
-                                        <h1 className="text-2xl mt-6 font-semibold lg:text-4xl md:pb-10
-                                   bg-gold bg-clip-text text-transparent dark:text-light md:max-w-[20rem] select-none">
-                                             {product.attributes.name} Product Bundle
+                                        <h1 className="text-2xl mt-6 font-semibold bg-gold 
+                                        bg-clip-text text-transparent dark:text-light
+                                        md:pb-10 md:max-w-[20rem] lg:pb-14 lg:text-4xl select-none">
+                                             {product.attributes.name} Bundle
                                         </h1>
                                    </div>
                               </SwiperSlide>

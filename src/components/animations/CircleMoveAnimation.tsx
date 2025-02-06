@@ -1,5 +1,5 @@
 import React from "react";
-import { AnimationProps, motion } from "framer-motion";
+import { AnimationProps, motion } from "motion/react"
 
 interface CircleMoveAnimationProps {
      initialPosition: 'right' | 'left';

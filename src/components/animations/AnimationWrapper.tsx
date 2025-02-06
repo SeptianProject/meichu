@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, Variants, MotionProps } from "framer-motion";
+import { motion, Variants, MotionProps } from "motion/react"
 
 interface AnimationWrapperProps extends MotionProps {
      children: React.ReactNode

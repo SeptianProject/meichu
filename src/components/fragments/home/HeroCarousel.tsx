@@ -2,7 +2,7 @@ import React from 'react';
 import BounceAnimation from '../../animations/BounceAnimation';
 import ArrowCardCarousel from '../../elements/ArrowCardCarousel';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { motion, AnimationProps } from 'framer-motion';
+import { motion, AnimationProps } from 'motion/react'
 import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useQuery } from '@tanstack/react-query';

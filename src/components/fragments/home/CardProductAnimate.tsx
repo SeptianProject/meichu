@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react'
 import { abstrakImages } from "../../../assets/assets";
 
 const CardProductAnimate = () => {
