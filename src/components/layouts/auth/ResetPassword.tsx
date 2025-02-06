@@ -66,7 +66,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
           >
                <AuthHeading title='Reset Your Password' />
                <form onSubmit={handleSubmit(onSubmit)}
-                    className='flex gap-y-3 flex-col w-full h-full max-w-60 items-center justify-center'>
+                    className='flex gap-y-3 flex-col w-full h-full max-w-72 items-center justify-center'>
                     <input type="hidden"  {...register('code')} value={resetCode || ''} />
                     <AuthInput
                          icon={IoIosLock}
@@ -86,7 +86,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                     />
                     <p className="text-dark dark:text-light/80 text-[12px] dark:font-extralight">
                          <span className="text-red-600 text-xl mr-1">*</span>
-                         * We will send you a message to set or reset your new password
+                         We will send you a message to set or reset your new password
                     </p>
                     <Button
                          isGradient

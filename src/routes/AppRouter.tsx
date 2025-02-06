@@ -28,7 +28,11 @@ const AppRouter = () => {
                          <Route path='/' element={<HomePage />} />
                          <Route path="/catalog" element={<CatalogPage />} />
                          <Route path="/brand-ambassador" element={<BrandPage />} />
-                         <Route path="/custom-product" element={<CustomProductPage />} />
+                         <Route path="/custom-product" element={
+                              <ProtectedRoute>
+                                   <CustomProductPage />
+                              </ProtectedRoute>
+                         } />
                          <Route path="/event" element={<EventPage />} />
                          <Route path="/catalog-detail/:productId" element={
                               <ProtectedRoute>

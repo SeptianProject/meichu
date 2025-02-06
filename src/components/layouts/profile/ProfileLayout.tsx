@@ -61,7 +61,8 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                   state: {
                      requestData: request?.uuid,
                      isEditing: true
-                  }
+                  },
+                  replace: true,
                })
             }, 200);
          }}

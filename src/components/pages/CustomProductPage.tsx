@@ -31,10 +31,10 @@ const CustomProductPage = () => {
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [previewUrl, setPreviewUrl] = React.useState<string>('')
      const [isPublishDisabled, setIsPublishDisabled] = React.useState(false)
-
-     const { data: userData } = useQuery(['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
      const uuidParams = location.state?.requestData
      const isEditing = location.state?.isEditing
+
+     const { data: userData } = useQuery(['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
      const { data: requestData } = useQuery<ProductRequestResponse>(
           ['productRequest'],
           () => getProductRequest(`${uuidParams}`)
@@ -47,10 +47,6 @@ const CustomProductPage = () => {
           productType: isEditing ? requestData?.data.attributes.productType : undefined,
           imvu: isEditing ? requestData?.data.attributes.imvu : undefined
      })
-
-     React.useEffect(() => {
-          console.log('requestData', requestData)
-     }, [requestData])
 
      const {
           register,

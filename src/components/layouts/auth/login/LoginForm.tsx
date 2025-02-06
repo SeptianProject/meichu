@@ -58,7 +58,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
           }
      })
 
-     const onSubmit = (data: LoginFormSchema) => {
+     const onSubmit = async (data: LoginFormSchema) => {
           loginMutation.mutate(data)
      }
 
