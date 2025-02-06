@@ -32,7 +32,7 @@ const CustomProductPage = () => {
      const [previewUrl, setPreviewUrl] = React.useState<string>('')
      const [isPublishDisabled, setIsPublishDisabled] = React.useState(false)
 
-     const { data: userData } = useQuery(['user'], () => getUser(''))
+     const { data: userData } = useQuery(['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
      const uuidParams = location.state?.requestData
      const isEditing = location.state?.isEditing
      const { data: requestData } = useQuery<ProductRequestResponse>(

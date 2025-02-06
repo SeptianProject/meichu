@@ -6,6 +6,9 @@ export interface ProductAttributes {
      readonly description: string
      readonly price: number
      readonly isBundle: boolean
+     readonly thumbnail: {
+          readonly url: string
+     }
 }
 
 export interface ProductData {
@@ -21,10 +24,8 @@ export interface BundleProducts {
 
 export interface ProductLike {
      readonly id: number
-     readonly attributes: {
-          readonly product: {
-               readonly data: ProductData
-          }
+     readonly product: {
+          readonly data: ProductData
      }
 }
 

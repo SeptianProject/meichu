@@ -17,7 +17,6 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
      const fileInputRef = React.useRef<HTMLInputElement>(null)
      const imgRef = React.useRef<HTMLImageElement>(null)
      const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ?? '')
-     const [showPreview, setShowPreview] = React.useState<boolean>(!!currentImageUrl)
      const [showCropModal, setShowCropModal] = React.useState(false)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [crop, setCrop] = React.useState<Crop>({
@@ -59,7 +58,6 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
           setSelectedFile(file)
           const objectUrl = URL.createObjectURL(file)
           setPreviewUrl(objectUrl)
-          setShowPreview(true)
           setShowCropModal(true)
 
           if (fileInputRef.current) {
@@ -73,7 +71,6 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                URL.revokeObjectURL(previewUrl)
           }
           setPreviewUrl('')
-          setShowPreview(false)
           setSelectedFile(null)
 
           if (fileInputRef.current) {
@@ -163,12 +160,13 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                                    PNG, GIF, WebP, MP4 Or MP3. Maximum File Size 100 Mb
                               </p>
                          </div>
-                         {showPreview && previewUrl && (
-                              <div className='absolute right-5 top-5'>
+                         {previewUrl && (
+                              <div className='absolute right-5 top-5 size-24 md:size-44
+                              flex items-center justify-center rounded-xl border-2 border-graySurface2'>
                                    <img src={previewUrl} alt=""
-                                        className="w-40 h-40 border-2 border-graySurface2 rounded-xl" />
+                                        className="size-20 md:size-40 rounded-md" />
                                    <BiX onClick={handleCancelImage}
-                                        className='text-white size-8 absolute right-2 top-2' />
+                                        className='text-white bg-graySurface2 size-6 rounded-md md:size-8 absolute right-2 top-2' />
                               </div>
                          )}
                     </div>

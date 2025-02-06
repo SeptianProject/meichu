@@ -11,8 +11,9 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '../../../services/authService.ts'
 import useUI from '../../../hooks/useUI'
 import { UserProfile } from '../../../types'
-import { assetItems } from '../../../assets/assets.ts'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../../../redux/hook.ts'
+import { setProfileActive } from '../../../redux/slices/authSlice.ts'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -23,13 +24,16 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    profileOpen,
    profileClose
 }) => {
+   const navigate = useNavigate()
    const [isFavored, setIsFavored] = React.useState(true)
    const [isTapDiscover, setIsTapDiscover] = React.useState(false)
    const [maxHeight, setMaxHeight] = React.useState(0)
-   const { screenSize } = useUI()
-   const navigate = useNavigate()
    const queryClient = useQueryClient()
-   const { data: userData } = useQuery<UserProfile>(['user'], () => getUser('populate=*'))
+   const dispatch = useAppDispatch()
+   const { screenSize } = useUI()
+
+   const { data: userData } = useQuery<UserProfile>(
+      ['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
 
    const isMobile = screenSize === 'mobile'
 
@@ -37,8 +41,8 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       <CatalogCard
          isFavored
          productId={like.id}
-         title={like.attributes?.product?.data?.attributes?.name}
-         image={like.attributes?.product?.data?.attributes?.name}
+         title={like.product?.data?.attributes?.name}
+         image={like.product?.data?.attributes?.thumbnail.url}
          initialLikeStatus={true}
       />
    ), [userData?.likes])
@@ -49,25 +53,27 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
          isEvent={false}
          title={request?.name}
          onClick={() => {
-            navigate('/custom-product', {
-               state: {
-                  requestData: request?.uuid,
-                  isEditing: true
-               }
-            })
+            dispatch(setProfileActive(false))
+            setTimeout(() => {
+               navigate('/custom-product', {
+                  state: {
+                     requestData: request?.uuid,
+                     isEditing: true
+                  }
+               })
+            }, 200);
          }}
-         // image request?.attributes?.references?.data?.attributes?.url
-         image={assetItems.EventImage}
+         image={request?.references?.data?.attributes?.url || ''}
          time={request?.createdAt?.split('T')[0]}
       />),
-      [userData?.requests, navigate]
+      [userData?.requests, navigate, dispatch]
    )
 
    React.useEffect(() => {
       if (profileOpen) {
          queryClient.invalidateQueries(['user'])
       }
-   }, [profileOpen, queryClient, userData])
+   }, [profileOpen, queryClient])
 
    const handleSwitchDiscover = () => setIsFavored(!isFavored)
    const handleTapDiscover = () => setIsTapDiscover(true)
