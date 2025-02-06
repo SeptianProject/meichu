@@ -5,12 +5,13 @@ import { BsClock } from 'react-icons/bs'
 
 interface CardEventProps {
      isEvent?: boolean
+     onClick?: VoidFunction
      image?: string
      title?: string
      time?: string
 }
 
-const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title, time }) => {
+const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title, time, onClick }) => {
      return (
           <div className={`w-full h-full border border-[#302F35] rounded-2xl space-y-4
           dark:border-transparent dark:bg-cardBackground
@@ -28,6 +29,7 @@ const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title,
                          <Button
                               isGradient
                               isCancel={false}
+                              onClick={onClick}
                               title={isEvent ? 'See Event' : 'See Details'}
                               className={`text-[12px] py-[5px]
                          ${isEvent ? ' w-[7rem] sm:text-sm' : 'w-[5rem] sm:text-x[12px] '}`}

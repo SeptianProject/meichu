@@ -1,5 +1,5 @@
 import { ImageFormats, ISO8601Date } from "./common"
-import { ProductLike, Request } from "./product"
+import { ProductLike, ProductRequest } from "./product"
 
 export interface UserAttributes {
      readonly username: string
@@ -22,7 +22,7 @@ export interface UserProfile {
      readonly createdAt: ISO8601Date
      readonly updatedAt: ISO8601Date
      readonly likes: ProductLike[]
-     readonly requests: Request[]
+     readonly requests: ProductRequest[]
      readonly profilePicture: UploadResponse
 }
 

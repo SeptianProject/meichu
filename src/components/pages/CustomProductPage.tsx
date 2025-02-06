@@ -11,25 +11,41 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { v4 as uuidv4 } from "uuid"
 import Button from "../elements/buttons/Button"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { getUser, uploadFile } from "../../services/authService"
-import { createProductRequest } from "../../services/productService"
+import { createProductRequest, getProductRequest } from "../../services/productService"
+import { ProductRequest } from "../../types"
+
+interface ProductRequestResponse {
+     data: {
+          id: number
+          attributes: ProductRequest
+     }
+}
 
 const CustomProductPage = () => {
      const navigate = useNavigate()
+     const location = useLocation()
      const queryClient = useQueryClient()
      const [onPublish, setOnPublish] = React.useState(false)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [previewUrl, setPreviewUrl] = React.useState<string>('')
      const [isPublishDisabled, setIsPublishDisabled] = React.useState(false)
+
      const { data: userData } = useQuery(['user'], () => getUser(''))
+     const uuidParams = location.state?.requestData
+     const isEditing = location.state?.isEditing
+     const { data: requestData } = useQuery<ProductRequestResponse>(
+          ['productRequest'],
+          () => getProductRequest(`${uuidParams}`)
+     )
      const getDefaultValues = () => ({
-          uuid: uuidv4(),
+          uuid: isEditing ? requestData?.data.attributes.uuid : uuidv4(),
           user: userData?.id as number,
-          references: null,
-          name: '',
-          productType: undefined,
-          imvu: undefined
+          references: isEditing ? requestData?.data.attributes.references.data.id : null,
+          name: isEditing ? requestData?.data.attributes.name : '',
+          productType: isEditing ? requestData?.data.attributes.productType : undefined,
+          imvu: isEditing ? requestData?.data.attributes.imvu : undefined
      })
 
      const {
@@ -43,6 +59,20 @@ const CustomProductPage = () => {
           resolver: zodResolver(createProductSchema),
           defaultValues: getDefaultValues()
      })
+
+     React.useEffect(() => {
+          if (isEditing && requestData?.data) {
+               const { attributes } = requestData.data
+               setValue('name', attributes.name)
+               setValue('productType', attributes.productType)
+               setValue('imvu', attributes.imvu)
+               setValue('references', attributes.references.data?.id || null)
+
+               if (attributes.references.data?.attributes?.url) {
+                    setPreviewUrl(attributes.references.data.attributes.url)
+               }
+          }
+     }, [requestData, setValue, isEditing])
 
      const resetForm = () => {
           reset(getDefaultValues())
@@ -66,10 +96,10 @@ const CustomProductPage = () => {
                }
                return createProductRequest({
                     ...formData,
-                    references: imageId
+                    references: imageId || formData.references
                })
           },
-          onSuccess: (data) => {
+          onSuccess: () => {
                queryClient.invalidateQueries(['user'])
                setOnPublish(true)
                setIsPublishDisabled(true)
@@ -78,7 +108,6 @@ const CustomProductPage = () => {
                     setIsPublishDisabled(false)
                     createProductMutation.reset()
                }, 5000);
-               console.log('Create product success:', data)
           },
           onError: (error) => {
                console.log('Create product error:', error)
@@ -182,15 +211,17 @@ const CustomProductPage = () => {
                                    onClick={handleCancel}
                                    className="lg:w-44"
                               />
-                              <Button
-                                   isGradient
-                                   type="submit"
-                                   disabled={createProductMutation.isLoading || isPublishDisabled}
-                                   title={createProductMutation.isLoading ? 'Publishing...'
-                                        : isPublishDisabled ? 'Published' : 'Publish'
-                                   }
-                                   className="lg:w-44"
-                              />
+                              {!isEditing && (
+                                   <Button
+                                        isGradient
+                                        type="submit"
+                                        disabled={createProductMutation.isLoading || isPublishDisabled}
+                                        title={createProductMutation.isLoading ? 'Publishing...'
+                                             : isPublishDisabled ? 'Published' : 'Publish'
+                                        }
+                                        className="lg:w-44"
+                                   />
+                              )}
                          </div>
                     </form>
                </section>

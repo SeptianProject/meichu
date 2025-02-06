@@ -12,6 +12,7 @@ import { getUser } from '../../../services/authService.ts'
 import useUI from '../../../hooks/useUI'
 import { UserProfile } from '../../../types'
 import { assetItems } from '../../../assets/assets.ts'
+import { useNavigate } from 'react-router-dom'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
@@ -26,6 +27,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const [isTapDiscover, setIsTapDiscover] = React.useState(false)
    const [maxHeight, setMaxHeight] = React.useState(0)
    const { screenSize } = useUI()
+   const navigate = useNavigate()
    const queryClient = useQueryClient()
    const { data: userData } = useQuery<UserProfile>(['user'], () => getUser('populate=*'))
 
@@ -40,16 +42,25 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
          initialLikeStatus={true}
       />
    ), [userData?.likes])
+
    const listCardRequest = React.useMemo(() => userData?.requests?.map((request) =>
       <CardEvent
          key={request.id}
          isEvent={false}
          title={request?.name}
+         onClick={() => {
+            navigate('/custom-product', {
+               state: {
+                  requestData: request?.uuid,
+                  isEditing: true
+               }
+            })
+         }}
          // image request?.attributes?.references?.data?.attributes?.url
          image={assetItems.EventImage}
          time={request?.createdAt?.split('T')[0]}
       />),
-      [userData]
+      [userData?.requests, navigate]
    )
 
    React.useEffect(() => {

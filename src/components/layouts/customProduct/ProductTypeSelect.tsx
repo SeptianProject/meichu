@@ -80,6 +80,7 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                               />
                               <div className={`p-4 flex items-center gap-x-4 w-full rounded-2xl 
                               border-none transition-all duration-500 dark:bg-dark 
+                              ${error ? 'ring-redDanger' : 'ring-graySecondary'}
                               ${value === option.value
                                         ? 'ring-[3px] ring-yellowLinear1'
                                         : 'ring-[1.5px] ring-graySurface1'}`}>
@@ -102,7 +103,6 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                          </label>
                     ))}
                </div>
-               {error && <p className="text-red-500 text-sm">{error.message}</p>}
           </div>
      )
 })

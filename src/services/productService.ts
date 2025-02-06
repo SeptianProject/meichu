@@ -9,6 +9,19 @@ export const createProductRequest = async (data: CreateProductSchema) => {
      return response.data
 }
 
+export const updateProductRequest = async (uuid: string, data: CreateProductSchema) => {
+     const token = localStorage.getItem('authToken')
+     const response = await axiosInstance.put(`${apiUrl}/requests/${uuid}`, { data }, {
+          headers: { Authorization: `Bearer ${token}` }
+     })
+     return response.data
+}
+
+export const getProductRequest = async (source?: string) => {
+     const response = await axiosInstance.get(`${apiUrl}/requests/${source}`)
+     return response.data
+}
+
 export const getBrandAmbassadors = async () => {
      const response = await axiosInstance.get(`${apiUrl}/ambassadors`)
      return response.data

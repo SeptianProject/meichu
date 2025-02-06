@@ -38,7 +38,6 @@ const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(
                          dark:bg-dark dark:text-light dark:text-opacity-70
                          transition-all duration-300 focus:ring-[2.5px]
                          ${error ? 'ring-redDanger' : 'ring-graySecondary'}`} />
-                    {error && <p className="text-redDanger text-[12px] text-start">{error.message}</p>}
                </div>
           </>
      );

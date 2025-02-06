@@ -39,13 +39,20 @@ export interface ProductImage {
      }
 }
 
-export interface Request {
+export interface ProductRequest {
      readonly id: number
      readonly name: string
      readonly productType: string
      readonly imvu: boolean
-     readonly createdAt: ISO8601Date
      readonly isNew: boolean
+     readonly uuid: string
+     readonly createdAt: ISO8601Date
+     readonly references: {
+          readonly data: ProductImage
+     }
+     readonly user: {
+          readonly data: UserData
+     }
 }
 
 export interface ProductRequestsResponse {
@@ -55,6 +62,8 @@ export interface ProductRequestsResponse {
                readonly name: string
                readonly productType: string
                readonly imvu: boolean
+               readonly isNew: boolean
+               readonly uuid: string
                readonly createdAt: ISO8601Date
                readonly references: {
                     readonly data: ProductImage[]

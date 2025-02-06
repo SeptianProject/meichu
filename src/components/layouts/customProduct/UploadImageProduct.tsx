@@ -3,7 +3,7 @@ import { IoCloudUpload } from 'react-icons/io5'
 import TitleDesc from '../../fragments/customProduct/TitleDesc'
 import ReactCrop, { Crop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
-import { assetItems } from '../../../assets/assets'
+import { BiX } from 'react-icons/bi'
 
 interface UploadImageProductProps {
      currentImageUrl?: string
@@ -16,7 +16,8 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
 }) => {
      const fileInputRef = React.useRef<HTMLInputElement>(null)
      const imgRef = React.useRef<HTMLImageElement>(null)
-     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ?? assetItems.EventImage)
+     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ?? '')
+     const [showPreview, setShowPreview] = React.useState<boolean>(!!currentImageUrl)
      const [showCropModal, setShowCropModal] = React.useState(false)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [crop, setCrop] = React.useState<Crop>({
@@ -28,8 +29,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
      })
 
      React.useEffect(() => {
-          setPreviewUrl(currentImageUrl ?? assetItems.EventImage
-          )
+          setPreviewUrl(currentImageUrl ?? '')
      }, [currentImageUrl])
 
      const validateFile = (file: File) => {
@@ -59,7 +59,26 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
           setSelectedFile(file)
           const objectUrl = URL.createObjectURL(file)
           setPreviewUrl(objectUrl)
+          setShowPreview(true)
           setShowCropModal(true)
+
+          if (fileInputRef.current) {
+               fileInputRef.current.value = ''
+          }
+     }
+
+     const handleCancelImage = (e: React.MouseEvent) => {
+          e.stopPropagation()
+          if (previewUrl && previewUrl.startsWith('blob:')) {
+               URL.revokeObjectURL(previewUrl)
+          }
+          setPreviewUrl('')
+          setShowPreview(false)
+          setSelectedFile(null)
+
+          if (fileInputRef.current) {
+               fileInputRef.current.value = ''
+          }
      }
 
      const getCroppedImg = async (
@@ -129,7 +148,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                          desc="Send the reference photo you want for custom product." />
                     <div
                          onClick={handleUploadClick}
-                         className="h-64 flex flex-col items-center gap-y-4 justify-center rounded-2xl 
+                         className="relative h-64 flex flex-col items-center gap-y-4 justify-center rounded-2xl 
                               ring-[1.5px] ring-graySurface1 dark:bg-dark lg:h-[25rem] cursor-pointer">
                          <input
                               type="file"
@@ -144,7 +163,14 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                                    PNG, GIF, WebP, MP4 Or MP3. Maximum File Size 100 Mb
                               </p>
                          </div>
-                         <img src={previewUrl} alt="" className="w-40 h-40 border-2 border-graySurface2 rounded-xl" />
+                         {showPreview && previewUrl && (
+                              <div className='absolute right-5 top-5'>
+                                   <img src={previewUrl} alt=""
+                                        className="w-40 h-40 border-2 border-graySurface2 rounded-xl" />
+                                   <BiX onClick={handleCancelImage}
+                                        className='text-white size-8 absolute right-2 top-2' />
+                              </div>
+                         )}
                     </div>
                </div>
                {showCropModal && (
