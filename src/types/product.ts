@@ -42,7 +42,10 @@ export interface ProductRequest {
      readonly isNew: boolean
      readonly uuid: string
      readonly createdAt: ISO8601Date
-     readonly references: ProductImage
+     readonly references: {
+          readonly url: string
+          readonly data: ProductImage
+     }
      readonly user: {
           readonly data: UserData
      }

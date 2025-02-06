@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid"
 import Button from "../elements/buttons/Button"
 import { useLocation, useNavigate } from "react-router-dom"
 import { getUser, uploadFile } from "../../services/authService"
-import { createProductRequest, getProductRequest } from "../../services/productService"
+import { createProductRequest, getProductRequest, updateProductRequest } from "../../services/productService"
 import { ProductRequest } from "../../types"
 
 interface ProductRequestResponse {
@@ -42,11 +42,15 @@ const CustomProductPage = () => {
      const getDefaultValues = () => ({
           uuid: isEditing ? requestData?.data.attributes.uuid : uuidv4(),
           user: userData?.id as number,
-          references: isEditing ? requestData?.data.attributes.references.id : null,
+          references: isEditing ? requestData?.data.attributes?.references?.data?.id : null,
           name: isEditing ? requestData?.data.attributes.name : '',
           productType: isEditing ? requestData?.data.attributes.productType : undefined,
           imvu: isEditing ? requestData?.data.attributes.imvu : undefined
      })
+
+     React.useEffect(() => {
+          console.log('requestData', requestData)
+     }, [requestData])
 
      const {
           register,
@@ -57,22 +61,9 @@ const CustomProductPage = () => {
           formState: { errors }
      } = useForm<CreateProductSchema>({
           resolver: zodResolver(createProductSchema),
-          defaultValues: getDefaultValues()
+          defaultValues: getDefaultValues(),
+          mode: 'onSubmit'
      })
-
-     React.useEffect(() => {
-          if (isEditing && requestData?.data) {
-               const { attributes } = requestData.data
-               setValue('name', attributes.name)
-               setValue('productType', attributes.productType)
-               setValue('imvu', attributes.imvu)
-               setValue('references', attributes.references?.id || null)
-
-               if (attributes.references?.url) {
-                    setPreviewUrl(attributes.references.url)
-               }
-          }
-     }, [requestData, setValue, isEditing])
 
      const resetForm = () => {
           reset(getDefaultValues())
@@ -94,6 +85,14 @@ const CustomProductPage = () => {
                          console.error('Failed upload ImageProduct', error)
                     }
                }
+
+               if (isEditing && uuidParams) {
+                    return updateProductRequest(uuidParams, {
+                         ...formData,
+                         references: imageId || formData.references
+                    })
+               }
+
                return createProductRequest({
                     ...formData,
                     references: imageId || formData.references
@@ -115,18 +114,22 @@ const CustomProductPage = () => {
           }
      })
 
-     const onSubmit = (data: CreateProductSchema) => {
+     const onSubmit = async (data: CreateProductSchema) => {
           if (isPublishDisabled) return
+          if (createProductMutation.isLoading) return
           createProductMutation.mutate(data)
      }
 
      const handleFileSelect = (file: File) => {
           setSelectedFile(file)
-          setPreviewUrl(URL.createObjectURL(file))
+          const objectUrl = URL.createObjectURL(file)
+          setPreviewUrl(objectUrl)
      }
 
      const handleCancel = () => {
-          resetForm()
+          if (!isEditing) {
+               resetForm()
+          }
           navigate('/')
      }
 
@@ -150,6 +153,20 @@ const CustomProductPage = () => {
      }, [previewUrl])
 
      React.useEffect(() => {
+          if (isEditing && requestData?.data) {
+               const { attributes } = requestData.data
+               setValue('name', attributes.name)
+               setValue('productType', attributes.productType)
+               setValue('imvu', attributes.imvu)
+               setValue('references', attributes.references.data?.id || null)
+
+               if (attributes.references.data?.attributes?.url) {
+                    setPreviewUrl(attributes.references.data.attributes.url)
+               }
+          }
+     }, [requestData, setValue, isEditing, userData?.id])
+
+     React.useEffect(() => {
           if (onPublish) {
                document.body.style.overflow = 'hidden'
                document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`
@@ -170,7 +187,10 @@ const CustomProductPage = () => {
                          <RouteHistory currentRoute="/custom-product" currentText="Custom Product" />
                          <TextTagline text="custom product" className="dark:text-light font-semibold" />
                     </div>
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-16">
+                    <form onSubmit={(e) => {
+                         e.preventDefault()
+                         handleSubmit(onSubmit)(e)
+                    }} className="space-y-16">
                          <input type="hidden" {...register('uuid')} />
                          <input type="hidden" {...register('references')} />
                          <input type="hidden"{...register('user')} />
@@ -211,17 +231,15 @@ const CustomProductPage = () => {
                                    onClick={handleCancel}
                                    className="lg:w-44"
                               />
-                              {!isEditing && (
-                                   <Button
-                                        isGradient
-                                        type="submit"
-                                        disabled={createProductMutation.isLoading || isPublishDisabled}
-                                        title={createProductMutation.isLoading ? 'Publishing...'
-                                             : isPublishDisabled ? 'Published' : 'Publish'
-                                        }
-                                        className="lg:w-44"
-                                   />
-                              )}
+                              <Button
+                                   isGradient
+                                   type="submit"
+                                   disabled={createProductMutation.isLoading || isPublishDisabled}
+                                   title={createProductMutation.isLoading ? 'Publishing...'
+                                        : isPublishDisabled ? 'Published' : isEditing ? 'Update' : 'Publish'
+                                   }
+                                   className="lg:w-44"
+                              />
                          </div>
                     </form>
                </section>

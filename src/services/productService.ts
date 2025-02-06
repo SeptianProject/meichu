@@ -48,6 +48,5 @@ export const createProductLike = async (userId: number, productId: number) => {
      }, {
           headers: { Authorization: `Bearer ${token}` }
      })
-     console.log('createProductLike', response.data)
      return response.data
 }

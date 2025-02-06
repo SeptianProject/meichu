@@ -46,6 +46,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
      }
 
      const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+          e.preventDefault()
           const file = e.target.files?.[0]
           if (!file) return
 
@@ -113,7 +114,8 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
           })
      }
 
-     const handleCropComplete = async () => {
+     const handleCropComplete = async (e: React.MouseEvent) => {
+          e.preventDefault()
           if (!imgRef.current) return
 
           try {
@@ -172,7 +174,8 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                     </div>
                </div>
                {showCropModal && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div onClick={(e) => e.stopPropagation()}
+                         className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                          <div className="bg-white p-4 rounded-lg max-w-2xl w-full mx-4">
                               <h3 className="text-lg font-semibold mb-4">Cropper Image</h3>
                               <div className="max-h-[60vh] overflow-auto">
@@ -191,11 +194,16 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                               </div>
                               <div className="mt-4 flex justify-end gap-2">
                                    <button
-                                        onClick={() => setShowCropModal(false)}
+                                        type='button'
+                                        onClick={(e) => {
+                                             e.preventDefault()
+                                             setShowCropModal(false)
+                                        }}
                                         className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md">
                                         Cancel
                                    </button>
                                    <button
+                                        type='button'
                                         onClick={handleCropComplete}
                                         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                                         Apply

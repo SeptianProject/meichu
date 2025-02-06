@@ -32,11 +32,14 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const dispatch = useAppDispatch()
    const { screenSize } = useUI()
    const { data: userData } = useQuery<UserProfile>(
-      ['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
+      ['userAvatar'], () => getUser('populate=*'))
+   const { data: userDataDetail } = useQuery<UserProfile>(
+      ['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*')
+   )
 
    const isMobile = screenSize === 'mobile'
 
-   const listCardFavored = React.useMemo(() => userData?.likes?.map((like) =>
+   const listCardFavored = React.useMemo(() => userDataDetail?.likes?.map((like) =>
       <CatalogCard
          isFavored
          productId={like.id}
@@ -44,9 +47,9 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
          image={like.product?.thumbnail.url}
          initialLikeStatus={true}
       />
-   ), [userData?.likes])
+   ), [userDataDetail?.likes])
 
-   const listCardRequest = React.useMemo(() => userData?.requests?.map((request) =>
+   const listCardRequest = React.useMemo(() => userDataDetail?.requests?.map((request) =>
       <CardEvent
          key={request.id}
          isEvent={false}
@@ -65,11 +68,12 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
          image={request?.references?.url || ''}
          time={request?.createdAt?.split('T')[0]}
       />),
-      [userData?.requests, navigate, dispatch]
+      [userDataDetail?.requests, navigate, dispatch]
    )
 
    React.useEffect(() => {
       if (profileOpen) {
+         queryClient.invalidateQueries(['userAvatar'])
          queryClient.invalidateQueries(['user'])
       }
    }, [profileOpen, queryClient])
