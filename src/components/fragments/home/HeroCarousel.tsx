@@ -82,14 +82,13 @@ const HeroCarousel = () => {
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
                                         <motion.div
                                              variants={cardVariants}
-                                             className='h-full w-full'
-                                        >
+                                             className='h-full w-full'>
                                              <img
                                                   src={product.attributes.thumbnail.data.attributes.url}
                                                   alt={product.attributes.name + ' Bundle'}
-                                                  className={`w-full h-full object-cover object-center transition-opacity duration-300 
-                                             ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'
-                                                       }`}
+                                                  className={`w-full h-full object-cover 
+                                                       object-center transition-opacity duration-300
+                                                       ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'}`}
                                                   onLoad={() => handleImageLoad(product.id)}
                                                   loading='lazy'
                                              />
@@ -98,8 +97,7 @@ const HeroCarousel = () => {
                               </SwiperSlide>
                          ))}
                     </Swiper>
-                    <div className='hidden absolute left-1/2 top-1/2 
-                    -translate-y-1/2 -translate-x-1/2 z-10
+                    <div className='hidden absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10
                     lg:flex items-center justify-between w-[95vw] xl:w-[80vw]'>
                          <BounceAnimation
                               delayVal={0.8}

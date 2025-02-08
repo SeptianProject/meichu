@@ -11,6 +11,7 @@ import { getProductCatalogs } from "../../../services/productService";
 import 'swiper/swiper-bundle.css'
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
+import BundleCarouselSkeleton from "../../elements/skeletons/BundleCarouselSkeleton";
 
 interface BundleCarouselLayoutProps {
      swiperRef: React.MutableRefObject<SwiperType | null>
@@ -24,7 +25,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      const [mainImageLoading, setMainImageLoading] = React.useState<{ [key: number]: boolean }>({})
      const [itemsImageLoading, setItemsImageLoading] = React.useState<{ [key: number]: boolean }>({})
 
-     const { data: productData } = useQuery<ProductCatalogsResponse>(
+     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
           ['product'],
           getProductCatalogs,
           { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 }
@@ -57,6 +58,8 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      const handleOnDetail = () => {
           navigate(`/catalog-detail/${activeMainBundleId}`)
      }
+
+     if (isLoading) return <BundleCarouselSkeleton />
 
      return (
           <div className="md:absolute md:left-0 lg:left-20 xl:left-40">
@@ -103,8 +106,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                     <div className="max-w-full -bottom-10 left-40 md:absolute md:max-w-[35rem] lg:max-w-[40rem]">
                          <Swiper {...swiperConfigItemsBundle}
                               className='mx-auto size-full'>
-                              {productData?.data
-                                   .find(product => product.id === activeMainBundleId)
+                              {productData?.data.find(product => product.id === activeMainBundleId)
                                    ?.attributes.images.data.map((image) => (
                                         <SwiperSlide key={image.id} className="!w-auto rounded-xl">
                                              <div className={`w-32 h-40 rounded-xl overflow-hidden

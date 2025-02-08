@@ -2,13 +2,13 @@ import React from 'react'
 import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import CatalogCard from './CatalogCard'
 import { useNavigate } from 'react-router-dom'
-import { ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
 import { useQuery } from '@tanstack/react-query'
 import { ProductCatalogsResponse } from '../../../types/product.ts'
 import { useAppSelector } from '../../../redux/hook.ts'
 import { getProductCatalogs } from '../../../services/productService'
-import Skeleton from 'react-loading-skeleton'
+import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton.tsx'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'
@@ -38,38 +38,17 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                     ? product.attributes.likes.some(like => like.id === userId) : false
 
                return (
-                    <>
-                         {isLoading ? <Skeleton className='h-60 md:h-[22rem] lg:h-[28rem] rounded-xl ' />
-                              : <CatalogCard
-                                   key={product.id}
-                                   productId={product.id}
-                                   isFavored={false}
-                                   title={product.attributes.name}
-                                   image={product.attributes.thumbnail.data.attributes.url}
-                                   initialLikeStatus={isLiked}
-                              />}
-                    </>
+                    <CatalogCard
+                         key={product.id}
+                         productId={product.id}
+                         isFavored={false}
+                         title={product.attributes.name}
+                         image={product.attributes.thumbnail.data.attributes.url}
+                         initialLikeStatus={isLiked}
+                    />
                )
           })
-     }, [productData, selectedCategory, isAuthenticated, userId, isLoading])
-
-
-     if (isLoading) {
-          return (
-               <div className='flex flex-col items-center gap-y-10'>
-                    <ContainerStaggerAnimation
-                         initialDelay={0.5}
-                         staggerDelay={0.4}
-                         className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
-                         gap-6 lg:gap-5 w-full'>
-                         {[...Array(type === 'homePage' ? 3 : isMobile ? 2 : 6)].map((_, index) => (
-                              <Skeleton key={index} className='h-40 lg:h-[25rem] px-20 rounded-2xl' />
-                         ))}
-                    </ContainerStaggerAnimation>
-                    <Skeleton className='w-28 md:w-32 h-10 rounded-full' />
-               </div>
-          )
-     }
+     }, [productData, selectedCategory, isAuthenticated, userId])
 
      const getDisplayCount = () => {
           if (type === 'homePage') return 3
@@ -82,6 +61,8 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
      const showExpandButton = type === 'catalogPage' &&
           (isMobile || filteredCatalog.length > getDisplayCount())
 
+     if (isLoading) return <CatalogCardSkeleton type={type} />
+
      return (
           <div className='flex flex-col items-center gap-y-10'>
                <ContainerStaggerAnimation
@@ -90,9 +71,11 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                     className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
                     gap-6 lg:gap-4 w-full'>
                     {displayedCards?.map((card, index) => (
-                         <div key={index}>
+                         <CardStaggerAnimation
+                              hiddenPosition={{ y: 50 }}
+                              key={index}>
                               {card}
-                         </div>
+                         </CardStaggerAnimation>
                     ))}
                </ContainerStaggerAnimation>
                {type === 'homePage'

@@ -18,7 +18,7 @@ const BundleProductsLayout = () => {
                          bg-gradient-to-r from-transparent to-yellowBloobs/30 from-40% 
                          md:w-[70rem] md:h-[15rem] lg:h-[20rem] md:top-36 lg:top-36 lg:-right-20
                          dark:to-transparent dark:to-95% dark:from-0% md:dark:bg-gradient-to-r 
-                         md:dark:from-dark/30 md:dark:to-transparent md:dark:from-10%
+                         md:dark:from-dark/0 md:dark:to-transparent md:dark:from-10%
                          md:dark:to-100% md:dark:w-[40rem] lg:dark:left-40" />
                     <div className="hidden absolute w-fit -right-10 top-20 items-center justify-end gap-x-5">
                          <ArrowCardCarousel

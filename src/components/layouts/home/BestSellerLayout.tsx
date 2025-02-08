@@ -8,32 +8,14 @@ import { ProductCatalogsResponse } from '../../../types'
 import { useNavigate } from 'react-router-dom'
 import { getProductCatalogs } from '../../../services/productService'
 import 'swiper/swiper-bundle.css'
+import BestSellerSkeleton from '../../elements/skeletons/BestSellerSkeleton'
 
 const BestSellerLayout = () => {
      const navigate = useNavigate()
      const { screenSize } = useUI()
      const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
 
-     if (isLoading) {
-          return (
-               <div>
-                    <TextTagline text="Best Seller" className='font-semibold' />
-                    <ContainerStaggerAnimation
-                         initialDelay={0.5}
-                         staggerDelay={0.4}
-                         className='mt-6'>
-                         {[...Array(screenSize === 'mobile' ? 1 : 3)].map((_, index) => (
-                              <CardStaggerAnimation
-                                   key={index}
-                                   hiddenPosition={{ y: 100 }}
-                                   className='w-full'>
-                                   <CardBestSeller thumbnail='' title='' isLoading />
-                              </CardStaggerAnimation>
-                         ))}
-                    </ContainerStaggerAnimation>
-               </div>
-          )
-     }
+     if (isLoading) return <BestSellerSkeleton />
 
      return (
           <div className="min-h-full relative">
