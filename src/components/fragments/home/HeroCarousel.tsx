@@ -8,9 +8,8 @@ import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { useQuery } from '@tanstack/react-query';
 import { ProductCatalogsResponse } from '../../../types';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
-import Skeleton from 'react-loading-skeleton';
 import { getProductCatalogs } from '../../../services/productService';
-import 'react-loading-skeleton/dist/skeleton.css';
+import HeroCarouselSkeleton from '../../elements/skeletons/HeroCarouselSkeleton';
 import 'swiper/css';
 
 const HeroCarousel = () => {
@@ -47,18 +46,20 @@ const HeroCarousel = () => {
           }
      }
 
-     // const cardVariants: Variants = {
-     //      hidden: { opacity: 0, scale: 0.5 },
-     //      visible: {
-     //           opacity: 1,
-     //           scale: 1,
-     //           transition: {
-     //                type: 'spring',
-     //                stiffness: 100,
-     //                damping: 10
-     //           }
-     //      }
-     // }
+     const cardVariants: Variants = {
+          hidden: { opacity: 0, scale: 0.5 },
+          visible: {
+               opacity: 1,
+               scale: 1,
+               transition: {
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 10
+               }
+          }
+     }
+
+     if (isLoading) return <HeroCarouselSkeleton />
 
      return (
           <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
@@ -70,7 +71,7 @@ const HeroCarousel = () => {
                     variants={containerVariants}
                     className='w-full'>
                     <Swiper
-                         {...createHeroCarouselSwiperConfig(swiperInstance)}
+                         {...createHeroCarouselSwiperConfig()}
                          onSwiper={setSwiperInstance}
                          className='w-full'>
                          {slides.map((product) => (
@@ -79,11 +80,10 @@ const HeroCarousel = () => {
                                    className="!w-28 !h-36 sm:!w-32 sm:!h-40 
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
-                                        {isLoading ? (
-                                             <div className='absolute -inset-1 z-10'>
-                                                  <Skeleton className='w-full h-full' duration={1.5} />
-                                             </div>
-                                        ) : (
+                                        <motion.div
+                                             variants={cardVariants}
+                                             className='h-full w-full'
+                                        >
                                              <img
                                                   src={product.attributes.thumbnail.data.attributes.url}
                                                   alt={product.attributes.name + ' Bundle'}
@@ -93,13 +93,11 @@ const HeroCarousel = () => {
                                                   onLoad={() => handleImageLoad(product.id)}
                                                   loading='lazy'
                                              />
-                                        )}
-
+                                        </motion.div>
                                    </div>
                               </SwiperSlide>
                          ))}
                     </Swiper>
-
                     <div className='hidden absolute left-1/2 top-1/2 
                     -translate-y-1/2 -translate-x-1/2 z-10
                     lg:flex items-center justify-between w-[95vw] xl:w-[80vw]'>

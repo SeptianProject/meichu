@@ -1,13 +1,11 @@
 import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules'
-import { Swiper as SwiperType } from 'swiper'
+import type { SwiperOptions } from 'swiper/types'
 
-export const createHeroCarouselSwiperConfig = (
-     swiperInstance: SwiperType | null
-) => {
+export const createHeroCarouselSwiperConfig = (): SwiperOptions => {
      return {
           effect: 'coverflow',
           initialSlide: 2,
-          slidesPerView: 'auto' as const,
+          slidesPerView: 'auto',
           centeredSlides: true,
           grabCursor: true,
           loop: true,
@@ -24,7 +22,6 @@ export const createHeroCarouselSwiperConfig = (
                delay: 3500,
                disableOnInteraction: false
           },
-          onSwiper: swiperInstance,
           modules: [EffectCoverflow, Navigation, Autoplay]
      }
 }
