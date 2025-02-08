@@ -38,7 +38,7 @@ const CustomProductsLayout = () => {
                                    isGradient
                                    title="Custom Product"
                                    onClick={() => navigate("/custom-product")}
-                                   className="md:w-40"
+                                   className="w-40"
                               />
                          </BounceAnimation>
                          <BounceAnimation
@@ -49,7 +49,7 @@ const CustomProductsLayout = () => {
                                    isGradient={false}
                                    title="More Product"
                                    onClick={() => navigate("/catalog")}
-                                   className="md:w-40"
+                                   className="w-40"
                               />
                          </BounceAnimation>
                     </div>

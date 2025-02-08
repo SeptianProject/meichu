@@ -119,10 +119,10 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                     </div>
                     <button onClick={handleToDetail}
                          className={`border border-[#5E5A5A] text-[#5E5A5A] font-inter w-fit
-                    px-3 py-2 rounded-full text-sm transition-all duration-300 
+                    px-5 py-2 rounded-full text-sm transition-all duration-300 
                     dark:border-light dark:text-light hover:bg-yellowLinear1 hover:text-light
                     hover:border-transparent dark:hover:border-transparent dark:hover:bg-yellowLinear1
-                    ${isFavored ? '' : ' font-semibold md:px-6 md:py-[10px] xl:px-10'}`}>
+                    ${isFavored ? '' : ' font-semibold md:px-7 md:py-[10px] xl:px-10'}`}>
                          Buy Now!
                     </button>
                </div>
