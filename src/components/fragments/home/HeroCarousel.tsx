@@ -82,9 +82,8 @@ const HeroCarousel = () => {
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
                                         <motion.div
                                              variants={cardVariants}
-                                             className='h-full w-full'>
-                                             <img
-                                                  src={product.attributes.thumbnail.data.attributes.url}
+                                             className='h-full w-full rounded-xl'>
+                                             <img src={product.attributes.thumbnail.data.attributes.url}
                                                   alt={product.attributes.name + ' Bundle'}
                                                   className={`w-full h-full object-cover 
                                                        object-center transition-opacity duration-300

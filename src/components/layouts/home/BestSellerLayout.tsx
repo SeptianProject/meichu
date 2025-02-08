@@ -35,7 +35,6 @@ const BestSellerLayout = () => {
                                         className='w-full'>
                                         <CardBestSeller
                                              key={product.id}
-                                             isLoading={isLoading}
                                              title={product.attributes.name}
                                              thumbnail={product.attributes.thumbnail.data.attributes.url}
                                              images={product.attributes.images.data.map((image) => image.attributes.url)}

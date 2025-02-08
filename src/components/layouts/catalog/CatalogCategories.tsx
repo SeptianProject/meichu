@@ -19,7 +19,7 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
      if (isLoading) return (
           <div className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>
                {[...Array(5)].map((_, index) => (
-                    <Skeleton key={index} className='w-32 h-10 rounded-3xl border border-graySurface2' />
+                    <Skeleton key={index} className='w-28 h-9 rounded-3xl border border-graySurface2' />
                ))}
           </div>
      )

@@ -5,7 +5,9 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const BestSellerSkeleton = () => {
      const { screenSize } = useUI()
-     const skeletonItems = Array.from({ length: screenSize === 'mobile' ? 1 : 3 })
+     const isMobile = screenSize === 'mobile'
+     const isTablet = screenSize === 'tablet'
+     const skeletonItems = Array.from({ length: isMobile ? 1 : isTablet ? 2 : 3 })
 
      return (
           <div className="relative">
@@ -23,7 +25,7 @@ const BestSellerSkeleton = () => {
                                    {[...Array(2)].map((_, index) => (
                                         <Skeleton key={index} className="border border-graySurface2 size-20 rounded-xl" />
                                    ))}
-                                   <Skeleton className="absolute border border-graySurface2 w-60 h-[10.8rem] rounded-xl" />
+                                   <Skeleton className="absolute border border-graySurface2 w-60 md:w-48 xl:w-60 h-[10.8rem] rounded-xl" />
                               </div>
                               <Skeleton className="absolute bottom-3 left-7 border border-graySurface2 w-48 h-[1.8rem]" />
                          </div>

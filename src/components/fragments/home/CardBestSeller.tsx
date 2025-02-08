@@ -7,14 +7,12 @@ interface CardBestSellerProps {
      thumbnail: string
      images?: string[]
      onClick?: () => void
-     isLoading?: boolean
 }
 
 const CardBestSeller: React.FC<CardBestSellerProps> = ({
      title,
      thumbnail,
      images = [],
-     isLoading,
      onClick
 }) => {
      const [imageLoadingStates, setImageLoadingStates] = React.useState<{ [key: string]: boolean }>({});
@@ -35,18 +33,14 @@ const CardBestSeller: React.FC<CardBestSellerProps> = ({
                hover:-translate-y-3 transition-all duration-500 h-[22rem]'>
                <div className='flex items-center gap-x-4'>
                     <div className="relative w-14 h-14">
-                         {isLoading ? <Skeleton className="absolute inset-0 size-full rounded-full border border-graySurface2" />
-                              : <img className='rounded-full size-full'
-                                   src={assetItems.AnyIcon} alt="" />}
+                         <img className='rounded-full size-full' src={assetItems.AnyIcon} alt="" />
                     </div>
                     <div className='flex flex-col items-start relative'>
                          <h3 className='text-graySurface1 dark:text-light text-lg font-bold'>
-                              {isLoading ? <Skeleton className="absolute inset-x-0 w-40 border border-graySurface2" />
-                                   : title}
+                              {title}
                          </h3>
                          <h6 className='text-graySurface1 dark:text-light text-base'>
-                              {isLoading ? <Skeleton className="absolute inset-x-0 w-20 border border-graySurface2" />
-                                   : '@meichu'}
+                              {'@meichu'}
                          </h6>
                     </div>
                </div>
@@ -87,9 +81,7 @@ const CardBestSeller: React.FC<CardBestSellerProps> = ({
                </div>
                <div>
                     <h3 className='dark:text-light font-semibold text-lg relative'>
-                         {isLoading ?
-                              <Skeleton className="absolute inset-0 w-40 h-full border border-graySurface2" />
-                              : title}
+                         {title}
                     </h3>
                </div>
           </div>
