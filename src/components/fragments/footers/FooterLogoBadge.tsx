@@ -1,7 +1,7 @@
-import { assetItems, sosmedIcons, } from "../../assets/assets"
-import BounceAnimation from "../animations/BounceAnimation"
-import { ContainerStaggerAnimation } from "../animations/StaggerAnimation"
-import ListBadgeSosmed from "../elements/ListBadgeSosmed"
+import { assetItems, sosmedIcons, } from "../../../assets/assets"
+import BounceAnimation from "../../animations/BounceAnimation"
+import { ContainerStaggerAnimation } from "../../animations/StaggerAnimation"
+import ListBadgeSosmed from "../../elements/ListBadgeSosmed"
 
 const FooterLogoBadge = () => {
      return (

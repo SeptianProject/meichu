@@ -1,6 +1,6 @@
 import TextTagline from "../fragments/home/TextTagline"
 import TextInput from "../fragments/customProduct/TextInput"
-import RouteHistory from "../layouts/RouteHistory"
+import RouteHistory from "../../routes/HistoryRoute"
 import ProductTypeSelect from "../layouts/customProduct/ProductTypeSelect"
 import UploadImageProduct from "../layouts/customProduct/UploadImageProduct"
 import React from "react"

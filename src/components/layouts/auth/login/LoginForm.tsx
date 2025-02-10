@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { cleanAuthErrors, login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
 import { useAppDispatch } from "../../../../redux/hook.ts";
 import Button from "../../../elements/buttons/Button.tsx";
-import { handleApiError } from "../../../../utils/errorHandler.ts";
+import { handleApiError } from "../../../../hooks/errorHandler.ts";
 import { loginAuth } from "../../../../services/authService.ts";
 
 interface LoginFormProps {

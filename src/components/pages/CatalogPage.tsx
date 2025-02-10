@@ -1,6 +1,6 @@
 import CatalogCards from "../layouts/catalog/CatalogCards"
 import TextTagline from "../fragments/home/TextTagline"
-import RouteHistory from "../layouts/RouteHistory"
+import RouteHistory from "../../routes/HistoryRoute"
 import CatalogCategories from "../layouts/catalog/CatalogCategories"
 import React from "react"
 

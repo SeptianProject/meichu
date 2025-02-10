@@ -1,7 +1,7 @@
 import React from "react"
 import CardEvent from "../fragments/event/CardEvent"
 import TextTagline from "../fragments/home/TextTagline"
-import RouteHistory from "../layouts/RouteHistory"
+import RouteHistory from "../../routes/HistoryRoute"
 import ButtonBorderGradient from "../elements/buttons/ButtonBorderGradient"
 
 const cardEvent = <CardEvent isEvent />

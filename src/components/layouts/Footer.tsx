@@ -1,6 +1,6 @@
 import { footerItems } from "../../assets/assets"
-import FooterItems from "../fragments/FooterItems"
-import FooterLogoBadge from "../fragments/FooterLogoBadge"
+import FooterItems from "../fragments/footers/FooterItems"
+import FooterLogoBadge from "../fragments/footers/FooterLogoBadge"
 
 const Footer = () => {
      return (

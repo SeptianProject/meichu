@@ -1,8 +1,8 @@
 import React from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { CardStaggerAnimation, ContainerStaggerAnimation } from "../animations/StaggerAnimation";
-import BounceAnimation from "../animations/BounceAnimation";
+import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation";
+import BounceAnimation from "../../animations/BounceAnimation";
 
 interface FooterItemsProps {
      title: string

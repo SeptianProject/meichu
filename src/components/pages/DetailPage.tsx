@@ -1,4 +1,4 @@
-import RouteHistory from "../layouts/RouteHistory"
+import RouteHistory from "../../routes/HistoryRoute"
 import React from "react"
 import ListProductDetail from "../layouts/detail/ListProductDetail"
 import { FadeAnimation } from "../animations/FadeAnimation"
