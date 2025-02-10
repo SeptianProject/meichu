@@ -10,7 +10,7 @@ import { createItemsBundleSwiperConfig } from "../../../configs/createItemsBundl
 import { getProductCatalogs } from "../../../services/productService";
 import { useNavigate } from "react-router-dom";
 import BundleCarouselSkeleton from "../../elements/skeletons/BundleCarouselSkeleton";
-import useThemeAwareSkeleton from "../../../hooks/useThemeAwareSkeleton";
+import Skeleton from "react-loading-skeleton";
 import 'swiper/css'
 
 interface BundleCarouselLayoutProps {
@@ -20,7 +20,6 @@ interface BundleCarouselLayoutProps {
 const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      swiperRef
 }) => {
-     const { ThemeAwareSkeleton } = useThemeAwareSkeleton()
      const navigate = useNavigate()
      const [activeMainBundleId, setActiveMainBundleId] = React.useState<number | null>(null)
      const [mainImageLoading, setMainImageLoading] = React.useState<{ [key: number]: boolean }>({})
@@ -76,7 +75,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                              className="rounded-3xl relative">
                                              {!mainImageLoading[product.id] && (
                                                   <div className="absolute -inset-1 z-10">
-                                                       <ThemeAwareSkeleton className='w-full h-full rounded-3xl' duration={1.5} />
+                                                       <Skeleton className='w-full h-full rounded-3xl' duration={1.5} />
                                                   </div>
                                              )}
                                              <img className="rounded-3xl object-cover object-center 
@@ -115,7 +114,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                                   transition-all duration-500`}>
                                                   {!itemsImageLoading[image.id] && (
                                                        <div className="absolute -inset-1 z-10">
-                                                            <ThemeAwareSkeleton className='w-full h-full' duration={1.5} />
+                                                            <Skeleton className='w-full h-full' duration={1.5} />
                                                        </div>
                                                   )}
                                                   <img

@@ -3,21 +3,19 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { getCircleAnimations } from "../helper/CircleAnimationHelper"
 import HomePage from "../components/pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
-import useThemeAwareSkeleton from "../hooks/useThemeAwareSkeleton"
+import Skeleton from "react-loading-skeleton"
 const CatalogPage = React.lazy(() => import('../components/pages/CatalogPage'))
 const BrandPage = React.lazy(() => import('../components/pages/BrandPage'))
 const CustomProductPage = React.lazy(() => import('../components/pages/CustomProductPage'))
 const EventPage = React.lazy(() => import('../components/pages/EventPage'))
 const DetailPage = React.lazy(() => import('../components/pages/DetailPage'))
 
-const LoadingFallback = () => {
-     const { ThemeAwareSkeleton } = useThemeAwareSkeleton()
-
+export const LoadingFallback = () => {
      return (
           <div className="p-4 max-w-7xl mx-auto">
-               <ThemeAwareSkeleton height={200} className="mb-4" />
-               <ThemeAwareSkeleton count={3} height={20} className="mb-2" />
-               <ThemeAwareSkeleton height={400} />
+               <Skeleton height={200} className="mb-4 " />
+               <Skeleton count={3} height={20} className="mb-2" />
+               <Skeleton height={400} />
           </div>
      )
 }

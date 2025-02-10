@@ -18,7 +18,8 @@ const HeroCarousel = () => {
      const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
           ['product'],
           getProductCatalogs,
-          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 })
+          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 }
+     )
 
      const slides = React.useMemo(() => {
           if (!productData?.data) return []

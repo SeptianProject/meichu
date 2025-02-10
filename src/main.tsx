@@ -10,12 +10,24 @@ import store from './redux/store.ts'
 
 const queryClient = new QueryClient()
 
+const getInitialTheme = () => {
+  const theme = localStorage.getItem('theme') || 'dark'
+  return {
+    baseColor: theme === 'dark' ? '#08070F' : '#ebebeb',
+    highlightColor: theme === 'dark' ? '#15151A' : '#f5f5f5'
+  }
+}
+
+const initialTheme = getInitialTheme()
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          <SkeletonTheme baseColor='#08070F' highlightColor='#15151A'>
+          <SkeletonTheme
+            baseColor={initialTheme.baseColor}
+            highlightColor={initialTheme.highlightColor}>
             <App />
           </SkeletonTheme>
         </QueryClientProvider>

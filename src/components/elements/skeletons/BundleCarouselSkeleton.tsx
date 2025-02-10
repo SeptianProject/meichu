@@ -1,21 +1,18 @@
-import 'react-loading-skeleton/dist/skeleton.css'
-import useThemeAwareSkeleton from "../../../hooks/useThemeAwareSkeleton"
+import Skeleton from 'react-loading-skeleton'
 
 const BundleCarouselSkeleton = () => {
-     const { ThemeAwareSkeleton } = useThemeAwareSkeleton()
-
      return (
           <div className="w-full h-full md:absolute md:left-0 lg:left-20 xl:left-40">
                <div className="w-full h-full pb-5">
                     <div className="flex flex-col md:flex-row md:items-center md:gap-x-10 lg:gap-x-16 
                     !max-w-[40rem] md:!max-w-[40rem] lg:!max-w-[50rem]">
                          <div className="rounded-3xl w-[23rem]">
-                              <ThemeAwareSkeleton className="rounded-3xl w-full h-[20rem] max-w-[65vw] 
+                              <Skeleton className="rounded-3xl w-full h-[20rem] max-w-[65vw] 
                                         sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
                                         lg:h-[30rem] lg:max-w-[26rem] border dark:border-graySurface2"/>
                          </div>
                          <div className="mt-6 md:mb-10 lg:mb-20 w-fit h-fit">
-                              <ThemeAwareSkeleton className="w-[16rem] h-[2rem] lg:h-[2.5rem] border dark:border-graySurface2" />
+                              <Skeleton className="w-[16rem] h-[2rem] lg:h-[2.5rem] border dark:border-graySurface2" />
                          </div>
                     </div>
                </div>
@@ -24,7 +21,7 @@ const BundleCarouselSkeleton = () => {
                          {Array.from({ length: 3 }).map((_, index) => (
                               <div key={index}
                                    className="w-32 h-40 md:w-52 md:h-48 lg:w-64 lg:h-56 rounded-xl">
-                                   <ThemeAwareSkeleton className="h-full w-full rounded-xl border dark:border-graySurface2" />
+                                   <Skeleton className="h-full w-full rounded-xl border dark:border-graySurface2" />
                               </div>
                          ))}
                     </div>

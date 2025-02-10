@@ -4,16 +4,16 @@ import AppRouter from "./routes/AppRouter"
 import FloatingButton from "./components/elements/buttons/FloatingBtn"
 import AuthModalContainer from "./components/layouts/auth/AuthModalContainer"
 import ProfileLayout from "./components/layouts/profile/ProfileLayout"
-import ScrollToTop from "./routes/ScrollToTop"
 import { useAppDispatch, useAppSelector } from "./redux/hook"
 import { setIsAuthModalOpen, setProfileActive } from "./redux/slices/authSlice"
+import { useLocation } from "react-router-dom"
+import React from "react"
 
 const App = () => {
+     const [isMounted, setIsMounted] = React.useState(false)
      const dispatch = useAppDispatch()
-     const {
-          isAuthModalOpen,
-          profileActive
-     } = useAppSelector((state) => state.auth)
+     const { pathname } = useLocation()
+     const { isAuthModalOpen, profileActive } = useAppSelector((state) => state.auth)
 
      const handleCloseModal = () => {
           dispatch(setIsAuthModalOpen(false))
@@ -29,10 +29,19 @@ const App = () => {
           }
      }
 
+     React.useEffect(() => {
+          setIsMounted(true)
+          if (pathname === "/") {
+               window.scrollTo(0, 0)
+          }
+          window.scrollTo(0, 0)
+     }, [pathname])
+
      return (
           <div className={`bg-light selection:bg-dark selection:text-light
           dark:bg-dark dark:selection:bg-light transition-all duration-500
-          dark:selection:text-dark relative min-h-screen overflow-hidden`}>
+          dark:selection:text-dark relative min-h-screen overflow-hidden
+          ${isMounted ? "opacity-100" : "opacity-0"}`}>
                <Navbar />
                <AuthModalContainer
                     isOpen={isAuthModalOpen}
@@ -44,7 +53,6 @@ const App = () => {
                <AppRouter />
                <FloatingButton />
                <Footer />
-               <ScrollToTop />
           </div>
      )
 }

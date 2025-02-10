@@ -3,7 +3,7 @@ import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animation
 import { useQuery } from '@tanstack/react-query'
 import { ProductCategoriesResponse } from '../../../types'
 import { getProductCategories } from '../../../services/productService'
-import useThemeAwareSkeleton from '../../../hooks/useThemeAwareSkeleton'
+import Skeleton from 'react-loading-skeleton'
 interface CatalogCategoriesProps {
      onSelectCategory: (categoryId: number | null) => void
      selectedCategory: number | null
@@ -13,13 +13,12 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
      onSelectCategory,
      selectedCategory
 }) => {
-     const { ThemeAwareSkeleton } = useThemeAwareSkeleton()
      const { data: categoryData, isLoading } = useQuery<ProductCategoriesResponse>(['category'], getProductCategories)
 
      if (isLoading) return (
           <div className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>
                {[...Array(5)].map((_, index) => (
-                    <ThemeAwareSkeleton key={index} className='w-28 h-9 rounded-3xl border dark:border-graySurface2' />
+                    <Skeleton key={index} className='w-28 h-9 rounded-3xl border dark:border-graySurface2' />
                ))}
           </div>
      )
