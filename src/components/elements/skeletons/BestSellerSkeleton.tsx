@@ -1,6 +1,7 @@
 import useUI from "../../../hooks/useUI"
 import TextTagline from "../../fragments/home/TextTagline"
 import Skeleton from "react-loading-skeleton"
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const BestSellerSkeleton = () => {
      const { screenSize } = useUI()

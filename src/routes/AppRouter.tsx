@@ -4,6 +4,7 @@ import { getCircleAnimations } from "../helper/CircleAnimationHelper"
 import HomePage from "../components/pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
 import Skeleton from "react-loading-skeleton"
+import 'react-loading-skeleton/dist/skeleton.css'
 const CatalogPage = React.lazy(() => import('../components/pages/CatalogPage'))
 const BrandPage = React.lazy(() => import('../components/pages/BrandPage'))
 const CustomProductPage = React.lazy(() => import('../components/pages/CustomProductPage'))

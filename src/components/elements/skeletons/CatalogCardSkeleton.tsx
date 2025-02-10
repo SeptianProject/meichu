@@ -1,6 +1,7 @@
 import React from "react"
 import useUI from "../../../hooks/useUI"
 import Skeleton from "react-loading-skeleton"
+import 'react-loading-skeleton/dist/skeleton.css'
 
 type CatalogCardPage = {
      type: 'homePage' | 'catalogPage'

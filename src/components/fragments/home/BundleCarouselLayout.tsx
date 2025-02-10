@@ -11,6 +11,7 @@ import { getProductCatalogs } from "../../../services/productService";
 import { useNavigate } from "react-router-dom";
 import BundleCarouselSkeleton from "../../elements/skeletons/BundleCarouselSkeleton";
 import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 import 'swiper/css'
 
 interface BundleCarouselLayoutProps {

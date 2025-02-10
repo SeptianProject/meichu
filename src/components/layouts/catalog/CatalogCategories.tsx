@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query'
 import { ProductCategoriesResponse } from '../../../types'
 import { getProductCategories } from '../../../services/productService'
 import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 interface CatalogCategoriesProps {
      onSelectCategory: (categoryId: number | null) => void
      selectedCategory: number | null
