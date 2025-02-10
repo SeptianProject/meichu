@@ -98,31 +98,31 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                     </h4>
                </div>
                <div className='my-5'>
-                    <img className={`object-cover object-top w-full rounded-2xl  
-                    ${isFavored ? 'h-36 sm:h-44' : 'h-52 md:h-56 lg:h-60 xl:h-72'}`}
+                    <img className={`object-cover object-top w-full rounded-xl md:rounded-2xl  
+                    ${isFavored ? 'h-36 sm:h-44 lg:h-48' : 'h-56 lg:h-60 xl:h-72'}`}
                          src={image} alt={title} />
                </div>
                <div className='flex items-center justify-between'>
                     <div className='flex items-center gap-x-2'>
-                         <img className={`${isFavored ? 'size-7 md:size-9' : 'size-9'}`}
+                         <img className={`${isFavored ? 'size-7 md:size-8' : 'size-9'}`}
                               src={assetItems.ImvuIcon} alt='' />
                          <div className='flex flex-col'>
                               <h4 className={`text-graySurface1 dark:text-light font-medium
-                              ${isFavored ? 'text-sm md:text-base' : 'text-base'}`}>
+                              ${isFavored ? 'text-sm' : 'text-base'}`}>
                                    Credits
                               </h4>
                               <h4 className={`text-graySurface1 dark:text-light font-semibold
-                              ${isFavored ? 'text-sm md:text-base' : 'text-base'}`}>
+                              ${isFavored ? 'text-sm' : 'text-base'}`}>
                                    4.3
                               </h4>
                          </div>
                     </div>
                     <button onClick={handleToDetail}
                          className={`border border-[#5E5A5A] text-[#5E5A5A] font-inter w-fit
-                    px-5 py-2 rounded-full text-sm transition-all duration-300 
+                    py-2 rounded-full text-sm transition-all duration-300 
                     dark:border-light dark:text-light hover:bg-yellowLinear1 hover:text-light
                     hover:border-transparent dark:hover:border-transparent dark:hover:bg-yellowLinear1
-                    ${isFavored ? '' : ' font-semibold md:px-7 md:py-[10px] xl:px-10'}`}>
+                    ${isFavored ? 'px-3' : 'px-5 font-semibold md:px-7 md:py-[10px] xl:px-10'}`}>
                          Buy Now!
                     </button>
                </div>

@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = React.memo(({
                     : isCancel ? 'border border-graySurface1 text-graySurface1 bg-transparent hover:bg-graySurface1 hover:text-white hover:border-transparent'
                          : isLogout ? 'border-redDanger text-redDanger hover:bg-redDanger hover:text-white border hover:border-transparent'
                               : 'border bg-transparent text-graySurface1 border-graySurface1 dark:border-light dark:text-light'}
-                    ${className} font-semibold rounded-full w-32 py-2 transition-all duration-300 ease-in-out`}
+                    ${className} font-semibold rounded-full w-32 py-[10px] transition-all duration-300 ease-in-out`}
           >
                {title}
           </button >

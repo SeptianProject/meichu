@@ -32,12 +32,12 @@ const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title,
                               onClick={onClick}
                               title={isEvent ? 'See Event' : 'See Details'}
                               className={`text-[12px] py-[5px]
-                         ${isEvent ? ' w-[7rem] sm:text-sm' : 'w-[5rem] sm:text-x[12px] '}`}
+                         ${isEvent ? ' w-[7rem] sm:text-sm' : 'w-[5rem] sm:text-[12px] md:w-[6rem]'}`}
                          />
                     </div>
-                    <p className={`font-light text-[10px] md:text-[15.5px] text-opacity-70
+                    <p className={`font-light text-[10px] text-opacity-70
                     tracking-wide md:leading-6 dark:font-extralight dark:text-light/70 md:pr-12
-                    ${isEvent ? 'sm:text-[12px]' : 'sm:text-[10px]'}`}>
+                    ${isEvent ? 'sm:text-[12px] md:text-[15.5px]' : 'sm:text-[10px] md:text-[14px]'}`}>
                          {isEvent
                               ? 'Whether you have a question about talents, pricing, portfolio, or anything else, our team, Whether you have a question about talents, pricing.'
                               : 'Your request is being processed. Please hold on for a moment as we carefully craft your product to ensure the highest quality, Thank You!'}

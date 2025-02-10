@@ -6,6 +6,7 @@ import TextInputProfile from "../../fragments/profile/TextInputProfile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserProfile, uploadFile } from "../../../services/authService.ts";
 import Button from "../../elements/buttons/Button";
+import { ProfileContentSkeleton } from "../../elements/skeletons/ProfileLayoutSkeleton.tsx";
 
 interface ProfileContentProps {
      isTapDiscover: boolean
@@ -15,6 +16,7 @@ interface ProfileContentProps {
      username?: string
      telephoneNumber?: string
      profilePicture?: string
+     userDataLoading?: boolean
 }
 
 const ProfileContent: React.FC<ProfileContentProps> = ({
@@ -24,7 +26,8 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      dateValue,
      username,
      telephoneNumber,
-     profilePicture
+     profilePicture,
+     userDataLoading
 }) => {
      const dispatch = useAppDispatch()
      const queryClient = useQueryClient()
@@ -98,6 +101,8 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
           })
      }, [username, profilePicture, telephoneNumber])
 
+     if (userDataLoading) return <ProfileContentSkeleton />
+
      return (
           <div className={`w-full h-full flex flex-col items-start gap-y-4 border-light/70 
           md:gap-x-5 md:flex-row md:items-start md:border-b md:pb-10
@@ -105,7 +110,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                <ProfileAvatar
                     currentImageUrl={profilePicture}
                     isEditing={isEditing}
-                    isLoading={updateProfileMutation.isLoading}
+                    uploading={updateProfileMutation.isLoading}
                     onFileSelect={handleFileSelect}
                />
                <div className='size-full flex flex-col gap-y-5'>

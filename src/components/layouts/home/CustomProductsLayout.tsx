@@ -12,9 +12,8 @@ const CustomProductsLayout = () => {
                <div className="max-w-full sm:max-w-[80vw] md:max-w-[45vw] lg:max-w-[60vw] 
                h-full relative flex flex-col gap-y-5 md:pb-20">
                     <BounceAnimation
-                         delayVal={0.8}
                          hiddenCoordinates={{ x: -100 }}>
-                         <h1 className="dark:text-light text-3xl xl:text-4xl font-bold">
+                         <h1 className="dark:text-light text-2xl sm:text-3xl xl:text-4xl font-bold">
                               Make it the style of your
                               <TextCursorAnimation
                                    words={['dreams!']}
@@ -23,16 +22,14 @@ const CustomProductsLayout = () => {
                          </h1>
                     </BounceAnimation>
                     <BounceAnimation
-                         delayVal={0.8}
                          hiddenCoordinates={{ y: 100 }}>
                          <p className="dark:text-light font-light text-base md:text-sm leading-relaxed
                          lg:text-base lg:max-w-[43vw] xl:tracking-wide xl:text-lg xl:max-w-[42vw]">
                               Hey there! We know you've got a great style, and we're here to help you make it even more attractive! Meichu products from Imvu using imvu+ make your style look HD and high-quality
                          </p>
                     </BounceAnimation>
-                    <div className="flex items-center gap-x-5">
+                    <div className="flex items-center gap-x-3 md:gap-x-5">
                          <BounceAnimation
-                              delayVal={0.8}
                               hiddenCoordinates={{ y: -50 }}>
                               <Button
                                    isGradient
@@ -42,7 +39,6 @@ const CustomProductsLayout = () => {
                               />
                          </BounceAnimation>
                          <BounceAnimation
-                              delayVal={0.8}
                               hiddenCoordinates={{ y: 50 }}>
                               <Button
                                    isCancel={false}

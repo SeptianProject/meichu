@@ -6,14 +6,15 @@ import 'react-image-crop/dist/ReactCrop.css'
 interface ProfileAvatarProps {
      currentImageUrl?: string
      isEditing?: boolean
-     isLoading?: boolean
+     uploading?: boolean
      onFileSelect: (file: File) => void
 }
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
      currentImageUrl,
      isEditing,
-     isLoading,
+     uploading,
+
      onFileSelect
 }) => {
      const fileInputRef = React.useRef<HTMLInputElement>(null)
@@ -111,7 +112,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
      }
 
      const handleUploadClick = () => {
-          if (isEditing && !isLoading) {
+          if (isEditing && !uploading) {
                fileInputRef.current?.click()
           }
      }
@@ -143,10 +144,10 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                          <button
                               type="button"
                               onClick={handleUploadClick}
-                              disabled={isLoading}
+                              disabled={uploading}
                               className='bg-light size-8 p-1 rounded-md absolute bottom-2 right-2
                          group transition-all duration-300'>
-                              {isLoading ? (
+                              {uploading ? (
                                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-graySurface2" />
                               ) : (
                                    <img

@@ -1,6 +1,7 @@
 import React from "react";
 import ButtonSwitchDiscover from "../../fragments/profile/ButtonSwitchDiscover";
 import Button from "../../elements/buttons/Button";
+import { ProfileDiscoverSkeleton } from "../../elements/skeletons/ProfileLayoutSkeleton";
 
 interface ProfileDiscoverProps {
      isFavored: boolean
@@ -12,12 +13,14 @@ interface ProfileDiscoverProps {
      handleBackToProfile: () => void
      favoredValue: number | undefined
      requestedValue: number | undefined
+     isLoading: boolean
 }
 
 const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
      handleBackToProfile,
      handleSwitchDiscover,
      isFavored,
+     isLoading,
      isTapDiscover,
      listCardFavored,
      listCardRequest,
@@ -25,8 +28,10 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
      requestedValue,
      renderCardContent,
 }) => {
+     if (isLoading) return <ProfileDiscoverSkeleton />
+
      return (
-          <div className='w-full'>
+          <div className='w-full overflow-hidden'>
                <div className={`md:block ${isTapDiscover ? 'block' : 'hidden'}`}>
                     <div className='md:pt-4 flex flex-col md:border-none gap-y-2 md:gap-y-7'>
                          <div className='flex items-center justify-between md:justify-center md:gap-x-5'>

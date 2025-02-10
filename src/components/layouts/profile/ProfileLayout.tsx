@@ -31,9 +31,9 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
    const queryClient = useQueryClient()
    const dispatch = useAppDispatch()
    const { screenSize } = useUI()
-   const { data: userData } = useQuery<UserProfile>(
+   const { data: userData, isLoading: userDataLoading } = useQuery<UserProfile>(
       ['userAvatar'], () => getUser('populate=*'))
-   const { data: userDataDetail } = useQuery<UserProfile>(
+   const { data: userDataDetail, isLoading: userDataDetailLoading } = useQuery<UserProfile>(
       ['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*')
    )
 
@@ -133,7 +133,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
          <ModalOverlay isModalClose={profileClose} isModalOpen={profileOpen} />
          <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                w-4/5 rounded-xl bg-light dark:bg-dark border border-graySurface1 overflow-y-hidden
-               transition-all duration-500 ease-in-out lg:w-3/5 lg:min-h-[85vh] lg:rounded-3xl
+               transition-all duration-500 ease-in-out lg:w-3/4 lg:min-h-[85vh] lg:rounded-3xl xl:w-3/5
                ${profileOpen || !profileClose ? 'z-50 opacity-100' : 'z-0 scale-0 opacity-0'}`}
             style={{ maxHeight: profileOpen ? `${maxHeight}px` : '0px' }}>
             <div style={{ maxHeight: profileOpen ? `${maxHeight}px` : '0px' }}
@@ -142,6 +142,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                <HeadProfile profileClose={profileClose} />
                <div className='w-full pt-5 z-10'>
                   <ProfileContent
+                     userDataLoading={userDataLoading}
                      isTapDiscover={isTapDiscover}
                      handleTapDiscover={handleTapDiscover}
                      emailValue={userData?.email}
@@ -149,8 +150,10 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      username={userData?.username}
                      telephoneNumber={userData?.telephoneNumber}
                      profilePicture={userData?.profilePicture?.url}
+
                   />
                   <ProfileDiscover
+                     isLoading={userDataDetailLoading}
                      isFavored={isFavored}
                      isTapDiscover={isTapDiscover}
                      favoredValue={userData?.likes?.length}
