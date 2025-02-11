@@ -31,7 +31,7 @@ const BestSellerLayout = () => {
                          {productData?.data.map((product, index) => (
                               <SwiperSlide key={index} className='px-2 py-5'>
                                    <CardStaggerAnimation
-                                        hiddenPosition={{ y: 100 }}
+                                        hiddenPosition={{ y: 50 }}
                                         className='w-full'>
                                         <CardBestSeller
                                              key={product.id}

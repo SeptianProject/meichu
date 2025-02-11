@@ -6,7 +6,7 @@ interface TextCursorAnimationProps {
      className?: string;
 }
 
-const TextCursorAnimation: React.FC<TextCursorAnimationProps> = ({ words, className, }) => {
+const TextCursorAnimation: React.FC<TextCursorAnimationProps> = React.memo(({ words, className, }) => {
      const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
      const [displayText, setDisplayText] = React.useState('');
      const [isDeleting, setIsDeleting] = React.useState(false);
@@ -55,16 +55,23 @@ const TextCursorAnimation: React.FC<TextCursorAnimationProps> = ({ words, classN
                <motion.span
                     className={`inline-block bg-dark dark:bg-gold ml-1
                          ${words.includes('dreams!') ? 'w-1 h-6 lg:h-8' : 'w-[2px] md:w-1 h-5 lg:h-10'}`}
-                    animate={{
+                    whileInView={{
                          opacity: [1, 0],
                          transition: {
                               duration: 0.5,
                               repeat: Infinity,
                               repeatType: "reverse",
                          }
-                    }} />
+                    }}
+                    exit={{
+                         opacity: 0,
+                         transition: {
+                              duration: 0.2
+                         }
+                    }}
+               />
           </div>
      );
-}
+})
 
 export default TextCursorAnimation;

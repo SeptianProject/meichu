@@ -1,40 +1,57 @@
 import React from "react";
-import { motion } from 'motion/react'
+import { motion, Variants } from 'motion/react'
 
 interface BounceAnimationProps {
-     delayVal?: number;
      hiddenCoordinates: { x?: number, y?: number };
      children: React.ReactNode;
      className?: string;
+     delayVal?: number;
 }
 
-const BounceAnimation: React.FC<BounceAnimationProps> = ({
-     delayVal,
+const BounceAnimation: React.FC<BounceAnimationProps> = React.memo(({
      children,
      className,
      hiddenCoordinates,
+     delayVal
 }) => {
-     const bounceEffect = {
-          hidden: { opacity: 0, y: hiddenCoordinates.y, x: hiddenCoordinates.x },
-          visible: { opacity: 1, y: 0, x: 0 }
-     }
-
-     return (
-          <motion.div
-               initial="hidden"
-               whileInView="visible"
-               viewport={{ once: true }}
-               transition={{
+     const bounceVariants: Variants = {
+          hidden: {
+               opacity: 0,
+               y: hiddenCoordinates.y,
+               x: hiddenCoordinates.x,
+          },
+          visible: {
+               opacity: 1,
+               y: 0,
+               x: 0,
+               transition: {
                     type: 'spring',
                     stiffness: 100,
                     damping: 10,
                     delay: delayVal
-               }}
-               variants={bounceEffect}
+               }
+          },
+          exit: {
+               opacity: 0,
+               y: hiddenCoordinates.y,
+               x: hiddenCoordinates.x,
+               transition: {
+                    duration: 0.2
+               }
+          }
+     }
+
+     return (
+          <motion.div
+               variants={bounceVariants}
+               initial="hidden"
+               whileInView="visible"
+               exit='exit'
+               viewport={{ once: true, amount: 0.2 }}
                className={className}>
                {children}
           </motion.div>
      );
-}
+})
 
 export default BounceAnimation;

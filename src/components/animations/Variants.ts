@@ -4,9 +4,11 @@ export const fadeVariants: Variants = {
      hidden: { opacity: 0 },
      visible: {
           opacity: 1,
-          transition: {
-               duration: 0.5
-          }
+          transition: { duration: 0.5 }
+     },
+     exit: {
+          opacity: 0,
+          transition: { duration: 0.2 }
      }
 }
 
@@ -21,6 +23,12 @@ export const scaleVariants: Variants = {
                stiffness: 300,
           }
      },
+     exit: {
+          opacity: 0, scale: 0.8,
+          transition: {
+               duration: 0.2
+          }
+     }
 }
 
 export const containerVariants: Variants = {
@@ -31,6 +39,10 @@ export const containerVariants: Variants = {
                delayChildren: 0.5,
                staggerChildren: 0.4
           }
+     },
+     exit: {
+          opacity: 0,
+          transition: { duration: 0.2 }
      }
 }
 
@@ -46,6 +58,13 @@ export const cardVariants: Variants = {
                type: 'spring',
                stiffness: 100,
                damping: 10,
+          }
+     },
+     exit: {
+          opacity: 0,
+          y: 100,
+          transition: {
+               duration: 0.2
           }
      }
 }

@@ -31,7 +31,7 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                staggerDelay={0.2}
                className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>
                <CardStaggerAnimation
-                    hiddenPosition={{ x: -50 }}>
+                    hiddenPosition={{ x: -20 }}>
                     <button
                          onClick={() => onSelectCategory(null)}
                          className={`${selectedCategory === null
@@ -50,7 +50,7 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                     return (
                          <CardStaggerAnimation
                               key={category.id}
-                              hiddenPosition={{ x: -50 }}>
+                              hiddenPosition={{ x: -20 }}>
                               <button onClick={() => onSelectCategory(category.id)}
                                    className={`${active} border w-fit py-[5px] px-5 hover:text-white
                                    rounded-full font-semibold font-inter transition-all duration-300`}>

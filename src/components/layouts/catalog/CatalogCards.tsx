@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
+import useUI from '../../../hooks/useUI'
 import CatalogCard from './CatalogCard'
+import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
+import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton.tsx'
 import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
-import useUI from '../../../hooks/useUI'
 import { useQuery } from '@tanstack/react-query'
 import { ProductCatalogsResponse } from '../../../types/product.ts'
 import { useAppSelector } from '../../../redux/hook.ts'
 import { getProductCatalogs } from '../../../services/productService'
-import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton.tsx'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'
@@ -20,15 +21,33 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
      const navigate = useNavigate()
      const isMobile = screenSize === 'mobile'
      const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
-     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
+     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], () => getProductCatalogs())
      const [isExpanded, setIsExpanded] = React.useState(false)
+     const [displayCount, setDisplayCount] = React.useState(getInitialDisplayCount())
+     const categoriesRef = React.useRef<HTMLDivElement>(null)
 
      React.useEffect(() => {
           setIsExpanded(false)
-     }, [selectedCategory])
+          setDisplayCount(getInitialDisplayCount())
+     }, [selectedCategory, screenSize])
+
+     const handleExpandToggle = () => {
+          setIsExpanded(!isExpanded)
+          if (isExpanded) {
+               setTimeout(() => {
+                    categoriesRef.current?.scrollIntoView({ behavior: 'smooth' })
+               }, 100);
+          }
+     }
+
+     function getInitialDisplayCount() {
+          if (type === 'homePage') return 3
+          if (isMobile) return 2
+          return Infinity
+     }
 
      const filteredCatalog = React.useMemo(() => {
-          if (!productData) return []
+          if (!productData?.data) return []
 
           return productData.data.filter((product) => {
                if (selectedCategory === null) return true
@@ -50,16 +69,16 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
           })
      }, [productData, selectedCategory, isAuthenticated, userId])
 
-     const getDisplayCount = () => {
-          if (type === 'homePage') return 3
-          if (isMobile && !isExpanded) return 2
-          return filteredCatalog.length
+     const getCurrentDisplayCount = () => {
+          if (isExpanded) return filteredCatalog.length
+          return Math.min(displayCount, filteredCatalog.length)
      }
 
-     const displayedCards = filteredCatalog.slice(0, isExpanded ? filteredCatalog.length : getDisplayCount())
+     const displayedCards = filteredCatalog.slice(0, getCurrentDisplayCount())
 
      const showExpandButton = type === 'catalogPage' &&
-          (isMobile || filteredCatalog.length > getDisplayCount())
+          filteredCatalog.length > getInitialDisplayCount() &&
+          (isMobile || !isExpanded)
 
      if (isLoading) return <CatalogCardSkeleton type={type} />
 
@@ -70,22 +89,22 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                     staggerDelay={0.4}
                     className='mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
                     gap-6 lg:gap-4 w-full'>
-                    {displayedCards?.map((card, index) => (
+                    {displayedCards.map((card, index) => (
                          <CardStaggerAnimation
                               hiddenPosition={{ y: 50 }}
-                              key={index}>
+                              key={`${selectedCategory}-${index}`}>
                               {card}
                          </CardStaggerAnimation>
                     ))}
                </ContainerStaggerAnimation>
-               {type === 'homePage'
-                    ? <ButtonBorderGradient onClick={() => navigate('/catalog')} />
-                    : showExpandButton
-                         ? <ButtonBorderGradient
-                              isExpanded={isExpanded}
-                              onClick={() => setIsExpanded(!isExpanded)} />
-                         : null
-               }
+               {type === 'homePage' ? (
+                    <ButtonBorderGradient onClick={() => navigate('/catalog')} />
+               ) : showExpandButton ? (
+                    <ButtonBorderGradient
+                         isExpanded={isExpanded}
+                         onClick={handleExpandToggle}
+                    />
+               ) : null}
           </div>
      )
 })

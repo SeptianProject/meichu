@@ -8,7 +8,7 @@ interface FadeAnimationProps {
      style?: React.CSSProperties
 }
 
-export const FadeAnimation: React.FC<FadeAnimationProps> = ({
+export const FadeAnimation: React.FC<FadeAnimationProps> = React.memo(({
      children,
      className,
      style
@@ -17,10 +17,13 @@ export const FadeAnimation: React.FC<FadeAnimationProps> = ({
      return (
           <AnimationWrapper
                variants={fadeVariants}
+               whileInView="visible"
+               initial="hidden"
+               exit="exit"
                style={style}
                className={className}>
                {children}
           </AnimationWrapper>
      );
-}
+})
 

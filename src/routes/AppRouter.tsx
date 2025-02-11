@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { getCircleAnimations } from "../helper/CircleAnimationHelper"
 import HomePage from "../components/pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
-import Skeleton from "react-loading-skeleton"
 import 'react-loading-skeleton/dist/skeleton.css'
 const CatalogPage = React.lazy(() => import('../components/pages/CatalogPage'))
 const BrandPage = React.lazy(() => import('../components/pages/BrandPage'))
@@ -12,13 +11,7 @@ const EventPage = React.lazy(() => import('../components/pages/EventPage'))
 const DetailPage = React.lazy(() => import('../components/pages/DetailPage'))
 
 export const LoadingFallback = () => {
-     return (
-          <div className="p-4 max-w-7xl mx-auto">
-               <Skeleton height={200} className="mb-4 " />
-               <Skeleton count={3} height={20} className="mb-2" />
-               <Skeleton height={400} />
-          </div>
-     )
+     return null
 }
 
 const AppRouter = () => {

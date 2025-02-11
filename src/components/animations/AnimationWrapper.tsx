@@ -10,19 +10,19 @@ interface AnimationWrapperProps extends MotionProps {
      className?: string
 }
 
-export const AnimationWrapper: React.FC<AnimationWrapperProps> = ({
+export const AnimationWrapper: React.FC<AnimationWrapperProps> = React.memo(({
      children,
      variants,
      initial = "hidden",
-     animate = "visible",
-     exit = "hidden",
+     whileInView = "visible",
+     exit = "exit",
      className,
      ...rest
 }) => {
      return (
           <motion.div
                initial={initial}
-               animate={animate}
+               whileInView={whileInView}
                exit={exit}
                variants={variants}
                className={className}
@@ -31,4 +31,4 @@ export const AnimationWrapper: React.FC<AnimationWrapperProps> = ({
                {children}
           </motion.div>
      )
-}
+})

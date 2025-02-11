@@ -9,8 +9,7 @@ type ButtonBorderGradient = {
 const ButtonBorderGradient: React.FC<ButtonBorderGradient> = React.memo(({ onClick, isExpanded }) => {
      return (
           <BounceAnimation
-               delayVal={0.8}
-               hiddenCoordinates={{ y: 100 }}>
+               hiddenCoordinates={{ y: 50 }}>
                <div className='bg-gold rounded-full w-28 md:w-32 p-[2px] group transform hover:-translate-y-1
                hover:scale-105 transition-all duration-300'>
                     <button onClick={onClick} className='bg-light font-medium dark:bg-dark w-full 

@@ -1,6 +1,6 @@
 import React from "react";
 import BounceAnimation from "../../animations/BounceAnimation";
-import { ContainerStaggerAnimation } from "../../animations/StaggerAnimation";
+import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation";
 import { Swiper as SwiperType } from 'swiper/types';
 import { useQuery } from "@tanstack/react-query";
 import { ProductCatalogsResponse } from "../../../types";
@@ -118,15 +118,18 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                                             <Skeleton className='w-full h-full' duration={1.5} />
                                                        </div>
                                                   )}
-                                                  <img
-                                                       src={image.attributes.url}
-                                                       alt={image.attributes.name}
-                                                       className={`w-full h-full object-cover object-center
+                                                  <CardStaggerAnimation
+                                                       hiddenPosition={{ x: -20 }}>
+                                                       <img
+                                                            src={image.attributes.url}
+                                                            alt={image.attributes.name}
+                                                            className={`w-full h-full object-cover object-center
                                                             transition-opacity duration-300
                                                             ${itemsImageLoading[image.id] ? 'opacity-100' : 'opacity-0'}`}
-                                                       onLoad={() => handleItemsImageLoad(image.id)}
-                                                       loading="lazy"
-                                                  />
+                                                            onLoad={() => handleItemsImageLoad(image.id)}
+                                                            loading="lazy"
+                                                       />
+                                                  </CardStaggerAnimation>
                                              </div>
                                         </SwiperSlide>
                                    ))}

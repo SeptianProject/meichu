@@ -3,16 +3,12 @@ import CardEvent from "../fragments/event/CardEvent"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../../routes/HistoryRoute"
 import ButtonBorderGradient from "../elements/buttons/ButtonBorderGradient"
+import { CardStaggerAnimation, ContainerStaggerAnimation } from "../animations/StaggerAnimation"
 
 const cardEvent = <CardEvent isEvent />
 
 const EventPage = () => {
      const listCardEvent = React.useMemo(() => [
-          cardEvent,
-          cardEvent,
-          cardEvent,
-          cardEvent,
-          cardEvent,
           cardEvent,
           cardEvent,
           cardEvent,
@@ -30,12 +26,17 @@ const EventPage = () => {
                     </p>
                </div>
                <div className="flex flex-col items-center gap-y-20">
-                    <div
+                    <ContainerStaggerAnimation
+                         staggerDelay={0.4}
                          className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                         {listCardEvent.map((item) => (
-                              item
+                         {listCardEvent.map((item, index) => (
+                              <CardStaggerAnimation
+                                   key={index}
+                                   hiddenPosition={{ y: 50 }}>
+                                   {item}
+                              </CardStaggerAnimation>
                          ))}
-                    </div>
+                    </ContainerStaggerAnimation>
                     <ButtonBorderGradient onClick={() => { }} />
                </div>
           </section>

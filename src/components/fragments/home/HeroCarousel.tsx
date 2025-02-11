@@ -44,6 +44,10 @@ const HeroCarousel = () => {
           visible: {
                opacity: 1,
                transition: { staggerChildren: 0.2 }
+          },
+          exit: {
+               opacity: 0,
+               transition: { duration: 0.2 }
           }
      }
 
@@ -57,6 +61,12 @@ const HeroCarousel = () => {
                     stiffness: 100,
                     damping: 10
                }
+          },
+          exit: {
+               opacity: 0,
+               transition: {
+                    duration: 0.2
+               }
           }
      }
 
@@ -66,10 +76,11 @@ const HeroCarousel = () => {
           <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
           md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem]'>
                <motion.div
+                    variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
+                    exit="exit"
                     viewport={{ once: true }}
-                    variants={containerVariants}
                     className='w-full'>
                     <Swiper
                          {...createHeroCarouselSwiperConfig()}
@@ -83,6 +94,7 @@ const HeroCarousel = () => {
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
                                         <motion.div
                                              variants={cardVariants}
+                                             layout
                                              className='h-full w-full rounded-xl'>
                                              <img src={product.attributes.thumbnail.data.attributes.url}
                                                   alt={product.attributes.name + ' Bundle'}
@@ -101,7 +113,7 @@ const HeroCarousel = () => {
                     lg:flex items-center justify-between w-[95vw] xl:w-[80vw]'>
                          <BounceAnimation
                               delayVal={0.8}
-                              hiddenCoordinates={{ x: -50 }}>
+                              hiddenCoordinates={{ x: -20 }}>
                               <ArrowCardCarousel
                                    onClick={() => swiperInstance?.slidePrev()}
                                    icon={LuChevronLeft} />

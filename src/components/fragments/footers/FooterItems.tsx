@@ -18,8 +18,7 @@ const FooterItems: React.FC<FooterItemsProps> = React.memo(({
      return (
           <div className="flex flex-col gap-y-5">
                <BounceAnimation
-                    hiddenCoordinates={{ y: 80 }}
-                    delayVal={title === 'MarketPlace' ? 1.5 : 2.5}
+                    hiddenCoordinates={{ y: 50 }}
                     className="size-fit">
                     <h3 className="dark:text-light text-base font-bold lg:text-lg">
                          {title}
@@ -32,7 +31,7 @@ const FooterItems: React.FC<FooterItemsProps> = React.memo(({
                     {listFooterItem.map((item, index) => (
                          <CardStaggerAnimation
                               key={index}
-                              hiddenPosition={{ x: -100 }}
+                              hiddenPosition={{ x: -50 }}
                               className="w-fit">
                               <Link to={item.link}
                                    className="w-fit text-dark flex items-center 

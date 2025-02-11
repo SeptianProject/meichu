@@ -7,7 +7,7 @@ interface ScaleAnimationProps {
      className?: string
 }
 
-const ScaleAnimation: React.FC<ScaleAnimationProps> = ({
+const ScaleAnimation: React.FC<ScaleAnimationProps> = React.memo(({
      children,
      className
 }) => {
@@ -20,6 +20,6 @@ const ScaleAnimation: React.FC<ScaleAnimationProps> = ({
                {children}
           </AnimationWrapper>
      );
-}
+})
 
 export default ScaleAnimation;

@@ -5,6 +5,7 @@ import CatalogCategories from '../catalog/CatalogCategories'
 
 const CatalogLayout = () => {
      const [selectedCategory, setSelectedCategory] = React.useState<number | null>(null)
+     const categoriesRef = React.useRef<HTMLDivElement>(null)
 
      return (
           <div className="min-h-full">
@@ -12,10 +13,12 @@ const CatalogLayout = () => {
                     text="Catalog"
                     className='font-semibold'
                />
-               <CatalogCategories
-                    selectedCategory={selectedCategory}
-                    onSelectCategory={setSelectedCategory}
-               />
+               <div ref={categoriesRef}>
+                    <CatalogCategories
+                         selectedCategory={selectedCategory}
+                         onSelectCategory={setSelectedCategory}
+                    />
+               </div>
                <CatalogCards
                     type='homePage'
                     selectedCategory={selectedCategory}
