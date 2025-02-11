@@ -119,7 +119,8 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                                        </div>
                                                   )}
                                                   <CardStaggerAnimation
-                                                       hiddenPosition={{ x: -20 }}>
+                                                       hiddenPosition={{ x: -20 }}
+                                                       className="w-full h-full">
                                                        <img
                                                             src={image.attributes.url}
                                                             alt={image.attributes.name}

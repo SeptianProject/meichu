@@ -10,8 +10,11 @@ const TextCursorAnimation: React.FC<TextCursorAnimationProps> = React.memo(({ wo
      const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
      const [displayText, setDisplayText] = React.useState('');
      const [isDeleting, setIsDeleting] = React.useState(false);
+     const [isInView, setIsInView] = React.useState(false);
 
      React.useEffect(() => {
+          if (!isInView) return
+
           const handleTyping = () => {
                const currentWord = words[currentWordIndex];
 
@@ -23,7 +26,8 @@ const TextCursorAnimation: React.FC<TextCursorAnimationProps> = React.memo(({ wo
                     }
                } else {
                     if (displayText.length > 0) {
-                         setDisplayText(currentWord.substring(0, displayText.length - 1));
+                         const deleteCount = Math.ceil(displayText.length / 8);
+                         setDisplayText(currentWord.substring(0, Math.max(0, displayText.length - deleteCount)));
                     } else {
                          setIsDeleting(false);
                          setCurrentWordIndex((prev) => (prev + 1) % words.length)
@@ -35,11 +39,14 @@ const TextCursorAnimation: React.FC<TextCursorAnimationProps> = React.memo(({ wo
           const timer = setTimeout(handleTyping, typingSpeed);
 
           return () => clearTimeout(timer)
-     }, [displayText, currentWordIndex, isDeleting, words])
-
+     }, [displayText, currentWordIndex, isDeleting, words, isInView])
 
      return (
-          <div className={`relative inline-block size-full text-dark 
+          <motion.div
+               onViewportEnter={() => setIsInView(true)}
+               onViewportLeave={() => setIsInView(false)}
+               viewport={{ once: true, amount: 0.5 }}
+               className={`relative inline-block size-full text-dark 
                dark:bg-gold dark:bg-clip-text dark:text-transparent ${className}`}>
                <AnimatePresence mode="wait">
                     <motion.span
@@ -70,7 +77,7 @@ const TextCursorAnimation: React.FC<TextCursorAnimationProps> = React.memo(({ wo
                          }
                     }}
                />
-          </div>
+          </motion.div>
      );
 })
 
