@@ -1,10 +1,10 @@
+import React from "react"
 import HeroCarousel from "../fragments/home/HeroCarousel"
 import Heading from "../fragments/home/Heading"
-import 'swiper/swiper-bundle.css'
-import BundleProductsLayout from "../layouts/home/BundleProductsLayout"
-import BestSellerLayout from "../layouts/home/BestSellerLayout"
-import CatalogLayout from "../layouts/home/CatalogLayout"
-import CustomProductsLayout from "../layouts/home/CustomProductsLayout"
+const BundleProductsLayout = React.lazy(() => import("../layouts/home/BundleProductsLayout"))
+const BestSellerLayout = React.lazy(() => import("../layouts/home/BestSellerLayout"))
+const CatalogLayout = React.lazy(() => import("../layouts/home/CatalogLayout"))
+const CustomProductsLayout = React.lazy(() => import("../layouts/home/CustomProductsLayout"))
 
 const HomePage = () => {
      return (

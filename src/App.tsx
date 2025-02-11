@@ -1,13 +1,13 @@
+import React from "react"
 import Footer from "./components/layouts/Footer"
 import Navbar from "./components/layouts/Navbar"
 import AppRouter from "./routes/AppRouter"
 import FloatingButton from "./components/elements/buttons/FloatingBtn"
-import AuthModalContainer from "./components/layouts/auth/AuthModalContainer"
-import ProfileLayout from "./components/layouts/profile/ProfileLayout"
 import { useAppDispatch, useAppSelector } from "./redux/hook"
 import { setIsAuthModalOpen, setProfileActive } from "./redux/slices/authSlice"
 import { useLocation } from "react-router-dom"
-import React from "react"
+const AuthModalContainer = React.lazy(() => import("./components/layouts/auth/AuthModalContainer"))
+const ProfileLayout = React.lazy(() => import("./components/layouts/profile/ProfileLayout"))
 
 const App = () => {
      const dispatch = useAppDispatch()

@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { getCircleAnimations } from "../helper/CircleAnimationHelper"
 import HomePage from "../components/pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
-import 'react-loading-skeleton/dist/skeleton.css'
 const CatalogPage = React.lazy(() => import('../components/pages/CatalogPage'))
 const BrandPage = React.lazy(() => import('../components/pages/BrandPage'))
 const CustomProductPage = React.lazy(() => import('../components/pages/CustomProductPage'))
