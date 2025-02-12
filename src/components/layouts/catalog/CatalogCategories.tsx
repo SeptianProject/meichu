@@ -37,7 +37,7 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                          className={`${selectedCategory === null
                               ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-light border-transparent'
                               : 'bg-transparent dark:bg-dark text-graySurface1 border-graySurface1'} 
-                              border w-fit py-[5px] px-5 hover:text-white rounded-full font-semibold
+                              border w-fit py-[5px] px-5 hover:dark:text-white rounded-full font-semibold
                               transition-all duration-300`}>
                          All
                     </button>
@@ -45,14 +45,14 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                {categoryData?.data.map((category) => {
                     const active = selectedCategory === category.id
                          ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-light border-transparent'
-                         : 'bg-transparent dark:bg-dark text-graySurface1 border-graySurface1'
+                         : 'bg-transparent text-graySurface1 border-graySurface1'
 
                     return (
                          <CardStaggerAnimation
                               key={category.id}
                               hiddenPosition={{ x: -20 }}>
                               <button onClick={() => onSelectCategory(category.id)}
-                                   className={`${active} border w-fit py-[5px] px-5 hover:text-white
+                                   className={`${active} border w-fit py-[5px] px-5 hover:dark:text-white
                                    rounded-full font-semibold font-inter transition-all duration-300`}>
                                    {category.attributes.name}
                               </button>
