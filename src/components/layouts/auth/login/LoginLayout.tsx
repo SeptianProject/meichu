@@ -1,18 +1,17 @@
-import AuthHeading from "../../../fragments/auth/AuthHeading.tsx";
 import LoginForm from "./LoginForm.tsx";
-import AuthLayout from "../AuthLayout.tsx";
+import AuthModal from "../AuthModal.tsx";
 import AuthButtonSwitch from "../../../fragments/auth/AuthButtonSwitch.tsx";
 import React from "react";
 
 interface LoginLayoutProps {
      isModalOpen: boolean;
-     isModalClose: () => void;
-     onSwitchModal: () => void;
+     isModalClose: VoidFunction;
+     onSwitchModal: VoidFunction;
      isAnimating: boolean;
      showPassword: boolean;
-     handleTogglePassword: () => void;
-     onForgotPassword: () => void;
-     onProfile: () => void;
+     handleTogglePassword: VoidFunction;
+     onForgotPassword: VoidFunction;
+     onProfile: VoidFunction;
 }
 
 const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
@@ -26,12 +25,12 @@ const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
      onSwitchModal
 }) => {
      return (
-          <AuthLayout
+          <AuthModal
+               isOpen={isModalOpen}
+               onClose={isModalClose}
                isAnimating={isAnimating}
-               isModalClose={isModalClose}
-               isModalOpen={isModalOpen}
+               title="Reconnect and Explore!"
                className="lg:min-h-[85vh]">
-               <AuthHeading title="Reconnect and Explore!" />
                <LoginForm
                     onForgotPassword={onForgotPassword}
                     onProfile={onProfile}
@@ -41,7 +40,7 @@ const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
                     text="Create An Account"
                     textBtn="Sign Up"
                     onSwitchModal={onSwitchModal} />
-          </AuthLayout>
+          </AuthModal>
      )
 })
 

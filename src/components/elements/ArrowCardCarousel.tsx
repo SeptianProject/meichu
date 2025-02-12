@@ -2,7 +2,7 @@ import React from "react";
 import { IconType } from "react-icons";
 
 interface ArrowCardCarouselProps {
-     onClick: () => void;
+     onClick: VoidFunction;
      icon: IconType;
 }
 

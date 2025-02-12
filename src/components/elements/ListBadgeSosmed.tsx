@@ -2,6 +2,7 @@ import React from "react";
 import { CardStaggerAnimation } from "../animations/StaggerAnimation";
 
 type BadgeSosmedItem = {
+     isAnimated?: boolean;
      className: string;
      badgeItems: {
           icon: string;
@@ -10,6 +11,7 @@ type BadgeSosmedItem = {
 }
 
 const ListBadgeSosmed: React.FC<BadgeSosmedItem> = React.memo(({
+     isAnimated,
      className,
      badgeItems
 }) => {
@@ -18,7 +20,7 @@ const ListBadgeSosmed: React.FC<BadgeSosmedItem> = React.memo(({
                {badgeItems.map((item, index) => (
                     <CardStaggerAnimation
                          key={index}
-                         hiddenPosition={{ x: -50 }}>
+                         hiddenPosition={{ x: isAnimated ? -50 : 0 }}>
                          <div className={`flex justify-center 
                          items-center size-11 ${className}`}>
                               <a href={item.link} target='_blank'>

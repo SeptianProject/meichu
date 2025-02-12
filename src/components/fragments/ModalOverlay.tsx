@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ModalOverlayProps {
-     isModalClose: () => void;
+     isModalClose: VoidFunction;
      isModalOpen: boolean;
 }
 

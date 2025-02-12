@@ -1,8 +1,6 @@
 import React from 'react'
-import AuthLayout from './AuthLayout'
 import Button from '../../elements/buttons/Button'
 import AuthInput from '../../fragments/auth/AuthInput'
-import AuthHeading from '../../fragments/auth/AuthHeading'
 import { IoIosLock } from 'react-icons/io'
 import { useForm } from 'react-hook-form'
 import { resetPasswordSchema, ResetPasswordSchema } from '../../../schema/AuthSchema'
@@ -12,10 +10,11 @@ import { resetPasswordAuth } from '../../../services/authService.ts'
 import { useAppDispatch, useAppSelector } from '../../../redux/hook'
 import { setActiveModal } from '../../../redux/slices/authSlice'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import AuthModal from './AuthModal.tsx'
 interface ResetPasswordProps {
      isAnimating: boolean;
      isModalOpen: boolean;
-     isModalClose: () => void;
+     isModalClose: VoidFunction;
 }
 
 const ResetPassword: React.FC<ResetPasswordProps> = ({
@@ -57,14 +56,19 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
           })
      }
 
+     React.useEffect(() => {
+          if (params.get('code')) {
+               dispatch(setActiveModal('reset-password'))
+          }
+     }, [dispatch, params])
+
      return (
-          <AuthLayout
+          <AuthModal
+               title='Reset Your Password'
+               isOpen={isModalOpen}
+               onClose={isModalClose}
                isAnimating={isAnimating}
-               isModalClose={isModalClose}
-               isModalOpen={isModalOpen}
-               className='lg:min-h-[70vh] pb-20'
-          >
-               <AuthHeading title='Reset Your Password' />
+               className='lg:min-h-[70vh] pb-20'>
                <form onSubmit={handleSubmit(onSubmit)}
                     className='flex gap-y-3 flex-col w-full h-full max-w-72 items-center justify-center'>
                     <input type="hidden"  {...register('code')} value={resetCode || ''} />
@@ -95,7 +99,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                          className="w-full"
                     />
                </form>
-          </AuthLayout>
+          </AuthModal>
      )
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 
 interface AuthButtonProps {
      text: string;
-     onClick?: () => void;
+     onClick?: VoidFunction;
      type: 'submit' | 'button' | 'reset';
 }
 

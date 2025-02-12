@@ -8,7 +8,7 @@ const AuthBadgeButton = () => {
                     - OR Continue with -
                </p>
                <div className="flex items-center justify-center gap-x-3">
-                    <ListBadgeSosmed badgeItems={authIcons}
+                    <ListBadgeSosmed isAnimated={false} badgeItems={authIcons}
                          className="rounded-full border border-dark 
                          dark:border-transparent dark:bg-light
                          transition-all duration-300 hover:-translate-y-1 hover:scale-110" />

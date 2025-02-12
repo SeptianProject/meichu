@@ -5,7 +5,7 @@ type NavButtonProps = {
      text: string
      icon?: IconType
      className?: string
-     onClick?: () => void
+     onClick?: VoidFunction
 }
 
 const NavButton: React.FC<NavButtonProps> = React.memo(({

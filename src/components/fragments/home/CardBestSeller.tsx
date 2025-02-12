@@ -6,7 +6,7 @@ interface CardBestSellerProps {
      title: string
      thumbnail: string
      images?: string[]
-     onClick?: () => void
+     onClick?: VoidFunction
 }
 
 const CardBestSeller: React.FC<CardBestSellerProps> = ({

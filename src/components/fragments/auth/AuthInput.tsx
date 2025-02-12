@@ -8,7 +8,7 @@ interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
      placeholder: string;
      type: InputHTMLAttributes<HTMLInputElement>['type'];
      showPassword?: boolean;
-     onTogglePassword?: () => void;
+     onTogglePassword?: VoidFunction;
      error: FieldError | undefined
 }
 

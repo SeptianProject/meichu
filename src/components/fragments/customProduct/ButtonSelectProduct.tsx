@@ -4,7 +4,7 @@ interface ButtonSelectProductProps {
      icon: string;
      title: string;
      isSelected: boolean;
-     onSelect: () => void;
+     onSelect: VoidFunction;
 }
 
 const ButtonSelectProduct = React.memo(React.forwardRef<HTMLButtonElement, ButtonSelectProductProps>(({

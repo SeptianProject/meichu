@@ -6,7 +6,7 @@ import Button from '../../elements/buttons/Button'
 
 type NavItemsProps = {
      isActive: boolean
-     modalOnClick: () => void
+     modalOnClick: VoidFunction
 }
 
 const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }) => {

@@ -23,7 +23,7 @@ const FooterLogoBadge = () => {
                     initialDelay={0.5}
                     staggerDelay={0.4}
                     className="flex items-center gap-x-2 mt-20 lg:mt-1">
-                    <ListBadgeSosmed badgeItems={sosmedIcons}
+                    <ListBadgeSosmed isAnimated={true} badgeItems={sosmedIcons}
                          className="rounded-xl bg-[#D9D9D9] transition-all duration-300
                               hover:scale-105 hover:-translate-y-1" />
                </ContainerStaggerAnimation>

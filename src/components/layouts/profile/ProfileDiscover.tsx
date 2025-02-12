@@ -6,11 +6,11 @@ import { ProfileDiscoverSkeleton } from "../../elements/skeletons/ProfileLayoutS
 interface ProfileDiscoverProps {
      isFavored: boolean
      isTapDiscover: boolean
-     handleSwitchDiscover: () => void
+     handleSwitchDiscover: VoidFunction
      renderCardContent: (listCard: JSX.Element[]) => JSX.Element
      listCardFavored: JSX.Element[]
      listCardRequest: JSX.Element[]
-     handleBackToProfile: () => void
+     handleBackToProfile: VoidFunction
      favoredValue: number | undefined
      requestedValue: number | undefined
      isLoading: boolean

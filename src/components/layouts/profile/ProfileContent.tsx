@@ -10,7 +10,7 @@ import { ProfileContentSkeleton } from "../../elements/skeletons/ProfileLayoutSk
 
 interface ProfileContentProps {
      isTapDiscover: boolean
-     handleTapDiscover: () => void
+     handleTapDiscover: VoidFunction
      emailValue?: string
      dateValue?: string
      username?: string

@@ -2,7 +2,7 @@ import React from "react"
 
 
 type buttonSwitchDiscoverProps = {
-     onClick: () => void
+     onClick: VoidFunction
      text: string
      value?: number
      isFavored: boolean

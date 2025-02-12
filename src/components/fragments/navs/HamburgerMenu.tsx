@@ -2,7 +2,7 @@ import React from 'react'
 import HamburgerItem from '../../elements/HamburgerItem'
 
 type HamburgerMenuProps = {
-     handleActive: () => void
+     handleActive: VoidFunction
      isActive: boolean
 }
 

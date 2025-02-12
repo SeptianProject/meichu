@@ -3,7 +3,7 @@ import React from "react";
 interface AuthButtonSwitchProps {
      text: string;
      textBtn: string;
-     onSwitchModal: () => void;
+     onSwitchModal: VoidFunction;
 }
 
 const AuthButtonSwitch: React.FC<AuthButtonSwitchProps> = React.memo(({

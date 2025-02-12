@@ -3,14 +3,15 @@ import LoginLayout from './login/LoginLayout'
 import RegisterLayout from './regis/RegisLayout'
 import ForgotPassword from './ForgotPassword'
 import { useAppDispatch, useAppSelector } from '../../../redux/hook'
-import { ModalType, setActiveModal, setIsAnimating, setResetCode } from '../../../redux/slices/authSlice'
+import { setActiveModal } from '../../../redux/slices/authSlice'
 import { useSearchParams } from 'react-router-dom'
 import ResetPassword from './ResetPassword'
+import { useModalState } from '../../../hooks/useModalState'
 
 interface AuthModalContainerProps {
      isOpen: boolean
-     onClose: () => void
-     onProfile: () => void
+     onClose: VoidFunction
+     onProfile: VoidFunction
 }
 
 const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
@@ -24,21 +25,14 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
      const [showConfirmPass, setShowConfirmPass] = React.useState(false)
      const [searchParams] = useSearchParams()
      const urlCode = searchParams.get('code')
+     const { handleSwitchAuthModal, handleResetCode } = useModalState()
 
      const handleTogglePassword = () => setShowPassword(!showPassword)
      const handleToggleConfirmPass = () => setShowConfirmPass(!showConfirmPass)
 
-     const handleSwitchModal = (modalType: ModalType) => {
-          dispatch(setIsAnimating(true))
-          dispatch(setActiveModal(modalType))
-          setTimeout(() => {
-               dispatch(setIsAnimating(false))
-          }, 200);
-     }
-
      React.useEffect(() => {
           if (urlCode) {
-               dispatch(setResetCode(urlCode))
+               handleResetCode(urlCode)
                dispatch(setActiveModal('reset-password'))
           }
 
@@ -55,7 +49,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
                     clearTimeout(resetTimer)
                }
           }
-     }, [isOpen, dispatch, urlCode])
+     }, [isOpen, dispatch, handleResetCode, urlCode])
 
      return (
           <>
@@ -63,10 +57,10 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
                     activeModal === 'login' ? (
                          <LoginLayout
                               onProfile={onProfile}
-                              onForgotPassword={() => handleSwitchModal('forgot-password')}
+                              onForgotPassword={() => handleSwitchAuthModal('forgot-password')}
                               isModalOpen={isOpen}
                               isModalClose={onClose}
-                              onSwitchModal={() => handleSwitchModal('register')}
+                              onSwitchModal={() => handleSwitchAuthModal('register')}
                               isAnimating={isAnimating}
                               showPassword={showPassword}
                               handleTogglePassword={handleTogglePassword}
@@ -75,7 +69,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
                          <RegisterLayout
                               isModalOpen={isOpen}
                               isModalClose={onClose}
-                              onSwitchModal={() => handleSwitchModal('login')}
+                              onSwitchModal={() => handleSwitchAuthModal('login')}
                               isAnimating={isAnimating}
                               showPassword={showPassword}
                               handleTogglePassword={handleTogglePassword}
@@ -87,8 +81,8 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
                               isAnimating={isAnimating}
                               isModalOpen={isOpen}
                               isModalClose={() => {
-                                   dispatch(setResetCode(null))
-                                   handleSwitchModal('login')
+                                   handleResetCode(null)
+                                   handleSwitchAuthModal('login')
                               }}
                          />
                     ) : (<ForgotPassword

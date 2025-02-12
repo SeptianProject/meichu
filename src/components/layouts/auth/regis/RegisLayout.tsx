@@ -1,19 +1,18 @@
-import AuthHeading from "../../../fragments/auth/AuthHeading";
 import AuthButtonSwitch from "../../../fragments/auth/AuthButtonSwitch";
 import RegisForm from "./RegisForm";
-import AuthLayout from "../AuthLayout";
+import AuthModal from "../AuthModal";
 import React from "react";
 
 
 interface RegisterLayoutProps {
      isModalOpen: boolean;
-     isModalClose: () => void;
-     onSwitchModal: () => void;
+     isModalClose: VoidFunction;
+     onSwitchModal: VoidFunction;
      isAnimating: boolean;
      showPassword: boolean;
-     handleTogglePassword: () => void;
+     handleTogglePassword: VoidFunction;
      showConfirmPass: boolean;
-     handleToggleConfirmPass: () => void;
+     handleToggleConfirmPass: VoidFunction;
 }
 
 const RegisterLayout: React.FC<RegisterLayoutProps> = React.memo(({
@@ -27,12 +26,12 @@ const RegisterLayout: React.FC<RegisterLayoutProps> = React.memo(({
      handleToggleConfirmPass
 }) => {
      return (
-          <AuthLayout
+          <AuthModal
                isAnimating={isAnimating}
-               isModalClose={isModalClose}
-               isModalOpen={isModalOpen}
+               isOpen={isModalOpen}
+               onClose={isModalClose}
+               title="Step Into Your Space!"
                className="lg:min-h-[85vh]">
-               <AuthHeading title="Step Into Your Space!" />
                <RegisForm
                     onLogin={onSwitchModal}
                     showPassword={showPassword}
@@ -43,7 +42,7 @@ const RegisterLayout: React.FC<RegisterLayoutProps> = React.memo(({
                     text="Already Have An Account?"
                     textBtn="Login"
                     onSwitchModal={onSwitchModal} />
-          </AuthLayout>
+          </AuthModal>
      );
 })
 

@@ -2,7 +2,7 @@ import React from "react"
 import BounceAnimation from "../../animations/BounceAnimation"
 
 type ButtonBorderGradient = {
-     onClick: () => void
+     onClick: VoidFunction
      isExpanded?: boolean
 }
 

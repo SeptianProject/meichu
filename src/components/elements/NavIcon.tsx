@@ -2,7 +2,7 @@ import React from "react"
 import { IconType } from "react-icons"
 
 type NavIconProps = {
-     onClick: () => void
+     onClick: VoidFunction
      icon?: IconType
      image?: string | undefined
      className?: string

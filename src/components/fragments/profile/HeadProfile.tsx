@@ -2,7 +2,7 @@ import React from "react";
 import { BiX } from "react-icons/bi";
 
 interface HeadProfileProps {
-     profileClose: () => void
+     profileClose: VoidFunction
 }
 
 const HeadProfile: React.FC<HeadProfileProps> = React.memo(({ profileClose }) => {

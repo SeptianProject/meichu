@@ -17,7 +17,7 @@ import { setProfileActive } from '../../../redux/slices/authSlice.ts'
 
 interface ProfileLayoutProps {
    profileOpen: boolean
-   profileClose: () => void
+   profileClose: VoidFunction
 }
 
 const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({

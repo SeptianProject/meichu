@@ -12,10 +12,10 @@ import { registerAuth } from "../../../../services/authService.ts";
 
 interface RegisFormProps {
      showPassword: boolean;
-     handleTogglePassword: () => void;
+     handleTogglePassword: VoidFunction;
      showConfirmPass: boolean;
-     handleToggleConfirmPass: () => void;
-     onLogin: () => void;
+     handleToggleConfirmPass: VoidFunction;
+     onLogin: VoidFunction;
 }
 
 const RegisForm: React.FC<RegisFormProps> = React.memo(({

@@ -2,7 +2,7 @@ import React from "react"
 
 type ButtonActionInProfileProps = {
      text: string
-     onClick: () => void
+     onClick: VoidFunction
      className?: string
      disabled?: boolean
 }

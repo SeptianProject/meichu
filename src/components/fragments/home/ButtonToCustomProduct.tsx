@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonToCustomProductProps {
      text: string
-     onClick: () => void
+     onClick: VoidFunction
 }
 
 const ButtonToCustomProduct: React.FC<ButtonToCustomProductProps> = React.memo(({

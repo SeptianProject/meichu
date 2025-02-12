@@ -15,9 +15,9 @@ import { loginAuth } from "../../../../services/authService.ts";
 
 interface LoginFormProps {
      showPassword: boolean;
-     handleTogglePassword: () => void;
-     onProfile: () => void;
-     onForgotPassword: () => void;
+     handleTogglePassword: VoidFunction;
+     onProfile: VoidFunction;
+     onForgotPassword: VoidFunction;
 }
 
 const LoginForm: React.FC<LoginFormProps> = React.memo(({

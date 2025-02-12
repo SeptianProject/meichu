@@ -1,19 +1,20 @@
 import React from "react";
-import AuthLayout from "./AuthLayout";
 import Button from "../../elements/buttons/Button";
 import AuthInput from "../../fragments/auth/AuthInput";
-import AuthHeading from "../../fragments/auth/AuthHeading";
 import { FaUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { forgotPasswordAuth } from "../../../services/authService.ts";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ForgotPasswordSchema, forgotPasswordSchema } from "../../../schema/AuthSchema";
+import AuthModal from "./AuthModal.tsx";
+import { useAppDispatch } from "../../../redux/hook.ts";
+import { setIsAuthModalOpen } from "../../../redux/slices/authSlice.ts";
 
 interface ForgotPasswordProps {
      isAnimating: boolean;
      isModalOpen: boolean;
-     isModalClose: () => void;
+     isModalClose: VoidFunction;
 }
 
 const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
@@ -21,6 +22,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
      isModalOpen,
      isModalClose
 }) => {
+     const dispatch = useAppDispatch()
+
      const {
           register,
           handleSubmit,
@@ -29,8 +32,10 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
 
      const forgotPasswordMutation = useMutation({
           mutationFn: forgotPasswordAuth,
-          onSuccess: (data) => {
-               console.log('Forgot Password success:', data)
+          onSuccess: () => {
+               setTimeout(() => {
+                    dispatch(setIsAuthModalOpen(false))
+               }, 1000);
           },
           onError: (error) => {
                console.error('Forgot Password error:', error)
@@ -43,14 +48,14 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
 
      return (
           <>
-               <AuthLayout
+               <AuthModal
+                    title="Forgot Your Password?"
+                    isOpen={isModalOpen}
+                    onClose={isModalClose}
                     isAnimating={isAnimating}
-                    isModalClose={isModalClose}
-                    isModalOpen={isModalOpen}
-                    className="lg:min-h-[70vh] pb-20">
-                    <AuthHeading title="Forgot Your Password?" />
+                    className="lg:min-h-[28rem]">
                     <form onSubmit={handleSubmit(onSubmit)}
-                         className="flex gap-y-8 flex-col w-full h-full max-w-60 items-center justify-center">
+                         className="flex gap-y-8 flex-col w-full h-full max-w-60 items-center justify-center pt-2">
                          <div className="space-y-1">
                               <AuthInput
                                    icon={FaUser}
@@ -72,7 +77,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
                               className="w-full"
                          />
                     </form>
-               </AuthLayout>
+               </AuthModal>
           </>
      );
 })
