@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, Variants, AnimatePresence } from "motion/react";
+import { motion, Variants } from "motion/react";
 
 interface ContainerStaggerAnimationProps {
      children: React.ReactNode
@@ -46,9 +46,7 @@ export const ContainerStaggerAnimation: React.FC<ContainerStaggerAnimationProps>
                     amount: 0.2
                }}
                className={className}>
-               <AnimatePresence mode="wait">
-                    {children}
-               </AnimatePresence>
+               {children}
           </motion.div>
      );
 })

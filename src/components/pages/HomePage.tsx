@@ -1,10 +1,11 @@
 import React from "react"
-import HeroCarousel from "../fragments/home/HeroCarousel"
-import Heading from "../fragments/home/Heading"
+const HeroCarousel = React.lazy(() => import("../fragments/home/HeroCarousel"))
+const Heading = React.lazy(() => import("../fragments/home/Heading"))
 const BundleProductsLayout = React.lazy(() => import("../layouts/home/BundleProductsLayout"))
 const BestSellerLayout = React.lazy(() => import("../layouts/home/BestSellerLayout"))
 const CatalogLayout = React.lazy(() => import("../layouts/home/CatalogLayout"))
 const CustomProductsLayout = React.lazy(() => import("../layouts/home/CustomProductsLayout"))
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const HomePage = () => {
      return (

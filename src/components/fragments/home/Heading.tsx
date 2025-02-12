@@ -8,7 +8,7 @@ const Heading = () => {
                <BounceAnimation
                     className="w-fit z-10"
                     delayVal={0.8}
-                    hiddenCoordinates={{ y: 100 }}>
+                    hiddenCoordinates={{ y: 50 }}>
                     <h1 className='text-2xl font-semibold w-[20rem] dark:text-light
                          sm:text-[25px] sm:leading-[30px] 
                          md:text-[35px] md:leading-[40px] md:w-[30rem]
@@ -33,13 +33,13 @@ const Heading = () => {
                </BounceAnimation>
                <BounceAnimation
                     delayVal={0.8}
-                    hiddenCoordinates={{ x: -100 }}
+                    hiddenCoordinates={{ x: -50 }}
                     className="size-full absolute">
                     <Star className='-left-2 -top-1 md:-left-8 md:top-1 lg:-left-16 lg:top-4 xl:top-2' />
                </BounceAnimation>
                <BounceAnimation
                     delayVal={0.8}
-                    hiddenCoordinates={{ x: 100 }}
+                    hiddenCoordinates={{ x: 50 }}
                     className="size-full absolute">
                     <Star className='right-7 bottom-14 md:right-2 md:bottom-12 lg:-right-12 xl:-right-8' />
                </BounceAnimation>

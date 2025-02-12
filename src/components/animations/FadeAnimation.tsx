@@ -1,6 +1,6 @@
 import React from "react";
 import { AnimationWrapper } from "./AnimationWrapper";
-import { fadeVariants } from "./Variants";
+import { createFadeVariants } from "./Variants";
 
 interface FadeAnimationProps {
      children: React.ReactNode;
@@ -16,7 +16,7 @@ export const FadeAnimation: React.FC<FadeAnimationProps> = React.memo(({
 
      return (
           <AnimationWrapper
-               variants={fadeVariants}
+               variants={createFadeVariants()}
                whileInView="visible"
                initial="hidden"
                exit="exit"

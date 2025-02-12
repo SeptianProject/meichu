@@ -1,21 +1,14 @@
 import React from "react";
-import { motion, Variants, MotionProps } from "motion/react"
+import { motion } from "motion/react"
+import { BASE_VIEWPORT, BaseAnimationProps } from "../../types/animation";
 
-interface AnimationWrapperProps extends MotionProps {
-     children: React.ReactNode
-     variants?: Variants
-     initial?: MotionProps['initial']
-     animate?: MotionProps['animate']
-     exit?: MotionProps['exit']
-     className?: string
-}
-
-export const AnimationWrapper: React.FC<AnimationWrapperProps> = React.memo(({
+export const AnimationWrapper: React.FC<BaseAnimationProps> = React.memo(({
      children,
      variants,
      initial = "hidden",
      whileInView = "visible",
      exit = "exit",
+     viewport = BASE_VIEWPORT,
      className,
      ...rest
 }) => {
@@ -25,6 +18,7 @@ export const AnimationWrapper: React.FC<AnimationWrapperProps> = React.memo(({
                whileInView={whileInView}
                exit={exit}
                variants={variants}
+               viewport={viewport}
                className={className}
                {...rest}
           >

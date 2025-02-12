@@ -1,6 +1,5 @@
 import React from "react";
 import BounceAnimation from "../../animations/BounceAnimation";
-import { CardStaggerAnimation, ContainerStaggerAnimation } from "../../animations/StaggerAnimation";
 import { Swiper as SwiperType } from 'swiper/types';
 import { useQuery } from "@tanstack/react-query";
 import { ProductCatalogsResponse } from "../../../types";
@@ -71,12 +70,12 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                               <SwiperSlide key={product.id} className='!max-w-[40rem] md:!max-w-[40rem] lg:!max-w-[50rem]'>
                                    <div className="flex flex-col h-full md:flex-row md:items-center md:gap-x-10 lg:gap-x-16">
                                         <BounceAnimation
-                                             delayVal={0.8}
-                                             hiddenCoordinates={{ x: -50 }}
+                                             delayVal={0.2}
+                                             hiddenCoordinates={{ x: -20 }}
                                              className="rounded-3xl relative">
                                              {!mainImageLoading[product.id] && (
                                                   <div className="absolute -inset-1 z-10">
-                                                       <Skeleton className='w-full h-full rounded-3xl' duration={1.5} />
+                                                       <Skeleton className='w-full h-full rounded-3xl border border-graySurface2' />
                                                   </div>
                                              )}
                                              <img className="rounded-3xl object-cover object-center 
@@ -101,42 +100,37 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                     </Swiper>
                </div>
                {/* Items bundle */}
-               <ContainerStaggerAnimation
-                    staggerDelay={0.3}
-                    className="w-full">
-                    <div className="max-w-full -bottom-10 left-40 md:absolute md:max-w-[35rem] lg:max-w-[40rem]">
-                         <Swiper {...swiperConfigItemsBundle}
-                              className='mx-auto size-full'>
-                              {productData?.data.find(product => product.id === activeMainBundleId)
-                                   ?.attributes.images.data.map((image) => (
-                                        <SwiperSlide key={image.id} className="!w-auto rounded-xl">
-                                             <div className={`w-32 h-40 rounded-xl overflow-hidden
-                                                  border-[#5E5A5A] border-2 md:w-52 md:h-48 lg:w-64 lg:h-56 
-                                                  transition-all duration-500`}>
+               <div className="max-w-full -bottom-10 left-40 md:absolute md:max-w-[35rem] lg:max-w-[40rem]">
+                    <Swiper {...swiperConfigItemsBundle}
+                         className='mx-auto size-full'>
+                         {productData?.data.find(product => product.id === activeMainBundleId)
+                              ?.attributes.images.data.map((image) => (
+                                   <SwiperSlide key={image.id} className="!w-auto rounded-xl">
+                                        <div className={`w-32 h-40 rounded-xl overflow-hidden 
+                                        md:w-52 md:h-48 lg:w-64 lg:h-56 transition-all duration-500`}>
+                                             <BounceAnimation
+                                                  hiddenCoordinates={{ x: -20 }}
+                                                  delayVal={0.2}
+                                                  className="w-full h-full">
                                                   {!itemsImageLoading[image.id] && (
                                                        <div className="absolute -inset-1 z-10">
-                                                            <Skeleton className='w-full h-full' duration={1.5} />
+                                                            <Skeleton className='w-full h-full border border-graySurface2' />
                                                        </div>
                                                   )}
-                                                  <CardStaggerAnimation
-                                                       hiddenPosition={{ x: -20 }}
-                                                       className="w-full h-full">
-                                                       <img
-                                                            src={image.attributes.url}
-                                                            alt={image.attributes.name}
-                                                            className={`w-full h-full object-cover object-center
-                                                            transition-opacity duration-300
+                                                  <img src={image.attributes.url}
+                                                       alt={image.attributes.name}
+                                                       className={`w-full h-full object-cover object-center rounded-xl
+                                                            transition-opacity duration-300 border-[#5E5A5A] border-2
                                                             ${itemsImageLoading[image.id] ? 'opacity-100' : 'opacity-0'}`}
-                                                            onLoad={() => handleItemsImageLoad(image.id)}
-                                                            loading="lazy"
-                                                       />
-                                                  </CardStaggerAnimation>
-                                             </div>
-                                        </SwiperSlide>
-                                   ))}
-                         </Swiper>
-                    </div>
-               </ContainerStaggerAnimation>
+                                                       onLoad={() => handleItemsImageLoad(image.id)}
+                                                       loading="lazy"
+                                                  />
+                                             </BounceAnimation>
+                                        </div>
+                                   </SwiperSlide>
+                              ))}
+                    </Swiper>
+               </div>
           </div>
      );
 })
