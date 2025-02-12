@@ -31,8 +31,8 @@ const App = () => {
                          onProfile={openProfileModal}
                     />
                     <ProfileLayout
-                         profileOpen={profileActive}
-                         profileClose={closeModal}
+                         isOpen={profileActive}
+                         onClose={closeModal}
                     />
                </React.Suspense>
                <AppRouter />
