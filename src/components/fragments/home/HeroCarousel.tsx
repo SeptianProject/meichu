@@ -5,21 +5,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { AnimatePresence, motion, Variants } from 'motion/react'
 import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
-import { useQuery } from '@tanstack/react-query';
-import { ProductCatalogsResponse } from '../../../types';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
-import { getProductCatalogs } from '../../../services/productService';
 import HeroCarouselSkeleton from '../../elements/skeletons/HeroCarouselSkeleton';
 import 'swiper/css';
+import { useProductCatalog } from '../../../hooks/useQueryRequest';
 
 const HeroCarousel = () => {
      const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
      const [imageLoading, setImageLoading] = React.useState<{ [key: number]: boolean }>({})
-     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
-          ['product'],
-          getProductCatalogs,
-          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 }
-     )
+     const { data: productData, isLoading } = useProductCatalog()
 
      const slides = React.useMemo(() => {
           if (!productData?.data) return []
@@ -132,4 +126,4 @@ const HeroCarousel = () => {
      );
 };
 
-export default HeroCarousel
+export default React.memo(HeroCarousel)

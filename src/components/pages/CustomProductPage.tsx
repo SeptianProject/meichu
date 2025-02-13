@@ -1,52 +1,47 @@
+import React from "react"
+import Button from "../elements/buttons/Button"
 import TextTagline from "../fragments/home/TextTagline"
 import TextInput from "../fragments/customProduct/TextInput"
 import RouteHistory from "../../routes/HistoryRoute"
 import ProductTypeSelect from "../layouts/customProduct/ProductTypeSelect"
 import UploadImageProduct from "../layouts/customProduct/UploadImageProduct"
-import React from "react"
 import ModalPublishCustomProduct from "../layouts/customProduct/ModalPublishCustomProduct"
 import { useForm } from "react-hook-form"
 import { createProductSchema, CreateProductSchema } from "../../schema/ProductSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { v4 as uuidv4 } from "uuid"
-import Button from "../elements/buttons/Button"
 import { useLocation, useNavigate } from "react-router-dom"
-import { getUser, uploadFile } from "../../services/authService"
-import { createProductRequest, getProductRequest, updateProductRequest } from "../../services/productService"
-import { ProductRequest } from "../../types"
-
-interface ProductRequestResponse {
-     data: {
-          id: number
-          attributes: ProductRequest
-     }
-}
+import { uploadFile } from "../../services/authService"
+import { createProductRequest, updateProductRequest } from "../../services/productService"
+import { useAppDispatch } from "../../redux/hook"
+import { setProfileActive } from "../../redux/slices/authSlice"
+import { useProductRequest, useUserData } from "../../hooks/useQueryRequest"
 
 const CustomProductPage = () => {
      const navigate = useNavigate()
      const location = useLocation()
-     const queryClient = useQueryClient()
+     const dispatch = useAppDispatch()
+
+     const uuidParams = location.state?.requestData
+     const isEditing = location.state?.isEditing
+
      const [onPublish, setOnPublish] = React.useState(false)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [previewUrl, setPreviewUrl] = React.useState<string>('')
      const [isPublishDisabled, setIsPublishDisabled] = React.useState(false)
-     const uuidParams = location.state?.requestData
-     const isEditing = location.state?.isEditing
 
-     const { data: userData } = useQuery(['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*'))
-     const { data: requestData } = useQuery<ProductRequestResponse>(
-          ['productRequest'],
-          () => getProductRequest(`${uuidParams}`)
-     )
-     const getDefaultValues = () => ({
+     const { data: userData } = useUserData('user')
+     const { data: requestData } = useProductRequest(uuidParams)
+
+     const getDefaultValues = React.useCallback(() => ({
           uuid: isEditing ? requestData?.data.attributes.uuid : uuidv4(),
           user: userData?.id as number,
           references: isEditing ? requestData?.data.attributes?.references?.data?.id : null,
-          name: isEditing ? requestData?.data.attributes.name : '',
+          name: isEditing ? requestData?.data.attributes.name : "",
           productType: isEditing ? requestData?.data.attributes.productType : undefined,
           imvu: isEditing ? requestData?.data.attributes.imvu : undefined
-     })
+     }), [isEditing, requestData, userData])
 
      const {
           register,
@@ -61,14 +56,14 @@ const CustomProductPage = () => {
           mode: 'onSubmit'
      })
 
-     const resetForm = () => {
+     const resetForm = React.useCallback((() => {
           reset(getDefaultValues())
           if (previewUrl) {
                URL.revokeObjectURL(previewUrl)
           }
           setSelectedFile(null)
           setPreviewUrl('')
-     }
+     }), [getDefaultValues, previewUrl, reset])
 
      const createProductMutation = useMutation({
           mutationFn: async (formData: CreateProductSchema) => {
@@ -82,30 +77,24 @@ const CustomProductPage = () => {
                     }
                }
 
-               if (isEditing && uuidParams) {
-                    return updateProductRequest(uuidParams, {
-                         ...formData,
-                         references: imageId || formData.references
-                    })
-               }
-
-               return createProductRequest({
+               const payload = {
                     ...formData,
                     references: imageId || formData.references
-               })
+               }
+
+               if (isEditing && uuidParams) {
+                    return updateProductRequest(uuidParams, payload)
+               }
+
+               return createProductRequest(payload)
           },
           onSuccess: () => {
-               queryClient.invalidateQueries(['user'])
                setOnPublish(true)
                setIsPublishDisabled(true)
                resetForm()
-               setTimeout(() => {
-                    setIsPublishDisabled(false)
-                    createProductMutation.reset()
-               }, 5000);
           },
           onError: (error) => {
-               console.log('Create product error:', error)
+               console.error('Create product error:', error)
                setIsPublishDisabled(false)
           }
      })
@@ -131,7 +120,13 @@ const CustomProductPage = () => {
 
      const handleModalClose = () => {
           setOnPublish(false)
-          queryClient.clear()
+
+          setTimeout(() => {
+               setIsPublishDisabled(false)
+               createProductMutation.reset()
+          }, 5000);
+
+          dispatch(setProfileActive(true))
      }
 
      React.useEffect(() => {
@@ -205,6 +200,7 @@ const CustomProductPage = () => {
                               {...register('name')}
                               type="text"
                               label="product"
+                              value={watch('name')}
                               error={errors.name}
                          />
                          <ProductTypeSelect
@@ -222,6 +218,7 @@ const CustomProductPage = () => {
                          <div className="flex items-center gap-x-5 pb-20 lg:pb-0">
                               <Button
                                    isCancel
+                                   type="button"
                                    isGradient={false}
                                    title="Cancel"
                                    onClick={handleCancel}

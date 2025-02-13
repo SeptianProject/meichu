@@ -1,19 +1,17 @@
-import CardBestSeller from '../../fragments/home/CardBestSeller'
-import TextTagline from '../../fragments/home/TextTagline'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import useUI from '../../../hooks/useUI'
-import { useQuery } from '@tanstack/react-query'
-import { ProductCatalogsResponse } from '../../../types'
-import { useNavigate } from 'react-router-dom'
-import { getProductCatalogs } from '../../../services/productService'
-import 'swiper/swiper-bundle.css'
+import TextTagline from '../../fragments/home/TextTagline'
+import CardBestSeller from '../../fragments/home/CardBestSeller'
 import BestSellerSkeleton from '../../elements/skeletons/BestSellerSkeleton'
+import { useNavigate } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { useProductCatalog } from '../../../hooks/useQueryRequest'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
+import 'swiper/css'
 
 const BestSellerLayout = () => {
      const navigate = useNavigate()
      const { screenSize } = useUI()
-     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], getProductCatalogs)
+     const { data: productData, isLoading } = useProductCatalog()
 
      if (isLoading) return <BestSellerSkeleton />
 

@@ -7,7 +7,7 @@ const FooterLogoBadge = () => {
      return (
           <div className="flex flex-col items-start relative gap-y-10 lg:gap-y-4">
                <BounceAnimation
-                    delayVal={0.8}
+                    delayVal={0.5}
                     hiddenCoordinates={{ y: -50 }}
                     className="w-fit">
                     <img className="w-48 absolute top-10 -left-5 select-none"

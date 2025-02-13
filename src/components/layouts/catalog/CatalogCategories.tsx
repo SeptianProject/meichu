@@ -1,9 +1,7 @@
 import React from 'react'
-import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
-import { useQuery } from '@tanstack/react-query'
-import { ProductCategoriesResponse } from '../../../types'
-import { getProductCategories } from '../../../services/productService'
 import Skeleton from 'react-loading-skeleton'
+import { useProductCategory } from '../../../hooks/useQueryRequest'
+import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 interface CatalogCategoriesProps {
@@ -15,7 +13,7 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
      onSelectCategory,
      selectedCategory
 }) => {
-     const { data: categoryData, isLoading } = useQuery<ProductCategoriesResponse>(['category'], getProductCategories)
+     const { data: categoryData, isLoading } = useProductCategory()
 
      if (isLoading) return (
           <div className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>

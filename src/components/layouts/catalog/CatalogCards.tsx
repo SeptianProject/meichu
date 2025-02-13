@@ -6,10 +6,8 @@ import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton.tsx'
 import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
-import { useQuery } from '@tanstack/react-query'
-import { ProductCatalogsResponse } from '../../../types/product.ts'
 import { useAppSelector } from '../../../redux/hook.ts'
-import { getProductCatalogs } from '../../../services/productService'
+import { useProductCatalog } from '../../../hooks/useQueryRequest.ts'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'
@@ -17,14 +15,16 @@ interface CatalogCardsProps {
 }
 
 const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCategory }) => {
-     const { screenSize } = useUI()
      const navigate = useNavigate()
+     const { screenSize } = useUI()
      const isMobile = screenSize === 'mobile'
-     const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
-     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(['product'], () => getProductCatalogs())
+     const categoriesRef = React.useRef<HTMLDivElement>(null)
+
      const [isExpanded, setIsExpanded] = React.useState(false)
      const [displayCount, setDisplayCount] = React.useState(getInitialDisplayCount())
-     const categoriesRef = React.useRef<HTMLDivElement>(null)
+
+     const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
+     const { data: productData, isLoading } = useProductCatalog()
 
      React.useEffect(() => {
           setIsExpanded(false)
@@ -69,12 +69,12 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
           })
      }, [productData, selectedCategory, isAuthenticated, userId])
 
-     const getCurrentDisplayCount = () => {
+     const getCurrentDisplayCount = React.useCallback(() => {
           if (isExpanded) return filteredCatalog.length
           return Math.min(displayCount, filteredCatalog.length)
-     }
+     }, [])
 
-     const displayedCards = filteredCatalog.slice(0, getCurrentDisplayCount())
+     const displayedCards = React.useMemo(() => filteredCatalog.slice(0, getCurrentDisplayCount()), [])
 
      const showExpandButton = type === 'catalogPage' &&
           filteredCatalog.length > getInitialDisplayCount() &&

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, Variants } from 'motion/react'
+import { BASE_VIEWPORT } from "../../types/animation";
 
 interface BounceAnimationProps {
      hiddenCoordinates: { x?: number, y?: number };
@@ -47,7 +48,7 @@ const BounceAnimation: React.FC<BounceAnimationProps> = React.memo(({
                initial="hidden"
                whileInView="visible"
                exit='exit'
-               viewport={{ once: true, amount: 0.2 }}
+               viewport={BASE_VIEWPORT}
                className={className}>
                {children}
           </motion.div>

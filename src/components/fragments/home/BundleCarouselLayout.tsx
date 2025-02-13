@@ -1,17 +1,15 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 import BounceAnimation from "../../animations/BounceAnimation";
+import BundleCarouselSkeleton from "../../elements/skeletons/BundleCarouselSkeleton";
 import { Swiper as SwiperType } from 'swiper/types';
-import { useQuery } from "@tanstack/react-query";
-import { ProductCatalogsResponse } from "../../../types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { createMainBundleSwiperConfig } from "../../../configs/createMainBundleSwiperConfig";
 import { createItemsBundleSwiperConfig } from "../../../configs/createItemsBundleSwiperConfig";
-import { getProductCatalogs } from "../../../services/productService";
 import { useNavigate } from "react-router-dom";
-import BundleCarouselSkeleton from "../../elements/skeletons/BundleCarouselSkeleton";
-import Skeleton from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css'
+import { useProductCatalog } from "../../../hooks/useQueryRequest";
 import 'swiper/css'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface BundleCarouselLayoutProps {
      swiperRef: React.MutableRefObject<SwiperType | null>
@@ -25,11 +23,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      const [mainImageLoading, setMainImageLoading] = React.useState<{ [key: number]: boolean }>({})
      const [itemsImageLoading, setItemsImageLoading] = React.useState<{ [key: number]: boolean }>({})
 
-     const { data: productData, isLoading } = useQuery<ProductCatalogsResponse>(
-          ['product'],
-          getProductCatalogs,
-          { staleTime: 5 * 60 * 1000, cacheTime: 30 * 60 * 1000 }
-     )
+     const { data: productData, isLoading } = useProductCatalog()
 
      const handleSlideChange = React.useCallback((index: number) => {
           const currentBundleId = productData?.data[index]?.id ?? null

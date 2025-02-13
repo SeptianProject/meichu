@@ -10,21 +10,26 @@ import { assetItems } from "../../assets/assets"
 import { useAppDispatch, useAppSelector } from "../../redux/hook"
 import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSlice"
 import useUI from "../../hooks/useUI"
-import { useQuery } from "@tanstack/react-query"
-import { UserProfile } from "../../types"
-import { getUser } from "../../services/authService"
+import { useUserData } from "../../hooks/useQueryRequest"
 
 const Navbar = () => {
+     const dispatch = useAppDispatch()
+
      const [hamburgerActive, setHamburgerActive] = React.useState(false)
      const [contactActive, setContactActive] = React.useState(false)
-     const [avatar, setAvatar] = React.useState<string | undefined>('')
+
      const { mode, toggleDarkMode } = useUI()
      const { token, userId } = useAppSelector((state) => state.auth)
-     const dispatch = useAppDispatch()
-     const { data: dataUser } = useQuery<UserProfile>(
-          ['userAvatar'], () => getUser('populate=*'))
+     const { data: dataUser } = useUserData('userAvatar')
 
      const isDarkMode = mode === 'dark'
+
+     const avatar = React.useMemo(() => {
+          if (token && userId && dataUser?.profilePicture.url) {
+               return dataUser.profilePicture.url
+          }
+          return assetItems.Profile
+     }, [dataUser?.profilePicture?.url, token, userId])
 
      const handleOpenModal = () => {
           if (token) {
@@ -34,17 +39,6 @@ const Navbar = () => {
           }
      }
      React.useEffect(() => {
-          const handleUserProfile = () => {
-               if (token && userId && dataUser) {
-                    const imageUrl = dataUser?.profilePicture?.url
-                    setAvatar(imageUrl ? imageUrl : assetItems.Profile)
-               } else {
-                    setAvatar(assetItems.Profile)
-               }
-          }
-
-          handleUserProfile()
-
           const handleHideHamburger = () => {
                if (window.scrollY > 0) {
                     setHamburgerActive(false)

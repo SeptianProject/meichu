@@ -27,7 +27,7 @@ const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(
                          ref={ref}
                          autoComplete="off"
                          type={type}
-                         value={value}
+                         value={value || ''}
                          readOnly={readOnly}
                          placeholder={label === 'product'
                               ? 'Enter your text here'

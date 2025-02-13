@@ -47,7 +47,6 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
           ]
 
      const handleChange = (newValue: string | boolean) => {
-          console.log('New Value:', newValue)
           onChange({
                target: {
                     name,

@@ -33,4 +33,4 @@ const BundleProductsLayout = () => {
      )
 }
 
-export default BundleProductsLayout
+export default React.memo(BundleProductsLayout)

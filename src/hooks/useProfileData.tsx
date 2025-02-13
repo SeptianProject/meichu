@@ -1,14 +1,13 @@
 import React from "react"
 import useUI from "./useUI"
-import { UserProfile } from "../types"
-import { getUser } from "../services/authService"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
 import CatalogCard from "../components/layouts/catalog/CatalogCard"
 import CardEvent from "../components/fragments/event/CardEvent"
+import { useQueryClient } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../redux/hook"
 import { setProfileActive } from "../redux/slices/authSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
+import { useUserData } from "./useQueryRequest"
 
 
 export const useProfileData = (isOpen: boolean) => {
@@ -21,11 +20,8 @@ export const useProfileData = (isOpen: boolean) => {
      const [isFavored, setIsFavored] = React.useState(true)
      const [isTapDiscover, setIsTapDiscover] = React.useState(false)
 
-     const { data: userData, isLoading: userDataLoading } = useQuery<UserProfile>(
-          ['userAvatar'], () => getUser('populate=*'))
-     const { data: userDataDetail, isLoading: userDataDetailLoading } = useQuery<UserProfile>(
-          ['user'], () => getUser('populate[requests][populate]=*&populate[likes][populate][product][populate]=*')
-     )
+     const { data: userData, isLoading: userDataLoading } = useUserData('userAvatar')
+     const { data: userDataDetail, isLoading: userDataDetailLoading } = useUserData('user')
 
      React.useEffect(() => {
           if (isOpen) {

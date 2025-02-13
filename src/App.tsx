@@ -1,14 +1,14 @@
 import React from "react"
 import Navbar from "./components/layouts/Navbar"
 import AppRouter from "./routes/AppRouter"
-import Footer from "./components/layouts/Footer"
-import FloatingButton from "./components/elements/buttons/FloatingBtn"
 import { useModalState } from "./hooks/useModalState"
 import { useAppSelector } from "./redux/hook"
 import { useLocation } from "react-router-dom"
 
-const AuthModalContainer = React.lazy(() => import("./components/layouts/auth/AuthModalContainer"))
+const Footer = React.lazy(() => import("./components/layouts/Footer"))
+const FloatingButton = React.lazy(() => import("./components/elements/buttons/FloatingBtn"))
 const ProfileLayout = React.lazy(() => import("./components/layouts/profile/ProfileLayout"))
+const AuthModalContainer = React.lazy(() => import("./components/layouts/auth/AuthModalContainer"))
 
 const App = () => {
      const { pathname } = useLocation()
@@ -42,5 +42,5 @@ const App = () => {
      )
 }
 
-export default React.memo(App)
+export default App
 

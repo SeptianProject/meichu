@@ -1,3 +1,4 @@
+import React from "react"
 import { footerItems } from "../../assets/assets"
 import FooterItems from "../fragments/footers/FooterItems"
 import FooterLogoBadge from "../fragments/footers/FooterLogoBadge"
@@ -15,4 +16,4 @@ const Footer = () => {
      )
 }
 
-export default Footer
+export default React.memo(Footer)

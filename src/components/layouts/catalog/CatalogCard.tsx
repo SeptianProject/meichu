@@ -4,7 +4,7 @@ import { assetItems } from '../../../assets/assets'
 import { useAppDispatch, useAppSelector } from '../../../redux/hook'
 import { FaHeart } from 'react-icons/fa'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { setIsAuthModalOpen } from '../../../redux/slices/authSlice'
+import { setIsAuthModalOpen, setProfileActive } from '../../../redux/slices/authSlice'
 import { createProductLike } from '../../../services/productService'
 
 type CatalogCardProps = {
@@ -42,6 +42,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
           onSuccess: () => {
                queryClient.invalidateQueries(['product'])
                setIsLiked(true)
+               dispatch(setProfileActive(true))
           },
           onError: (error) => {
                console.error('Error on like product', error)
@@ -56,6 +57,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                dispatch(setIsAuthModalOpen(true))
                return
           }
+
           try {
                await likeMutation.mutateAsync()
           } catch (error) {

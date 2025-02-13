@@ -37,7 +37,7 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
                localStorage.setItem('authToken', data.jwt)
           },
           onError: (error) => {
-               console.log('Register error:', error)
+               console.error('Register error:', error)
                alert('Register error')
           }
      })
