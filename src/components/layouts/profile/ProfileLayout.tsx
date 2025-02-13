@@ -6,6 +6,7 @@ import ProfileContent from './ProfileContent'
 import ProfileDiscover from './ProfileDiscover'
 import { useProfileData } from '../../../hooks/useProfileData'
 import useProfileUIState from '../../../hooks/useProfileUIState'
+import { getCloudinaryUrl } from '../../../services'
 
 interface ProfileLayoutProps {
    isOpen: boolean
@@ -53,7 +54,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      dateValue={userData?.createdAt?.split('T')[0]}
                      username={userData?.username}
                      telephoneNumber={userData?.telephoneNumber}
-                     profilePicture={userData?.profilePicture?.url}
+                     profilePicture={getCloudinaryUrl(userData?.profilePicture?.url || '')}
                   />
                   <ProfileDiscover
                      isLoading={userDataDetailLoading}

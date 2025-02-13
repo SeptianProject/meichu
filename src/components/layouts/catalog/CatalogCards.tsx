@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import { useAppSelector } from '../../../redux/hook.ts'
 import { useProducts } from '../../../hooks/useQueryRequest.ts'
+import { getCloudinaryUrl } from '../../../services/index.ts'
 // import { transformProductData } from '../../../helper/transformProductDataHelper.ts'
 
 interface CatalogCardsProps {
@@ -61,7 +62,7 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                          productId={product.id}
                          isFavored={false}
                          title={product.attributes.name}
-                         image={product.attributes.thumbnail.data.attributes.url}
+                         image={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
                          initialLikeStatus={isLiked}
                     />
                )

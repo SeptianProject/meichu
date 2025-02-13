@@ -14,8 +14,7 @@ const ButtonSelectProduct = React.memo(React.forwardRef<HTMLButtonElement, Butto
      onSelect
 }, ref) => {
      return (
-          <button
-               ref={ref}
+          <button ref={ref}
                onClick={onSelect}
                className={`h-20 xl:h-24 rounded-2xl flex items-center gap-x-5 px-5 w-full 
                     cursor-pointer transition-all duration-300 ease-in-out bg-transparent
@@ -24,9 +23,9 @@ const ButtonSelectProduct = React.memo(React.forwardRef<HTMLButtonElement, Butto
                <div className={`dark:bg-[#303037] w-20 h-14 xl:w-24 xl:h-16 rounded-lg flex 
                items-center justify-center
                ${title.includes('Imvu+') ? 'bg-transparent' : 'bg-[#C2C2C4]/50 '}`}>
-                    <img
-                         src={icon}
-                         alt=""
+                    <img src={icon}
+                         alt="Imvu"
+                         loading='lazy'
                          className={`object-cover
                          ${title.includes('Imvu+') ? 'size-full p-2 dark:p-4'
                                    : 'size-8 xl:size-10'}`}

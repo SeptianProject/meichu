@@ -22,7 +22,9 @@ const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = Reac
                     ${isModalOpen ? 'opacity-100 z-50' : 'opacity-0 z-0 scale-0'}`}>
                     <div className="flex flex-col items-center justify-center relative overflow-hidden pt-5">
                          <div className="bg-yellowBloobs/10 absolute -top-10 -right-28 size-60 rounded-full blur-3xl" />
-                         <img src={assetItems.MeichuLogo} alt=""
+                         <img src={assetItems.MeichuLogo}
+                              alt=""
+                              loading='lazy'
                               className="w-28 lg:w-40 py-5" />
                          <div className="flex flex-col items-center gap-y-6">
                               <div className="text-center space-y-3">

@@ -165,7 +165,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                          {previewUrl && (
                               <div className='absolute right-5 top-5 size-24 md:size-44
                               flex items-center justify-center rounded-xl border-2 border-graySurface2'>
-                                   <img src={previewUrl} alt=""
+                                   <img src={previewUrl} alt="" loading='lazy'
                                         className="size-20 md:size-40 rounded-md" />
                                    <BiX onClick={handleCancelImage}
                                         className='text-white bg-graySurface2 size-6 rounded-md md:size-8 absolute right-2 top-2' />
@@ -177,7 +177,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                     <div onClick={(e) => e.stopPropagation()}
                          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                          <div className="bg-white p-4 rounded-lg max-w-2xl w-full mx-4">
-                              <h3 className="text-lg font-semibold mb-4">Cropper Image</h3>
+                              <h3 className="text-lg font-semibold mb-4">Crop your Image</h3>
                               <div className="max-h-[60vh] overflow-auto">
                                    <ReactCrop
                                         crop={crop}
@@ -187,6 +187,7 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                                         <img
                                              ref={imgRef}
                                              src={previewUrl}
+                                             loading='lazy'
                                              alt="Crop preview"
                                              className="max-w-full"
                                         />

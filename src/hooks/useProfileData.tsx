@@ -7,6 +7,7 @@ import { useAppDispatch } from "../redux/hook"
 import { setProfileActive } from "../redux/slices/authSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useUserData } from "./useQueryRequest"
+import { getCloudinaryUrl } from "../services"
 
 export const useProfileData = () => {
      const navigate = useNavigate()
@@ -46,7 +47,7 @@ export const useProfileData = () => {
                     isFavored
                     productId={like.id}
                     title={like.product?.name}
-                    image={like.product?.thumbnail.url}
+                    image={getCloudinaryUrl(like.product?.thumbnail.url)}
                     initialLikeStatus={true}
                />
           )), [userDataDetail?.likes])
@@ -58,7 +59,7 @@ export const useProfileData = () => {
                     isEvent={false}
                     title={request?.name}
                     onClick={() => handleSeeDetail(request?.uuid)}
-                    image={request?.references?.url || ''}
+                    image={getCloudinaryUrl(request?.references?.url || '')}
                     time={request?.createdAt?.split('T')[0]}
                />
           ))

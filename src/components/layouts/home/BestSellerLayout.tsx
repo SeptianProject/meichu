@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { useProducts } from '../../../hooks/useQueryRequest'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import 'swiper/css'
+import { getCloudinaryUrl } from '../../../services'
 
 const BestSellerLayout = () => {
      const navigate = useNavigate()
@@ -34,8 +35,8 @@ const BestSellerLayout = () => {
                                         <CardBestSeller
                                              key={product.id}
                                              title={product.attributes.name}
-                                             thumbnail={product.attributes.thumbnail.data.attributes.url}
-                                             images={product.attributes.images.data.map((image) => image.attributes.url)}
+                                             thumbnail={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
+                                             images={product.attributes.images.data.map((image) => getCloudinaryUrl(image.attributes.url))}
                                              onClick={() => navigate(`/catalog-detail/${product.id}`)}
                                         />
                                    </CardStaggerAnimation>

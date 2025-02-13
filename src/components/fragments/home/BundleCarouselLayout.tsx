@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useProducts } from "../../../hooks/useQueryRequest";
 import 'swiper/css'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { getCloudinaryUrl } from "../../../services";
 
 interface BundleCarouselLayoutProps {
      swiperRef: React.MutableRefObject<SwiperType | null>
@@ -77,7 +78,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                                   sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
                                                   lg:h-[30rem] lg:max-w-[24rem] cursor-pointer"
                                                   onClick={handleOnDetail}
-                                                  src={product.attributes.thumbnail.data.attributes.url}
+                                                  src={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
                                                   alt={`${product.attributes.name} Bundle`}
                                                   onLoad={() => handleMainImageLoad(product.id)}
                                                   loading="lazy"
@@ -108,10 +109,10 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                                   className="w-full h-full">
                                                   {!itemsImageLoading[image.id] && (
                                                        <div className="absolute -inset-1 z-10">
-                                                            <Skeleton className='w-full h-full border border-graySurface2' />
+                                                            <Skeleton className='w-full h-full border border-graySurface2 rounded-xl' />
                                                        </div>
                                                   )}
-                                                  <img src={image.attributes.url}
+                                                  <img src={getCloudinaryUrl(image.attributes.url)}
                                                        alt={image.attributes.name}
                                                        className={`w-full h-full object-cover object-center rounded-xl
                                                             transition-opacity duration-300 border-[#5E5A5A] border-2

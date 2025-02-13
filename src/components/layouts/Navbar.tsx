@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook"
 import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSlice"
 import useUI from "../../hooks/useUI"
 import { useUserData } from "../../hooks/useQueryRequest"
+import { getCloudinaryUrl } from "../../services"
 
 const Navbar = () => {
      const dispatch = useAppDispatch()
@@ -26,7 +27,7 @@ const Navbar = () => {
 
      const avatar = React.useMemo(() => {
           if (token && userId && dataUser?.profilePicture.url) {
-               return dataUser.profilePicture.url
+               return getCloudinaryUrl(dataUser.profilePicture.url)
           }
           return assetItems.Profile
      }, [dataUser?.profilePicture?.url, token, userId])

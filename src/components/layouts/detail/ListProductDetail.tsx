@@ -5,6 +5,7 @@ import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animation
 import { useProducts } from '../../../hooks/useQueryRequest'
 import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton'
 import Skeleton from 'react-loading-skeleton'
+import { getCloudinaryUrl } from '../../../services'
 
 interface ListProductDetailProps {
      currentProductId: number
@@ -61,7 +62,7 @@ const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({ curren
                                         isFavored={false}
                                         productId={item.id}
                                         title={item.attributes.name}
-                                        image={item.attributes.thumbnail.data.attributes.url}
+                                        image={getCloudinaryUrl(item.attributes.thumbnail.data.attributes.url)}
                                         initialLikeStatus={false}
                                    />
                               </CardStaggerAnimation>

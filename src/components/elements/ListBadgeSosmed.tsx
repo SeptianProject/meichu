@@ -24,7 +24,12 @@ const ListBadgeSosmed: React.FC<BadgeSosmedItem> = React.memo(({
                          <div className={`flex justify-center 
                          items-center size-11 ${className}`}>
                               <a href={item.link} target='_blank'>
-                                   <img className='size-6' src={item.icon} alt="" />
+                                   <img
+                                        className='size-6'
+                                        src={item.icon}
+                                        alt=""
+                                        loading='lazy'
+                                   />
                               </a>
                          </div>
                     </CardStaggerAnimation>

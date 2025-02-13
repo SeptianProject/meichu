@@ -4,6 +4,9 @@ export const baseUrl = import.meta.env.VITE_PUBLIC_STRAPI_BASE_URL.replace('/api
 export const apiUrl = `${baseUrl}/api`;
 export const token = localStorage.getItem('authToken');
 export const userId = localStorage.getItem('userId');
+export const getCloudinaryUrl = (url: string) => {
+     return url.replace('/upload/', '/upload/f_webp,q_auto/');
+}
 
 if (!baseUrl) {
      console.error("Error: Base URL is not defined. Check your environment variables.");

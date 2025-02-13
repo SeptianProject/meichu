@@ -89,6 +89,7 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                                         {type === 'product' ?
                                              <img src={option.icon}
                                                   alt={option.label}
+                                                  loading='lazy'
                                                   className='size-10 pointer-events-none' />
                                              : <h5 className="text-lg font-medium text-white dark:text-white/80">
                                                   {option.icon}

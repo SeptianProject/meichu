@@ -102,12 +102,12 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                <div className='my-5'>
                     <img className={`object-cover object-top w-full rounded-xl md:rounded-2xl  
                     ${isFavored ? 'h-36 sm:h-44 lg:h-48' : 'h-56 lg:h-60 xl:h-72'}`}
-                         src={image} alt={title} />
+                         src={image} alt={title} loading='lazy' />
                </div>
                <div className='flex items-center justify-between'>
                     <div className='flex items-center gap-x-2'>
                          <img className={`${isFavored ? 'size-7 md:size-8' : 'size-9'}`}
-                              src={assetItems.ImvuIcon} alt='' />
+                              src={assetItems.ImvuIcon} alt='' loading='lazy' />
                          <div className='flex flex-col'>
                               <h4 className={`text-graySurface1 dark:text-light font-medium
                               ${isFavored ? 'text-sm' : 'text-base'}`}>

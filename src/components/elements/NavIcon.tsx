@@ -17,7 +17,7 @@ const NavIcon: React.FC<NavIconProps> = React.memo(({
      return (
           <button className="w-fit overflow-hidden rounded-full hover:scale-105 transition-all duration-300" onClick={onClick}>
                {image &&
-                    <img src={image} alt="Profile" className="hidden lg:block size-10 border-2 
+                    <img src={image} alt="Profile" loading='lazy' className="hidden lg:block size-10 border-2 
                     border-light/20 rounded-full object-cover object-center" />
                }
                {Icon &&

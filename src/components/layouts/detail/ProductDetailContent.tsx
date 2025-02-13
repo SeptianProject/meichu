@@ -37,6 +37,7 @@ const ProductDetailContent = ({ productId }: { productId: string | undefined }) 
                               <img
                                    src={image.url}
                                    alt={image.url}
+                                   loading='lazy'
                                    onClick={() => setSelectedImageId(image.id)}
                                    className={`w-fit border-2 border-light rounded-xl cursor-pointer 
                                         transition-all duration-300 ease-in-out

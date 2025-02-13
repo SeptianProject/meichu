@@ -9,6 +9,7 @@ import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarou
 import HeroCarouselSkeleton from '../../elements/skeletons/HeroCarouselSkeleton';
 import { useProducts } from '../../../hooks/useQueryRequest';
 import 'swiper/css';
+import { getCloudinaryUrl } from '../../../services';
 
 const HeroCarousel = () => {
      const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
@@ -90,7 +91,7 @@ const HeroCarousel = () => {
                                              <motion.div
                                                   variants={cardVariants}
                                                   className='h-full w-full rounded-xl'>
-                                                  <img src={product.attributes.thumbnail.data.attributes.url}
+                                                  <img src={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
                                                        alt={product.attributes.name + ' Bundle'}
                                                        className={`w-full h-full object-cover 
                                                        object-center transition-opacity duration-300

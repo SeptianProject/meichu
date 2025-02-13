@@ -131,6 +131,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                     <img
                          src={previewUrl}
                          alt='avatar'
+                         loading='lazy'
                          className='rounded-lg object-cover object-center size-full' />
                     <input
                          type="file"
@@ -150,8 +151,8 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                               {uploading ? (
                                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-graySurface2" />
                               ) : (
-                                   <img
-                                        src={assetItems.EditIcon}
+                                   <img src={assetItems.EditIcon}
+                                        loading='lazy'
                                         alt="edit-icon"
                                         className='size-fit group-hover:scale-90'
                                    />)}
@@ -161,7 +162,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                {showCropModal && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                          <div className="bg-white p-4 rounded-lg max-w-2xl w-full mx-4">
-                              <h3 className="text-lg font-semibold mb-4">Cropper Image</h3>
+                              <h3 className="text-lg font-semibold mb-4">Crop your Image</h3>
                               <div className="max-h-[60vh] overflow-auto">
                                    <ReactCrop
                                         crop={crop}
@@ -171,6 +172,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                                         <img
                                              ref={imgRef}
                                              src={previewUrl}
+                                             loading='lazy'
                                              alt="Crop preview"
                                              className="max-w-full"
                                         />
