@@ -7,13 +7,13 @@ import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
 import HeroCarouselSkeleton from '../../elements/skeletons/HeroCarouselSkeleton';
+import { useProducts } from '../../../hooks/useQueryRequest';
 import 'swiper/css';
-import { useProductCatalog } from '../../../hooks/useQueryRequest';
 
 const HeroCarousel = () => {
      const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
      const [imageLoading, setImageLoading] = React.useState<{ [key: number]: boolean }>({})
-     const { data: productData, isLoading } = useProductCatalog()
+     const { data: productData, isLoading } = useProducts()
 
      const slides = React.useMemo(() => {
           if (!productData?.data) return []
@@ -26,12 +26,12 @@ const HeroCarousel = () => {
           ).flat()
      }, [productData?.data])
 
-     const handleImageLoad = (virtualId: number) => {
+     const handleImageLoad = React.useCallback((virtualId: number) => {
           setImageLoading(prev => ({
                ...prev,
                [virtualId]: true
           }))
-     }
+     }, [])
 
      const containerVariants: Variants = {
           hidden: { opacity: 0 },
@@ -74,7 +74,7 @@ const HeroCarousel = () => {
                     initial="hidden"
                     whileInView="visible"
                     exit="exit"
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
                     className='w-full'>
                     <AnimatePresence mode='wait'>
                          <Swiper

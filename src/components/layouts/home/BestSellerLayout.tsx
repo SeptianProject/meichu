@@ -4,14 +4,14 @@ import CardBestSeller from '../../fragments/home/CardBestSeller'
 import BestSellerSkeleton from '../../elements/skeletons/BestSellerSkeleton'
 import { useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useProductCatalog } from '../../../hooks/useQueryRequest'
+import { useProducts } from '../../../hooks/useQueryRequest'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import 'swiper/css'
 
 const BestSellerLayout = () => {
      const navigate = useNavigate()
      const { screenSize } = useUI()
-     const { data: productData, isLoading } = useProductCatalog()
+     const { data: productData, isLoading } = useProducts()
 
      if (isLoading) return <BestSellerSkeleton />
 

@@ -28,7 +28,7 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
       handleTapDiscover,
       handleSwitchDiscover,
       handleBackToProfile,
-   } = useProfileData(isOpen)
+   } = useProfileData()
 
    const { modalStyle, contentStyle } = useProfileUIState(isOpen)
 

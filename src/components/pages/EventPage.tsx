@@ -32,7 +32,7 @@ const EventPage = () => {
                          {listCardEvent.map((item, index) => (
                               <CardStaggerAnimation
                                    key={index}
-                                   hiddenPosition={{ y: 50 }}>
+                                   hiddenPosition={{ y: 20 }}>
                                    {item}
                               </CardStaggerAnimation>
                          ))}

@@ -17,7 +17,7 @@ export const FadeAnimation: React.FC<FadeAnimationProps> = React.memo(({
      return (
           <AnimationWrapper
                variants={createFadeVariants()}
-               whileInView="visible"
+               animate="visible"
                initial="hidden"
                exit="exit"
                style={style}

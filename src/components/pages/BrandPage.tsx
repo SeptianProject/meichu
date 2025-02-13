@@ -4,14 +4,13 @@ import ButtonBorderGradient from "../elements/buttons/ButtonBorderGradient"
 import SingleBadgeSosmed from "../elements/SingleBadgeSosmed"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../../routes/HistoryRoute"
-import { useQuery } from "@tanstack/react-query"
 import { BrandAmbassadors } from "../../types"
-import { getBrandAmbassadors } from "../../services/productService"
 import BrandPageSkeleton from "../elements/skeletons/BrandPageSkeleton"
 import React from "react"
+import { useBrandAmbassadorData } from "../../hooks/useQueryRequest"
 
 const BrandPage = () => {
-     const { data: brandAmbassadorData, isLoading } = useQuery<BrandAmbassadors>(['ambassador'], getBrandAmbassadors)
+     const { data: brandAmbassadorData, isLoading } = useBrandAmbassadorData()
 
      return (
           <section className="px-7 space-y-10 lg:px-20 relative">
@@ -36,7 +35,7 @@ const BrandPage = () => {
      )
 }
 
-export default BrandPage
+export default React.memo(BrandPage)
 
 interface BrandAmbassadorCardsProps {
      brandAmbassadorData?: BrandAmbassadors

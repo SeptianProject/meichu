@@ -2,18 +2,15 @@ import React from "react"
 import useUI from "./useUI"
 import CatalogCard from "../components/layouts/catalog/CatalogCard"
 import CardEvent from "../components/fragments/event/CardEvent"
-import { useQueryClient } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../redux/hook"
 import { setProfileActive } from "../redux/slices/authSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useUserData } from "./useQueryRequest"
 
-
-export const useProfileData = (isOpen: boolean) => {
+export const useProfileData = () => {
      const navigate = useNavigate()
      const dispatch = useAppDispatch()
-     const queryClient = useQueryClient()
      const { screenSize } = useUI()
      const isMobile = screenSize === 'mobile'
 
@@ -22,13 +19,6 @@ export const useProfileData = (isOpen: boolean) => {
 
      const { data: userData, isLoading: userDataLoading } = useUserData('userAvatar')
      const { data: userDataDetail, isLoading: userDataDetailLoading } = useUserData('user')
-
-     React.useEffect(() => {
-          if (isOpen) {
-               queryClient.invalidateQueries(['userAvatar'])
-               queryClient.invalidateQueries(['user'])
-          }
-     }, [isOpen, queryClient])
 
      const handleSwitchDiscover = React.useCallback(() => setIsFavored(prev => !prev), [])
 

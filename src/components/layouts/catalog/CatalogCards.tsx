@@ -7,7 +7,8 @@ import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton.ts
 import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import { useAppSelector } from '../../../redux/hook.ts'
-import { useProductCatalog } from '../../../hooks/useQueryRequest.ts'
+import { useProducts } from '../../../hooks/useQueryRequest.ts'
+// import { transformProductData } from '../../../helper/transformProductDataHelper.ts'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'
@@ -18,13 +19,13 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
      const navigate = useNavigate()
      const { screenSize } = useUI()
      const isMobile = screenSize === 'mobile'
-     const categoriesRef = React.useRef<HTMLDivElement>(null)
+     const productRef = React.useRef<HTMLDivElement>(null)
 
      const [isExpanded, setIsExpanded] = React.useState(false)
      const [displayCount, setDisplayCount] = React.useState(getInitialDisplayCount())
 
      const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
-     const { data: productData, isLoading } = useProductCatalog()
+     const { data: products, isLoading } = useProducts()
 
      React.useEffect(() => {
           setIsExpanded(false)
@@ -34,9 +35,7 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
      const handleExpandToggle = () => {
           setIsExpanded(!isExpanded)
           if (isExpanded) {
-               setTimeout(() => {
-                    categoriesRef.current?.scrollIntoView({ behavior: 'smooth' })
-               }, 100);
+               productRef.current?.scrollIntoView({ behavior: 'smooth' })
           }
      }
 
@@ -47,9 +46,9 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
      }
 
      const filteredCatalog = React.useMemo(() => {
-          if (!productData?.data) return []
+          if (!products?.data) return []
 
-          return productData.data.filter((product) => {
+          return products.data.filter((product) => {
                if (selectedCategory === null) return true
                return product.attributes.categories.data.some(category => category.id === selectedCategory)
           }).map((product) => {
@@ -67,14 +66,14 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                     />
                )
           })
-     }, [productData, selectedCategory, isAuthenticated, userId])
+     }, [products, selectedCategory, isAuthenticated, userId])
 
-     const getCurrentDisplayCount = React.useCallback(() => {
+     const getCurrentDisplayCount = () => {
           if (isExpanded) return filteredCatalog.length
           return Math.min(displayCount, filteredCatalog.length)
-     }, [])
+     }
 
-     const displayedCards = React.useMemo(() => filteredCatalog.slice(0, getCurrentDisplayCount()), [])
+     const displayedCards = filteredCatalog.slice(0, getCurrentDisplayCount())
 
      const showExpandButton = type === 'catalogPage' &&
           filteredCatalog.length > getInitialDisplayCount() &&
@@ -83,7 +82,7 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
      if (isLoading) return <CatalogCardSkeleton type={type} />
 
      return (
-          <div className='flex flex-col items-center gap-y-10'>
+          <div ref={productRef} className='flex flex-col items-center gap-y-10'>
                <ContainerStaggerAnimation
                     initialDelay={0.5}
                     staggerDelay={0.4}

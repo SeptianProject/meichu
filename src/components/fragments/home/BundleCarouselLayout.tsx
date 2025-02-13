@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { createMainBundleSwiperConfig } from "../../../configs/createMainBundleSwiperConfig";
 import { createItemsBundleSwiperConfig } from "../../../configs/createItemsBundleSwiperConfig";
 import { useNavigate } from "react-router-dom";
-import { useProductCatalog } from "../../../hooks/useQueryRequest";
+import { useProducts } from "../../../hooks/useQueryRequest";
 import 'swiper/css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -23,7 +23,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      const [mainImageLoading, setMainImageLoading] = React.useState<{ [key: number]: boolean }>({})
      const [itemsImageLoading, setItemsImageLoading] = React.useState<{ [key: number]: boolean }>({})
 
-     const { data: productData, isLoading } = useProductCatalog()
+     const { data: productData, isLoading } = useProducts()
 
      const handleSlideChange = React.useCallback((index: number) => {
           const currentBundleId = productData?.data[index]?.id ?? null
