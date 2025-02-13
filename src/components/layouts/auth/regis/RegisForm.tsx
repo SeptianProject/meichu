@@ -38,7 +38,6 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
           },
           onError: (error) => {
                console.error('Register error:', error)
-               alert('Register error')
           }
      })
 

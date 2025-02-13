@@ -88,9 +88,6 @@ const HeroCarousel = () => {
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
                                         <motion.div
-                                             initial="hidden"
-                                             animate="visible"
-                                             exit="exit"
                                              variants={cardVariants}
                                              className='h-full w-full rounded-xl'>
                                              <img src={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}

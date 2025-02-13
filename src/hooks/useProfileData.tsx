@@ -53,7 +53,7 @@ export const useProfileData = () => {
           )), [userDataDetail?.likes])
 
      const listCardRequest = React.useMemo(() => (
-          userDataDetail?.requests.map(request => (
+          userDataDetail?.requests?.map(request => (
                <CardEvent
                     key={request.id}
                     isEvent={false}

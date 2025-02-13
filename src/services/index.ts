@@ -8,10 +8,6 @@ export const getCloudinaryUrl = (url: string) => {
      return url.replace('/upload/', '/upload/f_webp,q_auto/');
 }
 
-if (!baseUrl) {
-     console.error("Error: Base URL is not defined. Check your environment variables.");
-}
-
 export const axiosInstance = axios.create({
      baseURL: apiUrl
 })

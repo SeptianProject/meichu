@@ -13,3 +13,14 @@ export interface ImageFormats {
      readonly small: ImageFormat
      readonly thumbnail: ImageFormat
 }
+
+export interface ApiErrorResponse {
+     status: number;
+     message: string;
+     data?: unknown;
+}
+
+export interface ApiSuccessResponse<T> {
+     data: T;
+     meta?: unknown;
+}

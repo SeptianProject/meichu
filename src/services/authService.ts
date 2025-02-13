@@ -25,6 +25,8 @@ export const getUser = async (params?: string) => {
      const token = localStorage.getItem('authToken')
      const userId = localStorage.getItem('userId')
 
+     if (!token || !userId) return
+
      const response = await axiosInstance.get(`${apiUrl}/users/${userId}?${params}`, {
           headers: {
                Authorization: `Bearer ${token}`
