@@ -26,7 +26,7 @@ const FooterItems: React.FC<FooterItemsProps> = React.memo(({
                </BounceAnimation>
                <ContainerStaggerAnimation
                     staggerDelay={0.2}
-                    initialDelay={title === 'MarketPlace' ? 1.7 : 2.7}
+                    initialDelay={title === 'MarketPlace' ? 0.8 : 1.6}
                     className="flex flex-col gap-y-2 lg:gap-y-3">
                     {listFooterItem.map((item, index) => (
                          <CardStaggerAnimation

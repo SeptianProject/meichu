@@ -6,6 +6,7 @@ import { transformProductData } from '../../../helper/transformProductDataHelper
 import { useProduct } from '../../../hooks/useQueryRequest'
 import DetailContentSkeleton from '../../elements/skeletons/DetailContentSkeleton'
 import { useNavigate } from 'react-router-dom'
+import { getCloudinaryUrl } from '../../../services'
 
 const ProductDetailContent = ({ productId }: { productId: string | undefined }) => {
      const navigate = useNavigate()
@@ -28,14 +29,14 @@ const ProductDetailContent = ({ productId }: { productId: string | undefined }) 
      return (
           <div className="space-y-10 lg:flex items-start gap-x-16">
                <FadeAnimation
-                    style={{ backgroundImage: `url(${activeImageSource})` }}
+                    style={{ backgroundImage: `url(${getCloudinaryUrl(activeImageSource)})` }}
                     className="w-full h-[22rem] rounded-2xl bg-cover bg-center 
                          transition-all duration-500 flex flex-col items-start justify-center
                          gap-y-3 md:gap-y-5 p-5 lg:h-[35rem]">
                     {allImages.map((image) => (
                          <ScaleAnimation key={image.id}>
                               <img
-                                   src={image.url}
+                                   src={getCloudinaryUrl(image.url)}
                                    alt={image.url}
                                    loading='lazy'
                                    onClick={() => setSelectedImageId(image.id)}

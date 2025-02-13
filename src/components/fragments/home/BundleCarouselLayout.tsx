@@ -103,24 +103,19 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                    <SwiperSlide key={image.id} className="!w-auto rounded-xl">
                                         <div className={`w-32 h-40 rounded-xl overflow-hidden 
                                         md:w-52 md:h-48 lg:w-64 lg:h-56 transition-all duration-500`}>
-                                             <BounceAnimation
-                                                  hiddenCoordinates={{ x: -20 }}
-                                                  delayVal={0.2}
-                                                  className="w-full h-full">
-                                                  {!itemsImageLoading[image.id] && (
-                                                       <div className="absolute -inset-1 z-10">
-                                                            <Skeleton className='w-full h-full border border-graySurface2 rounded-xl' />
-                                                       </div>
-                                                  )}
-                                                  <img src={getCloudinaryUrl(image.attributes.url)}
-                                                       alt={image.attributes.name}
-                                                       className={`w-full h-full object-cover object-center rounded-xl
+                                             {!itemsImageLoading[image.id] && (
+                                                  <div className="absolute -inset-1 z-10">
+                                                       <Skeleton className='w-full h-full border border-graySurface2 rounded-xl' />
+                                                  </div>
+                                             )}
+                                             <img src={getCloudinaryUrl(image.attributes.url)}
+                                                  alt={image.attributes.name}
+                                                  className={`w-full h-full object-cover object-center rounded-xl
                                                             transition-opacity duration-300 border-[#5E5A5A] border-2
                                                             ${itemsImageLoading[image.id] ? 'opacity-100' : 'opacity-0'}`}
-                                                       onLoad={() => handleItemsImageLoad(image.id)}
-                                                       loading="lazy"
-                                                  />
-                                             </BounceAnimation>
+                                                  onLoad={() => handleItemsImageLoad(image.id)}
+                                                  loading="lazy"
+                                             />
                                         </div>
                                    </SwiperSlide>
                               ))}

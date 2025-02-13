@@ -2,7 +2,7 @@ import React from 'react';
 import BounceAnimation from '../../animations/BounceAnimation';
 import ArrowCardCarousel from '../../elements/ArrowCardCarousel';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { AnimatePresence, motion, Variants } from 'motion/react'
+import { motion, Variants } from 'motion/react'
 import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
@@ -77,34 +77,35 @@ const HeroCarousel = () => {
                     exit="exit"
                     viewport={{ once: true, amount: 0.2 }}
                     className='w-full'>
-                    <AnimatePresence mode='wait'>
-                         <Swiper
-                              {...createHeroCarouselSwiperConfig()}
-                              onSwiper={setSwiperInstance}
-                              className='w-full'>
-                              {slides.map((product) => (
-                                   <SwiperSlide
-                                        key={product.virtualId}
-                                        className="!w-28 !h-36 sm:!w-32 sm:!h-40 
+                    <Swiper
+                         {...createHeroCarouselSwiperConfig()}
+                         onSwiper={setSwiperInstance}
+                         className='w-full'>
+                         {slides.map((product) => (
+                              <SwiperSlide
+                                   key={product.virtualId}
+                                   className="!w-28 !h-36 sm:!w-32 sm:!h-40 
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
-                                        <div className="h-full w-full overflow-hidden rounded-xl relative">
-                                             <motion.div
-                                                  variants={cardVariants}
-                                                  className='h-full w-full rounded-xl'>
-                                                  <img src={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
-                                                       alt={product.attributes.name + ' Bundle'}
-                                                       className={`w-full h-full object-cover 
+                                   <div className="h-full w-full overflow-hidden rounded-xl relative">
+                                        <motion.div
+                                             initial="hidden"
+                                             animate="visible"
+                                             exit="exit"
+                                             variants={cardVariants}
+                                             className='h-full w-full rounded-xl'>
+                                             <img src={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
+                                                  alt={product.attributes.name + ' Bundle'}
+                                                  className={`w-full h-full object-cover 
                                                        object-center transition-opacity duration-300
                                                        ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'}`}
-                                                       onLoad={() => handleImageLoad(product.id)}
-                                                       loading='lazy'
-                                                  />
-                                             </motion.div>
-                                        </div>
-                                   </SwiperSlide>
-                              ))}
-                         </Swiper>
-                    </AnimatePresence>
+                                                  onLoad={() => handleImageLoad(product.id)}
+                                                  loading='lazy'
+                                             />
+                                        </motion.div>
+                                   </div>
+                              </SwiperSlide>
+                         ))}
+                    </Swiper>
                     <div className='hidden absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10
                     lg:flex items-center justify-between w-[95vw] xl:w-[80vw]'>
                          <BounceAnimation

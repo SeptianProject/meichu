@@ -8,6 +8,7 @@ import { BrandAmbassadors } from "../../types"
 import BrandPageSkeleton from "../elements/skeletons/BrandPageSkeleton"
 import React from "react"
 import { useBrandAmbassadorData } from "../../hooks/useQueryRequest"
+import { getCloudinaryUrl } from "../../services"
 
 const BrandPage = () => {
      const { data: brandAmbassadorData, isLoading } = useBrandAmbassadorData()
@@ -56,7 +57,7 @@ const BrandAmbassadorCards: React.FC<BrandAmbassadorCardsProps> = ({ isLoading, 
                               key={brand.id}
                               hiddenPosition={{ y: 50 }}>
                               <div className="h-[30rem] bg-center bg-cover rounded-2xl relative overflow-hidden lg:h-[25rem] xl:h-[32rem]"
-                                   style={{ backgroundImage: `url(${brand.attributes.image.data.attributes.url})` }}>
+                                   style={{ backgroundImage: `url(${getCloudinaryUrl(brand.attributes.image.data.attributes.url)})` }}>
                                    <div className="absolute bottom-7 z-10 left-5 flex flex-col gap-y-2">
                                         <h1 className="font-semibold lg:text-lg xl:text-2xl text-light">
                                              {brand.attributes.name ?? 'Jane Rubyjane'}

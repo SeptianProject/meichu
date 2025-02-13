@@ -19,7 +19,7 @@ const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title,
                <div>
                     <img className={`w-full object-cover rounded-2xl
                     ${isEvent ? 'h-44 md:h-40 lg:h-52 xl:h-60' : 'h-36 md:h-40'}`}
-                         src={image ? image : assetItems.EventImage} alt="" />
+                         src={image ? image : assetItems.EventImage} alt="" loading='lazy' />
                </div>
                <div className={`flex flex-col gap-y-2 md:gap-y-4`}>
                     <div className="flex items-center justify-between gap-x-2 w-full">
