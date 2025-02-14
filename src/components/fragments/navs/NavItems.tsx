@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { assetItems, navItems } from '../../../assets/assets'
 import React from 'react'
 import Button from '../../elements/buttons/Button'
+import { useAppSelector } from '../../../redux/hook'
 
 type NavItemsProps = {
      isActive: boolean
@@ -10,7 +11,15 @@ type NavItemsProps = {
 }
 
 const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }) => {
+     const { isAuthenticated } = useAppSelector((state) => state.auth)
+     const [isLogin, setIsLogin] = React.useState(false)
      const location = useLocation()
+
+     React.useEffect(() => {
+          if (isAuthenticated) {
+               setIsLogin(true)
+          }
+     }, [isAuthenticated])
 
      return (
           <div className='flex items-center gap-x-6 z-20 relative overflow-hidden'>
@@ -46,7 +55,7 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                     ))}
                     <Button
                          isGradient
-                         title='Login'
+                         title={isLogin ? 'Profile' : 'Login'}
                          onClick={modalOnClick}
                          className='rounded-lg py-3 mt-3 lg:hidden'
                     />

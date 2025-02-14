@@ -9,7 +9,7 @@ import ModalPublishCustomProduct from "../layouts/customProduct/ModalPublishCust
 import { useForm } from "react-hook-form"
 import { createProductSchema, CreateProductSchema } from "../../schema/ProductSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { v4 as uuidv4 } from "uuid"
 import { useLocation, useNavigate } from "react-router-dom"
 import { uploadFile } from "../../services/authService"
@@ -19,6 +19,7 @@ import { setProfileActive } from "../../redux/slices/authSlice"
 import { useProductRequest, useUserData } from "../../hooks/useQueryRequest"
 
 const CustomProductPage = () => {
+     const queryClient = useQueryClient()
      const navigate = useNavigate()
      const location = useLocation()
      const dispatch = useAppDispatch()
@@ -89,6 +90,7 @@ const CustomProductPage = () => {
                return createProductRequest(payload)
           },
           onSuccess: () => {
+               queryClient.invalidateQueries(['user'])
                setOnPublish(true)
                setIsPublishDisabled(true)
                resetForm()

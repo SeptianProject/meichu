@@ -40,7 +40,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                return createProductLike(userId, productId)
           },
           onSuccess: () => {
-               queryClient.invalidateQueries(['product'])
+               queryClient.invalidateQueries(['user'])
                setIsLiked(true)
                dispatch(setProfileActive(true))
           },

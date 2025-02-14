@@ -59,7 +59,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                )
           },
           onSuccess: () => {
-               queryClient.invalidateQueries(['user'])
+               queryClient.invalidateQueries(['userAvatar'])
                setIsEditing(false)
                setSelectedFile(null)
                setUploadedImageId(null)

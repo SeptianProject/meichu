@@ -6,7 +6,7 @@ import React from "react";
 import { loginFormSchema, LoginFormSchema } from "../../../../schema/AuthSchema.ts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cleanAuthErrors, login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
 import { useAppDispatch } from "../../../../redux/hook.ts";
 import Button from "../../../elements/buttons/Button.tsx";
@@ -26,6 +26,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      onProfile,
      onForgotPassword
 }) => {
+     const queryClient = useQueryClient()
      const dispatch = useAppDispatch()
 
      const {
@@ -45,6 +46,8 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      const loginMutation = useMutation({
           mutationFn: loginAuth,
           onSuccess: (data) => {
+               queryClient.invalidateQueries(['user'])
+               queryClient.invalidateQueries(['userAvatar'])
                dispatch(login({
                     token: data.jwt,
                     userId: data.user.id
