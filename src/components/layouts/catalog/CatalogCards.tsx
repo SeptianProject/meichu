@@ -2,14 +2,13 @@
 import React from 'react'
 import useUI from '../../../hooks/useUI'
 import CatalogCard from './CatalogCard'
-import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton.tsx'
 import { useNavigate } from 'react-router-dom'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import { useAppSelector } from '../../../redux/hook.ts'
 import { useProducts } from '../../../hooks/useQueryRequest.ts'
 import { getCloudinaryUrl } from '../../../services/index.ts'
-// import { transformProductData } from '../../../helper/transformProductDataHelper.ts'
+import Button from '../../elements/buttons/Button.tsx'
 
 interface CatalogCardsProps {
      type: 'homePage' | 'catalogPage'
@@ -98,10 +97,19 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                     ))}
                </ContainerStaggerAnimation>
                {type === 'homePage' ? (
-                    <ButtonBorderGradient onClick={() => navigate('/catalog')} />
+                    <Button
+                         isGold
+                         title='Load More'
+                         onClick={() => navigate('/catalog')}
+                    />
                ) : showExpandButton ? (
-                    <ButtonBorderGradient
-                         isExpanded={isExpanded}
+                    // <ButtonBorderGradient
+                    //      isExpanded={isExpanded}
+                    //      onClick={handleExpandToggle}
+                    // />
+                    <Button
+                         isGold
+                         title={isExpanded ? 'Show Less' : 'Load More'}
                          onClick={handleExpandToggle}
                     />
                ) : null}

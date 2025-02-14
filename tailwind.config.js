@@ -30,7 +30,7 @@ export default {
         yellowBloobs: '#FFBA00',
         yellowLinear1: '#FE7A0F',
         yellowLinear2: '#967009',
-        cardBackground: '#08070F',
+        cardBackground: '#212121',
         graySurface1: '#5E5A5A',
         graySurface2: '#15151A',
         textDark: '#1E1E1E',

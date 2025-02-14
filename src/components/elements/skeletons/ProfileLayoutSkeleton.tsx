@@ -7,23 +7,23 @@ export const ProfileContentSkeleton = () => {
                md:gap-x-5 md:flex-row md:items-start md:border-b md:pb-10 overflow-hidden">
                <div className='size-44 md:w-7/12 md:h-[15rem] lg:h-[19rem] relative'>
                     <Skeleton className='rounded-lg object-cover object-center size-full 
-                         border dark:border-graySurface2' />
+                         border dark:border-dark' />
                </div>
                <div className="size-full flex flex-col gap-y-5">
                     <div className="flex flex-col gap-y-3">
                          {[...Array(3)].map((_, index) => (
                               <Skeleton key={index}
-                                   className="w-full h-14 md:h-16 rounded-xl border dark:border-graySurface2" />
+                                   className="w-full h-14 md:h-16 rounded-xl border dark:border-dark" />
                          ))}
                     </div>
                     <div className="w-full flex items-center justify-center gap-x-2 md:gap-x-3">
                          {[...Array(2)].map((_, index) => (
                               <Skeleton key={index} borderRadius={99}
-                                   className="w-[7.5rem] md:w-40 h-10 lg:h-12 border dark:border-graySurface2" />
+                                   className="w-[7.5rem] md:w-40 h-10 lg:h-12 border dark:border-dark" />
                          ))}
                     </div>
                     <Skeleton borderRadius={99}
-                         className="md:hidden w-full h-10 lg:h-12 border dark:border-graySurface2" />
+                         className="md:hidden w-full h-10 lg:h-12 border dark:border-dark" />
                </div>
           </div>
      )
@@ -41,13 +41,13 @@ export const ProfileDiscoverSkeleton = () => {
                     <div className="md:pt-4 flex flex-col md:border-none gap-y-2 md:gap-y-7">
                          <div className="flex items-center justify-center gap-x-20">
                               {[...Array(2)].map((_, index) => (
-                                   <Skeleton key={index} className="w-32 border dark:border-graySurface2" />
+                                   <Skeleton key={index} className="w-32 border dark:border-dark" />
                               ))}
                          </div>
                          <div className="flex items-center justify-center gap-x-5 w-full">
                               {cardSkeletons.map((_, index) => (
                                    <Skeleton key={index} className="h-60 md:w-64 lg:w-52 xl:w-56 
-                                        rounded-xl border dark:border-graySurface2" />
+                                        rounded-xl border dark:border-dark" />
                               ))}
                          </div>
                     </div>

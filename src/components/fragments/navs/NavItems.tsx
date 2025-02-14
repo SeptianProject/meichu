@@ -27,7 +27,7 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                     <img src={assetItems.MeichuLogo} alt="meichuLogo"
                          className='w-28 lg:w-40' />
                </div>
-               <div className={`fixed flex flex-col bg-[#08070F]/40 dark:bg-[#08070F]/75 gap-4 z-50
+               <div className={`fixed flex flex-col bg-[#08070F]/40 dark:bg-dark/60 gap-4 z-50
                backdrop-blur-md top-0 right-0 w-7/12 pl-8 pb-10 pt-32 rounded-b-2xl
                md:w-2/5
                ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
@@ -46,19 +46,15 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                                              : 'text-light/70 lg:text-dark/70 lg:dark:text-light/70 text-base lg:text-sm xl:text-base'}`}>
                                    {item.name}
                               </Link>
-                              <div className={`absolute h-[2px] rounded-full bg-gold 
-                              transition-all duration-500 ease-in-out
-                              ${location.pathname === item.link
-                                        ? 'w-full'
-                                        : 'w-0 group-hover:w-full'}`} />
                          </div>
                     ))}
-                    <Button
-                         isGradient
-                         title={isLogin ? 'Profile' : 'Login'}
-                         onClick={modalOnClick}
-                         className='rounded-lg py-3 mt-3 lg:hidden'
-                    />
+                    <div className='lg:hidden'>
+                         <Button
+                              isGold
+                              title={isLogin ? 'Profile' : 'Login'}
+                              onClick={modalOnClick}
+                         />
+                    </div>
                </div>
           </div>
      )

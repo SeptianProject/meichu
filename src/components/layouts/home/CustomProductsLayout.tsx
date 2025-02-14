@@ -32,7 +32,7 @@ const CustomProductsLayout = () => {
                          <BounceAnimation
                               hiddenCoordinates={{ y: -50 }}>
                               <Button
-                                   isGradient
+                                   isGold
                                    title="Custom Product"
                                    onClick={() => navigate("/custom-product")}
                                    className="w-40"
@@ -42,7 +42,7 @@ const CustomProductsLayout = () => {
                               hiddenCoordinates={{ y: 50 }}>
                               <Button
                                    isCancel={false}
-                                   isGradient={false}
+                                   isGold={false}
                                    title="More Product"
                                    onClick={() => navigate("/catalog")}
                                    className="w-40"

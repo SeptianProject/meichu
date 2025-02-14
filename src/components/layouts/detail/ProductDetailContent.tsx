@@ -72,14 +72,14 @@ const ProductDetailContent = ({ productId }: { productId: string | undefined }) 
                     </div>
                     <div className="flex items-center gap-x-5 pb-10">
                          <Button
-                              isGradient
+                              isGold
                               title="Buy Now!"
                               onClick={() => { }}
                               className="lg:w-44"
                          />
                          <Button
                               isCancel
-                              isGradient={false}
+                              isGold={false}
                               title="Cancel"
                               onClick={() => navigate('/')}
                               className="lg:w-44"

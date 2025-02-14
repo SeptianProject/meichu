@@ -53,7 +53,7 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
                               }
                          </div>
                          <Button
-                              isGradient
+                              isGold
                               title="Back to Profile"
                               onClick={handleBackToProfile}
                               className="md:hidden mx-auto text-sm"

@@ -70,7 +70,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
                               </p>
                          </div>
                          <Button
-                              isGradient
+                              isGold
                               disabled={forgotPasswordMutation.isLoading}
                               type="submit"
                               title={forgotPasswordMutation.isLoading ? 'Loading...' : 'Submit'}

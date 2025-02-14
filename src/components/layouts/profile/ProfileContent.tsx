@@ -146,37 +146,35 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                     </div>
                     <div className='w-full flex items-center gap-x-3'>
                          <Button
-                              isGradient
+                              isGold
                               title={updateProfileMutation.isLoading ? 'Updating...' : isEditing ? 'Save Changes' : 'Edit Profile'}
                               onClick={handleEdit}
                               disabled={updateProfileMutation.isLoading}
-                              className="lg:py-3 lg:w-40"
                          />
                          {isEditing ? (
                               <Button
                                    isCancel
-                                   isGradient={false}
+                                   isGold={false}
                                    title="Cancel"
                                    disabled={updateProfileMutation.isLoading}
                                    onClick={handleCancel}
-                                   className="lg:py-3 lg:w-40"
                               />
                          ) : (
                               <Button
                                    isLogout
-                                   isGradient={false}
+                                   isGold={false}
                                    title="Log Out"
                                    onClick={handleLogout}
-                                   className="lg:py-3 lg:w-40"
                               />
                          )}
                     </div>
-                    <Button
-                         isGradient
-                         title="Discover More About Me!"
-                         onClick={handleTapDiscover}
-                         className="md:hidden w-full py-3"
-                    />
+                    <div className="md:hidden">
+                         <Button
+                              isGold
+                              title="Discover More About Me!"
+                              onClick={handleTapDiscover}
+                         />
+                    </div>
                </div>
           </div>
      );

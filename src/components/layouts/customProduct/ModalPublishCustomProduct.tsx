@@ -37,7 +37,7 @@ const ModalPublishCustomProduct: React.FC<ModalPublishCustomProductProps> = Reac
                                    </p>
                               </div>
                               <Button
-                                   isGradient
+                                   isGold
                                    title="Okay!"
                                    onClick={isModalClose}
                                    className="w-40"

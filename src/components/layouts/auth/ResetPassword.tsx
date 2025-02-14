@@ -93,7 +93,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                          We will send you a message to set or reset your new password
                     </p>
                     <Button
-                         isGradient
+                         isGold
                          type="submit"
                          title={resetPasswordMutation.isLoading ? 'Loading...' : 'Submit'}
                          className="w-full"

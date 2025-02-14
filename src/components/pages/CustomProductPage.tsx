@@ -221,13 +221,13 @@ const CustomProductPage = () => {
                               <Button
                                    isCancel
                                    type="button"
-                                   isGradient={false}
+                                   isGold={false}
                                    title="Cancel"
                                    onClick={handleCancel}
                                    className="lg:w-44"
                               />
                               <Button
-                                   isGradient
+                                   isGold
                                    type="submit"
                                    disabled={createProductMutation.isLoading || isPublishDisabled}
                                    title={createProductMutation.isLoading ? 'Publishing...'

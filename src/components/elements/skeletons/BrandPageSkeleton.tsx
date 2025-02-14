@@ -13,13 +13,13 @@ const BrandPageSkeleton = () => {
                {cardSkeletonItems.map((_, index) => (
                     <div key={index}
                          className="relative h-[30rem] lg:h-[25rem] xl:h-[32rem]">
-                         <Skeleton className="w-full h-full rounded-2xl border dark:border-graySurface2" />
+                         <Skeleton className="w-full h-full rounded-2xl border dark:border-dark" />
                          <div className="absolute bottom-7 z-10 left-5 flex flex-col gap-y-3">
-                              <Skeleton className="w-48 h-[1.8rem] border dark:border-graySurface2" />
-                              <Skeleton className="w-28 h-[1.2rem] border dark:border-graySurface2" />
+                              <Skeleton className="w-48 h-[1.8rem] border dark:border-dark" />
+                              <Skeleton className="w-28 h-[1.2rem] border dark:border-dark" />
                               <div className="flex items-center gap-x-2">
                                    {badgeSkeletonItems.map((_, index) => (
-                                        <Skeleton key={index} className="size-12 border dark:border-graySurface2 rounded-full" />
+                                        <Skeleton key={index} className="size-12 border dark:border-dark rounded-full" />
                                    ))}
                               </div>
                          </div>

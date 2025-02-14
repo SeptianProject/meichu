@@ -21,23 +21,23 @@ const CatalogCardSkeleton: React.FC<CatalogCardPage> = ({ type }) => {
                     gap-6 lg:gap-4 w-full h-[24rem] lg:h-[28rem]'>
                     {skeletonItems.map((_, index) => (
                          <div key={index} className='relative h-[24rem] lg:h-[28rem] w-full'>
-                              <Skeleton className='h-full w-full rounded-2xl border dark:border-graySurface2' />
-                              <Skeleton circle className='absolute top-5 right-5 size-12 border dark:border-graySurface2' />
+                              <Skeleton className='h-full w-full rounded-2xl border dark:border-dark' />
+                              <Skeleton circle className='absolute top-5 right-5 size-12 border dark:border-dark' />
                               <div className='absolute top-5 left-5 flex flex-col gap-y-2'>
-                                   <Skeleton className='w-48 h-[1.8rem] border dark:border-graySurface2' />
-                                   <Skeleton className='w-28 h-[1.2rem] border dark:border-graySurface2' />
+                                   <Skeleton className='w-48 h-[1.8rem] border dark:border-dark' />
+                                   <Skeleton className='w-28 h-[1.2rem] border dark:border-dark' />
                               </div>
-                              <Skeleton className='absolute top-24 -translate-x-1/2 left-1/2 border w-[90%] h-[13rem] lg:h-[16.5rem] dark:border-graySurface2 rounded-xl' />
-                              <Skeleton circle className='absolute bottom-4 left-5 size-12 border dark:border-graySurface2' />
+                              <Skeleton className='absolute top-24 -translate-x-1/2 left-1/2 border w-[90%] h-[13rem] lg:h-[16.5rem] dark:border-dark rounded-xl' />
+                              <Skeleton circle className='absolute bottom-4 left-5 size-12 border dark:border-dark' />
                               <div className='absolute bottom-3 left-20 flex flex-col gap-y-1'>
-                                   <Skeleton className='w-24 h-[1.4rem] border dark:border-graySurface2' />
-                                   <Skeleton className='w-16 h-[0.8rem] border dark:border-graySurface2' />
+                                   <Skeleton className='w-24 h-[1.4rem] border dark:border-dark' />
+                                   <Skeleton className='w-16 h-[0.8rem] border dark:border-dark' />
                               </div>
-                              <Skeleton className='absolute right-5 bottom-5 w-32 h-[2.5rem] rounded-md border dark:border-graySurface2' />
+                              <Skeleton className='absolute right-5 bottom-5 w-32 h-[2.5rem] rounded-md border dark:border-dark' />
                          </div>
                     ))}
                </div>
-               <Skeleton className='w-28 md:w-32 h-10 rounded-full border dark:border-graySurface2' />
+               <Skeleton className='w-28 md:w-32 h-10 rounded-full border dark:border-dark' />
           </div>
      )
 }

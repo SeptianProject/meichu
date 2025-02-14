@@ -1,6 +1,5 @@
 import { BsInstagram, BsTiktok, BsTwitterX, BsYoutube } from "react-icons/bs"
 import { CardStaggerAnimation, ContainerStaggerAnimation } from "../animations/StaggerAnimation"
-import ButtonBorderGradient from "../elements/buttons/ButtonBorderGradient"
 import SingleBadgeSosmed from "../elements/SingleBadgeSosmed"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../../routes/HistoryRoute"
@@ -9,6 +8,7 @@ import BrandPageSkeleton from "../elements/skeletons/BrandPageSkeleton"
 import React from "react"
 import { useBrandAmbassadorData } from "../../hooks/useQueryRequest"
 import { getCloudinaryUrl } from "../../services"
+import Button from "../elements/buttons/Button"
 
 const BrandPage = () => {
      const { data: brandAmbassadorData, isLoading } = useBrandAmbassadorData()
@@ -28,8 +28,9 @@ const BrandPage = () => {
                          isLoading={isLoading}
                          brandAmbassadorData={brandAmbassadorData}
                     />
-                    <ButtonBorderGradient
-                         onClick={() => { }}
+                    <Button
+                         isGold
+                         title="Load More"
                     />
                </div>
           </section>
@@ -56,10 +57,11 @@ const BrandAmbassadorCards: React.FC<BrandAmbassadorCardsProps> = ({ isLoading, 
                          <CardStaggerAnimation
                               key={brand.id}
                               hiddenPosition={{ y: 50 }}>
-                              <div className="h-[30rem] bg-center bg-cover rounded-2xl relative overflow-hidden lg:h-[25rem] xl:h-[32rem]"
+                              <div className="h-[28rem] bg-center bg-cover rounded-2xl relative overflow-hidden 
+                              lg:h-[25rem] xl:h-[32rem] bg-slate-200 dark:bg-cardBackground"
                                    style={{ backgroundImage: `url(${getCloudinaryUrl(brand.attributes.image.data.attributes.url)})` }}>
                                    <div className="absolute bottom-7 z-10 left-5 flex flex-col gap-y-2">
-                                        <h1 className="font-semibold lg:text-lg xl:text-2xl text-light">
+                                        <h1 className="font-semibold lg:text-lg xl:text-xl text-light">
                                              {brand.attributes.name ?? 'Jane Rubyjane'}
                                         </h1>
                                         <p className="lg:text-xs xl:text-base font-extralight text-light">
@@ -72,9 +74,8 @@ const BrandAmbassadorCards: React.FC<BrandAmbassadorCardsProps> = ({ isLoading, 
                                              <SingleBadgeSosmed icon={BsTiktok} />
                                         </div>
                                    </div>
-                                   <div className="absolute h-44 w-full bottom-0 rounded-t-2xl 
-                                   bg-gradient-to-t from-yellowBloobs via-yellowBloobs/40
-                                   to-transparent via-60% from-[5%]"/>
+                                   <div className="absolute h-40 w-full bottom-0 rounded-t-2xl 
+                                   bg-gradient-to-t from-[#BA8C46] to-transparent from-20%"/>
                               </div>
                          </CardStaggerAnimation>
                     ))}

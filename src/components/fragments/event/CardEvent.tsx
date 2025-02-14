@@ -27,7 +27,7 @@ const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title,
                               {isEvent ? 'Giveaway Assets Chinnese' : title ?? 'Giveaway Assets Chinnese'}
                          </h1>
                          <Button
-                              isGradient
+                              isGold
                               isCancel={false}
                               onClick={onClick}
                               title={isEvent ? 'See Event' : 'See Details'}

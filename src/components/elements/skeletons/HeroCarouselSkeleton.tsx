@@ -30,14 +30,14 @@ const HeroCarouselSkeleton = () => {
                               <SwiperSlide key={index}
                                    className="!w-28 !h-36 sm:!w-32 sm:!h-40 md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl">
-                                        <Skeleton className="h-full w-full border dark:border-graySurface2 rounded-xl" />
+                                        <Skeleton className="h-full w-full border dark:border-dark rounded-xl" />
                                    </div>
                               </SwiperSlide>
                          ))}
                     </Swiper>
                     <div className="hidden lg:flex items-center justify-between absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 w-[95vw] xl:w-[80vw]">
                          {[...Array(2)].map((_, index) => (
-                              <Skeleton key={index} circle className="size-12 border dark:border-graySurface2" />
+                              <Skeleton key={index} circle className="size-12 border dark:border-dark" />
                          ))}
                     </div>
                </div>

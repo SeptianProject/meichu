@@ -109,7 +109,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                     </button>
                </div>
                <Button
-                    isGradient
+                    isGold
                     title={loginMutation.isLoading ? 'Loading...' : 'Login'}
                     type="submit"
                     className="w-full"

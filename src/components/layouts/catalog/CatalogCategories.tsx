@@ -18,7 +18,7 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
      if (isLoading) return (
           <div className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>
                {[...Array(5)].map((_, index) => (
-                    <Skeleton key={index} className='w-28 h-9 rounded-3xl border dark:border-graySurface2' />
+                    <Skeleton key={index} className='w-28 h-9 rounded-3xl border dark:border-dark' />
                ))}
           </div>
      )
@@ -30,33 +30,35 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                className='flex flex-wrap items-center justify-start gap-3 mt-5 w-fit'>
                <CardStaggerAnimation
                     hiddenPosition={{ x: -20 }}>
-                    <button
-                         onClick={() => onSelectCategory(null)}
-                         className={`${selectedCategory === null
-                              ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-light border-transparent'
-                              : 'bg-transparent dark:bg-dark text-graySurface1 border-graySurface1'} 
-                              border w-fit py-[5px] px-5 hover:dark:text-white rounded-full font-semibold
-                              transition-all duration-300`}>
-                         All
-                    </button>
+                    <div className={`${selectedCategory === null
+                         ? 'bg-gold rounded-full font-semibold p-[2px]'
+                         : 'bg-transparent'} w-fit h-fit transition-all`}>
+                         <button
+                              onClick={() => onSelectCategory(null)}
+                              className={`${selectedCategory === null
+                                   ? 'bg-light dark:bg-dark text-yellowBloobs border-transparent'
+                                   : 'bg-transparent text-graySurface1 border-graySurface1 border-2'}
+                                   border-graySurface1 py-[6px] px-5 rounded-full`}>
+                              All
+                         </button>
+                    </div>
                </CardStaggerAnimation>
-               {categoryData?.data.map((category) => {
-                    const active = selectedCategory === category.id
-                         ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-light border-transparent'
-                         : 'bg-transparent text-graySurface1 border-graySurface1'
-
-                    return (
-                         <CardStaggerAnimation
-                              key={category.id}
-                              hiddenPosition={{ x: -20 }}>
+               {categoryData?.data.map((category) => (
+                    <CardStaggerAnimation
+                         key={category.id}
+                         hiddenPosition={{ x: -20 }}>
+                         <div className={`${selectedCategory === category.id
+                              ? 'bg-gold rounded-full font-semibold p-[2px]' : 'bg-transparent'} rounded-full w-fit h-fit`}>
                               <button onClick={() => onSelectCategory(category.id)}
-                                   className={`${active} border w-fit py-[5px] px-5 hover:dark:text-white
-                                   rounded-full font-semibold font-inter transition-all duration-300`}>
+                                   className={`${selectedCategory === category.id
+                                        ? 'bg-light dark:bg-dark text-yellowBloobs border-transparent'
+                                        : 'bg-transparent text-graySurface1 border-graySurface1 border-2'} 
+                                             py-[6px] px-5 rounded-full`}>
                                    {category.attributes.name}
                               </button>
-                         </CardStaggerAnimation>
-                    )
-               })}
+                         </div>
+                    </CardStaggerAnimation>
+               ))}
           </ContainerStaggerAnimation>
      )
 }

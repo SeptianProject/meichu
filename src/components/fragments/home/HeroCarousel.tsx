@@ -68,7 +68,7 @@ const HeroCarousel = () => {
      if (isLoading) return <HeroCarouselSkeleton />
 
      return (
-          <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
+          <div className='relative mx-auto w-full max-w-[440px] sm:max-w-[450px] 
           md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem]'>
                <motion.div
                     variants={containerVariants}
@@ -84,7 +84,7 @@ const HeroCarousel = () => {
                          {slides.map((product) => (
                               <SwiperSlide
                                    key={product.virtualId}
-                                   className="!w-28 !h-36 sm:!w-32 sm:!h-40 
+                                   className="!w-32 !h-40 sm:!w-36 sm:!h-44 
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
                                         <motion.div
