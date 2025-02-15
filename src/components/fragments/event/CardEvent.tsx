@@ -31,7 +31,7 @@ const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title,
                               isCancel={false}
                               onClick={onClick}
                               title={isEvent ? 'See Event' : 'See Details'}
-                              className={`text-[12px] py-[5px]
+                              className={`text-[12px] py-[4px]
                          ${isEvent ? ' w-[7rem] sm:text-sm' : 'w-[5rem] sm:text-[12px] md:w-[6rem]'}`}
                          />
                     </div>

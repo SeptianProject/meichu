@@ -2,6 +2,7 @@ import React from "react";
 import ButtonSwitchDiscover from "../../fragments/profile/ButtonSwitchDiscover";
 import Button from "../../elements/buttons/Button";
 import { ProfileDiscoverSkeleton } from "../../elements/skeletons/ProfileLayoutSkeleton";
+import useUI from "../../../hooks/useUI";
 
 interface ProfileDiscoverProps {
      isFavored: boolean
@@ -28,6 +29,7 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
      requestedValue,
      renderCardContent,
 }) => {
+     const { screenSize } = useUI()
      if (isLoading) return <ProfileDiscoverSkeleton />
 
      return (
@@ -52,12 +54,15 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
                                    : renderCardContent(listCardRequest)
                               }
                          </div>
-                         <Button
-                              isGold
-                              title="Back to Profile"
-                              onClick={handleBackToProfile}
-                              className="md:hidden mx-auto text-sm"
-                         />
+                         {screenSize === 'mobile' && (
+                              <Button
+                                   isGold
+                                   isWidthFull
+                                   title="Back to Profile"
+                                   onClick={handleBackToProfile}
+                                   className="md:hidden text-sm"
+                              />
+                         )}
                     </div>
                </div>
           </div>

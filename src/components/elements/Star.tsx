@@ -29,7 +29,7 @@ const Star: React.FC<StarProps> = React.memo(({ className }) => {
                </defs>
                <path
                     d={mdiStarFourPoints}
-                    className="dark:fill-[url(#white-gradient)] fill-[url(#gold-gradient)]"
+                    className="fill-[url(#gold-gradient)]"
                />
           </svg>
      )

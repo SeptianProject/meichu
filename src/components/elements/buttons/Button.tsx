@@ -2,6 +2,8 @@ import React from 'react'
 
 interface ButtonProps {
      title: string
+     isCirlce?: boolean
+     isWidthFull?: boolean
      className?: string
      onClick?: VoidFunction
      isGold: boolean
@@ -15,15 +17,17 @@ const Button: React.FC<ButtonProps> = React.memo(({
      title,
      className,
      isGold,
+     isCirlce = true,
      isCancel,
      isLogout,
      disabled,
      type = 'button',
      onClick,
+     isWidthFull
 }) => {
      return (
-          <div className={`${isGold ? 'bg-gold rounded-full font-semibold' : 'bg-transparent'} 
-          p-[2px] w-fit h-fit`}>
+          <div className={`${isGold ? `bg-gold p-[2px] ${isCirlce ? 'rounded-full' : 'rounded-lg'} font-semibold` : 'bg-transparent'} 
+          ${isWidthFull ? 'w-full' : 'w-fit'}`}>
                <button
                     disabled={disabled}
                     type={type}
@@ -32,8 +36,8 @@ const Button: React.FC<ButtonProps> = React.memo(({
                          : isCancel ? 'border border-graySurface1 text-graySurface1 bg-transparent hover:bg-graySurface1 hover:text-white hover:border-transparent'
                               : isLogout ? 'border-redDanger text-redDanger hover:bg-redDanger hover:text-white border hover:border-transparent'
                                    : 'border bg-transparent text-graySurface1 border-graySurface1 dark:border-light dark:text-light'}
-                         border-2 font-semibold w-32 py-[10px] rounded-full transition-all duration-300
-                         ${className}`}>
+                         border-2 font-semibold py-[8px] rounded-full transition-all duration-300
+                         ${isWidthFull ? 'w-full' : `${className}`} `}>
                     {title}
                </button >
           </div>

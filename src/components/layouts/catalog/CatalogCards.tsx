@@ -101,16 +101,14 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                          isGold
                          title='Load More'
                          onClick={() => navigate('/catalog')}
+                         className='w-28 md:w-32'
                     />
                ) : showExpandButton ? (
-                    // <ButtonBorderGradient
-                    //      isExpanded={isExpanded}
-                    //      onClick={handleExpandToggle}
-                    // />
                     <Button
                          isGold
                          title={isExpanded ? 'Show Less' : 'Load More'}
                          onClick={handleExpandToggle}
+                         className='w-28 md:w-32'
                     />
                ) : null}
           </div>

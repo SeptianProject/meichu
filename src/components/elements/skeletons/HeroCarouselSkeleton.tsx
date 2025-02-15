@@ -8,8 +8,7 @@ const HeroCarouselSkeleton = () => {
      const skeletonItems = Array.from({ length: 5 })
 
      return (
-          <div className='relative mx-auto w-full max-w-[380px] sm:max-w-[430px] 
-          md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem] h-full'>
+          <div className='relative mx-auto w-full md:max-w-[700px] lg:max-w-[1024px] lg:px-[5.5rem] h-full'>
                <div className="w-full h-full">
                     <Swiper
                          effect={'coverflow'}
@@ -28,7 +27,8 @@ const HeroCarouselSkeleton = () => {
                          className="w-full h-full">
                          {skeletonItems.map((_, index) => (
                               <SwiperSlide key={index}
-                                   className="!w-28 !h-36 sm:!w-32 sm:!h-40 md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
+                                   className="!w-36 !h-48 sm:!w-40 sm:!h-52
+                                   md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl">
                                         <Skeleton className="h-full w-full border dark:border-dark rounded-xl" />
                                    </div>

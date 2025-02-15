@@ -27,7 +27,7 @@ const Heading = () => {
                     <p className='text-sm font-light w-[22rem] tracking-wider
                          sm:text-[15px] md:text-[18px] md:w-[28rem]
                          lg:text-[20px] lg:leading-[50px] lg:w-full
-                         dark:font-extralight dark:text-light'>
+                         dark:font-extralight dark:text-light/80'>
                          With smooth HD Quality, Korean Style, Goth Style & Cute Stuff.
                     </p>
                </BounceAnimation>
@@ -35,13 +35,13 @@ const Heading = () => {
                     delayVal={0.8}
                     hiddenCoordinates={{ x: -50 }}
                     className="size-full absolute">
-                    <Star className='-left-2 -top-1 md:-left-8 md:top-1 lg:-left-16 lg:top-4 xl:top-2' />
+                    <Star className='-left-1 -top-2 md:-left-8 md:top-1 lg:-left-14 lg:top-4 xl:top-2' />
                </BounceAnimation>
                <BounceAnimation
                     delayVal={0.8}
                     hiddenCoordinates={{ x: 50 }}
                     className="size-full absolute">
-                    <Star className='right-7 bottom-14 md:right-2 md:bottom-12 lg:-right-12 xl:-right-8' />
+                    <Star className='right-6 bottom-14 md:right-2 md:bottom-12 lg:-right-12 xl:-right-2' />
                </BounceAnimation>
           </div>
      )

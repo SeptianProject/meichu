@@ -29,7 +29,8 @@ const BounceAnimation: React.FC<BounceAnimationProps> = React.memo(({
                     type: 'spring',
                     stiffness: 100,
                     damping: 10,
-                    delay: delayVal
+                    delay: delayVal,
+                    duration: 0.8
                }
           },
           exit: {

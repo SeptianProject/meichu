@@ -1,9 +1,9 @@
+import React from "react";
 import AuthBadgeButton from "../../../fragments/auth/AuthBadgeButton";
+import Button from "../../../elements/buttons/Button.tsx";
 import AuthInput from "../../../fragments/auth/AuthInput";
 import { FaUser } from "react-icons/fa";
 import { IoIosLock } from "react-icons/io";
-import React from "react";
-import RegisTextDesc from "./RegisTextDesc";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { registerFormSchema, RegisterFormSchema } from "../../../../schema/AuthSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -75,16 +75,20 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
                          error={errors.username}
                          {...register('username')}
                     />
-                    <RegisTextDesc />
+                    <div className="text-dark dark:text-[#676767] text-xs font-medium dark:font-normal max-w-60 dark:max-w-56 text-start">
+                         By clicking the
+                         <span className="text-yellowLinear1 px-1">
+                              Register
+                         </span>
+                         button, you agree to the public offer
+                    </div>
                </div>
                <div className="space-y-5">
-                    <div className='bg-gold rounded-full w-full p-[1.5px]'>
-                         <button type="submit"
-                              className='bg-light font-medium dark:bg-dark w-full 
-                              rounded-full dark:text-light p-2'>
-                              Register
-                         </button>
-                    </div>
+                    <Button
+                         isGold
+                         isWidthFull
+                         title="Register"
+                    />
                     <AuthBadgeButton />
                </div>
           </form>

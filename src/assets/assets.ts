@@ -8,10 +8,6 @@ import DarkSingleEmoji from './images/emoji/dark-emoji1.svg'
 import DarkDuoEmoji from './images/emoji/dark-emoji2.svg'
 import LightSingleEmoji from './images/emoji/light-emoji1.svg'
 import LightDuoEmoji from './images/emoji/light-emoji2.svg'
-import Abstrak1 from './images/abstrak-image/abstrak1.webp'
-import Abstrak2 from './images/abstrak-image/abstrak2.webp'
-import Abstrak3 from './images/abstrak-image/abstrak3.webp'
-import Abstrak4 from './images/abstrak-image/abstrak4.webp'
 import EventImage from './images/another/event-image.webp'
 import EditIcon from './images/another/edit-icon.svg'
 import ImvuIcon from './images/imvu/iconImvu.svg'
@@ -21,19 +17,18 @@ import Gmail from './images/sosmed-icons/gmail.svg'
 import Google from './images/auth-icons/google.svg'
 import Apple from './images/auth-icons/apple.svg'
 import FacebookAuth from './images/auth-icons/facebook-auth.svg'
+import DeafultAvatar from './images/avatar.webp'
 
 export const assetItems = {
      MeichuLogo, Profile, AnyIcon, DarkImvuPlus, DarkImvu, LightImvu, EventImage,
      DarkSingleEmoji, DarkDuoEmoji, LightSingleEmoji, LightDuoEmoji, ImvuIcon,
-     EditIcon
+     DeafultAvatar, EditIcon
 }
 
 export const categories = [
      'All', 'Head', 'Skin', 'Hairstyle', 'Eye',
      'Eyebrows', 'Avatar', 'Bundles', 'Furniture'
 ]
-
-export const abstrakImages = [Abstrak1, Abstrak2, Abstrak3, Abstrak4]
 
 export const sosmedIcons = [
      {

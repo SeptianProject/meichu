@@ -71,10 +71,10 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
                          </div>
                          <Button
                               isGold
-                              disabled={forgotPasswordMutation.isLoading}
+                              isWidthFull
                               type="submit"
+                              disabled={forgotPasswordMutation.isLoading}
                               title={forgotPasswordMutation.isLoading ? 'Loading...' : 'Submit'}
-                              className="w-full"
                          />
                     </form>
                </AuthModal>

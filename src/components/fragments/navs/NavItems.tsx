@@ -27,7 +27,7 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                     <img src={assetItems.MeichuLogo} alt="meichuLogo"
                          className='w-28 lg:w-40' />
                </div>
-               <div className={`fixed flex flex-col bg-[#08070F]/40 dark:bg-dark/60 gap-4 z-50
+               <div className={`fixed flex flex-col bg-[#08070F]/40 dark:bg-dark/80 gap-4 z-50
                backdrop-blur-md top-0 right-0 w-7/12 pl-8 pb-10 pt-32 rounded-b-2xl
                md:w-2/5
                ${isActive ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
@@ -51,8 +51,10 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
                     <div className='lg:hidden'>
                          <Button
                               isGold
+                              isCirlce={false}
                               title={isLogin ? 'Profile' : 'Login'}
                               onClick={modalOnClick}
+                              className='w-32 rounded-md'
                          />
                     </div>
                </div>

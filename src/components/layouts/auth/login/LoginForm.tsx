@@ -1,15 +1,15 @@
-import { FaUser } from "react-icons/fa";
-import { IoIosLock } from "react-icons/io";
+import React from "react";
+import Button from "../../../elements/buttons/Button.tsx";
 import AuthInput from "../../../fragments/auth/AuthInput.tsx";
 import AuthBadgeButton from "../../../fragments/auth/AuthBadgeButton.tsx";
-import React from "react";
+import { FaUser } from "react-icons/fa";
+import { IoIosLock } from "react-icons/io";
 import { loginFormSchema, LoginFormSchema } from "../../../../schema/AuthSchema.ts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cleanAuthErrors, login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
-import { useAppDispatch } from "../../../../redux/hook.ts";
-import Button from "../../../elements/buttons/Button.tsx";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hook.ts";
 import { handleApiError } from "../../../../hooks/errorHandler.ts";
 import { loginAuth } from "../../../../services/authService.ts";
 
@@ -28,6 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
 }) => {
      const queryClient = useQueryClient()
      const dispatch = useAppDispatch()
+     const { isAuthModalOpen } = useAppSelector(state => state.auth)
 
      const {
           register,
@@ -37,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
           formState: { errors }
      } = useForm<LoginFormSchema>({
           resolver: zodResolver(loginFormSchema),
-          values: {
+          defaultValues: {
                identifier: '',
                password: ''
           }
@@ -62,21 +63,19 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      })
 
      const onSubmit = async (data: LoginFormSchema) => {
-          loginMutation.mutate(data)
+          loginMutation.mutateAsync(data)
      }
 
      React.useEffect(() => {
-          return () => {
-               dispatch(cleanAuthErrors())
-          }
-     }, [dispatch])
-
-     React.useEffect(() => {
-          if (loginMutation.isSuccess) {
+          if (!isAuthModalOpen) {
                setValue('identifier', '')
                setValue('password', '')
           }
-     }, [loginMutation.isSuccess, setValue])
+
+          return () => {
+               dispatch(cleanAuthErrors())
+          }
+     }, [dispatch, isAuthModalOpen, setValue])
 
      return (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
@@ -110,6 +109,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                </div>
                <Button
                     isGold
+                    isWidthFull
                     title={loginMutation.isLoading ? 'Loading...' : 'Login'}
                     type="submit"
                     className="w-full"
@@ -119,4 +119,4 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      );
 })
 
-export default LoginForm;
+export default LoginForm

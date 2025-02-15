@@ -31,6 +31,7 @@ const BrandPage = () => {
                     <Button
                          isGold
                          title="Load More"
+                         className="w-28 md:w-32"
                     />
                </div>
           </section>

@@ -7,6 +7,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserProfile, uploadFile } from "../../../services/authService.ts";
 import Button from "../../elements/buttons/Button";
 import { ProfileContentSkeleton } from "../../elements/skeletons/ProfileLayoutSkeleton.tsx";
+import useUI from "../../../hooks/useUI.ts";
+import { assetItems } from "../../../assets/assets.ts";
 
 interface ProfileContentProps {
      isTapDiscover: boolean
@@ -31,6 +33,9 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
 }) => {
      const dispatch = useAppDispatch()
      const queryClient = useQueryClient()
+     const { screenSize } = useUI()
+     const isMobile = screenSize === "mobile"
+
      const [isEditing, setIsEditing] = React.useState(false)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [uploadedImageId, setUploadedImageId] = React.useState<number | null>(null)
@@ -96,7 +101,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      React.useEffect(() => {
           setEditedValues({
                username: username || '',
-               profilePicture: profilePicture,
+               profilePicture: profilePicture || assetItems.DeafultAvatar,
                telephoneNumber: telephoneNumber || ''
           })
      }, [username, profilePicture, telephoneNumber])
@@ -147,15 +152,17 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                     <div className='w-full flex items-center gap-x-3'>
                          <Button
                               isGold
+                              isWidthFull={isMobile ? true : false}
                               title={updateProfileMutation.isLoading ? 'Updating...' : isEditing ? 'Save Changes' : 'Edit Profile'}
                               onClick={handleEdit}
                               disabled={updateProfileMutation.isLoading}
-                              className="lg:w-40"
+                              className="w-full lg:w-40"
                          />
                          {isEditing ? (
                               <Button
                                    isCancel
                                    isGold={false}
+                                   isWidthFull={isMobile ? true : false}
                                    title="Cancel"
                                    disabled={updateProfileMutation.isLoading}
                                    onClick={handleCancel}
@@ -164,6 +171,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                          ) : (
                               <Button
                                    isLogout
+                                   isWidthFull={isMobile ? true : false}
                                    isGold={false}
                                    title="Log Out"
                                    onClick={handleLogout}
@@ -171,13 +179,15 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                               />
                          )}
                     </div>
-                    <div className="md:hidden">
+                    {screenSize === 'mobile' && (
                          <Button
                               isGold
+                              isWidthFull
                               title="Discover More About Me!"
                               onClick={handleTapDiscover}
+                              className=""
                          />
-                    </div>
+                    )}
                </div>
           </div>
      );

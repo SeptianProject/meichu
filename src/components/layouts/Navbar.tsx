@@ -26,7 +26,7 @@ const Navbar = () => {
      const isDarkMode = mode === 'dark'
 
      const avatar = React.useMemo(() => {
-          if (token && userId && dataUser?.profilePicture.url) {
+          if (token && userId && dataUser?.profilePicture?.url) {
                return getCloudinaryUrl(dataUser.profilePicture.url)
           }
           return assetItems.Profile

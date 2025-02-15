@@ -94,9 +94,9 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                     </p>
                     <Button
                          isGold
+                         isWidthFull
                          type="submit"
                          title={resetPasswordMutation.isLoading ? 'Loading...' : 'Submit'}
-                         className="w-full"
                     />
                </form>
           </AuthModal>

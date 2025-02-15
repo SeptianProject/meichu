@@ -1,11 +1,11 @@
 import CatalogCard from '../catalog/CatalogCard'
-import ButtonBorderGradient from '../../elements/buttons/ButtonBorderGradient'
 import React from 'react'
 import { CardStaggerAnimation, ContainerStaggerAnimation } from '../../animations/StaggerAnimation'
 import { useProducts } from '../../../hooks/useQueryRequest'
 import CatalogCardSkeleton from '../../elements/skeletons/CatalogCardSkeleton'
 import Skeleton from 'react-loading-skeleton'
 import { getCloudinaryUrl } from '../../../services'
+import Button from '../../elements/buttons/Button'
 
 interface ListProductDetailProps {
      currentProductId: number
@@ -68,9 +68,12 @@ const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({ curren
                               </CardStaggerAnimation>
                          ))}
                     </ContainerStaggerAnimation>
-                    <ButtonBorderGradient
-                         isExpanded={isExpanded}
-                         onClick={handleExpandToggle} />
+                    <Button
+                         isGold
+                         title={isExpanded ? 'Show Less' : 'Load More'}
+                         onClick={handleExpandToggle}
+                         className='w-28 md:w-32'
+                    />
                </div>
           </div>
      )

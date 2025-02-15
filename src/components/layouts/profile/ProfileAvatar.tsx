@@ -1,5 +1,5 @@
 import React from 'react'
-import { abstrakImages, assetItems } from "../../../assets/assets";
+import { assetItems } from "../../../assets/assets";
 import ReactCrop, { Crop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
@@ -19,7 +19,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
 }) => {
      const fileInputRef = React.useRef<HTMLInputElement>(null)
      const imgRef = React.useRef<HTMLImageElement>(null)
-     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ?? abstrakImages[1])
+     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ?? assetItems.DeafultAvatar)
      const [showCropModal, setShowCropModal] = React.useState(false)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [crop, setCrop] = React.useState<Crop>({
@@ -31,7 +31,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
      })
 
      React.useEffect(() => {
-          setPreviewUrl(currentImageUrl ?? abstrakImages[1])
+          setPreviewUrl(currentImageUrl ?? assetItems.DeafultAvatar)
      }, [currentImageUrl])
 
      const validateFile = (file: File) => {
@@ -130,7 +130,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                <div className='size-44 md:w-7/12 md:h-[15rem] lg:h-[19rem] relative'>
                     <img
                          src={previewUrl}
-                         alt='avatar'
+                         alt='Profile avatar'
                          loading='lazy'
                          className='rounded-lg object-cover object-center size-full' />
                     <input

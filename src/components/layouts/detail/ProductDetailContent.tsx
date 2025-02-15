@@ -75,14 +75,14 @@ const ProductDetailContent = ({ productId }: { productId: string | undefined }) 
                               isGold
                               title="Buy Now!"
                               onClick={() => { }}
-                              className="lg:w-44"
+                              className="w-32 lg:w-44"
                          />
                          <Button
                               isCancel
                               isGold={false}
                               title="Cancel"
                               onClick={() => navigate('/')}
-                              className="lg:w-44"
+                              className="w-32 lg:w-44"
                          />
                     </div>
                </div>

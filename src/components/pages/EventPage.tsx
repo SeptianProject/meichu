@@ -2,8 +2,8 @@ import React from "react"
 import CardEvent from "../fragments/event/CardEvent"
 import TextTagline from "../fragments/home/TextTagline"
 import RouteHistory from "../../routes/HistoryRoute"
-import ButtonBorderGradient from "../elements/buttons/ButtonBorderGradient"
 import { CardStaggerAnimation, ContainerStaggerAnimation } from "../animations/StaggerAnimation"
+import Button from "../elements/buttons/Button"
 
 const cardEvent = <CardEvent isEvent />
 
@@ -37,7 +37,11 @@ const EventPage = () => {
                               </CardStaggerAnimation>
                          ))}
                     </ContainerStaggerAnimation>
-                    <ButtonBorderGradient onClick={() => { }} />
+                    <Button
+                         isGold
+                         title="Load More"
+                         className="w-28 md:w-32"
+                    />
                </div>
           </section>
      )
