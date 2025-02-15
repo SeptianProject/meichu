@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
-import { motion } from 'motion/react'
+import { motion, Variants } from 'motion/react'
 import { abstrakImages } from "../../../assets/assets";
 
 const CardProductAnimate = () => {
@@ -14,15 +14,15 @@ const CardProductAnimate = () => {
      const columns = React.useMemo(() => [...Array(4)].map(() => createColumnProducts()), [])
 
 
-     const scrollAnimate = (duration: number, direction: number = 1) => ({
+     const scrollAnimate = (duration: number, direction: number = 1): Variants => ({
           animate: {
                y: direction > 0 ? [0, -10000] : [-10000, 0],
                transition: {
                     y: {
                          repeat: Infinity,
-                         repeatType: 'loop',
+                         repeatType: 'mirror',
                          duration: duration,
-                         ease: 'linear'
+                         ease: 'linear',
                     }
                }
           }

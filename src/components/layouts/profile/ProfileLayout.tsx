@@ -50,10 +50,10 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = React.memo(({
                      userDataLoading={userDataLoading}
                      isTapDiscover={isTapDiscover}
                      handleTapDiscover={handleTapDiscover}
-                     emailValue={userData?.email}
+                     emailValue={userData?.email ?? '-'}
                      dateValue={userData?.createdAt?.split('T')[0]}
-                     username={userData?.username}
-                     telephoneNumber={userData?.telephoneNumber}
+                     username={userData?.username ?? '-'}
+                     telephoneNumber={userData?.telephoneNumber ?? '-'}
                      profilePicture={getCloudinaryUrl(userData?.profilePicture?.url || '')}
                   />
                   <ProfileDiscover

@@ -3,14 +3,17 @@ import BounceAnimation from "../../animations/BounceAnimation"
 import TextCursorAnimation from "../../animations/TextCursorAnimation"
 import CardProductAnimate from "../../fragments/home/CardProductAnimate"
 import Button from "../../elements/buttons/Button"
+import CardStackProduct from "../../fragments/home/CardStackProduct"
 
 const CustomProductsLayout = () => {
      const navigate = useNavigate()
 
      return (
-          <div className="lg:min-h-screen w-full flex items-center gap-x-10 pb-20 md:pb-5">
-               <div className="max-w-full sm:max-w-[80vw] md:max-w-[45vw] lg:max-w-[60vw] 
-               h-full relative flex flex-col gap-y-5 md:pb-20">
+          <div className="min-h-screen w-full h-full relative flex flex-col items-center gap-y-20 
+          md:flex-row md:gap-y-0 md:gap-x-10 md:pb-5">
+               <CardStackProduct />
+               <div className="max-w-full h-full sm:max-w-[80vw] md:h-full md:max-w-[45vw] lg:max-w-[60vw] 
+               relative flex flex-col gap-y-5 md:pb-20">
                     <BounceAnimation
                          hiddenCoordinates={{ x: -100 }}>
                          <h1 className="dark:text-light text-2xl sm:text-3xl xl:text-4xl font-bold">

@@ -21,7 +21,7 @@ const TextCursorAnimation: React.FC<TextCursorProps> = React.memo(({
                animate={{ opacity: 1 }}
                onViewportEnter={() => setIsInView(true)}
                onViewportLeave={() => setIsInView(false)}
-               className={`relative inline-block size-full text-dark 
+               className={`relative inline-block size-full text-dark
                dark:bg-gold dark:bg-clip-text dark:text-transparent ${className}`}>
                <AnimatePresence mode="wait">
                     <motion.span
