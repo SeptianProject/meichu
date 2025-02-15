@@ -77,28 +77,34 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                                    onChange={(e) => handleChange(JSON.parse(e.target.value))}
                                    className="hidden"
                               />
-                              <div className={`p-4 flex items-center gap-x-4 w-full rounded-2xl 
-                              border-none transition-all duration-500 dark:bg-dark 
-                              ${error ? 'ring-redDanger' : 'ring-graySecondary'}
-                              ${value === option.value
-                                        ? 'ring-[3px] ring-yellowLinear1'
-                                        : 'ring-[1.5px] ring-graySurface1'}`}>
-                                   <div className={`${option.label.includes('Imvu+')
-                                        ? 'bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 dark:from-graySurface2 dark:to-graySurface2 py-4'
-                                        : 'bg-[#C2C2C4]/50 dark:bg-graySurface2 py-2'} rounded-lg w-24 h-full flex justify-center`}>
-                                        {type === 'product' ?
-                                             <img src={option.icon}
-                                                  alt={option.label}
-                                                  loading='lazy'
-                                                  className='size-10 pointer-events-none' />
-                                             : <h5 className="text-lg font-medium text-white dark:text-white/80">
-                                                  {option.icon}
-                                             </h5>
-                                        }
+                              <div className={`${value === option.value ? 'bg-gold rounded-2xl' : 'bg-transparent'}
+                                   w-full border-none p-[3px]`}>
+                                   <div className={`p-3 md:p-4 flex items-center gap-x-4 w-full rounded-[14px] 
+                                   border-none bg-light dark:bg-dark transition-all duration-300
+                                   ${error ? 'ring-redDanger' : 'ring-graySecondary'}
+                                   ${value === option.value
+                                             ? 'ring-0 ring-transparent'
+                                             : 'ring-[1.5px] ring-graySurface1'}`}>
+                                        <div className={`${option.label.includes('Imvu+')
+                                             ? 'bg-[#f1f1f1] dark:bg-graySurface2 py-3'
+                                             : 'bg-[#C2C2C4]/50 dark:bg-graySurface2 py-2'} rounded-lg w-24 h-full flex justify-center`}>
+                                             {type === 'product' ?
+                                                  <img src={option.icon}
+                                                       alt={option.label}
+                                                       loading='lazy'
+                                                       className='size-10 pointer-events-none' />
+                                                  : <h5 className="text-lg font-medium text-gold dark:text-white/80">
+                                                       {option.icon}
+                                                  </h5>
+                                             }
+                                        </div>
+                                        <span className={`${value === option.value
+                                             ? 'bg-gold bg-clip-text text-transparent'
+                                             : ' text-graySurface1 dark:text-white/80'}
+                                        text-lg font-medium transition-colors duration-300`}>
+                                             {option.label}
+                                        </span>
                                    </div>
-                                   <span className="text-lg font-medium text-graySurface1 dark:text-white/80">
-                                        {option.label}
-                                   </span>
                               </div>
                          </label>
                     ))}

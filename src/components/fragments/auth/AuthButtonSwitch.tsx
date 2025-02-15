@@ -15,7 +15,7 @@ const AuthButtonSwitch: React.FC<AuthButtonSwitchProps> = React.memo(({
           <div className="flex items-center gap-x-2 justify-center">
                <h4 className="dark:text-light/40 text-xs">{text}</h4>
                <button onClick={onSwitchModal}
-                    className="underline-offset-2 underline text-transparent bg-clip-text bg-gradient-to-r from-yellowLinear1 to-yellowLinear2 text-sm font-medium">
+                    className="bg-gold text-transparent bg-clip-text text-sm font-medium">
                     {textBtn}
                </button>
           </div>

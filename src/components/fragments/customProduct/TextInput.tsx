@@ -33,7 +33,7 @@ const TextInput = React.memo(React.forwardRef<HTMLInputElement, TextInputProps>(
                               ? 'Enter your text here'
                               : 'Ex: Meichu'}
                          {...props}
-                         className={`text-dark font-poppins ring-[1.5px] w-full py-8 
+                         className={`text-dark font-poppins ring-[1.5px] w-full py-6 md:py-8 
                               rounded-2xl px-10 bg-transparent outline-none border-none 
                          dark:bg-dark dark:text-light dark:text-opacity-70
                          transition-all duration-300 focus:ring-[2.5px]

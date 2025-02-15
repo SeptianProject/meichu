@@ -101,9 +101,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                     <button
                          type="button"
                          onClick={onForgotPassword}
-                         className="text-dark/80 text-xs lg:text-sm font-medium 
-                              dark:bg-gradient-to-r from-yellowLinear1 to-yellowLinear2
-                              bg-clip-text dark:text-transparent">
+                         className="bg-gold bg-clip-text text-transparent text-xs lg:text-sm font-medium">
                          Forgot Password?
                     </button>
                </div>

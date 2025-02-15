@@ -127,7 +127,8 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
 
      return (
           <>
-               <div className='size-44 md:w-7/12 md:h-[15rem] lg:h-[19rem] relative'>
+               <div className={`size-44 md:w-7/12 md:h-[15rem] lg:h-[19rem] relative rounded-lg
+                    ${previewUrl ? '' : 'border border-graySurface1'}`}>
                     <img
                          src={previewUrl}
                          alt='Profile avatar'

@@ -36,10 +36,13 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                          <button
                               onClick={() => onSelectCategory(null)}
                               className={`${selectedCategory === null
-                                   ? 'bg-light dark:bg-dark text-yellowBloobs border-transparent'
+                                   ? 'bg-light dark:bg-dark border-transparent'
                                    : 'bg-transparent text-graySurface1 border-graySurface1 border-2'}
-                                   border-graySurface1 py-[6px] px-5 rounded-full`}>
-                              All
+                                   border-graySurface1 py-[5px] px-6 rounded-full`}>
+                              <span className={`${selectedCategory === null
+                                   ? 'bg-gold bg-clip-text text-transparent' : ''}`}>
+                                   All
+                              </span>
                          </button>
                     </div>
                </CardStaggerAnimation>
@@ -48,13 +51,17 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                          key={category.id}
                          hiddenPosition={{ x: -20 }}>
                          <div className={`${selectedCategory === category.id
-                              ? 'bg-gold rounded-full font-semibold p-[2px]' : 'bg-transparent'} rounded-full w-fit h-fit`}>
+                              ? 'bg-gold rounded-full font-semibold p-[2px]'
+                              : 'bg-transparent'} rounded-full w-fit h-fit`}>
                               <button onClick={() => onSelectCategory(category.id)}
                                    className={`${selectedCategory === category.id
                                         ? 'bg-light dark:bg-dark text-yellowBloobs border-transparent'
                                         : 'bg-transparent text-graySurface1 border-graySurface1 border-2'} 
-                                             py-[6px] px-5 rounded-full`}>
-                                   {category.attributes.name}
+                                             py-[5px] px-5 rounded-full`}>
+                                   <span className={`${selectedCategory === category.id
+                                        ? 'bg-gold bg-clip-text text-transparent' : ''}`}>
+                                        {category.attributes.name}
+                                   </span>
                               </button>
                          </div>
                     </CardStaggerAnimation>

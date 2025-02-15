@@ -6,7 +6,7 @@ const DetailCardSkeleton = () => {
      const buttonSkeletons = Array.from({ length: 2 })
 
      const borderClasses = `
-     border border-graySurface2
+     border dark:border-graySurface2
      `
 
      return (

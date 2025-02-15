@@ -224,7 +224,7 @@ const CustomProductPage = () => {
                                    isGold={false}
                                    title="Cancel"
                                    onClick={handleCancel}
-                                   className="lg:w-44"
+                                   className="w-32 lg:w-44"
                               />
                               <Button
                                    isGold
@@ -233,7 +233,7 @@ const CustomProductPage = () => {
                                    title={createProductMutation.isLoading ? 'Publishing...'
                                         : isPublishDisabled ? 'Published' : isEditing ? 'Update' : 'Publish'
                                    }
-                                   className="lg:w-44"
+                                   className="w-32 lg:w-44"
                               />
                          </div>
                     </form>

@@ -10,7 +10,7 @@ import LightSingleEmoji from './images/emoji/light-emoji1.svg'
 import LightDuoEmoji from './images/emoji/light-emoji2.svg'
 import EventImage from './images/another/event-image.webp'
 import EditIcon from './images/another/edit-icon.svg'
-import ImvuIcon from './images/imvu/iconImvu.svg'
+import CreditLogo from './images/logo-credits.webp'
 import Facebook from './images/sosmed-icons/facebook.svg'
 import Instagram from './images/sosmed-icons/instagram.svg'
 import Gmail from './images/sosmed-icons/gmail.svg'
@@ -21,7 +21,7 @@ import DeafultAvatar from './images/avatar.webp'
 
 export const assetItems = {
      MeichuLogo, Profile, AnyIcon, DarkImvuPlus, DarkImvu, LightImvu, EventImage,
-     DarkSingleEmoji, DarkDuoEmoji, LightSingleEmoji, LightDuoEmoji, ImvuIcon,
+     DarkSingleEmoji, DarkDuoEmoji, LightSingleEmoji, LightDuoEmoji, CreditLogo,
      DeafultAvatar, EditIcon
 }
 

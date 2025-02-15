@@ -70,9 +70,9 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
      }
 
      return (
-          <div className={`bg-transparent border border-graySurface1 rounded-2xl 
+          <div className={`bg-[#C2C2C4]/30 border border-graySurface1 rounded-2xl 
                h-full w-full cursor-pointer dark:border-transparent dark:bg-cardBackground
-               hover:-translate-y-3 transition-all duration-500 ${isFavored ? 'p-3' : 'p-5'}`}>
+               hover:-translate-y-3 transition-all duration-500 ${isFavored ? 'p-3' : 'px-5 pt-5 pb-2'}`}>
                <div className='flex items-center justify-between'>
                     <h3 className={`${isFavored ? 'text-base  font-semibold' : 'font-bold text-lg md:text-xl'}
                          text-graySurface1 dark:text-light`}>
@@ -106,14 +106,14 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                </div>
                <div className='flex items-center justify-between'>
                     <div className='flex items-center gap-x-2'>
-                         <img className={`${isFavored ? 'size-7 md:size-8' : 'size-9'}`}
-                              src={assetItems.ImvuIcon} alt='' loading='lazy' />
+                         <img className={`${isFavored ? 'w-7 md:w-8' : 'w-12'}`}
+                              src={assetItems.CreditLogo} alt='' loading='lazy' />
                          <div className='flex flex-col'>
-                              <h4 className={`text-graySurface1 dark:text-light font-medium
+                              <h4 className={`text-graySurface1 dark:text-light
                               ${isFavored ? 'text-sm' : 'text-base'}`}>
                                    Credits
                               </h4>
-                              <h4 className={`text-graySurface1 dark:text-light font-semibold
+                              <h4 className={`text-graySurface1 dark:text-light
                               ${isFavored ? 'text-sm' : 'text-base'}`}>
                                    4.3
                               </h4>

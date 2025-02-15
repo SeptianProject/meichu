@@ -30,7 +30,7 @@ const CardStackProduct = () => {
 
      if (isLoading) {
           return (
-               <div className='relative h-[45dvh] w-full'>
+               <div className='md:hidden relative h-[45dvh] w-full'>
                     {cardConfigs.map((config, index) => (
                          <div key={index}
                               className={`absolute ${config.className}`}>
