@@ -27,7 +27,7 @@ const CardBestSeller: React.FC<CardBestSellerProps> = ({
 
      return (
           <div onClick={onClick}
-               className='bg-[#f1f1f1] border border-graySurface1 dark:border-transparent
+               className='bg-[#C2C2C4]/30 border border-graySurface1 dark:border-transparent
                dark:bg-cardBackground w-full p-5 
                rounded-3xl flex flex-col items-start gap-y-5 cursor-pointer
                hover:-translate-y-3 transition-all duration-500 h-[22rem]'>

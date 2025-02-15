@@ -14,7 +14,7 @@ interface CardEventProps {
 const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title, time, onClick }) => {
      return (
           <div className={`w-full h-full border border-[#302F35] rounded-2xl space-y-4
-          dark:border-transparent bg-[#f1f1f1] dark:bg-cardBackground
+          dark:border-transparent bg-[#C2C2C4]/30 dark:bg-cardBackground
           ${isEvent ? 'p-6' : 'px-3 py-4'}`}>
                <div>
                     <img className={`w-full object-cover rounded-2xl
