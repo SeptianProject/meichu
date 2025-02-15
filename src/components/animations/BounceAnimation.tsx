@@ -46,7 +46,7 @@ const BounceAnimation: React.FC<BounceAnimationProps> = React.memo(({
           <motion.div
                variants={bounceVariants}
                initial="hidden"
-               whileInView="visible"
+               animate="visible"
                exit='exit'
                viewport={BASE_VIEWPORT}
                className={className}>

@@ -14,7 +14,7 @@ const CardStackProduct = () => {
                     <CardStack
                          delay={1}
                          image={abstrakImages[0]}
-                         className='size-52 left-0 top-0'
+                         className='size-52 left-5 top-0'
                          amplitude={15}
                     />
                     <CardStack

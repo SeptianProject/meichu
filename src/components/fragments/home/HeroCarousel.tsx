@@ -73,7 +73,7 @@ const HeroCarousel = () => {
                <motion.div
                     variants={containerVariants}
                     initial="hidden"
-                    whileInView="visible"
+                    animate="visible"
                     exit="exit"
                     viewport={{ once: true, amount: 0.2 }}
                     className='w-full'>
