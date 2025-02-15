@@ -101,7 +101,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                </div>
                <div className='my-5'>
                     <img className={`object-cover object-top w-full rounded-xl md:rounded-2xl  
-                    ${isFavored ? 'h-36 sm:h-44 lg:h-48' : 'h-56 lg:h-60 xl:h-72'}`}
+                    ${isFavored ? 'h-36 xs:h-44 lg:h-48' : 'h-56 lg:h-60 xl:h-72'}`}
                          src={image} alt={title} loading='lazy' />
                </div>
                <div className='flex items-center justify-between'>

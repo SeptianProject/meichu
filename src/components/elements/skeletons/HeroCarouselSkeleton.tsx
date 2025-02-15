@@ -27,7 +27,7 @@ const HeroCarouselSkeleton = () => {
                          className="w-full h-full">
                          {skeletonItems.map((_, index) => (
                               <SwiperSlide key={index}
-                                   className="!w-36 !h-48 sm:!w-40 sm:!h-52
+                                   className="!w-36 !h-48 xs:!w-40 xs:!h-52
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl">
                                         <Skeleton className="h-full w-full border dark:border-dark rounded-xl" />

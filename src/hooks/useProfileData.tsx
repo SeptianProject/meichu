@@ -71,7 +71,7 @@ export const useProfileData = () => {
                     {items.map((item, index) => (
                          <SwiperSlide
                               key={index}
-                              className={`py-5 px-1 sm:px-2 ${items === listCardFavored ? 'sm:max-w-[15rem]' : ''}`}>
+                              className={`py-5 px-1 xs:px-2 ${items === listCardFavored ? 'xs:max-w-[15rem]' : ''}`}>
                               {item}
                          </SwiperSlide>
                     ))}

@@ -9,7 +9,7 @@ const BundleCarouselSkeleton = () => {
                     !max-w-[40rem] md:!max-w-[40rem] lg:!max-w-[50rem]">
                          <div className="rounded-3xl w-[23rem]">
                               <Skeleton className="rounded-3xl w-full h-[20rem] max-w-[65vw] 
-                                        sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
+                                        xs:h-[25rem] xs:max-w-[70vw] md:max-w-[20rem]
                                         lg:h-[30rem] lg:max-w-[26rem] border dark:border-dark"/>
                          </div>
                          <div className="mt-6 md:mb-10 lg:mb-20 w-fit h-fit">

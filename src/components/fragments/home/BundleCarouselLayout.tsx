@@ -75,7 +75,7 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                                              )}
                                              <img className="rounded-3xl object-cover object-center 
                                                   border-4 border-[#5E5A5A] w-full h-[20rem] max-w-[65vw] 
-                                                  sm:h-[25rem] sm:max-w-[70vw] md:max-w-[20rem]
+                                                  xs:h-[25rem] xs:max-w-[70vw] md:max-w-[20rem]
                                                   lg:h-[30rem] lg:max-w-[24rem] cursor-pointer"
                                                   onClick={handleOnDetail}
                                                   src={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}

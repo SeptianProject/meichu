@@ -83,7 +83,7 @@ const HeroCarousel = () => {
                          {slides.map((product) => (
                               <SwiperSlide
                                    key={product.virtualId}
-                                   className="!w-36 !h-48 sm:!w-40 sm:!h-52
+                                   className="!w-36 !h-48 xs:!w-40 xs:!h-52
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
                                         <motion.div
