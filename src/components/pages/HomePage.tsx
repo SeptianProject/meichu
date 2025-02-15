@@ -10,7 +10,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const HomePage = () => {
      return (
           <section className="px-7 md:px-12 lg:px-20 overflow-hidden flex flex-col gap-y-20">
-               <div className='flex items-center pb-32 justify-center min-h-screen lg:pt-36'>
+               <div className='flex items-center justify-center min-h-[100dvh] lg:pt-36'>
                     <div className="flex flex-col items-center gap-y-10">
                          <HeroCarousel />
                          <Heading />

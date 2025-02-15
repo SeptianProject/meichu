@@ -32,7 +32,7 @@ const CatalogCategories: React.FC<CatalogCategoriesProps> = ({
                     hiddenPosition={{ x: -20 }}>
                     <div className={`${selectedCategory === null
                          ? 'bg-gold rounded-full font-semibold p-[2px]'
-                         : 'bg-transparent'} w-fit h-fit transition-all`}>
+                         : 'bg-transparent'} w-fit h-fit`}>
                          <button
                               onClick={() => onSelectCategory(null)}
                               className={`${selectedCategory === null

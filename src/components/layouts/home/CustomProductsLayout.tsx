@@ -9,10 +9,10 @@ const CustomProductsLayout = () => {
      const navigate = useNavigate()
 
      return (
-          <div className="min-h-screen w-full h-full relative flex flex-col items-center gap-y-20 
+          <div className="min-h-[100dvh] w-full relative flex flex-col items-center gap-y-20 
           md:flex-row md:gap-y-0 md:gap-x-10 md:pb-5">
                <CardStackProduct />
-               <div className="max-w-full h-full sm:max-w-[80vw] md:h-full md:max-w-[45vw] lg:max-w-[60vw] 
+               <div className="max-w-full sm:max-w-[80vw] md:h-full md:max-w-[45vw] lg:max-w-[60vw] 
                relative flex flex-col gap-y-5 md:pb-20">
                     <BounceAnimation
                          hiddenCoordinates={{ x: -100 }}>

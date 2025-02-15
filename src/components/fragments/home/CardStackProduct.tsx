@@ -1,34 +1,62 @@
 import React from 'react'
-import { abstrakImages } from '../../../assets/assets'
 import { motion } from 'motion/react'
+import { useProducts } from '../../../hooks/useQueryRequest'
+import { getCloudinaryUrl } from '../../../services'
+import Skeleton from 'react-loading-skeleton'
+
+const cardConfigs = [
+     {
+          className: 'size-52 left-5 top-0',
+          amplitude: 15,
+          delay: 0.5,
+          skeletonHeight: 192
+     },
+     {
+          className: 'w-52 h-64 -bottom-10 right-20',
+          amplitude: 20,
+          delay: 0,
+          skeletonHeight: 256
+     },
+     {
+          className: 'size-44 right-5 top-24',
+          amplitude: 15,
+          delay: 1,
+          skeletonHeight: 176
+     }
+]
 
 const CardStackProduct = () => {
+     const { data: productData, isLoading } = useProducts()
+
+     if (isLoading) {
+          return (
+               <div className='relative h-[45dvh] w-full'>
+                    {cardConfigs.map((config, index) => (
+                         <div key={index}
+                              className={`absolute ${config.className}`}>
+                              <Skeleton height={config.skeletonHeight} className='rounded-xl' />
+                         </div>
+                    ))}
+               </div>
+          )
+     }
 
      return (
-          <div className='relative md:hidden w-full h-[50vh]'>
+          <div className='relative md:hidden w-full h-[45dvh]'>
                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                >
-                    <CardStack
-                         delay={1}
-                         image={abstrakImages[0]}
-                         className='size-52 left-5 top-0'
-                         amplitude={15}
-                    />
-                    <CardStack
-                         delay={1.5}
-                         image={abstrakImages[2]}
-                         className='w-52 h-72 -bottom-5 right-10'
-                         amplitude={20}
-                    />
-                    <CardStack
-                         delay={0.5}
-                         image={abstrakImages[1]}
-                         className='size-44 right-0 top-24'
-                         amplitude={10}
-                    />
+                    {productData?.data.slice(0, 3).map((product, index) => (
+                         <CardStack
+                              key={product.id}
+                              delay={cardConfigs[index].delay}
+                              image={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
+                              className={cardConfigs[index].className}
+                              amplitude={cardConfigs[index].amplitude}
+                         />
+                    ))}
                </motion.div>
           </div>
      )
@@ -67,8 +95,12 @@ export const CardStack: React.FC<CardStackProps> = ({
                     src={image}
                     alt="Stack Image"
                     whileHover={{
+                         type: 'spring',
                          scale: 1.05,
-                         transition: { duration: 0.3 }
+                    }}
+                    transition={{
+                         duration: 0.3,
+                         ease: 'easeInOut'
                     }}
                     className='w-full h-full object-cover rounded-xl'
                />
