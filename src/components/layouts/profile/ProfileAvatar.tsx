@@ -19,7 +19,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
 }) => {
      const fileInputRef = React.useRef<HTMLInputElement>(null)
      const imgRef = React.useRef<HTMLImageElement>(null)
-     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl ?? assetItems.DeafultAvatar)
+     const [previewUrl, setPreviewUrl] = React.useState<string>(currentImageUrl || assetItems.DeafultAvatar)
      const [showCropModal, setShowCropModal] = React.useState(false)
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [crop, setCrop] = React.useState<Crop>({
@@ -31,7 +31,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
      })
 
      React.useEffect(() => {
-          setPreviewUrl(currentImageUrl ?? assetItems.DeafultAvatar)
+          setPreviewUrl(currentImageUrl || assetItems.DeafultAvatar)
      }, [currentImageUrl])
 
      const validateFile = (file: File) => {
@@ -147,8 +147,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
                               type="button"
                               onClick={handleUploadClick}
                               disabled={uploading}
-                              className='bg-light size-8 p-1 rounded-md absolute bottom-2 right-2
-                         group transition-all duration-300'>
+                              className='bg-light size-8 p-1 rounded-md absolute bottom-2 right-2 group transition-all duration-300'>
                               {uploading ? (
                                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-graySurface2" />
                               ) : (

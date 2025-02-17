@@ -28,15 +28,29 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
      const {
           reset,
           register,
+          watch,
           handleSubmit,
           formState: { errors }
      } = useForm<RegisterFormSchema>({ resolver: zodResolver(registerFormSchema) })
 
+     const email = watch('email')
+
+     const generateUsername = (email: string) => {
+          return email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
+     }
+
      const registerMutation = useMutation({
-          mutationFn: registerAuth,
+          mutationFn: (data: RegisterFormSchema) => {
+               const regsistrationData = {
+                    ...data,
+                    username: generateUsername(email)
+               }
+               return registerAuth(regsistrationData)
+          },
           onSuccess: (data) => {
                reset()
                localStorage.setItem('authToken', data.jwt)
+               onLogin()
           },
           onError: (error) => {
                console.error('Register error:', error)
@@ -45,9 +59,13 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
 
      const onSubmit: SubmitHandler<RegisterFormSchema> = (data) => {
           registerMutation.mutate(data)
-          onLogin()
      }
 
+     const generatedUsername = email ? generateUsername(email) : ''
+
+     React.useEffect(() => {
+          console.log('RegisForm rendered', registerMutation.data)
+     }, [registerMutation])
 
      return (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
@@ -59,6 +77,11 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
                          error={errors.email}
                          {...register('email')}
                     />
+                    {email && (
+                         <p className="text-dark dark:text-light/80 text-xs">
+                              Your username will be: <span className="font-medium">{generatedUsername}</span>
+                         </p>
+                    )}
                     <AuthInput
                          icon={IoIosLock}
                          type="password"
@@ -70,12 +93,12 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
                     />
                     <AuthInput
                          icon={IoIosLock}
-                         type="text"
-                         placeholder="Enter Username"
+                         type="password"
+                         placeholder="Confirm Password"
                          showPassword={showConfirmPass}
                          onTogglePassword={handleToggleConfirmPass}
-                         error={errors.username}
-                         {...register('username')}
+                         error={errors.passwordConfirmation}
+                         {...register('passwordConfirmation')}
                     />
                     <div className="text-dark dark:text-[#676767] text-xs font-medium dark:font-normal max-w-60 dark:max-w-56 text-start">
                          By clicking the
@@ -89,7 +112,9 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
                     <Button
                          isGold
                          isWidthFull
-                         title="Register"
+                         type="submit"
+                         title={registerMutation.isLoading ? "Loading..." : "Register"}
+                         disabled={registerMutation.isLoading}
                     />
                     <AuthBadgeButton />
                </div>

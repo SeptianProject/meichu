@@ -8,8 +8,11 @@ export const loginFormSchema = z.object({
 export const registerFormSchema = z.object({
      email: z.string().min(1, 'Email is required').email('Invalid email format'),
      password: z.string().min(5, 'Password must be at least 5 characters'),
-     username: z.string().min(1, 'Username is required'),
-}).required()
+     passwordConfirmation: z.string().min(5, 'Password confirmation is required')
+}).required().refine(data => data.passwordConfirmation === data.password, {
+     message: 'Passwords do not match',
+     path: ['passwordConfirmation']
+})
 
 export const forgotPasswordSchema = z.object({
      email: z.string().min(1, 'Email is required').email('Invalid email format')
@@ -18,9 +21,10 @@ export const forgotPasswordSchema = z.object({
 export const resetPasswordSchema = z.object({
      code: z.string().min(1, 'Code is required'),
      password: z.string().min(5, 'Password must be at least 5 characters'),
-     passwordConfirmation: z.string()
+     passwordConfirmation: z.string().min(5, 'Password confirmation is required')
 }).refine(data => data.passwordConfirmation === data.password, {
      message: 'Passwords do not match',
+     path: ['passwordConfirmation']
 })
 
 export type LoginFormSchema = z.infer<typeof loginFormSchema>
