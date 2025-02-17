@@ -47,12 +47,12 @@ const CardProductAnimate = () => {
                                         key={`container-${columnIndex}`}
                                         ref={containerRefs[columnIndex]}
                                         className="h-screen">
-                                        <motion.div key={columnIndex}
+                                        <div key={columnIndex}
                                              className="flex flex-col gap-y-4 lg:gap-y-5 cursor-grab active:cursor-grabbing">
                                              {columnProducts.map((_, index) => (
                                                   <div key={index} className="bg-cardBackground md:w-36 h-60 lg:w-48 lg:h-80" />
                                              ))}
-                                        </motion.div>
+                                        </div>
                                    </motion.div>
                               ))}
                          </div>

@@ -1,17 +1,16 @@
 import React from "react";
+import AuthModal from "./AuthModal.tsx";
 import Button from "../../elements/buttons/Button";
 import AuthInput from "../../fragments/auth/AuthInput";
+import ModalInformation from "../modal/ModalInformation.tsx";
 import { FaUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { forgotPasswordAuth } from "../../../services/authService.ts";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ForgotPasswordSchema, forgotPasswordSchema } from "../../../schema/AuthSchema";
-import AuthModal from "./AuthModal.tsx";
 import { useAppDispatch } from "../../../redux/hook.ts";
 import { setIsAuthModalOpen } from "../../../redux/slices/authSlice.ts";
-import ModalInformation from "../modal/ModalInformation.tsx";
-import { useNavigate } from "react-router-dom";
 
 interface ForgotPasswordProps {
      isAnimating: boolean;
@@ -25,23 +24,25 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
      isModalClose
 }) => {
      const dispatch = useAppDispatch()
-     const navigate = useNavigate()
      const [isInformModalOpen, setIsInformModalOpen] = React.useState(false)
+     const [shouldCloseAuthModal, setShouldCloseAuthModal] = React.useState(false)
 
      const {
           register,
           handleSubmit,
-          formState: { errors }
-     } = useForm<ForgotPasswordSchema>({ resolver: zodResolver(forgotPasswordSchema) })
+          formState: { errors },
+          reset,
+     } = useForm<ForgotPasswordSchema>({
+          resolver: zodResolver(forgotPasswordSchema),
+          defaultValues: { email: '' }
+     })
 
      const forgotPasswordMutation = useMutation({
           mutationFn: forgotPasswordAuth,
           onSuccess: () => {
-               setTimeout(() => {
-                    dispatch(setIsAuthModalOpen(false))
-               }, 1000);
-
+               reset()
                setIsInformModalOpen(true)
+               setShouldCloseAuthModal(true)
           },
           onError: (error) => {
                console.error('Forgot Password error:', error)
@@ -52,17 +53,37 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
           forgotPasswordMutation.mutate(data)
      }
 
-     const handleModalInformClose = () => {
-          navigate('https://mail.google.com/')
-          setIsInformModalOpen(false)
+     const handleCloseInformModal = () => {
+          dispatch(setIsAuthModalOpen(false))
+          window.open('https://mail.google.com', '_blank')
+     }
+
+     React.useEffect(() => {
+          if (shouldCloseAuthModal) {
+               setShouldCloseAuthModal(false)
+          }
+     }, [shouldCloseAuthModal, dispatch])
+
+     const handleCloseAuthModal = () => {
+          if (!isInformModalOpen) {
+               isModalClose()
+          }
      }
 
      return (
           <>
+               <ModalInformation
+                    isOpen={isInformModalOpen}
+                    onClose={handleCloseInformModal}
+                    title="We’ve Sent You an Email!"
+                    message="We've sent a password reset link to your email. Please check your inbox (and spam folder) and follow the instructions to create a new password."
+                    buttonText="Open Email"
+                    className="z-40"
+               />
                <AuthModal
                     title="Forgot Your Password?"
-                    isOpen={isModalOpen}
-                    onClose={isModalClose}
+                    isOpen={isModalOpen && !isInformModalOpen}
+                    onClose={handleCloseAuthModal}
                     isAnimating={isAnimating}
                     className="lg:min-h-[28rem]">
                     <form onSubmit={handleSubmit(onSubmit)}
@@ -89,13 +110,6 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
                          />
                     </form>
                </AuthModal>
-               <ModalInformation
-                    isOpen={isInformModalOpen}
-                    onClose={handleModalInformClose}
-                    title="We’ve Sent You an Email!"
-                    message="We've sent a password reset link to your email. Please check your inbox (and spam folder) and follow the instructions to create a new password."
-                    buttonText="Open Email"
-               />
           </>
      );
 })

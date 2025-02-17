@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from 'react-router-dom'
 import { assetItems, navItems } from '../../../assets/assets'
 import React from 'react'
@@ -18,6 +17,8 @@ const NavItems: React.FC<NavItemsProps> = React.memo(({ isActive, modalOnClick }
      React.useEffect(() => {
           if (isAuthenticated) {
                setIsLogin(true)
+          } else {
+               setIsLogin(false)
           }
      }, [isAuthenticated])
 

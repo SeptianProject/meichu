@@ -33,6 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      const {
           register,
           handleSubmit,
+          reset,
           setError,
           setValue,
           formState: { errors }
@@ -47,6 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      const loginMutation = useMutation({
           mutationFn: loginAuth,
           onSuccess: (data) => {
+               reset()
                queryClient.invalidateQueries(['user'])
                queryClient.invalidateQueries(['userAvatar'])
                dispatch(login({

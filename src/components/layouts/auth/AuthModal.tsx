@@ -9,11 +9,10 @@ interface AuthModalProps extends React.ComponentProps<typeof BaseModal> {
 const AuthModal: React.FC<AuthModalProps> = ({
      title,
      children,
-     className = '',
      ...props
 }) => {
      return (
-          <BaseModal className={`w-4/5 lg:w-1/2 lg:rounded-3xl ${className}`} {...props}>
+          <BaseModal isAuthModal  {...props}>
                <AuthHeading title={title} />
                {children}
           </BaseModal>

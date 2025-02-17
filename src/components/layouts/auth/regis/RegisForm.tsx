@@ -26,6 +26,7 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
      onLogin
 }) => {
      const {
+          reset,
           register,
           handleSubmit,
           formState: { errors }
@@ -34,6 +35,7 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
      const registerMutation = useMutation({
           mutationFn: registerAuth,
           onSuccess: (data) => {
+               reset()
                localStorage.setItem('authToken', data.jwt)
           },
           onError: (error) => {

@@ -10,11 +10,15 @@ const BaseModal: React.FC<BaseModalProps> = ({
      isAnimating = false,
      className = '',
      showCloseButton = true,
+     isAuthModal
 }) => {
      const baseClasses = `
-     fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-     rounded-2xl bg-light dark:bg-dark border border-[#5E5A5A]
-     transition-all duration-500 ease-in-out
+     ${isAuthModal
+               ? `w-4/5 lg:w-1/2 lg:rounded-3xl`
+               : `size-[22rem] lg:w-2/5 lg:min-h-[55vh]`}
+               fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl
+               border border-[#5E5A5A] bg-light dark:bg-dark
+               transition-all duration-500 ease-in-out
      `
 
      const visibilityClasses = isOpen && !isAnimating
@@ -25,7 +29,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
           <>
                <ModalOverlay isModalClose={onClose} isModalOpen={isOpen} />
                <section className={`${baseClasses} ${visibilityClasses} ${className}`}>
-                    <div className='relative flex items-center justify-center size-full overflow-hidden pb-5'>
+                    <div className='relative flex flex-col items-center justify-center size-full overflow-hidden pb-5'>
                          <div className="bg-yellowBloobs/10 absolute -top-10 -z-30 -right-28 size-80 rounded-full blur-3xl" />
                          {showCloseButton && (
                               <BiX onClick={onClose}
