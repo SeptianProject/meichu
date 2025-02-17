@@ -1,15 +1,7 @@
 import React from 'react'
 import ModalOverlay from '../../fragments/ModalOverlay'
 import { BiX } from 'react-icons/bi'
-
-interface BaseModalProps {
-     children: React.ReactNode
-     isOpen: boolean
-     onClose: VoidFunction
-     isAnimating?: boolean
-     className?: string
-     showCloseButton?: boolean
-}
+import { BaseModalProps } from '../../../types/modal'
 
 const BaseModal: React.FC<BaseModalProps> = ({
      children,
@@ -17,7 +9,7 @@ const BaseModal: React.FC<BaseModalProps> = ({
      onClose,
      isAnimating = false,
      className = '',
-     showCloseButton = true
+     showCloseButton = true,
 }) => {
      const baseClasses = `
      fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2

@@ -5,7 +5,6 @@ import TextInput from "../fragments/customProduct/TextInput"
 import RouteHistory from "../../routes/HistoryRoute"
 import ProductTypeSelect from "../layouts/customProduct/ProductTypeSelect"
 import UploadImageProduct from "../layouts/customProduct/UploadImageProduct"
-import ModalPublishCustomProduct from "../layouts/customProduct/ModalPublishCustomProduct"
 import { useForm } from "react-hook-form"
 import { createProductSchema, CreateProductSchema } from "../../schema/ProductSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -17,6 +16,7 @@ import { createProductRequest, updateProductRequest } from "../../services/produ
 import { useAppDispatch } from "../../redux/hook"
 import { setProfileActive } from "../../redux/slices/authSlice"
 import { useProductRequest, useUserData } from "../../hooks/useQueryRequest"
+import ModalInformation from "../layouts/modal/ModalInformation"
 
 const CustomProductPage = () => {
      const queryClient = useQueryClient()
@@ -238,9 +238,13 @@ const CustomProductPage = () => {
                          </div>
                     </form>
                </section>
-               <ModalPublishCustomProduct
-                    isModalOpen={onPublish}
-                    isModalClose={handleModalClose} />
+               <ModalInformation
+                    isOpen={onPublish}
+                    onClose={handleModalClose}
+                    title="Request Received!"
+                    message="Thank you for your request. It will be processed within 1-2 weeks. We'll notify you via email once it's ready. Thank you for your patience!"
+                    buttonText="Okay!"
+               />
           </>
      )
 }

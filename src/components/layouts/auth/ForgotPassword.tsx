@@ -10,6 +10,8 @@ import { ForgotPasswordSchema, forgotPasswordSchema } from "../../../schema/Auth
 import AuthModal from "./AuthModal.tsx";
 import { useAppDispatch } from "../../../redux/hook.ts";
 import { setIsAuthModalOpen } from "../../../redux/slices/authSlice.ts";
+import ModalInformation from "../modal/ModalInformation.tsx";
+import { useNavigate } from "react-router-dom";
 
 interface ForgotPasswordProps {
      isAnimating: boolean;
@@ -23,6 +25,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
      isModalClose
 }) => {
      const dispatch = useAppDispatch()
+     const navigate = useNavigate()
+     const [isInformModalOpen, setIsInformModalOpen] = React.useState(false)
 
      const {
           register,
@@ -36,6 +40,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
                setTimeout(() => {
                     dispatch(setIsAuthModalOpen(false))
                }, 1000);
+
+               setIsInformModalOpen(true)
           },
           onError: (error) => {
                console.error('Forgot Password error:', error)
@@ -44,6 +50,11 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
 
      const onSubmit = (data: ForgotPasswordSchema) => {
           forgotPasswordMutation.mutate(data)
+     }
+
+     const handleModalInformClose = () => {
+          navigate('https://mail.google.com/')
+          setIsInformModalOpen(false)
      }
 
      return (
@@ -78,6 +89,13 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = React.memo(({
                          />
                     </form>
                </AuthModal>
+               <ModalInformation
+                    isOpen={isInformModalOpen}
+                    onClose={handleModalInformClose}
+                    title="We’ve Sent You an Email!"
+                    message="We've sent a password reset link to your email. Please check your inbox (and spam folder) and follow the instructions to create a new password."
+                    buttonText="Open Email"
+               />
           </>
      );
 })
