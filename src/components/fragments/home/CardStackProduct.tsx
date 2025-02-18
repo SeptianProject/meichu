@@ -7,19 +7,19 @@ import Skeleton from 'react-loading-skeleton'
 const cardConfigs = [
      {
           className: 'size-52 left-5 top-0',
-          amplitude: 15,
-          delay: 0.5,
+          amplitude: 7,
+          delay: 0,
           skeletonHeight: 192
      },
      {
-          className: 'w-52 h-64 -bottom-10 right-20',
-          amplitude: 20,
-          delay: 0,
+          className: 'w-52 h-64 bottom-0 right-20',
+          amplitude: 5,
+          delay: 2,
           skeletonHeight: 256
      },
      {
-          className: 'size-44 right-5 top-24',
-          amplitude: 15,
+          className: 'size-44 right-5 top-20',
+          amplitude: 10,
           delay: 1,
           skeletonHeight: 176
      }
@@ -85,9 +85,9 @@ export const CardStack: React.FC<CardStackProps> = ({
                     transition: {
                          ease: 'linear',
                          repeat: Infinity,
-                         repeatType: 'mirror',
+                         repeatType: 'loop',
                          delay: delay,
-                         duration: 5,
+                         duration: 6
                     }
                }}
           >

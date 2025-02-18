@@ -48,7 +48,16 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
      const swiperConfigMainBundle = React.useMemo(() =>
           createMainBundleSwiperConfig(handleSlideChange, swiperRef),
           [handleSlideChange, swiperRef])
+
      const swiperConfigItemsBundle = createItemsBundleSwiperConfig()
+
+     const mainBundle = React.useMemo(() => productData?.data || [], [productData?.data])
+
+     const itemsBundle = React.useMemo(() =>
+          [...Array(8)].flatMap(() => productData?.data.find(
+               product => product.id === activeMainBundleId
+          )?.attributes.images.data || [])
+          , [activeMainBundleId, productData?.data])
 
      const handleOnDetail = () => {
           navigate(`/catalog-detail/${activeMainBundleId}`)
@@ -61,8 +70,10 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                <div className='w-full pb-5'>
                     <Swiper {...swiperConfigMainBundle}
                          className='size-full md:max-w-[50rem]'>
-                         {productData?.data.map((product) => (
-                              <SwiperSlide key={product.id} className='!max-w-[40rem] md:!max-w-[40rem] lg:!max-w-[50rem]'>
+                         {mainBundle.map((product, index) => (
+                              <SwiperSlide
+                                   key={index}
+                                   className='!max-w-[40rem] md:!max-w-[40rem] lg:!max-w-[50rem]'>
                                    <div className="flex flex-col h-full md:flex-row md:items-center md:gap-x-10 lg:gap-x-16">
                                         <BounceAnimation
                                              delayVal={0.2}
@@ -95,30 +106,32 @@ const BundleCarouselLayout: React.FC<BundleCarouselLayoutProps> = React.memo(({
                     </Swiper>
                </div>
                {/* Items bundle */}
-               <div className="max-w-full -bottom-10 left-40 md:absolute md:max-w-[35rem] lg:max-w-[40rem]">
+               <div className="max-w-full w-full -bottom-10 left-40 md:absolute md:max-w-[35rem] lg:max-w-[40rem]">
                     <Swiper {...swiperConfigItemsBundle}
-                         className='mx-auto size-full'>
-                         {productData?.data.find(product => product.id === activeMainBundleId)
-                              ?.attributes.images.data.map((image) => (
-                                   <SwiperSlide key={image.id} className="!w-auto rounded-xl">
-                                        <div className={`w-32 h-40 rounded-xl overflow-hidden 
-                                        md:w-52 md:h-48 lg:w-64 lg:h-56 transition-all duration-500`}>
-                                             {!itemsImageLoading[image.id] && (
-                                                  <div className="absolute -inset-1 z-10">
-                                                       <Skeleton className='w-full h-full border border-graySurface2 rounded-xl' />
-                                                  </div>
-                                             )}
-                                             <img src={getCloudinaryUrl(image.attributes.url)}
-                                                  alt={image.attributes.name}
-                                                  className={`w-full h-full object-cover object-center rounded-xl
+                         className='mx-auto w-full h-full'>
+                         {itemsBundle.map((image, index) => (
+                              <SwiperSlide
+                                   key={index}
+                                   className="!w-auto rounded-xl">
+                                   <div
+                                        className={`w-36 h-40 rounded-xl overflow-hidden 
+                                             md:w-52 md:h-48 lg:w-64 lg:h-56 transition-all duration-500`}>
+                                        {!itemsImageLoading[image.id] && (
+                                             <div className="absolute -inset-1 z-10">
+                                                  <Skeleton className='w-full h-full border border-graySurface2 rounded-xl' />
+                                             </div>
+                                        )}
+                                        <img src={getCloudinaryUrl(image.attributes.url)}
+                                             alt={image.attributes.name}
+                                             className={`w-full h-full object-cover object-center rounded-xl
                                                             transition-opacity duration-300 border-[#5E5A5A] border-2
                                                             ${itemsImageLoading[image.id] ? 'opacity-100' : 'opacity-0'}`}
-                                                  onLoad={() => handleItemsImageLoad(image.id)}
-                                                  loading="lazy"
-                                             />
-                                        </div>
-                                   </SwiperSlide>
-                              ))}
+                                             onLoad={() => handleItemsImageLoad(image.id)}
+                                             loading="lazy"
+                                        />
+                                   </div>
+                              </SwiperSlide>
+                         ))}
                     </Swiper>
                </div>
           </div>
