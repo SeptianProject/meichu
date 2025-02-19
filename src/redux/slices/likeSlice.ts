@@ -23,9 +23,9 @@ const likeSlice = createSlice({
                }
           },
           removeLike: (state, action: PayloadAction<LikeProduct>) => {
-               const { productId } = action.payload
+               const { productId, uuid } = action.payload
                state.likedProducts = state.likedProducts.filter(
-                    (product) => product.productId !== productId
+                    (product) => product.productId !== productId && product.uuid !== uuid
                )
           },
           setProfileDiscoverOpen: (state, action: PayloadAction<boolean>) => {
