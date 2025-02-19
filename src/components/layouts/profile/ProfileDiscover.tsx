@@ -3,7 +3,6 @@ import ButtonSwitchDiscover from "../../fragments/profile/ButtonSwitchDiscover";
 import Button from "../../elements/buttons/Button";
 import { ProfileDiscoverSkeleton } from "../../elements/skeletons/ProfileLayoutSkeleton";
 import useUI from "../../../hooks/useUI";
-
 interface ProfileDiscoverProps {
      isFavored: boolean
      isTapDiscover: boolean

@@ -19,6 +19,7 @@ export interface BundleProducts {
 
 export interface ProductLike {
      readonly id: number
+     readonly uuid: string
      readonly product: ProductAttributes
 }
 
@@ -83,8 +84,10 @@ export interface ProductCategoriesResponse {
 
 export interface ProductCatalogsResponse {
      readonly data: Array<{
+          readonly uuid: string
           readonly id: number
           readonly attributes: {
+               readonly uuid: string
                readonly name: string
                readonly description: string
                readonly price: number

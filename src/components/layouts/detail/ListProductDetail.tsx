@@ -63,7 +63,6 @@ const ListProductDetail: React.FC<ListProductDetailProps> = React.memo(({ curren
                                         productId={item.id}
                                         title={item.attributes.name}
                                         image={getCloudinaryUrl(item.attributes.thumbnail.data.attributes.url)}
-                                        initialLikeStatus={false}
                                    />
                               </CardStaggerAnimation>
                          ))}

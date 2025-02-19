@@ -20,11 +20,11 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
      const { screenSize } = useUI()
      const isMobile = screenSize === 'mobile'
      const productRef = React.useRef<HTMLDivElement>(null)
+     const likedProducts = useAppSelector((state) => state.like.likedProducts)
 
      const [isExpanded, setIsExpanded] = React.useState(false)
      const [displayCount, setDisplayCount] = React.useState(getInitialDisplayCount())
 
-     const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
      const { data: products, isLoading } = useProducts()
 
      React.useEffect(() => {
@@ -52,9 +52,6 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                if (selectedCategory === null) return true
                return product.attributes.categories.data.some(category => category.id === selectedCategory)
           }).map((product) => {
-               const isLiked = isAuthenticated && Array.isArray(product.attributes.likes)
-                    ? product.attributes.likes.some(like => like.id === userId) : false
-
                return (
                     <CatalogCard
                          key={product.id}
@@ -62,11 +59,11 @@ const CatalogCards: React.FC<CatalogCardsProps> = React.memo(({ type, selectedCa
                          isFavored={false}
                          title={product.attributes.name}
                          image={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
-                         initialLikeStatus={isLiked}
+                         isProfileView={false}
                     />
                )
           })
-     }, [products, selectedCategory, isAuthenticated, userId])
+     }, [products, selectedCategory, likedProducts])
 
      const getCurrentDisplayCount = () => {
           if (isExpanded) return filteredCatalog.length

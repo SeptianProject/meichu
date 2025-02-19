@@ -91,6 +91,7 @@ const CustomProductPage = () => {
           },
           onSuccess: () => {
                queryClient.invalidateQueries(['user'])
+               queryClient.invalidateQueries(['userAvatar'])
                setOnPublish(true)
                setIsPublishDisabled(true)
                resetForm()

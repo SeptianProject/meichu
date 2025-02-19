@@ -30,7 +30,7 @@ const CardStackProduct = () => {
 
      if (isLoading) {
           return (
-               <div className='md:hidden relative h-[45dvh] w-full'>
+               <div className='md:hidden relative h-[45vh] w-full'>
                     {cardConfigs.map((config, index) => (
                          <div key={index}
                               className={`absolute ${config.className}`}>
@@ -42,7 +42,7 @@ const CardStackProduct = () => {
      }
 
      return (
-          <div className='relative md:hidden w-full h-[45dvh]'>
+          <div className='relative md:hidden w-full h-[45vh]'>
                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

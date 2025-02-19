@@ -1,10 +1,12 @@
 import { Action, combineReducers, configureStore, ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
 import authSlice from "./slices/authSlice"
 import uiSlice from "./slices/uiSlice"
+import likeSlice from "./slices/likeSlice"
 
 const rootReducer = combineReducers({
      auth: authSlice,
      ui: uiSlice,
+     like: likeSlice
 })
 
 const store = configureStore({

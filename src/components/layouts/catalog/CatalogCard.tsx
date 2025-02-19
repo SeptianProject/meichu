@@ -5,52 +5,73 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hook'
 import { FaHeart } from 'react-icons/fa'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { setIsAuthModalOpen, setProfileActive } from '../../../redux/slices/authSlice'
-import { createProductLike } from '../../../services/productService'
+import { createProductLike, deleteProductLike } from '../../../services/likeService'
+import { addLike, removeLike } from '../../../redux/slices/likeSlice'
+
 
 type CatalogCardProps = {
      isFavored?: boolean
+     uuid?: string
      title?: string
      image?: string
      productId: number
-     initialLikeStatus?: boolean
+     isProfileView?: boolean
 }
 
 const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
      isFavored,
      title,
+     uuid,
      image,
      productId,
-     initialLikeStatus = false
+     isProfileView
 }) => {
      const navigate = useNavigate()
      const dispatch = useAppDispatch()
-     const [isLiked, setIsLiked] = React.useState(initialLikeStatus)
-     const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
      const queryClient = useQueryClient()
+     const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
+     const likedProducts = useAppSelector((state) => state.like.likedProducts)
+     const likedProduct = likedProducts.find(product => product.productId === productId)
+     const isLiked = isProfileView ? true : !!likedProduct
 
-     React.useEffect(() => {
-          setIsLiked(initialLikeStatus)
-     }, [initialLikeStatus])
-
-     const likeMutation = useMutation({
-          mutationFn: () => {
-               if (!isAuthenticated || !userId) {
-                    throw new Error('User must be authenticated')
-               }
-               return createProductLike(userId, productId)
-          },
-          onSuccess: () => {
+     const createLikeMutation = useMutation({
+          mutationFn: () => createProductLike(userId!, productId),
+          onSuccess: (response) => {
                queryClient.invalidateQueries(['user'])
-               setIsLiked(true)
+               queryClient.invalidateQueries(['userAvatar'])
+               const newUuid = response.data.attributes.uuid
+               dispatch(addLike({
+                    productId,
+                    uuid: newUuid
+               }))
                dispatch(setProfileActive(true))
           },
           onError: (error) => {
                console.error('Error on like product', error)
-               setIsLiked(initialLikeStatus)
           }
      })
 
-     const handleOnLike = async (e: React.MouseEvent) => {
+     const deleteLikeMutation = useMutation({
+          mutationFn: () => {
+               if (!likedProduct?.uuid && !uuid) {
+                    throw new Error('Product not found')
+               }
+               return deleteProductLike(isProfileView ? uuid! : likedProduct!.uuid)
+          },
+          onSuccess: () => {
+               queryClient.invalidateQueries(['user'])
+               queryClient.invalidateQueries(['userAvatar'])
+               dispatch(removeLike({
+                    productId,
+                    uuid: isProfileView ? uuid! : likedProduct!.uuid
+               }))
+          },
+          onError: (error) => {
+               console.error('Error deleting product', error)
+          }
+     })
+
+     const handleOnLike = React.useCallback(async (e: React.MouseEvent) => {
           e.stopPropagation()
 
           if (!isAuthenticated) {
@@ -59,15 +80,21 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
           }
 
           try {
-               await likeMutation.mutateAsync()
+               if (isLiked) {
+                    await deleteLikeMutation.mutateAsync()
+               } else {
+                    await createLikeMutation.mutateAsync()
+               }
           } catch (error) {
-               console.error('Error on like product: ', error)
+               console.error('Error handling product: ', error)
           }
-     }
+     }, [isAuthenticated, isLiked, createLikeMutation, deleteLikeMutation, dispatch])
 
-     const handleToDetail = () => {
+     const handleToDetail = React.useCallback(() => {
           navigate(`/catalog-detail/${productId}`)
-     }
+     }, [navigate, productId])
+
+     const isLoading = createLikeMutation.isLoading || deleteLikeMutation.isLoading
 
      return (
           <div className={`bg-[#C2C2C4]/30 border border-graySurface1 rounded-2xl 
@@ -78,20 +105,22 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                          text-graySurface1 dark:text-light`}>
                          {title}
                     </h3>
-                    <div onClick={handleOnLike}
+                    <button
+                         onClick={handleOnLike}
+                         disabled={isLoading}
                          className={`${isFavored
                               ? 'bg-red-500 border-transparent dark:border-transparent p-1'
                               : 'border-[#5E5A5A] dark:border-light p-2'}
                               ${isLiked ? 'bg-red-500 border-transparent dark:border-transparent' : ''}
                               border cursor-pointer rounded-full w-fit 
                               hover:scale-105 transition-all duration-300
-                              ${likeMutation.isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                              ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
                          <FaHeart
                               className={`${isFavored ? 'text-light ' : 'md:size-5'}
                                    ${isLiked ? 'text-light' : ''} text-[#5E5A5A] 
                                    dark:text-light size-4 active:scale-50 transition-all
                                    duration-300`} />
-                    </div>
+                    </button>
                </div>
                <div className='flex items-center gap-x-2 my-2'>
                     <h4 className={`text-graySurface1 dark:text-light text-sm font-medium

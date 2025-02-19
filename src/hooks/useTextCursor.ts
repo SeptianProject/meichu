@@ -67,7 +67,7 @@ export const useTextCursor = (words: string[], isInView: boolean) => {
 
      return {
           displayText: state.displayText,
-          cursorStyle: `inline-block bg-dark dark:bg-gold ml-1
+          cursorStyle: `inline-block bg-gold ml-1
                          ${words.includes('dreams!') ? 'w-[2px] md:w-1 h-6 lg:h-8' : 'w-[2px] md:w-1 h-5 lg:h-10'}`
      }
 }

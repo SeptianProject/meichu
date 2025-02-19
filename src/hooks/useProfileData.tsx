@@ -23,7 +23,9 @@ export const useProfileData = () => {
 
      const handleSwitchDiscover = React.useCallback(() => setIsFavored(prev => !prev), [])
 
-     const handleTapDiscover = React.useCallback(() => setIsTapDiscover(true), [])
+     const handleTapDiscover = React.useCallback(() => {
+          setIsTapDiscover(true)
+     }, [])
 
      const handleBackToProfile = React.useCallback(() => setIsTapDiscover(false), [])
 
@@ -41,16 +43,19 @@ export const useProfileData = () => {
      }, [dispatch, navigate])
 
      const listCardFavored = React.useMemo(() =>
-          userDataDetail?.likes?.map(like => (
-               <CatalogCard
-                    key={like.id}
-                    isFavored
-                    productId={like.id}
-                    title={like.product?.name}
-                    image={getCloudinaryUrl(like.product?.thumbnail.url)}
-                    initialLikeStatus={true}
-               />
-          )), [userDataDetail?.likes])
+          userDataDetail?.likes?.map(like => {
+               return (
+                    <CatalogCard
+                         key={like.id}
+                         isFavored={true}
+                         uuid={like.uuid}
+                         productId={like.id}
+                         title={like.product?.name}
+                         image={getCloudinaryUrl(like.product?.thumbnail.url)}
+                         isProfileView={true}
+                    />
+               )
+          }), [userDataDetail?.likes])
 
      const listCardRequest = React.useMemo(() => (
           userDataDetail?.requests?.map(request => (
