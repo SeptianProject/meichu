@@ -14,7 +14,4 @@ export interface LikeProduct {
 
 export interface LikeState {
      likedProducts: LikeProduct[]
-     isProfileDiscoverOpen: boolean
-     isProfileModalOpen: boolean
-     isMobile: boolean
 }

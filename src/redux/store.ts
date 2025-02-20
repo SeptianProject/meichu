@@ -2,11 +2,13 @@ import { Action, combineReducers, configureStore, ThunkAction, ThunkDispatch } f
 import authSlice from "./slices/authSlice"
 import uiSlice from "./slices/uiSlice"
 import likeSlice from "./slices/likeSlice"
+import profileSlice from "./slices/profileSlice"
 
 const rootReducer = combineReducers({
      auth: authSlice,
      ui: uiSlice,
-     like: likeSlice
+     like: likeSlice,
+     profile: profileSlice
 })
 
 const store = configureStore({

@@ -111,7 +111,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      return (
           <div className={`w-full h-full flex flex-col items-start gap-y-4 border-light/70 
           md:gap-x-5 md:flex-row md:items-start md:border-b md:pb-10
-          ${isTapDiscover ? 'hidden' : 'block'}`}>
+          ${isTapDiscover && window.innerWidth < 768 ? 'hidden' : 'block'}`}>
                <ProfileAvatar
                     currentImageUrl={profilePicture}
                     isEditing={isEditing}

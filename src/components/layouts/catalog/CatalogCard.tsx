@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { setIsAuthModalOpen, setProfileActive } from '../../../redux/slices/authSlice'
 import { createProductLike, deleteProductLike } from '../../../services/likeService'
 import { addLike, removeLike } from '../../../redux/slices/likeSlice'
+import { setTapDiscover } from '../../../redux/slices/profileSlice'
 
 
 type CatalogCardProps = {
@@ -33,6 +34,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
      const likedProducts = useAppSelector((state) => state.like.likedProducts)
      const likedProduct = likedProducts.find(product => product.productId === productId)
      const isLiked = isProfileView ? true : !!likedProduct
+     const cardRef = React.useRef<HTMLDivElement>(null)
 
      const createLikeMutation = useMutation({
           mutationFn: () => createProductLike(userId!, productId),
@@ -45,6 +47,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                     uuid: newUuid
                }))
                dispatch(setProfileActive(true))
+               dispatch(setTapDiscover(true))
           },
           onError: (error) => {
                console.error('Error on like product', error)
@@ -97,7 +100,8 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
      const isLoading = createLikeMutation.isLoading || deleteLikeMutation.isLoading
 
      return (
-          <div className={`bg-[#C2C2C4]/30 border border-graySurface1 rounded-2xl 
+          <div ref={cardRef}
+               className={`bg-[#C2C2C4]/30 border border-graySurface1 rounded-2xl 
                h-full w-full cursor-pointer dark:border-transparent dark:bg-cardBackground
                hover:-translate-y-3 transition-all duration-500 ${isFavored ? 'p-3' : 'px-5 pt-5 pb-2'}`}>
                <div className='flex items-center justify-between'>

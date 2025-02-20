@@ -17,6 +17,7 @@ import { useAppDispatch } from "../../redux/hook"
 import { setProfileActive } from "../../redux/slices/authSlice"
 import { useProductRequest, useUserData } from "../../hooks/useQueryRequest"
 import ModalInformation from "../layouts/modal/ModalInformation"
+import { setTapDiscover } from "../../redux/slices/profileSlice"
 
 const CustomProductPage = () => {
      const queryClient = useQueryClient()
@@ -130,6 +131,7 @@ const CustomProductPage = () => {
           }, 5000);
 
           dispatch(setProfileActive(true))
+          dispatch(setTapDiscover(true))
      }
 
      React.useEffect(() => {

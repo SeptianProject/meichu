@@ -3,11 +3,12 @@ import useUI from "./useUI"
 import CatalogCard from "../components/layouts/catalog/CatalogCard"
 import CardEvent from "../components/fragments/event/CardEvent"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch } from "../redux/hook"
+import { useAppDispatch, useAppSelector } from "../redux/hook"
 import { setProfileActive } from "../redux/slices/authSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useUserData } from "./useQueryRequest"
 import { getCloudinaryUrl } from "../services"
+import { setTapDiscover } from "../redux/slices/profileSlice"
 
 export const useProfileData = () => {
      const navigate = useNavigate()
@@ -16,7 +17,7 @@ export const useProfileData = () => {
      const isMobile = screenSize === 'mobile'
 
      const [isFavored, setIsFavored] = React.useState(true)
-     const [isTapDiscover, setIsTapDiscover] = React.useState(false)
+     const isTapDiscover = useAppSelector((state) => state.profile.isTapDiscover)
 
      const { data: userData, isLoading: userDataLoading } = useUserData('userAvatar')
      const { data: userDataDetail, isLoading: userDataDetailLoading } = useUserData('user')
@@ -24,10 +25,11 @@ export const useProfileData = () => {
      const handleSwitchDiscover = React.useCallback(() => setIsFavored(prev => !prev), [])
 
      const handleTapDiscover = React.useCallback(() => {
-          setIsTapDiscover(true)
-     }, [])
+          dispatch(setTapDiscover(true))
+     }, [dispatch])
 
-     const handleBackToProfile = React.useCallback(() => setIsTapDiscover(false), [])
+     const handleBackToProfile = React.useCallback(() =>
+          dispatch(setTapDiscover(false)), [dispatch])
 
      const handleSeeDetail = React.useCallback((uuid: string) => {
           dispatch(setProfileActive(false))
