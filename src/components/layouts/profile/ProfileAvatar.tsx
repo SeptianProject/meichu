@@ -127,7 +127,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
 
      return (
           <>
-               <div className={`w-44 h-52 md:w-2/4 md:h-[15rem] lg:h-[30rem] relative rounded-lg
+               <div className={`w-44 h-52 md:w-3/5 lg:w-2/4 md:h-[22rem] lg:h-[24rem] xl:h-[30rem] relative rounded-lg
                     ${previewUrl ? '' : 'border border-graySurface1'}`}>
                     <img
                          src={previewUrl}

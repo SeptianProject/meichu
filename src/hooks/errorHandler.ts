@@ -25,6 +25,8 @@ export const handleApiError = (
                     handleValidationErrors(error.response.data?.error, setError)
                     break
                case 401:
+               case 403:
+                    handleAuthenticationErrors(error.response.data?.error, setError)
                     dispatch(logout())
                     break
           }
@@ -37,6 +39,27 @@ export const handleApiError = (
                type: modalType,
                message: 'An error occurred. Please try again later.'
           }))
+     }
+}
+
+const handleAuthenticationErrors = (
+     error: any,
+     setError: UseFormSetError<any>
+) => {
+     const errorMessage = error?.message?.toLowerCase() || ''
+
+     if (errorMessage) {
+          if (errorMessage.includes('password')) {
+               setError('password', {
+                    type: 'manual',
+                    message: 'Invalid password format'
+               });
+          } else if (errorMessage.includes('email') || errorMessage.includes('identifier')) {
+               setError('identifier', {
+                    type: 'manual',
+                    message: 'Invalid email format'
+               });
+          }
      }
 }
 

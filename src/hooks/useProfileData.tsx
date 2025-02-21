@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { useUserData } from "./useQueryRequest"
 import { getCloudinaryUrl } from "../services"
 import 'swiper/css'
+import BounceAnimation from "../components/animations/BounceAnimation"
 
 export const useProfileData = () => {
      const navigate = useNavigate()
@@ -71,7 +72,11 @@ export const useProfileData = () => {
                          <SwiperSlide
                               key={index}
                               className={`py-5 px-1 xs:px-2 ${items === listCardFavored ? 'xs:max-w-[15rem]' : ''}`}>
-                              {item}
+                              <BounceAnimation
+                                   hiddenCoordinates={{ y: 50 }}
+                                   delayVal={0.5} className="w-full">
+                                   {item}
+                              </BounceAnimation>
                          </SwiperSlide>
                     ))}
                </Swiper>

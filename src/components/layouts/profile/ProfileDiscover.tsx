@@ -40,7 +40,8 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
                               onClick={() => handleSwitchDiscover(false)}
                               isFavored={!isFavored} />
                     </div>
-                    <div className='flex items-center gap-x-10'>
+                    <div
+                         className="w-full flex items-center gap-x-10">
                          {isFavored
                               ? renderCardContent(listCardFavored)
                               : renderCardContent(listCardRequest)

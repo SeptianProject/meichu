@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cleanAuthErrors, login, setIsAuthModalOpen } from "../../../../redux/slices/authSlice.ts";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hook.ts";
+import { useAppDispatch } from "../../../../redux/hook.ts";
 import { handleApiError } from "../../../../hooks/errorHandler.ts";
 import { loginAuth } from "../../../../services/authService.ts";
 import { useNavigate } from "react-router-dom";
@@ -28,14 +28,13 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      const queryClient = useQueryClient()
      const dispatch = useAppDispatch()
      const navigate = useNavigate()
-     const { isAuthModalOpen } = useAppSelector(state => state.auth)
+     const [isSubmitting, setIsSubmitting] = React.useState(false)
 
      const {
           register,
           handleSubmit,
           reset,
           setError,
-          setValue,
           formState: { errors }
      } = useForm<LoginFormSchema>({
           resolver: zodResolver(loginFormSchema),
@@ -47,6 +46,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
 
      const loginMutation = useMutation({
           mutationFn: loginAuth,
+          retry: false,
           onSuccess: (data) => {
                reset()
                queryClient.invalidateQueries(['user'])
@@ -64,19 +64,22 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      })
 
      const onSubmit = async (data: LoginFormSchema) => {
-          loginMutation.mutateAsync(data)
+          if (isSubmitting) return
+          setIsSubmitting(true)
+          try {
+               await loginMutation.mutateAsync(data)
+          } finally {
+               setIsSubmitting(false)
+          }
      }
 
      React.useEffect(() => {
-          if (!isAuthModalOpen) {
-               setValue('identifier', '')
-               setValue('password', '')
-          }
-
           return () => {
+               queryClient.removeQueries(['user'])
+               queryClient.removeQueries(['userAvatar'])
                dispatch(cleanAuthErrors())
           }
-     }, [dispatch, isAuthModalOpen, setValue])
+     }, [dispatch, queryClient])
 
      return (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">

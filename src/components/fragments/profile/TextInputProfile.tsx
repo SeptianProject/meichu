@@ -15,7 +15,7 @@ const TextInputProfile: React.FC<TextInputProfileProps> = React.memo(({
 }) => {
      if (isEditing) {
           return (
-               <div className="bg-graySurface1/10 dark:bg-[#303033] p-4 md:p-5 rounded-md">
+               <div className="bg-graySurface1/10 dark:bg-[#303033] p-3 lg:p-4 xl:p-5 rounded-md">
                     <h2 className='text-lg font-semibold tracking-wide dark:text-light/80'>
                          {title}
                     </h2>
@@ -32,7 +32,7 @@ const TextInputProfile: React.FC<TextInputProfileProps> = React.memo(({
      }
 
      return (
-          <div className='bg-graySurface1/10 dark:bg-[#303033] p-4 md:p-5 rounded-md'>
+          <div className='bg-graySurface1/10 dark:bg-[#303033] p-3 lg:p-4 xl:p-5 rounded-md'>
                <h2 className='text-lg font-semibold tracking-wide dark:text-graySurface1'>
                     {title}
                </h2>

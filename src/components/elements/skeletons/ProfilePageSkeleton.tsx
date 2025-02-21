@@ -3,15 +3,15 @@ import useUI from "../../../hooks/useUI"
 
 export const ProfileContentSkeleton = () => {
      return (
-          <div className="w-full h-full flex flex-col items-start border-light/70 
-               md:gap-x-5 md:flex-row md:items-start md:border-b md:pb-10 overflow-hidden">
-               <div className='w-44 h-52 md:w-7/12 md:h-[15rem] lg:h-[19rem] relative'>
+          <div className="w-full h-full pb-10 flex flex-col items-start gap-y-6
+          md:gap-x-14 md:flex-row md:items-start">
+               <div className='w-44 h-52 md:w-3/5 lg:w-2/4 md:h-[22rem] lg:h-[24rem] xl:h-[30rem] relative'>
                     <Skeleton className='rounded-lg object-cover object-center size-full 
                          border dark:border-dark' />
                </div>
-               <Skeleton className="w-60 h-8 md:h-14 rounded-lg border dark:border-dark mt-5" />
-               <Skeleton className="w-60 h-3 rounded-lg border dark:border-dark mt-1 mb-5" />
                <div className="size-full flex flex-col gap-y-4 md:gap-y-5">
+                    <Skeleton className="w-60 h-8 md:h-14 rounded-lg border dark:border-dark mt-5" />
+                    <Skeleton className="w-60 h-3 rounded-lg border dark:border-dark mt-1 mb-5" />
                     <div className="flex flex-col gap-y-1">
                          {[...Array(3)].map((_, index) => (
                               <Skeleton key={index}

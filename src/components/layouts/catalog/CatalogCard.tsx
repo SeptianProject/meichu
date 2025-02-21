@@ -122,8 +122,8 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                          onClick={handleOnLike}
                          disabled={isLoading}
                          className={`${isFavored
-                              ? 'bg-red-500 border-transparent dark:border-transparent p-1'
-                              : 'border-[#5E5A5A] dark:border-light p-2'}
+                              ? 'bg-red-500 border-transparent dark:border-transparent'
+                              : 'border-[#5E5A5A] dark:border-light'} p-2
                               ${isLiked ? 'bg-red-500 border-transparent dark:border-transparent' : ''}
                               border cursor-pointer rounded-full w-fit 
                               hover:scale-105 transition-all duration-300

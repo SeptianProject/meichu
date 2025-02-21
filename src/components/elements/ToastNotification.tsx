@@ -8,7 +8,7 @@ interface ToastProps {
 }
 
 const defaultToastOptions: ToastOptions = {
-     duration: 3000,
+     duration: 2000,
      position: 'bottom-left',
      style: {
           background: '#333',
@@ -29,10 +29,11 @@ export const showActionToast = ({ isLiked, productTitle, onClick }: ToastProps) 
           (t: Toast) => (
                <div
                     onClick={onClick}
-                    className={`${t.visible ? 'animate-enter' : 'animate-leave'}
-               flex items-center gap-3 bg-[#C4C4C4] dark:bg-[#333] px-5 py-3 shadow-lg rounded-lg`}>
+                    className={`${t.visible ? 'animate-enter' : 'custom-leave'} cursor-pointer
+               flex items-center gap-3 bg-[#f1f1f1] dark:bg-[#212121] px-5 py-3 shadow-lg rounded-lg
+               transition-all duration-300`}>
                     {icon}
-                    <p className='text-dark dark:text-white/60 font-medium'>
+                    <p className='text-dark dark:text-white/70 text-sm md:text-base font-medium'>
                          {message}
                     </p>
                </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, Variants } from 'motion/react'
 import { useProducts } from "../../../hooks/useQueryRequest";
+import { getCloudinaryUrl } from "../../../services";
 
 const CardProductAnimate = () => {
      const ref = React.useRef(null);
@@ -87,7 +88,7 @@ const CardProductAnimate = () => {
                                                        transition: { duration: 0.3 }
                                                   }}
                                                   className="md:w-36 h-60 lg:w-48 lg:h-80">
-                                                  <img src={product}
+                                                  <img src={getCloudinaryUrl(product!)}
                                                        alt={`image-${columnIndex}-${index}`}
                                                        className={`size-full object-cover object-center 
                                                        pointer-events-none transition-opacity duration-300

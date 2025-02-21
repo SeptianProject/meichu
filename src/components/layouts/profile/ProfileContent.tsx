@@ -89,8 +89,8 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      }
 
      const handleLogout = () => {
-          dispatch(logout())
           queryClient.clear()
+          dispatch(logout())
      }
 
      React.useEffect(() => {
@@ -105,7 +105,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
 
      return (
           <div className="w-full h-full border-b pb-10 flex flex-col items-start gap-y-6
-          border-dark dark:border-light/70 md:gap-x-14 md:flex-row md:items-start">
+          border-dark dark:border-light/70 md:gap-x-8 lg:gap-x-10 xl:gap-x-14 md:flex-row md:items-start">
                <ProfileAvatar
                     currentImageUrl={profilePicture}
                     isEditing={isEditing}
@@ -115,7 +115,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                <div className='size-full flex flex-col gap-y-5 justify-center'>
                     <div className='space-y-2'>
                          <div className='flex flex-col justify-center gap-y-2 pb-6'>
-                              <h1 className='text-dark dark:text-light font-bold text-2xl lg:text-3xl'>Hi, {editedValues.username ?? 'User'}!</h1>
+                              <h1 className='text-dark dark:text-light font-bold text-2xl xl:text-3xl'>Hi, {editedValues.username ?? 'User'}!</h1>
                               <h5 className='text-graySurface1 text-lg'>Welcome to your profile dashboard</h5>
                          </div>
                          {isEditing ? (
@@ -154,7 +154,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                               title={updateProfileMutation.isLoading ? 'Updating...' : isEditing ? 'Save Changes' : 'Edit Profile'}
                               onClick={handleEdit}
                               disabled={updateProfileMutation.isLoading}
-                              className="w-full lg:w-40 h-10"
+                              className="w-full md:w-40"
                          />
                          {isEditing ? (
                               <Button
@@ -164,7 +164,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                                    title="Cancel"
                                    disabled={updateProfileMutation.isLoading}
                                    onClick={handleCancel}
-                                   className="lg:w-40"
+                                   className="md:w-40"
                               />
                          ) : (
                               <Button
@@ -173,7 +173,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                                    isGold={false}
                                    title="Log Out"
                                    onClick={handleLogout}
-                                   className="lg:w-40"
+                                   className="md:w-40"
                               />
                          )}
                     </div>
