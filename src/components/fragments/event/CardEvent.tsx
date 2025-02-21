@@ -14,9 +14,10 @@ interface CardEventProps {
 const CardEvent: React.FC<CardEventProps> = React.memo(({ isEvent, image, title, time, onClick }) => {
      return (
           <div className='w-full h-full border border-[#302F35] rounded-2xl space-y-4
-          dark:border-transparent bg-[#C2C2C4]/30 dark:bg-cardBackground px-3 py-4'>
+          dark:border-transparent bg-[#C2C2C4]/30 dark:bg-cardBackground px-3 py-4
+          hover:-translate-y-3 transition-all duration-500'>
                <div>
-                    <img className='w-full object-cover rounded-2xl h-44 md:h-48 lg:h-64 xl:h-72'
+                    <img className='w-full object-cover rounded-2xl h-44 md:h-48 lg:h-64'
                          src={image ? image : assetItems.EventImage} alt="" loading='lazy' />
                </div>
                <div className='flex flex-col gap-y-2 md:gap-y-4'>

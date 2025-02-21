@@ -27,7 +27,7 @@ const ProfileDiscover: React.FC<ProfileDiscoverProps> = React.memo(({
 
      return (
           <div className='w-full overflow-hidden'>
-               <div className='pt-4 flex flex-col gap-y-2 md:gap-y-7'>
+               <div className='pt-4 flex flex-col gap-y-10'>
                     <div className='flex items-center justify-center gap-x-10'>
                          <ButtonSwitchDiscover
                               text='Favored Items'
