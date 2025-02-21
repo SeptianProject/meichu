@@ -4,6 +4,7 @@ import AppRouter from "./routes/AppRouter"
 import { useModalState } from "./hooks/useModalState"
 import { useAppSelector } from "./redux/hook"
 import { useLocation } from "react-router-dom"
+import { Toaster } from "react-hot-toast"
 
 const Footer = React.lazy(() => import("./components/layouts/Footer"))
 const FloatingButton = React.lazy(() => import("./components/elements/buttons/FloatingBtn"))
@@ -38,6 +39,7 @@ const App = () => {
                <AppRouter />
                <FloatingButton />
                <Footer />
+               <Toaster />
           </div>
      )
 }

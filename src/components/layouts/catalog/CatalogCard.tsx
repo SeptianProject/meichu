@@ -4,10 +4,10 @@ import { assetItems } from '../../../assets/assets'
 import { useAppDispatch, useAppSelector } from '../../../redux/hook'
 import { FaHeart } from 'react-icons/fa'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { setIsAuthModalOpen, setProfileActive } from '../../../redux/slices/authSlice'
+import { setIsAuthModalOpen } from '../../../redux/slices/authSlice'
 import { createProductLike, deleteProductLike } from '../../../services/likeService'
 import { addLike, removeLike } from '../../../redux/slices/likeSlice'
-import { setTapDiscover } from '../../../redux/slices/profileSlice'
+import { showActionToast } from '../../elements/ToastNotification'
 
 
 type CatalogCardProps = {
@@ -46,8 +46,9 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                     productId,
                     uuid: newUuid
                }))
-               dispatch(setProfileActive(true))
-               dispatch(setTapDiscover(true))
+               // dispatch(setProfileActive(true))
+               // dispatch(setTapDiscover(true))
+               showActionToast({ isLiked: true, productTitle: title })
           },
           onError: (error) => {
                console.error('Error on like product', error)
@@ -68,6 +69,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                     productId,
                     uuid: isProfileView ? uuid! : likedProduct!.uuid
                }))
+               showActionToast({ isLiked: false, productTitle: title })
           },
           onError: (error) => {
                console.error('Error deleting product', error)

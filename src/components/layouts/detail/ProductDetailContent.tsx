@@ -27,10 +27,10 @@ const ProductDetailContent = ({ productId }: { productId: string | undefined }) 
           transformedProduct.thumbnail
 
      return (
-          <div className="space-y-10 md:flex items-start gap-x-16">
+          <div className="space-y-10 md:flex items-start gap-x-16 overflow-hidden">
                <FadeAnimation
                     style={{ backgroundImage: `url(${getCloudinaryUrl(activeImageSource)})` }}
-                    className="w-full h-[22rem] rounded-2xl bg-cover bg-center 
+                    className="w-full max-w-screen-md mx-auto h-[22rem] rounded-2xl bg-cover bg-center 
                          transition-all duration-500 flex flex-col items-start justify-center
                          gap-y-3 lg:gap-y-5 p-5 lg:h-[35rem]">
                     {allImages.map((image) => (
@@ -40,9 +40,9 @@ const ProductDetailContent = ({ productId }: { productId: string | undefined }) 
                                    alt={image.url}
                                    loading='lazy'
                                    onClick={() => setSelectedImageId(image.id)}
-                                   className={`w-fit border-2 border-light rounded-xl cursor-pointer 
-                                        transition-all duration-300 ease-in-out
-                                        h-24 md:h-20 lg:h-32 xl:h-36`} />
+                                   className={`w-full max-w-[6rem] md:max-w-[5rem] lg:max-w-[8rem] xl:max-w-[10rem] 
+                                        border-2 border-light rounded-xl cursor-pointer 
+                                        transition-all duration-300 ease-in-out`} />
                          </ScaleAnimation>
                     ))}
                </FadeAnimation>

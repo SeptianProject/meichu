@@ -59,8 +59,8 @@ const Navbar = () => {
                          <NavButton
                               text="Contact"
                               onClick={() => setContactActive(!contactActive)} />
-                         <div className={`pt-1 absolute flex flex-col items-center 
-                         justify-center gap-y-1 transition-all duration-300 ease-in-out
+                         <div className={`pt-2 absolute flex flex-col items-center 
+                         justify-center gap-y-2 transition-all duration-300 ease-in-out
                          ${contactActive ? 'z-0 opacity-100 top-10' : '-z-10 opacity-0 top-0'}`}>
                               <NavButton icon={MdOutlineEmail} text="Email" />
                               <NavButton icon={BsWhatsapp} text="Whatsapp" />
