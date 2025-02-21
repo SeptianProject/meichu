@@ -3,16 +3,14 @@ import useUI from "./useUI"
 import CatalogCard from "../components/layouts/catalog/CatalogCard"
 import CardEvent from "../components/fragments/event/CardEvent"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../redux/hook"
-import { setProfileActive } from "../redux/slices/authSlice"
+import { useAppSelector } from "../redux/hook"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useUserData } from "./useQueryRequest"
 import { getCloudinaryUrl } from "../services"
-import { setTapDiscover } from "../redux/slices/profileSlice"
+import 'swiper/css'
 
 export const useProfileData = () => {
      const navigate = useNavigate()
-     const dispatch = useAppDispatch()
      const { screenSize } = useUI()
      const isMobile = screenSize === 'mobile'
 
@@ -22,17 +20,11 @@ export const useProfileData = () => {
      const { data: userData, isLoading: userDataLoading } = useUserData('userAvatar')
      const { data: userDataDetail, isLoading: userDataDetailLoading } = useUserData('user')
 
-     const handleSwitchDiscover = React.useCallback(() => setIsFavored(prev => !prev), [])
-
-     const handleTapDiscover = React.useCallback(() => {
-          dispatch(setTapDiscover(true))
-     }, [dispatch])
-
-     const handleBackToProfile = React.useCallback(() =>
-          dispatch(setTapDiscover(false)), [dispatch])
+     const handleSwitchDiscover = React.useCallback((selected: boolean) =>
+          setIsFavored((prev) => (prev !== selected ? selected : prev)),
+          [])
 
      const handleSeeDetail = React.useCallback((uuid: string) => {
-          dispatch(setProfileActive(false))
           setTimeout(() => {
                navigate('/custom-product', {
                     state: {
@@ -42,7 +34,7 @@ export const useProfileData = () => {
                     replace: true,
                })
           }, 200);
-     }, [dispatch, navigate])
+     }, [navigate])
 
      const listCardFavored = React.useMemo(() =>
           userDataDetail?.likes?.map(like => {
@@ -102,8 +94,6 @@ export const useProfileData = () => {
           listCardFavored,
           listCardRequest,
           handleSwitchDiscover,
-          handleTapDiscover,
-          handleBackToProfile,
           renderCardContent,
      }
 }

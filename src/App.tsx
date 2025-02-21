@@ -8,13 +8,12 @@ import { Toaster } from "react-hot-toast"
 
 const Footer = React.lazy(() => import("./components/layouts/Footer"))
 const FloatingButton = React.lazy(() => import("./components/elements/buttons/FloatingBtn"))
-const ProfileLayout = React.lazy(() => import("./components/layouts/profile/ProfileLayout"))
 const AuthModalContainer = React.lazy(() => import("./components/layouts/auth/AuthModalContainer"))
 
 const App = () => {
      const { pathname } = useLocation()
-     const { isAuthModalOpen, profileActive } = useAppSelector((state) => state.auth)
-     const { closeModal, openProfileModal } = useModalState()
+     const { isAuthModalOpen } = useAppSelector((state) => state.auth)
+     const { closeModal } = useModalState()
 
      React.useEffect(() => {
           window.scrollTo(0, 0)
@@ -28,11 +27,6 @@ const App = () => {
                <React.Suspense fallback={null}>
                     <AuthModalContainer
                          isOpen={isAuthModalOpen}
-                         onClose={closeModal}
-                         onProfile={openProfileModal}
-                    />
-                    <ProfileLayout
-                         isOpen={profileActive}
                          onClose={closeModal}
                     />
                </React.Suspense>

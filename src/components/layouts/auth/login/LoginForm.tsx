@@ -8,26 +8,26 @@ import { loginFormSchema, LoginFormSchema } from "../../../../schema/AuthSchema.
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { cleanAuthErrors, login, setIsAuthModalOpen, setProfileActive } from "../../../../redux/slices/authSlice.ts";
+import { cleanAuthErrors, login, setIsAuthModalOpen } from "../../../../redux/slices/authSlice.ts";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hook.ts";
 import { handleApiError } from "../../../../hooks/errorHandler.ts";
 import { loginAuth } from "../../../../services/authService.ts";
+import { useNavigate } from "react-router-dom";
 
 interface LoginFormProps {
      showPassword: boolean;
      handleTogglePassword: VoidFunction;
-     onProfile: VoidFunction;
      onForgotPassword: VoidFunction;
 }
 
 const LoginForm: React.FC<LoginFormProps> = React.memo(({
      showPassword,
      handleTogglePassword,
-     onProfile,
      onForgotPassword
 }) => {
      const queryClient = useQueryClient()
      const dispatch = useAppDispatch()
+     const navigate = useNavigate()
      const { isAuthModalOpen } = useAppSelector(state => state.auth)
 
      const {
@@ -56,8 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                     userId: data.user.id
                }))
                dispatch(setIsAuthModalOpen(false))
-               dispatch(setProfileActive(true))
-               onProfile()
+               navigate('/dashboard')
           },
           onError: (error: Error) => {
                handleApiError(error, setError, dispatch, 'login')

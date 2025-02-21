@@ -5,7 +5,6 @@ export type ModalType = 'login' | 'register' | 'forgot-password' | 'reset-passwo
 interface AuthState {
      activeModal: ModalType
      isAnimating: boolean;
-     profileActive: boolean;
      isAuthModalOpen: boolean;
      isAuthenticated: boolean;
      token: string | null;
@@ -22,7 +21,6 @@ interface AuthState {
 const initialState: AuthState = {
      activeModal: 'login',
      isAnimating: false,
-     profileActive: false,
      isAuthModalOpen: false,
      isAuthenticated: Boolean(localStorage.getItem('authToken')),
      token: localStorage.getItem('authToken'),
@@ -45,9 +43,6 @@ const authSlice = createSlice({
           },
           setIsAnimating: (state, action: PayloadAction<boolean>) => {
                state.isAnimating = action.payload
-          },
-          setProfileActive: (state, action: PayloadAction<boolean>) => {
-               state.profileActive = action.payload
           },
           setIsAuthModalOpen: (state, action: PayloadAction<boolean>) => {
                state.isAuthModalOpen = action.payload
@@ -108,7 +103,6 @@ export const {
      setActiveModal,
      setIsAnimating,
      cleanAuthErrors,
-     setProfileActive,
      setIsAuthModalOpen,
 } = authSlice.actions
 

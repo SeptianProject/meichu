@@ -11,13 +11,11 @@ import { useModalState } from '../../../hooks/useModalState'
 interface AuthModalContainerProps {
      isOpen: boolean
      onClose: VoidFunction
-     onProfile: VoidFunction
 }
 
 const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
      isOpen,
      onClose,
-     onProfile
 }) => {
      const dispatch = useAppDispatch()
      const { activeModal, isAnimating, resetCode } = useAppSelector((state) => state.auth)
@@ -56,7 +54,6 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = React.memo(({
                {
                     activeModal === 'login' ? (
                          <LoginLayout
-                              onProfile={onProfile}
                               onForgotPassword={() => handleSwitchAuthModal('forgot-password')}
                               isModalOpen={isOpen}
                               isModalClose={onClose}

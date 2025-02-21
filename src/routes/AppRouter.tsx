@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { getCircleAnimations } from "../helper/CircleAnimationHelper"
 import HomePage from "../components/pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
+import ProfilePage from "../components/pages/ProfilePage"
 const CatalogPage = React.lazy(() => import('../components/pages/CatalogPage'))
 const BrandPage = React.lazy(() => import('../components/pages/BrandPage'))
 const CustomProductPage = React.lazy(() => import('../components/pages/CustomProductPage'))
@@ -41,6 +42,12 @@ const AppRouter = () => {
                               element={
                                    <ProtectedRoute>
                                         <DetailPage />
+                                   </ProtectedRoute>
+                              } />
+                         <Route path="/dashboard"
+                              element={
+                                   <ProtectedRoute>
+                                        <ProfilePage />
                                    </ProtectedRoute>
                               } />
                          <Route path='*' element={<HomePage />} />

@@ -1,18 +1,16 @@
 import React from "react";
 import { useAppDispatch } from "../../../redux/hook";
-import { logout, setProfileActive } from "../../../redux/slices/authSlice";
+import { logout } from "../../../redux/slices/authSlice";
 import ProfileAvatar from "./ProfileAvatar";
 import TextInputProfile from "../../fragments/profile/TextInputProfile";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserProfile, uploadFile } from "../../../services/authService.ts";
 import Button from "../../elements/buttons/Button";
-import { ProfileContentSkeleton } from "../../elements/skeletons/ProfileLayoutSkeleton.tsx";
+import { ProfileContentSkeleton } from "../../elements/skeletons/ProfilePageSkeleton.tsx";
 import useUI from "../../../hooks/useUI.ts";
 import { assetItems } from "../../../assets/assets.ts";
 
 interface ProfileContentProps {
-     isTapDiscover: boolean
-     handleTapDiscover: VoidFunction
      emailValue?: string
      dateValue?: string
      username?: string
@@ -22,8 +20,6 @@ interface ProfileContentProps {
 }
 
 const ProfileContent: React.FC<ProfileContentProps> = ({
-     isTapDiscover,
-     handleTapDiscover,
      emailValue,
      dateValue,
      username,
@@ -94,7 +90,6 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
 
      const handleLogout = () => {
           dispatch(logout())
-          dispatch(setProfileActive(false))
           queryClient.clear()
      }
 
@@ -109,17 +104,20 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
      if (userDataLoading) return <ProfileContentSkeleton />
 
      return (
-          <div className={`w-full h-full flex flex-col items-start gap-y-4 border-light/70 
-          md:gap-x-5 md:flex-row md:items-start md:border-b md:pb-10
-          ${isTapDiscover && window.innerWidth < 768 ? 'hidden' : 'block'}`}>
+          <div className="w-full h-full border-b pb-10 flex flex-col items-start gap-y-6
+          border-dark dark:border-light/70 md:gap-x-14 md:flex-row md:items-start">
                <ProfileAvatar
                     currentImageUrl={profilePicture}
                     isEditing={isEditing}
                     uploading={updateProfileMutation.isLoading}
                     onFileSelect={handleFileSelect}
                />
-               <div className='size-full flex flex-col gap-y-5'>
-                    <div className='space-y-3 lg:space-y-5'>
+               <div className='size-full flex flex-col gap-y-5 justify-center'>
+                    <div className='space-y-2'>
+                         <div className='flex flex-col justify-center gap-y-2 pb-6'>
+                              <h1 className='text-dark dark:text-light font-bold text-2xl lg:text-3xl'>Hi, {editedValues.username ?? 'User'}!</h1>
+                              <h5 className='text-graySurface1 text-lg'>Welcome to your profile dashboard</h5>
+                         </div>
                          {isEditing ? (
                               <>
                                    <TextInputProfile
@@ -149,14 +147,14 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                               onChange={(value) => setEditedValues(prev => ({ ...prev, telephoneNumber: value }))}
                          />
                     </div>
-                    <div className='w-full flex items-center gap-x-3'>
+                    <div className='w-full flex items-center gap-x-3 mt-2'>
                          <Button
                               isGold
                               isWidthFull={isMobile ? true : false}
                               title={updateProfileMutation.isLoading ? 'Updating...' : isEditing ? 'Save Changes' : 'Edit Profile'}
                               onClick={handleEdit}
                               disabled={updateProfileMutation.isLoading}
-                              className="w-full lg:w-40"
+                              className="w-full lg:w-40 h-10"
                          />
                          {isEditing ? (
                               <Button
@@ -179,15 +177,6 @@ const ProfileContent: React.FC<ProfileContentProps> = ({
                               />
                          )}
                     </div>
-                    {screenSize === 'mobile' && (
-                         <Button
-                              isGold
-                              isWidthFull
-                              title="Discover More About Me!"
-                              onClick={handleTapDiscover}
-                              className=""
-                         />
-                    )}
                </div>
           </div>
      );

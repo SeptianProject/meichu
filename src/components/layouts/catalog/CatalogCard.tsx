@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { assetItems } from '../../../assets/assets'
 import { useAppDispatch, useAppSelector } from '../../../redux/hook'
 import { FaHeart } from 'react-icons/fa'
@@ -29,6 +29,7 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
 }) => {
      const navigate = useNavigate()
      const dispatch = useAppDispatch()
+     const location = useLocation()
      const queryClient = useQueryClient()
      const { userId, isAuthenticated } = useAppSelector((state) => state.auth)
      const likedProducts = useAppSelector((state) => state.like.likedProducts)
@@ -46,9 +47,16 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                     productId,
                     uuid: newUuid
                }))
-               // dispatch(setProfileActive(true))
-               // dispatch(setTapDiscover(true))
-               showActionToast({ isLiked: true, productTitle: title })
+               showActionToast({
+                    isLiked: true,
+                    productTitle: title,
+                    onClick: () => {
+                         navigate(`/dashboard`)
+                         if (location.pathname === '/dashboard') {
+                              cardRef.current?.scrollIntoView({ behavior: 'smooth' })
+                         }
+                    }
+               })
           },
           onError: (error) => {
                console.error('Error on like product', error)
@@ -103,12 +111,11 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
 
      return (
           <div ref={cardRef}
-               className={`bg-[#C2C2C4]/30 border border-graySurface1 rounded-2xl 
+               className='bg-[#C2C2C4]/30 border border-graySurface1 rounded-2xl 
                h-full w-full cursor-pointer dark:border-transparent dark:bg-cardBackground
-               hover:-translate-y-3 transition-all duration-500 ${isFavored ? 'p-3' : 'px-5 pt-5 pb-2'}`}>
+               hover:-translate-y-3 transition-all duration-500 px-5 pt-5 pb-2'>
                <div className='flex items-center justify-between'>
-                    <h3 className={`${isFavored ? 'text-base  font-semibold' : 'font-bold text-lg md:text-xl'}
-                         text-graySurface1 dark:text-light`}>
+                    <h3 className='font-bold text-lg md:text-xl text-graySurface1 dark:text-light'>
                          {title}
                     </h3>
                     <button
@@ -122,44 +129,39 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                               hover:scale-105 transition-all duration-300
                               ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
                          <FaHeart
-                              className={`${isFavored ? 'text-light ' : 'md:size-5'}
-                                   ${isLiked ? 'text-light' : ''} text-[#5E5A5A] 
-                                   dark:text-light size-4 active:scale-50 transition-all
-                                   duration-300`} />
+                              className={`md:size-5 ${isLiked ? 'text-light' : ''} 
+                                   text-[#5E5A5A] dark:text-light size-4 active:scale-50 
+                                   transition-all duration-300`} />
                     </button>
                </div>
                <div className='flex items-center gap-x-2 my-2'>
-                    <h4 className={`text-graySurface1 dark:text-light text-sm font-medium
-                    ${isFavored ? '' : 'md:text-base'}`}>
+                    <h4 className='text-graySurface1 dark:text-light text-sm font-medium md:text-base'>
                          @Meichu
                     </h4>
                </div>
                <div className='my-5'>
-                    <img className={`object-cover object-top w-full rounded-xl md:rounded-2xl  
-                    ${isFavored ? 'h-36 xs:h-44 lg:h-48' : 'h-56 lg:h-60 xl:h-72'}`}
+                    <img className='object-cover object-top w-full rounded-xl md:rounded-2xl h-56 lg:h-60 xl:h-72'
                          src={image} alt={title} loading='lazy' />
                </div>
                <div className='flex items-center justify-between'>
                     <div className='flex items-center gap-x-2'>
-                         <img className={`${isFavored ? 'w-7 md:w-8' : 'w-12'}`}
+                         <img className='w-12'
                               src={assetItems.CreditLogo} alt='' loading='lazy' />
                          <div className='flex flex-col'>
-                              <h4 className={`text-graySurface1 dark:text-light
-                              ${isFavored ? 'text-sm' : 'text-base'}`}>
+                              <h4 className='text-graySurface1 text-base dark:text-light'>
                                    Credits
                               </h4>
-                              <h4 className={`text-graySurface1 dark:text-light
-                              ${isFavored ? 'text-sm' : 'text-base'}`}>
+                              <h4 className='text-graySurface1 text-base dark:text-light'>
                                    4.3
                               </h4>
                          </div>
                     </div>
                     <button onClick={handleToDetail}
-                         className={`border border-[#5E5A5A] text-[#5E5A5A] font-inter w-fit
+                         className='border border-[#5E5A5A] text-[#5E5A5A] font-inter w-fit
                     py-2 rounded-full text-sm transition-all duration-300 
                     dark:border-light dark:text-light hover:bg-yellowLinear1 hover:text-light
                     hover:border-transparent dark:hover:border-transparent dark:hover:bg-yellowLinear1
-                    ${isFavored ? 'px-3' : 'px-5 font-semibold md:px-7 md:py-[10px] xl:px-10'}`}>
+                    px-5 font-semibold md:px-7 md:py-[10px] xl:px-10'>
                          Buy Now!
                     </button>
                </div>

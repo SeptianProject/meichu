@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useAppDispatch } from '../redux/hook'
-import { ModalType, setActiveModal, setIsAnimating, setIsAuthModalOpen, setProfileActive, setResetCode } from '../redux/slices/authSlice'
+import { ModalType, setActiveModal, setIsAnimating, setIsAuthModalOpen, setResetCode } from '../redux/slices/authSlice'
 
 export const useModalState = () => {
      const dispatch = useAppDispatch()
@@ -21,19 +21,11 @@ export const useModalState = () => {
 
      const closeModal = useCallback(() => {
           dispatch(setIsAuthModalOpen(false))
-          dispatch(setProfileActive(false))
           handleScrollLock(false)
      }, [dispatch, handleScrollLock])
 
      const openAuthModal = useCallback(() => {
           dispatch(setIsAuthModalOpen(true))
-          dispatch(setProfileActive(false))
-          handleScrollLock(true)
-     }, [dispatch, handleScrollLock])
-
-     const openProfileModal = useCallback(() => {
-          dispatch(setProfileActive(true))
-          dispatch(setIsAuthModalOpen(false))
           handleScrollLock(true)
      }, [dispatch, handleScrollLock])
 
@@ -52,7 +44,6 @@ export const useModalState = () => {
      return {
           closeModal,
           openAuthModal,
-          openProfileModal,
           handleSwitchAuthModal,
           handleResetCode
      }

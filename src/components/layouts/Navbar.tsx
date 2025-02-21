@@ -8,13 +8,15 @@ import { BsWhatsapp } from "react-icons/bs"
 import { IoMoonOutline } from "react-icons/io5"
 import { assetItems } from "../../assets/assets"
 import { useAppDispatch, useAppSelector } from "../../redux/hook"
-import { setIsAuthModalOpen, setProfileActive } from "../../redux/slices/authSlice"
+import { setIsAuthModalOpen } from "../../redux/slices/authSlice"
 import useUI from "../../hooks/useUI"
 import { useUserData } from "../../hooks/useQueryRequest"
 import { getCloudinaryUrl } from "../../services"
+import { useNavigate } from "react-router-dom"
 
 const Navbar = () => {
      const dispatch = useAppDispatch()
+     const navigate = useNavigate()
 
      const [hamburgerActive, setHamburgerActive] = React.useState(false)
      const [contactActive, setContactActive] = React.useState(false)
@@ -32,13 +34,14 @@ const Navbar = () => {
           return assetItems.Profile
      }, [dataUser?.profilePicture?.url, token, userId])
 
-     const handleOpenModal = () => {
+     const handleProfileClick = () => {
           if (token) {
-               dispatch(setProfileActive(true))
+               navigate('/dashboard')
           } else {
                dispatch(setIsAuthModalOpen(true))
           }
      }
+
      React.useEffect(() => {
           const handleHideHamburger = () => {
                if (window.scrollY > 0) {
@@ -53,7 +56,7 @@ const Navbar = () => {
      return (
           <nav className="absolute inset-x-0 -right-5 flex items-center justify-between 
           px-5 md:px-14 xl:px-20 h-28">
-               <NavItems modalOnClick={handleOpenModal} isActive={hamburgerActive} />
+               <NavItems modalOnClick={handleProfileClick} isActive={hamburgerActive} />
                <div className="flex items-center gap-x-7 z-20 relative">
                     <div className="hidden lg:block">
                          <NavButton
@@ -77,7 +80,7 @@ const Navbar = () => {
                          handleActive={() => setHamburgerActive(!hamburgerActive)} />
                     <NavIcon
                          image={avatar}
-                         onClick={handleOpenModal} />
+                         onClick={handleProfileClick} />
                </div>
           </nav>
      )

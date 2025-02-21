@@ -14,7 +14,6 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { uploadFile } from "../../services/authService"
 import { createProductRequest, updateProductRequest } from "../../services/productService"
 import { useAppDispatch } from "../../redux/hook"
-import { setProfileActive } from "../../redux/slices/authSlice"
 import { useProductRequest, useUserData } from "../../hooks/useQueryRequest"
 import ModalInformation from "../layouts/modal/ModalInformation"
 import { setTapDiscover } from "../../redux/slices/profileSlice"
@@ -128,9 +127,9 @@ const CustomProductPage = () => {
           setTimeout(() => {
                setIsPublishDisabled(false)
                createProductMutation.reset()
-          }, 5000);
+          }, 3000);
 
-          dispatch(setProfileActive(true))
+          navigate('/dashboard')
           dispatch(setTapDiscover(true))
      }
 

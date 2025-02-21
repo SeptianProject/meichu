@@ -4,6 +4,7 @@ import { FaHeart } from 'react-icons/fa'
 interface ToastProps {
      isLiked: boolean
      productTitle?: string
+     onClick?: VoidFunction
 }
 
 const defaultToastOptions: ToastOptions = {
@@ -17,7 +18,7 @@ const defaultToastOptions: ToastOptions = {
      }
 }
 
-export const showActionToast = ({ isLiked, productTitle }: ToastProps) => {
+export const showActionToast = ({ isLiked, productTitle, onClick }: ToastProps) => {
      const message = isLiked ? `Liked ${productTitle || 'item'} Product!`
           : `Unliked ${productTitle || 'item'} Product`
 
@@ -26,7 +27,9 @@ export const showActionToast = ({ isLiked, productTitle }: ToastProps) => {
 
      toast.custom(
           (t: Toast) => (
-               <div className={`${t.visible ? 'animate-enter' : 'animate-leave'}
+               <div
+                    onClick={onClick}
+                    className={`${t.visible ? 'animate-enter' : 'animate-leave'}
                flex items-center gap-3 bg-[#C4C4C4] dark:bg-[#333] px-5 py-3 shadow-lg rounded-lg`}>
                     {icon}
                     <p className='text-dark dark:text-white/60 font-medium'>

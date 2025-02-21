@@ -11,14 +11,12 @@ interface LoginLayoutProps {
      showPassword: boolean;
      handleTogglePassword: VoidFunction;
      onForgotPassword: VoidFunction;
-     onProfile: VoidFunction;
 }
 
 const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
      isModalOpen,
      isModalClose,
      isAnimating,
-     onProfile,
      showPassword,
      handleTogglePassword,
      onForgotPassword,
@@ -33,7 +31,6 @@ const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
                className="lg:min-h-[85vh]">
                <LoginForm
                     onForgotPassword={onForgotPassword}
-                    onProfile={onProfile}
                     showPassword={showPassword}
                     handleTogglePassword={handleTogglePassword} />
                <AuthButtonSwitch
