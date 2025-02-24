@@ -14,6 +14,25 @@ export interface ImageFormats {
      readonly thumbnail: ImageFormat
 }
 
+export interface BannerImages {
+     readonly data: Array<{
+          readonly id: string
+          readonly attributes: {
+               readonly uuid: string
+               readonly image: {
+                    readonly data: {
+                         readonly id: string
+                         readonly attributes: {
+                              readonly name: string
+                              readonly url: string
+                              readonly formats: ImageFormats
+                         }
+                    }
+               }
+          }
+     }>
+}
+
 export interface ApiErrorResponse {
      status: number;
      message: string;

@@ -1,19 +1,19 @@
 import React from "react";
 import { motion, Variants } from 'motion/react'
-import { useProducts } from "../../../hooks/useQueryRequest";
+import { useCustomImages } from "../../../hooks/useQueryRequest";
 import { getCloudinaryUrl } from "../../../services";
 
 const CardProductAnimate = () => {
      const ref = React.useRef(null);
      const containerRefs = Array(4).fill(null).map(() => ref);
-     const { data: productData, isLoading } = useProducts()
+     const { data: customImages, isLoading } = useCustomImages(false)
 
      const createColumnProducts = React.useCallback(() => {
           const items = [...Array(8)].flatMap(() => isLoading ? []
-               : productData?.data.flatMap((product) => product.attributes.thumbnail.data.attributes.url))
+               : customImages?.data.flatMap((product) => product.attributes.image.data.attributes.url))
 
           return [...items, ...items]
-     }, [productData, isLoading])
+     }, [customImages, isLoading])
 
      const columns = React.useMemo(() => [...Array(4)].map(
           () => createColumnProducts()

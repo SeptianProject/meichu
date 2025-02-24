@@ -7,25 +7,25 @@ import { Swiper as SwiperType } from 'swiper/types';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { createHeroCarouselSwiperConfig } from '../../../configs/createHeroCarouselSwiperConfig';
 import HeroCarouselSkeleton from '../../elements/skeletons/HeroCarouselSkeleton';
-import { useProducts } from '../../../hooks/useQueryRequest';
-import 'swiper/css';
+import { useCustomImages } from '../../../hooks/useQueryRequest';
 import { getCloudinaryUrl } from '../../../services';
+import 'swiper/css';
 
 const HeroCarousel = () => {
      const [swiperInstance, setSwiperInstance] = React.useState<SwiperType | null>(null);
      const [imageLoading, setImageLoading] = React.useState<{ [key: number]: boolean }>({})
-     const { data: productData, isLoading } = useProducts()
+     const { data: bannerImages, isLoading } = useCustomImages(true)
 
      const slides = React.useMemo(() => {
-          if (!productData?.data) return []
+          if (!bannerImages?.data) return []
 
           return Array.from({ length: 2 }, (_, index) =>
-               productData.data.map((product) => ({
-                    ...product,
-                    virtualId: `${product.id}-${index}`
+               bannerImages.data.map((image) => ({
+                    ...image,
+                    virtualId: `${image.id}-${index}`
                }))
           ).flat()
-     }, [productData?.data])
+     }, [bannerImages?.data])
 
      const handleImageLoad = React.useCallback((virtualId: number) => {
           setImageLoading(prev => ({
@@ -80,21 +80,21 @@ const HeroCarousel = () => {
                          {...createHeroCarouselSwiperConfig()}
                          onSwiper={setSwiperInstance}
                          className='w-full'>
-                         {slides.map((product) => (
+                         {slides.map((image) => (
                               <SwiperSlide
-                                   key={product.virtualId}
+                                   key={image.virtualId}
                                    className="!w-36 !h-48 xs:!w-40 xs:!h-52
                                    md:!w-48 md:!h-60 lg:!w-60 lg:!h-80">
                                    <div className="h-full w-full overflow-hidden rounded-xl relative">
                                         <motion.div
                                              variants={cardVariants}
                                              className='h-full w-full rounded-xl'>
-                                             <img src={getCloudinaryUrl(product.attributes.thumbnail.data.attributes.url)}
-                                                  alt={product.attributes.name + ' Bundle'}
+                                             <img src={getCloudinaryUrl(image.attributes.image.data.attributes.url)}
+                                                  alt={image.attributes.image.data.attributes.name + ' Bundle'}
                                                   className={`w-full h-full object-cover 
                                                        object-center transition-opacity duration-300
-                                                       ${imageLoading[product.id] ? 'opacity-100' : 'opacity-0'}`}
-                                                  onLoad={() => handleImageLoad(product.id)}
+                                                       ${imageLoading[Number(image.id)] ? 'opacity-100' : 'opacity-0'}`}
+                                                  onLoad={() => handleImageLoad(Number(image.id))}
                                                   loading='lazy'
                                              />
                                         </motion.div>

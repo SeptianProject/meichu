@@ -36,3 +36,8 @@ export const getProductCatalogs = async () => {
      const response = await axiosInstance.get(`${apiUrl}/products`)
      return response.data
 }
+
+export const getCustomImages = async (source?: string) => {
+     const response = await axiosInstance.get(`${apiUrl}/${source}`)
+     return response.data
+}

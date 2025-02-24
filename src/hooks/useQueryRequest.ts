@@ -2,6 +2,7 @@ import { useQuery, UseQueryOptions } from "@tanstack/react-query"
 import { getUser } from "../services/authService"
 import {
      ApiErrorResponse,
+     BannerImages,
      BrandAmbassadors,
      ProductCatalogsResponse,
      ProductCategoriesResponse,
@@ -9,6 +10,7 @@ import {
 } from "../types"
 import {
      getBrandAmbassadors,
+     getCustomImages,
      getProductCatalogs,
      getProductCategories,
      getProductRequest
@@ -140,6 +142,14 @@ export const useBrandAmbassadorData = () => {
      return useQuery<BrandAmbassadors, ApiErrorResponse>({
           queryKey: ['ambassador'],
           queryFn: getBrandAmbassadors,
+          ...BASE_PROPS
+     })
+}
+
+export const useCustomImages = (isBanner: boolean) => {
+     return useQuery<BannerImages, ApiErrorResponse>({
+          queryKey: [isBanner ? 'bannerImages' : 'customImages'],
+          queryFn: () => getCustomImages(isBanner ? 'banner-images' : 'custom-images'),
           ...BASE_PROPS
      })
 }
