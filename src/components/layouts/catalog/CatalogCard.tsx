@@ -55,6 +55,12 @@ const CatalogCard: React.FC<CatalogCardProps> = React.memo(({
                          if (location.pathname === '/dashboard') {
                               cardRef.current?.scrollIntoView({ behavior: 'smooth' })
                          }
+                         setTimeout(() => {
+                              window.scrollTo({
+                                   top: document.body.scrollHeight,
+                                   behavior: 'smooth'
+                              })
+                         }, 500);
                     }
                })
           },
