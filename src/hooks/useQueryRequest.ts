@@ -11,9 +11,9 @@ import {
 import {
      getBrandAmbassadors,
      getCustomImages,
-     getProductCatalogs,
-     getProductCategories,
-     getProductRequest
+     getProducts,
+     getProductRequest,
+     getCategories,
 } from "../services/productService"
 
 const BASE_PROPS = {
@@ -84,7 +84,7 @@ export const useProducts = (options?: QueryHookOptions<ProductCatalogsResponse>)
           queryKey: productKeys.lists(),
           queryFn: async () => {
                try {
-                    const data = await getProductCatalogs();
+                    const data = await getProducts('products');
                     if (!data) {
                          throw {
                               status: 404,
@@ -109,7 +109,7 @@ export const useProduct = (productId: string | undefined) => {
      return useQuery({
           queryKey: productKeys.detail(productId ?? ''),
           queryFn: async () => {
-               const response: ProductCatalogsResponse = await getProductCatalogs()
+               const response: ProductCatalogsResponse = await getProducts('products')
                const product = response.data.find(
                     (product) => product.id === Number(productId)
                )
@@ -133,10 +133,21 @@ export const useProductRequest = (uuid: string | undefined) => {
 export const useProductCategory = () => {
      return useQuery<ProductCategoriesResponse, ApiErrorResponse>({
           queryKey: productKeys.productCategory,
-          queryFn: getProductCategories,
+          queryFn: () => getCategories('categories'),
           ...BASE_PROPS
      })
 }
+
+export const useCustomCategories = (isBundle: boolean | undefined) => {
+     const params = isBundle !== undefined ? `filters[isBundle][$eq]=${isBundle}` : '';
+
+     return useQuery<ProductCategoriesResponse, ApiErrorResponse>({
+          queryKey: ['customCategories', isBundle],
+          queryFn: () => getCategories(`custom-categories/?${params}`),
+          ...BASE_PROPS,
+          enabled: isBundle !== undefined
+     });
+};
 
 export const useBrandAmbassadorData = () => {
      return useQuery<BrandAmbassadors, ApiErrorResponse>({

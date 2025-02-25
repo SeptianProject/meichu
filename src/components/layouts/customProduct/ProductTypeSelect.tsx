@@ -1,30 +1,30 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react"
 import TitleDesc from "../../fragments/customProduct/TitleDesc"
 import { assetItems } from "../../../assets/assets";
 import useUI from "../../../hooks/useUI";
 import { FieldError } from "react-hook-form";
 import { AnimatePresence, Variants, motion } from "motion/react";
+import { useCustomCategories } from "../../../hooks/useQueryRequest";
+import { ProductCategoriesResponse } from "../../../types";
 
 interface Option {
      value: string | boolean
      label: string
      icon: string
-     subOptions?: SubOption[]
+     subOptions?: ProductCategoriesResponse['data']
 }
 
-interface SubOption {
-     value: string
-     label: string
-}
 
 interface ProductTypeSelectProps {
      type: 'product' | 'imvu';
      value?: string | boolean;
      name: string
      onChange: (e: { target: { name: string, value: string | boolean } }) => void;
+     onCategorySelect?: (categoryUuid: string) => void
      error?: FieldError
      ref?: React.Ref<HTMLInputElement>
+     categoryRequired?: boolean
+     categoryError?: FieldError
 }
 
 const subOptionsVariants: Variants = {
@@ -46,12 +46,38 @@ const subOptionsVariants: Variants = {
 }
 
 const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectProps>(({
-     onChange, type, value, error, name
+     onChange,
+     type,
+     value,
+     error,
+     name,
+     onCategorySelect,
+     categoryRequired = false,
+     categoryError
 }, ref) => {
      const { mode } = useUI()
      const isDarkMode = mode === 'dark'
      const [showSubOptions, setShowSubOptions] = React.useState(false)
+     const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null)
+     const [isBundle, setIsBundle] = React.useState<boolean | undefined>(() => {
+          if (type === 'product') {
+               if (value === 'Single') return false
+               if (value === 'Bundle') return true
+          }
+          return undefined
+     })
 
+     const { data: customCategories } = useCustomCategories(isBundle)
+
+     React.useEffect(() => {
+          if (type === 'product') {
+               if (value === 'Single') setIsBundle(false)
+               else if (value === 'Bundle') setIsBundle(true)
+               setShowSubOptions(value === 'Single' || value === 'Bundle')
+          }
+     }, [value, type, customCategories])
+
+     // eslint-disable-next-line react-hooks/exhaustive-deps
      const getIcon = (darkIcon: string, lightIcon: string) => isDarkMode ? darkIcon : lightIcon
 
      const options: Option[] = React.useMemo(() => type === 'product' ? [
@@ -59,25 +85,13 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                value: 'Single',
                label: 'Create Single Product',
                icon: getIcon(assetItems.DarkSingleEmoji, assetItems.LightSingleEmoji),
-               subOptions: [
-                    {
-                         value: 'Single',
-                         label: 'Basic Single Product',
-                    },
-                    {
-                         value: 'Single_Premium',
-                         label: 'Premium Single Product',
-                    },
-                    {
-                         value: 'Single_Custom',
-                         label: 'Custom Single Product',
-                    },
-               ]
+               subOptions: !isBundle ? customCategories?.data : undefined,
           },
           {
                value: 'Bundle',
                label: 'Create Bundle',
-               icon: getIcon(assetItems.DarkDuoEmoji, assetItems.LightDuoEmoji)
+               icon: getIcon(assetItems.DarkDuoEmoji, assetItems.LightDuoEmoji),
+               subOptions: isBundle ? customCategories?.data : undefined,
           }
      ] : [
           {
@@ -90,11 +104,18 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                label: 'Non Imvu+',
                icon: 'Imvu'
           }
-     ], [getIcon, type])
+     ], [getIcon, type, isBundle, customCategories])
 
      const handleChange = React.useCallback((newValue: string | boolean, isMainOption = true) => {
-          if (isMainOption) {
-               setShowSubOptions(newValue === "Single")
+          if (isMainOption && type === 'product') {
+               if (newValue === 'Single') setIsBundle(false)
+               else if (newValue === 'Bundle') setIsBundle(true)
+               setShowSubOptions(newValue === 'Single' || newValue === 'Bundle')
+               setSelectedCategory(null)
+
+               if (onCategorySelect) {
+                    onCategorySelect('')
+               }
           }
           onChange({
                target: {
@@ -104,7 +125,22 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                          : newValue
                }
           })
-     }, [onChange, name, type])
+     }, [onChange, name, type, onCategorySelect])
+
+     const handleCategorySelect = React.useCallback((categoryUuid: string, categoryName: string) => {
+          setSelectedCategory(categoryUuid)
+
+          if (onCategorySelect) {
+               onCategorySelect(categoryUuid)
+          }
+
+          onChange({
+               target: {
+                    name: categoryName,
+                    value: isBundle ? 'Bundle' : 'Single'
+               }
+          })
+     }, [isBundle, onChange, onCategorySelect])
 
      const isSelected = React.useCallback((optionValue: string | boolean) => {
           if (type === 'imvu') {
@@ -115,6 +151,51 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
           }
           return value === optionValue
      }, [type, value, showSubOptions])
+
+     const renderSubOptions = (option: Option) => {
+          if (!showSubOptions || !option.subOptions) return null;
+
+          return (
+               <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={subOptionsVariants}
+                    className="bg-[#C2C2C4]/30 dark:bg-cardBackground mt-4 p-4 space-y-3 rounded-xl">
+                    {categoryRequired && !selectedCategory && (
+                         <div className="text-redDanger text-sm mb-2">
+                              {categoryError?.message || "Please select a category"}
+                         </div>
+                    )}
+                    {option.subOptions.map((subOption) => (
+                         <label key={subOption.id}
+                              className="flex items-center cursor-pointer w-full">
+                              <input
+                                   type="radio"
+                                   name={`${name}_category`}
+                                   value={subOption.attributes.uuid}
+                                   checked={selectedCategory === subOption.attributes.uuid}
+                                   onChange={() => handleCategorySelect(subOption.attributes.uuid, subOption.attributes.name)}
+                                   className="hidden"
+                              />
+                              <div className={`${selectedCategory === subOption.attributes.uuid ? 'bg-gold rounded-xl' : 'bg-transparent'} 
+                                   w-full border-none p-[2px]`}>
+                                   <div className={`p-3 md:p-4 flex items-center gap-x-4 w-full rounded-[11px]
+                                   border-none bg-light dark:bg-dark transition-all duration-300
+                                   ${selectedCategory === subOption.attributes.uuid ? 'ring-0 ring-transparent' : 'ring-[1.5px] ring-graySurface1'}`}>
+                                        <span className={`${selectedCategory === subOption.attributes.uuid
+                                             ? 'bg-gold bg-clip-text text-transparent'
+                                             : 'text-graySurface1 dark:text-white/80'}
+                                             text-base font-medium transition-colors duration-300`}>
+                                             {subOption.attributes.name}
+                                        </span>
+                                   </div>
+                              </div>
+                         </label>
+                    ))}
+               </motion.div>
+          );
+     };
 
      const renderOption = (option: Option) => (
           <div key={String(option.value)} className="w-full">
@@ -131,9 +212,9 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                     <div className={`${isSelected(option.value)
                          ? 'bg-gold rounded-2xl' : 'bg-transparent'} w-full border-none p-[3px]`}>
                          <div className={`p-3 md:p-4 flex items-center gap-x-4 w-full rounded-[14px] 
-                                   border-none bg-light dark:bg-dark transition-all duration-300
-                                   ${error ? 'ring-redDanger' : 'ring-graySecondary'}
-                                   ${isSelected(option.value)
+                         border-none bg-light dark:bg-dark transition-all duration-300
+                         ${error ? 'ring-redDanger' : 'ring-graySecondary'}
+                         ${isSelected(option.value)
                                    ? 'ring-0 ring-transparent'
                                    : 'ring-[1.5px] ring-graySurface1'}`}>
                               <div className={`${String(option.label).includes('Imvu+')
@@ -160,44 +241,10 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                     </div>
                </label>
                <AnimatePresence>
-                    {showSubOptions && option.value === "Single" && option.subOptions && (
-                         <motion.div
-                              initial="hidden"
-                              animate="visible"
-                              exit="exit"
-                              variants={subOptionsVariants}
-                              className="bg-[#C2C2C4]/30 dark:bg-cardBackground mt-4 p-4 space-y-3 rounded-xl">
-                              {option.subOptions.map((subOption) => (
-                                   <label key={subOption.value}
-                                        className="flex items-center cursor-pointer w-full">
-                                        <input
-                                             type="radio"
-                                             name={name}
-                                             value={subOption.value}
-                                             checked={value === subOption.value}
-                                             onChange={(e) => handleChange(e.target.value, false)}
-                                             className="hidden"
-                                        />
-                                        <div className={`${value === subOption.value ? 'bg-gold rounded-xl' : 'bg-transparent'} 
-                                             w-full border-none p-[2px]`}>
-                                             <div className={`p-3 md:p-4 flex items-center gap-x-4 w-full rounded-[11px]
-                                             border-none bg-light dark:bg-dark transition-all duration-300
-                                             ${value === subOption.value ? 'ring-0 ring-transparent' : 'ring-[1.5px] ring-graySurface1'}`}>
-                                                  <span className={`${value === subOption.value
-                                                       ? 'bg-gold bg-clip-text text-transparent'
-                                                       : 'text-graySurface1 dark:text-white/80'}
-                                                       text-base font-medium transition-colors duration-300`}>
-                                                       {subOption.label}
-                                                  </span>
-                                             </div>
-                                        </div>
-                                   </label>
-                              ))}
-                         </motion.div>
-                    )}
+                    {showSubOptions && option.subOptions && renderSubOptions(option)}
                </AnimatePresence>
           </div>
-     )
+     );
 
      return (
           <div className="space-y-8">

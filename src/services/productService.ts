@@ -27,13 +27,13 @@ export const getBrandAmbassadors = async () => {
      return response.data
 }
 
-export const getProductCategories = async () => {
-     const response = await axiosInstance.get(`${apiUrl}/categories`)
+export const getCategories = async (source?: string) => {
+     const response = await axiosInstance.get(`${apiUrl}/${source}`)
      return response.data
 }
 
-export const getProductCatalogs = async () => {
-     const response = await axiosInstance.get(`${apiUrl}/products`)
+export const getProducts = async (source?: string) => {
+     const response = await axiosInstance.get(`${apiUrl}/${source}`)
      return response.data
 }
 

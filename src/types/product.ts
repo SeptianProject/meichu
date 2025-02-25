@@ -76,7 +76,10 @@ export interface ProductCategoriesResponse {
      readonly data: Array<{
           readonly id: number
           readonly attributes: {
+               readonly uuid: string
                readonly name: string
+               readonly isBundle: boolean
+               readonly requests: ProductRequestsResponse['data']
                readonly products: ProductCatalogsResponse['data']
           }
      }>

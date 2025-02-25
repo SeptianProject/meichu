@@ -31,6 +31,7 @@ const CustomProductPage = () => {
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [previewUrl, setPreviewUrl] = React.useState<string>('')
      const [isPublishDisabled, setIsPublishDisabled] = React.useState(false)
+     const [selectedCategoryId, setSelectedCategoryId] = React.useState<string | null>(null)
 
      const { data: userData } = useUserData('user')
      const { data: requestData } = useProductRequest(uuidParams)
@@ -41,7 +42,10 @@ const CustomProductPage = () => {
           references: isEditing ? requestData?.data.attributes?.references?.data?.id : null,
           name: isEditing ? requestData?.data.attributes.name : "",
           productType: isEditing ? requestData?.data.attributes.productType : undefined,
-          imvu: isEditing ? requestData?.data.attributes.imvu : undefined
+          imvu: isEditing ? requestData?.data.attributes.imvu : undefined,
+          custom_categories: isEditing && requestData?.data.attributes.custom_categories?.data
+               ? requestData.data.attributes.custom_categories.data.map((category: { uuid: string }) => category.uuid)
+               : []
      }), [isEditing, requestData, userData])
 
      const {
@@ -50,7 +54,8 @@ const CustomProductPage = () => {
           setValue,
           watch,
           reset,
-          formState: { errors }
+          formState: { errors },
+          trigger
      } = useForm<CreateProductSchema>({
           resolver: zodResolver(createProductSchema),
           defaultValues: getDefaultValues(),
@@ -64,7 +69,17 @@ const CustomProductPage = () => {
           }
           setSelectedFile(null)
           setPreviewUrl('')
+          setSelectedCategoryId(null)
      }), [getDefaultValues, previewUrl, reset])
+
+     const handleCategorySelect = (categoryId: string) => {
+          setSelectedCategoryId(categoryId)
+          setValue('custom_categories', categoryId ? [categoryId] : [])
+
+          if (categoryId) {
+               trigger('custom_categories')
+          }
+     }
 
      const createProductMutation = useMutation({
           mutationFn: async (formData: CreateProductSchema) => {
@@ -80,7 +95,8 @@ const CustomProductPage = () => {
 
                const payload = {
                     ...formData,
-                    references: imageId || formData.references
+                    references: imageId || formData.references,
+                    custom_categories: formData.custom_categories
                }
 
                if (isEditing && uuidParams) {
@@ -105,6 +121,13 @@ const CustomProductPage = () => {
      const onSubmit = async (data: CreateProductSchema) => {
           if (isPublishDisabled) return
           if (createProductMutation.isLoading) return
+
+          const productType = watch('productType')
+          if ((productType === 'Single' || productType === 'Bundle') && !selectedCategoryId) {
+               setValue('custom_categories', [], { shouldValidate: true })
+               return
+          }
+
           createProductMutation.mutate(data)
      }
 
@@ -123,6 +146,8 @@ const CustomProductPage = () => {
 
      const handleModalClose = () => {
           setOnPublish(false)
+          document.body.style.overflow = ''
+          document.body.style.paddingRight = ''
 
           setTimeout(() => {
                setIsPublishDisabled(false)
@@ -131,6 +156,13 @@ const CustomProductPage = () => {
 
           navigate('/dashboard')
           dispatch(setTapDiscover(true))
+
+          setTimeout(() => {
+               window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+               })
+          }, 500)
      }
 
      React.useEffect(() => {
@@ -155,6 +187,12 @@ const CustomProductPage = () => {
                setValue('imvu', attributes.imvu)
                setValue('references', attributes.references.data?.id || null)
 
+               if (attributes.custom_categories?.data?.length) {
+                    const categoryId = attributes.custom_categories.data[0].attributes.uuid;
+                    setSelectedCategoryId(categoryId);
+                    setValue('custom_categories', [categoryId]);
+               }
+
                if (attributes.references.data?.attributes?.url) {
                     setPreviewUrl(attributes.references.data.attributes.url)
                }
@@ -173,7 +211,14 @@ const CustomProductPage = () => {
 
                return () => clearTimeout(timer)
           }
+
+          return () => {
+               document.body.style.overflow = ''
+               document.body.style.paddingRight = ''
+          }
      }, [onPublish])
+
+     const productTypeSelected = watch('productType') === 'Single' || watch('productType') === 'Bundle'
 
      return (
           <>
@@ -189,12 +234,16 @@ const CustomProductPage = () => {
                          <input type="hidden" {...register('uuid')} />
                          <input type="hidden" {...register('references')} />
                          <input type="hidden"{...register('user')} />
+                         <input type="hidden"{...register('custom_categories')} />
                          <ProductTypeSelect
                               {...register('productType')}
                               name="productType"
                               type="product"
                               value={watch('productType')}
                               error={errors.productType}
+                              onCategorySelect={handleCategorySelect}
+                              categoryRequired={productTypeSelected}
+                              categoryError={errors.custom_categories?.[0]}
                          />
                          <UploadImageProduct
                               currentImageUrl={previewUrl}

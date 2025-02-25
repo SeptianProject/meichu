@@ -16,7 +16,7 @@ const ProfilePage = () => {
      } = useProfileData()
 
      return (
-          <div className="w-full min-h-screen bg-light dark:bg-dark">
+          <div className="w-full min-h-screen lg:min-h-full bg-light dark:bg-dark">
                <div className="max-w-7xl mx-auto px-7 md:px-12 lg:px-20 pt-32 lg:pt-40 pb-20">
                     <ProfileContent
                          userDataLoading={userDataLoading}

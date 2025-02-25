@@ -63,10 +63,6 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
 
      const generatedUsername = email ? generateUsername(email) : ''
 
-     React.useEffect(() => {
-          console.log('RegisForm rendered', registerMutation.data)
-     }, [registerMutation])
-
      return (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                <div className="flex flex-col gap-y-2">
