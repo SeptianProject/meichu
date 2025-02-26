@@ -2,8 +2,6 @@ import axios from "axios";
 
 export const baseUrl = import.meta.env.VITE_PUBLIC_STRAPI_BASE_URL.replace('/api', '');
 export const apiUrl = `${baseUrl}/api`;
-export const token = localStorage.getItem('authToken');
-export const userId = localStorage.getItem('userId');
 export const getCloudinaryUrl = (url: string) => {
      return url.replace('/upload/', '/upload/f_webp,q_auto/');
 }
@@ -14,6 +12,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
      (config) => {
+          const token = localStorage.getItem('authToken');
           if (token) {
                config.headers.Authorization = `Bearer ${token}`;
           }

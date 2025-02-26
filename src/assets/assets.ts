@@ -45,13 +45,11 @@ export const sosmedIcons = [
 
 export const authIcons = [
      {
-          link: 'https://www.google.com/',
-          icon: Google
+          icon: Google,
+          type: 'google',
      }, {
-          link: 'https://www.apple.com/',
           icon: Apple
      }, {
-          link: 'https://www.facebook.com/',
           icon: FacebookAuth
      }
 ]

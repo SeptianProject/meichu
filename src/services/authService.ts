@@ -7,9 +7,18 @@ export const registerAuth = async (data: RegisterFormSchema) => {
 }
 
 export const loginAuth = async (data: LoginFormSchema) => {
-     const response = await axiosInstance.post(`/auth/local`, data)
+     const response = await axiosInstance.post(`/auth/local`, {
+          identifier: data.identifier,
+          passwoword: data.password
+     })
      return response.data;
 }
+
+export const googleAuth = async (callback: string) => {
+     const response = await axiosInstance.get(`${apiUrl}/auth/google/callback?${callback}`)
+     return response.data;
+}
+
 
 export const forgotPasswordAuth = async (data: Pick<ForgotPasswordSchema, 'email'>) => {
      const response = await axiosInstance.post(`${apiUrl}/auth/forgot-password`, data)
