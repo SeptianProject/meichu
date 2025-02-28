@@ -46,7 +46,6 @@ export const sosmedIcons = [
 export const authIcons = [
      {
           icon: Google,
-          type: 'google',
      }, {
           icon: Apple
      }, {

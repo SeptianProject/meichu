@@ -68,7 +68,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
                isOpen={isModalOpen}
                onClose={isModalClose}
                isAnimating={isAnimating}
-               className='lg:min-h-[70vh] pb-20'>
+               className='pb-20'>
                <form onSubmit={handleSubmit(onSubmit)}
                     className='flex gap-y-3 flex-col w-full h-full max-w-72 items-center justify-center'>
                     <input type="hidden"  {...register('code')} value={resetCode || ''} />

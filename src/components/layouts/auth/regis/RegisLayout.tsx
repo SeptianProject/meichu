@@ -31,7 +31,7 @@ const RegisterLayout: React.FC<RegisterLayoutProps> = React.memo(({
                isOpen={isModalOpen}
                onClose={isModalClose}
                title="Step Into Your Space!"
-               className="lg:min-h-[85vh]">
+               className="pb-10">
                <RegisForm
                     showPassword={showPassword}
                     handleTogglePassword={handleTogglePassword}

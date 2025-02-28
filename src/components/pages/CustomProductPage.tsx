@@ -31,7 +31,7 @@ const CustomProductPage = () => {
      const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
      const [previewUrl, setPreviewUrl] = React.useState<string>('')
      const [isPublishDisabled, setIsPublishDisabled] = React.useState(false)
-     const [selectedCategoryId, setSelectedCategoryId] = React.useState<string | null>(null)
+     const [, setSelectedCategoryId] = React.useState<string | null>(null)
 
      const { data: userData } = useUserData('user')
      const { data: requestData } = useProductRequest(uuidParams)
@@ -72,11 +72,12 @@ const CustomProductPage = () => {
           setSelectedCategoryId(null)
      }), [getDefaultValues, previewUrl, reset])
 
-     const handleCategorySelect = (categoryId: string) => {
-          setSelectedCategoryId(categoryId)
-          setValue('custom_categories', categoryId ? [categoryId] : [])
+     const handleCategorySelect = (categoryId: string[] | string) => {
+          const categoryArray = Array.isArray(categoryId) ? categoryId : [categoryId]
+          setSelectedCategoryId(categoryArray.length > 0 ? categoryArray[0] : null)
+          setValue('custom_categories', categoryArray)
 
-          if (categoryId) {
+          if (categoryArray.length > 0) {
                trigger('custom_categories')
           }
      }
@@ -123,12 +124,14 @@ const CustomProductPage = () => {
           if (createProductMutation.isLoading) return
 
           const productType = watch('productType')
-          if ((productType === 'Single' || productType === 'Bundle') && !selectedCategoryId) {
+          const categories = watch('custom_categories')
+          if ((productType === 'Single' || productType === 'Bundle') && (!categories || categories.length === 0)) {
                setValue('custom_categories', [], { shouldValidate: true })
                return
           }
 
           createProductMutation.mutate(data)
+          console.log('Data:', data)
      }
 
      const handleFileSelect = (file: File) => {

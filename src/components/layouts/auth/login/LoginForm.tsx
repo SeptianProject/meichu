@@ -107,7 +107,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
      return (
           <>
                <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
-                    <div className="flex flex-col items-end gap-y-1">
+                    <div className="flex flex-col items-end gap-y-2">
                          <div className="flex flex-col items-start gap-y-2">
                               <AuthInput
                                    icon={FaUser}
@@ -137,8 +137,8 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(({
                          isGold
                          isWidthFull
                          title={loginMutation.isLoading ? 'Loading...' : 'Login'}
+                         disabled={loginMutation.isLoading}
                          type="submit"
-                         className="w-full"
                     />
                </form>
                <AuthBadgeButton />

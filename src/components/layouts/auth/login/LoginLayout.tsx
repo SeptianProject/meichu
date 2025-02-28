@@ -28,7 +28,7 @@ const LoginLayout: React.FC<LoginLayoutProps> = React.memo(({
                onClose={isModalClose}
                isAnimating={isAnimating}
                title="Reconnect and Explore!"
-               className="lg:min-h-[85vh]">
+               className="pb-10">
                <LoginForm
                     onForgotPassword={onForgotPassword}
                     showPassword={showPassword}

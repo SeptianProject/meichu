@@ -17,10 +17,10 @@ interface Option {
 
 interface ProductTypeSelectProps {
      type: 'product' | 'imvu';
-     value?: string | boolean;
+     value?: string | boolean | string[];
      name: string
-     onChange: (e: { target: { name: string, value: string | boolean } }) => void;
-     onCategorySelect?: (categoryUuid: string) => void
+     onChange: (e: { target: { name: string, value: string | boolean | string[] } }) => void;
+     onCategorySelect?: (categoryUuid: string[] | string) => void
      error?: FieldError
      ref?: React.Ref<HTMLInputElement>
      categoryRequired?: boolean
@@ -58,7 +58,7 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
      const { mode } = useUI()
      const isDarkMode = mode === 'dark'
      const [showSubOptions, setShowSubOptions] = React.useState(false)
-     const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null)
+     const [selectedCategories, setSelectedCategories] = React.useState<string[]>([])
      const [isBundle, setIsBundle] = React.useState<boolean | undefined>(() => {
           if (type === 'product') {
                if (value === 'Single') return false
@@ -76,6 +76,12 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                setShowSubOptions(value === 'Single' || value === 'Bundle')
           }
      }, [value, type, customCategories])
+
+     React.useEffect(() => {
+          if (Array.isArray(value)) {
+               setSelectedCategories(value)
+          }
+     }, [value])
 
      // eslint-disable-next-line react-hooks/exhaustive-deps
      const getIcon = (darkIcon: string, lightIcon: string) => isDarkMode ? darkIcon : lightIcon
@@ -111,10 +117,10 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                if (newValue === 'Single') setIsBundle(false)
                else if (newValue === 'Bundle') setIsBundle(true)
                setShowSubOptions(newValue === 'Single' || newValue === 'Bundle')
-               setSelectedCategory(null)
+               setSelectedCategories([])
 
                if (onCategorySelect) {
-                    onCategorySelect('')
+                    onCategorySelect([])
                }
           }
           onChange({
@@ -127,30 +133,46 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
           })
      }, [onChange, name, type, onCategorySelect])
 
-     const handleCategorySelect = React.useCallback((categoryUuid: string, categoryName: string) => {
-          setSelectedCategory(categoryUuid)
+     const handleCategoryToggle = React.useCallback((categoryUuid: string) => {
+          setSelectedCategories(prev => {
+               const isSelected = prev.includes(categoryUuid)
+               let newSelectedCategories: string[]
 
-          if (onCategorySelect) {
-               onCategorySelect(categoryUuid)
-          }
-
-          onChange({
-               target: {
-                    name: categoryName,
-                    value: isBundle ? 'Bundle' : 'Single'
+               if (isSelected) {
+                    newSelectedCategories = prev.filter(uuid => uuid !== categoryUuid)
+               } else {
+                    newSelectedCategories = [...prev, categoryUuid]
                }
+
+               if (onCategorySelect) {
+                    onCategorySelect(newSelectedCategories)
+               }
+
+               onChange({
+                    target: {
+                         name: 'custom_categories',
+                         value: newSelectedCategories
+                    }
+               })
+               return newSelectedCategories
           })
-     }, [isBundle, onChange, onCategorySelect])
+     }, [onChange, onCategorySelect])
 
      const isSelected = React.useCallback((optionValue: string | boolean) => {
           if (type === 'imvu') {
                return value === optionValue
           }
           if (showSubOptions && typeof optionValue === 'string') {
-               return value?.toString().startsWith(optionValue)
+               if (typeof value === 'string') {
+                    return value?.toString().startsWith(optionValue)
+               }
           }
           return value === optionValue
      }, [type, value, showSubOptions])
+
+     const isCategorySelected = (categoryUuid: string) => {
+          return selectedCategories.includes(categoryUuid);
+     };
 
      const renderSubOptions = (option: Option) => {
           if (!showSubOptions || !option.subOptions) return null;
@@ -162,7 +184,7 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                     exit="exit"
                     variants={subOptionsVariants}
                     className="bg-[#C2C2C4]/30 dark:bg-cardBackground mt-4 p-4 space-y-3 rounded-xl">
-                    {categoryRequired && !selectedCategory && (
+                    {categoryRequired && selectedCategories.length === 0 && (
                          <div className="text-redDanger text-sm mb-2">
                               {categoryError?.message || "Please select a category"}
                          </div>
@@ -171,19 +193,19 @@ const ProductTypeSelect = React.forwardRef<HTMLInputElement, ProductTypeSelectPr
                          <label key={subOption.id}
                               className="flex items-center cursor-pointer w-full">
                               <input
-                                   type="radio"
+                                   type="checkbox"
                                    name={`${name}_category`}
                                    value={subOption.attributes.uuid}
-                                   checked={selectedCategory === subOption.attributes.uuid}
-                                   onChange={() => handleCategorySelect(subOption.attributes.uuid, subOption.attributes.name)}
+                                   checked={isCategorySelected(subOption.attributes.uuid)}
+                                   onChange={() => handleCategoryToggle(subOption.attributes.uuid)}
                                    className="hidden"
                               />
-                              <div className={`${selectedCategory === subOption.attributes.uuid ? 'bg-gold rounded-xl' : 'bg-transparent'} 
+                              <div className={`${isCategorySelected(subOption.attributes.uuid) ? 'bg-gold rounded-xl' : 'bg-transparent'} 
                                    w-full border-none p-[2px]`}>
                                    <div className={`p-3 md:p-4 flex items-center gap-x-4 w-full rounded-[11px]
                                    border-none bg-light dark:bg-dark transition-all duration-300
-                                   ${selectedCategory === subOption.attributes.uuid ? 'ring-0 ring-transparent' : 'ring-[1.5px] ring-graySurface1'}`}>
-                                        <span className={`${selectedCategory === subOption.attributes.uuid
+                                   ${isCategorySelected(subOption.attributes.uuid) ? 'ring-0 ring-transparent' : 'ring-[1.5px] ring-graySurface1'}`}>
+                                        <span className={`${isCategorySelected(subOption.attributes.uuid)
                                              ? 'bg-gold bg-clip-text text-transparent'
                                              : 'text-graySurface1 dark:text-white/80'}
                                              text-base font-medium transition-colors duration-300`}>

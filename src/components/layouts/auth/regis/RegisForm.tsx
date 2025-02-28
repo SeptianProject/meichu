@@ -115,47 +115,47 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
      const generatedUsername = email ? generateUsername(email) : ''
 
      return (
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-               <div className="flex flex-col gap-y-2">
-                    <AuthInput
-                         icon={FaUser}
-                         type="email"
-                         placeholder="Your Email"
-                         error={errors.email}
-                         {...register('email')}
-                    />
-                    {email && (
-                         <p className="text-dark dark:text-light/80 text-xs">
-                              Your username will be: <span className="font-medium">{generatedUsername}</span>
-                         </p>
-                    )}
-                    <AuthInput
-                         icon={IoIosLock}
-                         type="password"
-                         placeholder="Password"
-                         showPassword={showPassword}
-                         onTogglePassword={handleTogglePassword}
-                         error={errors.password}
-                         {...register('password')}
-                    />
-                    <AuthInput
-                         icon={IoIosLock}
-                         type="password"
-                         placeholder="Confirm Password"
-                         showPassword={showConfirmPass}
-                         onTogglePassword={handleToggleConfirmPass}
-                         error={errors.passwordConfirmation}
-                         {...register('passwordConfirmation')}
-                    />
-                    <div className="text-dark dark:text-[#676767] text-xs font-medium dark:font-normal max-w-60 dark:max-w-56 text-start">
-                         By clicking the
-                         <span className="bg-gold text-transparent bg-clip-text px-1">
-                              Register
-                         </span>
-                         button, you agree to the public offer
+          <>
+               <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
+                    <div className="flex flex-col gap-y-2">
+                         <AuthInput
+                              icon={FaUser}
+                              type="email"
+                              placeholder="Your Email"
+                              error={errors.email}
+                              {...register('email')}
+                         />
+                         {email && (
+                              <p className="text-dark dark:text-light/80 text-xs">
+                                   Your username will be: <span className="font-medium">{generatedUsername}</span>
+                              </p>
+                         )}
+                         <AuthInput
+                              icon={IoIosLock}
+                              type="password"
+                              placeholder="Password"
+                              showPassword={showPassword}
+                              onTogglePassword={handleTogglePassword}
+                              error={errors.password}
+                              {...register('password')}
+                         />
+                         <AuthInput
+                              icon={IoIosLock}
+                              type="password"
+                              placeholder="Confirm Password"
+                              showPassword={showConfirmPass}
+                              onTogglePassword={handleToggleConfirmPass}
+                              error={errors.passwordConfirmation}
+                              {...register('passwordConfirmation')}
+                         />
+                         <h5 className="text-dark dark:text-[#676767] text-xs font-medium dark:font-normal max-w-60 dark:max-w-56 text-start">
+                              By clicking the
+                              <span className="bg-gold text-transparent bg-clip-text px-1">
+                                   Register
+                              </span>
+                              button, you agree to the public offer
+                         </h5>
                     </div>
-               </div>
-               <div className="space-y-5">
                     <Button
                          isGold
                          isWidthFull
@@ -163,9 +163,9 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
                          title={registerMutation.isLoading ? "Loading..." : "Register"}
                          disabled={registerMutation.isLoading}
                     />
-                    <AuthBadgeButton />
-               </div>
-          </form>
+               </form>
+               <AuthBadgeButton />
+          </>
      );
 })
 

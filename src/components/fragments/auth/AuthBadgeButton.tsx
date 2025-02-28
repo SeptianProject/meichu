@@ -17,15 +17,18 @@ const AuthBadgeButton = () => {
                <p className="dark:text-light/40 text-xs text-center">
                     - OR Continue with -
                </p>
-               <div className="flex items-center justify-center gap-x-3">
-                    {authIcons.map((icon, index) => (
+               <button onClick={connectGoogleAuth}
+                    className="flex items-center justify-center gap-x-3 bg-white rounded-full py-[10px] w-full">
+                    <img src={authIcons[0].icon} className="w-6" alt="" />
+                    <span className="font-poppins font-medium text-graySurface2 text-sm">Sign in with Google</span>
+               </button>
+               {/* {authIcons.map((icon, index) => (
                          <BadgeSosmedItem
                               key={index}
                               icon={icon.icon}
                               onClick={icon.type?.includes('google') ? connectGoogleAuth : undefined}
                          />
-                    ))}
-               </div>
+                    ))} */}
           </>
      );
 }
@@ -37,7 +40,7 @@ interface BadgeSosmedItemProps {
      onClick?: VoidFunction
 }
 
-const BadgeSosmedItem: React.FC<BadgeSosmedItemProps> = ({
+export const BadgeSosmedItem: React.FC<BadgeSosmedItemProps> = ({
      icon, onClick
 }) => {
      return (
