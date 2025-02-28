@@ -7,30 +7,38 @@ import { IoIosLock } from "react-icons/io";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { registerFormSchema, RegisterFormSchema } from "../../../../schema/AuthSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { registerAuth } from "../../../../services/authService.ts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { googleAuth, registerAuth } from "../../../../services/authService.ts";
+import { useAppDispatch } from "../../../../redux/hook.ts";
+import { useNavigate } from "react-router-dom";
+import { cleanAuthErrors, login, setIsAuthModalOpen } from "../../../../redux/slices/authSlice.ts";
+import { handleApiError } from "../../../../hooks/errorHandler.ts";
 
 interface RegisFormProps {
      showPassword: boolean;
      handleTogglePassword: VoidFunction;
      showConfirmPass: boolean;
      handleToggleConfirmPass: VoidFunction;
-     onLogin: VoidFunction;
 }
 
 const RegisForm: React.FC<RegisFormProps> = React.memo(({
      showPassword,
      handleTogglePassword,
      showConfirmPass,
-     handleToggleConfirmPass,
-     onLogin
+     handleToggleConfirmPass
 }) => {
+     const dispatch = useAppDispatch()
+     const navigate = useNavigate()
+     const queryClient = useQueryClient()
+     const [isSubmitting, setIsSubmitting] = React.useState(false)
+
      const {
           reset,
           register,
           watch,
           handleSubmit,
-          formState: { errors }
+          formState: { errors },
+          setError
      } = useForm<RegisterFormSchema>({ resolver: zodResolver(registerFormSchema) })
 
      const email = watch('email')
@@ -49,17 +57,60 @@ const RegisForm: React.FC<RegisFormProps> = React.memo(({
           },
           onSuccess: (data) => {
                reset()
-               localStorage.setItem('authToken', data.jwt)
-               onLogin()
+               queryClient.invalidateQueries(['user'])
+               queryClient.invalidateQueries(['userAvatar'])
+               dispatch(login({
+                    token: data.jwt,
+                    userId: data.user.id,
+               }))
+               dispatch(setIsAuthModalOpen(false))
+               navigate('/dashboard')
           },
           onError: (error) => {
-               console.error('Register error:', error)
+               handleApiError(error, setError, dispatch, 'register')
           }
      })
 
-     const onSubmit: SubmitHandler<RegisterFormSchema> = (data) => {
-          registerMutation.mutate(data)
+     const onSubmit: SubmitHandler<RegisterFormSchema> = async (data) => {
+          if (isSubmitting) return
+          setIsSubmitting(true)
+          try {
+               await registerMutation.mutateAsync(data)
+          } catch (error) {
+               console.error(error)
+               setIsSubmitting(false)
+          }
      }
+
+     const handleGoogleRegister = React.useCallback(() => {
+          const params = new URLSearchParams(window.location.search)
+          const accessToken = params.get('access_token')
+          window.history.replaceState({}, document.title, window.location.pathname)
+          if (accessToken) {
+               try {
+                    googleAuth(`access_token=${accessToken}`).then((data) => {
+                         return (
+                              data && dispatch(login({
+                                   token: data.jwt,
+                                   userId: data.user.id
+                              }))
+                         )
+                    })
+                    navigate('/dashboard')
+               } catch (error) {
+                    console.error(error)
+               }
+          }
+     }, [dispatch, navigate])
+
+     React.useEffect(() => {
+          handleGoogleRegister()
+          return () => {
+               queryClient.removeQueries(['user'])
+               queryClient.removeQueries(['userAvatar'])
+               dispatch(cleanAuthErrors())
+          }
+     }, [dispatch, queryClient, handleGoogleRegister])
 
      const generatedUsername = email ? generateUsername(email) : ''
 
