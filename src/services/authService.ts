@@ -3,19 +3,16 @@ import { apiUrl, axiosInstance } from '.';
 
 export const registerAuth = async (data: RegisterFormSchema) => {
      const response = await axiosInstance.post(`/auth/local/register`, data)
-     console.log(response.data)
      return response.data;
 }
 
 export const loginAuth = async (data: LoginFormSchema) => {
      const response = await axiosInstance.post(`/auth/local`, data)
-     console.log(response.data)
      return response.data;
 }
 
 export const googleAuth = async (callback: string) => {
      const response = await axiosInstance.get(`${apiUrl}/auth/google/callback?${callback}`)
-     console.log(response.data)
      return response.data;
 }
 
