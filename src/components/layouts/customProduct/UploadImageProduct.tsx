@@ -4,15 +4,18 @@ import TitleDesc from '../../fragments/customProduct/TitleDesc'
 import ReactCrop, { Crop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import { BiX } from 'react-icons/bi'
+import { FieldError } from 'react-hook-form'
 
 interface UploadImageProductProps {
      currentImageUrl?: string
      onFileSelect: (file: File) => void
+     error: FieldError | undefined
 }
 
 const UploadImageProduct: React.FC<UploadImageProductProps> = ({
      currentImageUrl,
-     onFileSelect
+     onFileSelect,
+     error
 }) => {
      const fileInputRef = React.useRef<HTMLInputElement>(null)
      const imgRef = React.useRef<HTMLImageElement>(null)
@@ -147,8 +150,9 @@ const UploadImageProduct: React.FC<UploadImageProductProps> = ({
                          desc="Send the reference photo you want for custom product." />
                     <div
                          onClick={handleUploadClick}
-                         className="relative h-64 flex flex-col items-center gap-y-4 justify-center rounded-2xl 
-                              ring-[1.5px] ring-graySurface1 dark:bg-dark lg:h-[25rem] cursor-pointer">
+                         className={`relative h-64 flex flex-col items-center gap-y-4 justify-center rounded-2xl 
+                              ring-[1.5px] dark:bg-dark lg:h-[25rem] cursor-pointer
+                              ${error ? 'ring-redDanger' : 'ring-graySurface1'}`}>
                          <input
                               type="file"
                               ref={fileInputRef}
